@@ -17,16 +17,32 @@ class Student;
 
 class Course
 {
-	friend class Student;
-	friend class CourseUnit;
-public:
-	string name, acronym;
+private:
+	//MEMBER VARIABLES
+	const string name, acronym;
 	vector<CourseUnit*> courseUnits;
 	vector<Student*> students;
 	vector<Tutor*> professors;
 	College* college;
 
-	Course(string n, string a) : name(n), acronym(a) {}
+public:
+	//MEMBER FUNCTIONS
+	Course(string n, string a, College* c) : name(n), acronym(a), college(c) {}
+	void addCourseUnit(CourseUnit* cu);
+	void removeCourseUnit(CourseUnit* cu);
+	void addStudent(Student* s);
+	void removeStudent(Student* s);
+	void addProfessor(Tutor* s);
+	void removeProfessor(Tutor* s);
+
+	//GETS
+	string getName() const { return name; }
+	string getAcronym() const { return acronym; }
+	vector<CourseUnit*> getCourseUnits() const { return courseUnits; }
+	vector<Student*> getStudents() const { return students; }
+	vector<Tutor*> getProfessors() const { return professors; }
+	College* getCollege() const { return college; }
+
 };
 
 #endif

@@ -6,15 +6,25 @@
 
 class CourseUnitClass : public CourseUnit
 {
-	unsigned short int classNumber, numberOfStudents;
+private:
+	//MEMBER VARIABLES
+	const unsigned short int classNumber;
+	unsigned short int numberOfStudents;
 	vector<Student*> studentsInClass;
 	CourseUnit* courseUnit;
-
+	
 public:
+	//MEMBER FUNCTIONS
 	CourseUnitClass(CourseUnit* cu, unsigned short int cn);
-	unsigned short int getNumberOfStudents() const;
-	vector<Student*> getStudentsInClass() const;
-	void addStudent(const Student* s); 
+	bool addStudent(const Student* s);
+	void removeStudent(const Student* s);
+
+
+	//GETS
+	unsigned short int getNumberOfStudents() const { return numberOfStudents; }
+	unsigned short int getClassNumber() const { return classNumber; }
+	vector<Student*> getStudentsInClass() const { return studentsInClass; }
+	CourseUnit* getCourseUnit() const { return courseUnit;}
 };
 
 #endif
