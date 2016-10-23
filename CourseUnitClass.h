@@ -17,7 +17,7 @@ public:
 	//MEMBER FUNCTIONS
 	CourseUnitClass(CourseUnit* cu, unsigned short int cn);
 	void addStudent(Student* s);
-	bool removeStudent(const Student* s);
+	bool removeStudent(Student* s);
 
 
 	//GETS

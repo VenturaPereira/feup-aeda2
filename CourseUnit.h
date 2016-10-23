@@ -9,6 +9,7 @@
 class Course;
 class Student;
 class Tutor;
+class CourseUnitClass;
 
 using namespace std;
 
@@ -28,16 +29,17 @@ public:
 	//MEMBER FUNCTIONS
 	CourseUnit(unsigned short int mnos, unsigned short int mnospc, string n, string a, Course* c);
 	bool addStudent(Student* s);
-	void removeStudent(Student* s);
+	bool removeStudent(Student* s);
 	void addProfessor(Tutor* t);
-	void removeProfessor(Tutor* t);
+	bool removeProfessor(Tutor* t);
 	void addCourseUnitClass(CourseUnitClass* cuc);
-	void removeCourseUnitClass(CourseUnitClass* cuc);
+	bool removeCourseUnitClass(CourseUnitClass* cuc);
 			
 
 	//GETS
 	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
 	unsigned short int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
+	unsigned short int getNumberOfStudents() const {return numberOfStudents;}
 	vector<CourseUnitClass*> getClasses() const { return classes; }
 	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*> getCourseUnitProfessors() const { return courseUnitProfessors; }

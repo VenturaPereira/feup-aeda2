@@ -24,6 +24,7 @@ public:
 		
 	//GETS
 	static unsigned long long int getLastStudentID();
+	void incLastStudentID() { lastStudentID++; }
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
 	string getCountryAcronym() const { return countryAcronym; }

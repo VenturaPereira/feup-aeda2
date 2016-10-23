@@ -2,8 +2,8 @@
 #ifndef COLLEGE_H
 #define COLLEGE_H
 
-#include <string>
-#include <vector>
+//#include <string>
+//#include <vector>
 
 using namespace std;
 
@@ -23,7 +23,7 @@ public:
 	//MEMBER FUNCTIONS
 	College(string n, string a, University* u) : name(n), acronym(a), university(u) {}
 	void addCourse(Course* c);
-	void removeCourse(Course* c);
+	bool removeCourse(Course* c);
 
 	//GETS
 	string getName() const { return name; }

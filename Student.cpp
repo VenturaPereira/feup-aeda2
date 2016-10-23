@@ -4,52 +4,58 @@
 
 void Student::assignEmail()
 {
-	email = course->college->university->acronym
+	email = getCourse()->getCollege()->getUniversity()->getAcronym()
 		+ to_string(ID)
 		+ '@'
-		+ course->college->acronym
+		+ getCourse()->getCollege()->getAcronym()
 		+ '.'
-		+ course->college->university->acronym
+		+ getCourse()->getCollege()->getUniversity()->getAcronym()
 		+ '.'
-		+ course->college->university->countryAcronym;
+		+ getCourse()->getCollege()->getUniversity()->getCountryAcronym();
 }
 void Student::assignID()
 {
-	ID = dateOfRegistration.getYear() * 100000 + 1 + course->college->university->lastStudentID;
-	course->college->university->lastStudentID++;
+	ID = dateOfRegistration.getYear() * 100000 + 1 + getCourse()->getCollege()->getUniversity()->getLastStudentID();
+	getCourse()->getCollege()->getUniversity()->incLastStudentID();
 }
 
-bool Student::enrollClass(CourseUnitClass &courseUnitClass)
+bool Student::enrollClass(CourseUnitClass* courseUnitClass)
 {
-	if (courseUnitClass.getNumberOfStudents() >= courseUnitClass.getMaxStudentsPerClass()) //CHECK IF CLASS IS FULL
+	if (courseUnitClass->getNumberOfStudents() >= courseUnitClass->getMaxStudentsPerClass()) //CHECK IF CLASS IS FULL
 		return false;
 	else
 	{
-		courseUnitClass.addStudent(this); //ADD STUDENT TO CLASS
+		courseUnitClass->addStudent(this); //ADD STUDENT TO CLASS
 		return true;
 	}
 }
 
-bool Student::enrollCourseUnit(CourseUnit &courseUnit) 
+bool Student::enrollCourseUnit(CourseUnit* courseUnit) 
 {
-	//FIND THE INDEX IN THE VECTOR OF COURSE UNITS
-	unsigned int indexOfCourseUnit = 0;
-	for (; indexOfCourseUnit < this->course->courseUnits.size(); indexOfCourseUnit++)
+	//FIND THE ARGUMENT IN THE VECTOR OF COURSE UNITS
+	vector<CourseUnit*>::iterator itOfCourseUnit;
+	for (itOfCourseUnit = getCourse()->getCourseUnits().begin();		
+		itOfCourseUnit != getCourse()->getCourseUnits().end();
+		itOfCourseUnit++)
 	{
-		if (this->course->courseUnits[indexOfCourseUnit] == courseUnit)
+		if (*itOfCourseUnit == courseUnit)
 			break;
 	}
-	if(indexOfCourseUnit == this->course->courseUnits.size()) //THERE IS NO COURSE UNIT IN THE VECTOR THAT MATCHES THE ARGUMENT 
-		return false
-	//if(this->course->courseUnits[indexOfCourseUnit]) //CHECKS IF COURSE UNIT IS FULL
 
+	if (itOfCourseUnit == getCourse()->getCourseUnits().end()) //THERE IS NO COURSE UNIT IN THE VECTOR THAT MATCHES THE ARGUMENT 
+		return false;
 
-/*
-	for (unsigned int i = 0; i < this->course->courseUnits->getClasses.size(); i++)
+	if ((*itOfCourseUnit)->getNumberOfStudents() >= (*itOfCourseUnit)->getMaxStudents()) //COURSE UNIT IS FULL
+		return false;
+
+	vector<CourseUnitClass*>::iterator itCourseUnitClass;
+	for (itCourseUnitClass = (*itOfCourseUnit)->getClasses().begin();
+		itCourseUnitClass != (*itOfCourseUnit)->getClasses().end();
+		itCourseUnitClass++)
 	{
-		if (enrollClass(*(this->course->courseUnits->getClasses[i])))
+		if (enrollClass((*itCourseUnitClass)))
 			return true;
 	}
-	*/
+	return false;
 }
 

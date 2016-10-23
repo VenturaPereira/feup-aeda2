@@ -3,7 +3,7 @@
 #ifndef COLLEGEUSER_H
 #define COLLEGEUSER_H
 
-#include <string>
+//#include <string>
 #include "Date.h"
 using namespace std;
 
@@ -26,10 +26,6 @@ public:
 	string getName() const { return name; }
 	Date getDateOfRegistration() const { return dateOfRegistration; }
 	Date getDateOfBirth() const { return dateOfBirth; }
-	
-	//SETS
-	void setEmail(string e) { email = e; }
-	void setID(unsigned long long int id) { ID = id; }
 	
 };
 

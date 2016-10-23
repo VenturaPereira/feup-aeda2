@@ -9,7 +9,7 @@ void CourseUnitClass::addStudent(Student* s)
 	numberOfStudents = studentsInClass.size();
 }
 
-bool CourseUnitClass::removeStudent(const Student* s) {
+bool CourseUnitClass::removeStudent(Student* s) {
 	for (vector<Student *> ::const_iterator it = studentsInClass.begin(); it != studentsInClass.end(); it++) {
 		if ((*it) == s) {
 			studentsInClass.erase(it);
