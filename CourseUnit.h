@@ -4,6 +4,7 @@
 #define COURSEUNIT_H
 
 #include <string>
+#include <vector>
 
 class Course;
 class Student;
