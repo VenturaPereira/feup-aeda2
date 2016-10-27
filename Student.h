@@ -7,7 +7,7 @@
 #include "CourseUnit.h"
 #include "CourseUnitClass.h"
 #include "Date.h"
-
+#include "Utilities.h"
 //#include <vector>
 #include <map>
 
@@ -27,7 +27,7 @@ public:
 	//MEMBER FUNCTIONS
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);
-	void completedClass(CourseUnit &courseUnit, unsigned short int grade);
+	void completedClass(CourseUnit *courseUnit, unsigned short int grade);
 
 	//GETS
 	Course* getCourse() const { return course; }

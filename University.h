@@ -28,7 +28,7 @@ public:
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
 	string getCountryAcronym() const { return countryAcronym; }
-	vector<College*> getCollegesVector() const { return collegesVector; }
+	vector<College*> getColleges() const { return collegesVector; }
 	
 };
 

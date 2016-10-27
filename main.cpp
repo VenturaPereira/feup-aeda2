@@ -6,9 +6,15 @@
 int main()
 {
 	EnrollmentSystem system(75); //INITIALIZE SYSTEM
-	//system.universitiesVector.push_back(new University("Universidade do Porto", "up", "pt")); //ADD UP
-	//system.universitiesVector[0]->collegesVector.push_back(new College("Faculdade de Engenharia da Universidade do Porto", "FEUP")); //ADD FEUP
-	//system.universitiesVector[0]->collegesVector[0]->courses.push_back(new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC")); //ADD MIEIC
+	
+	University* UP = new University("Universidade do Porto", "up", "pt");
+	system.getUniversities().push_back(UP); //ADD UP
+	
+	College* FEUP = new College("Faculdade de Engenharia da Universidade do Porto", "FEUP", UP);
+	system.getUniversities()[0]->getColleges().push_back(FEUP); //ADD FEUP
+	
+	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);
+	system.getUniversities()[0]->getColleges()[0]->getCourses().push_back(MIEIC); //ADD MIEIC
 
 
 	return 0;

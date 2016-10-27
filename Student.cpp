@@ -13,6 +13,7 @@ void Student::assignEmail()
 		+ '.'
 		+ getCourse()->getCollege()->getUniversity()->getCountryAcronym();
 }
+
 void Student::assignID()
 {
 	ID = dateOfRegistration.getYear() * 100000 + 1 + getCourse()->getCollege()->getUniversity()->getLastStudentID();
@@ -59,3 +60,28 @@ bool Student::enrollCourseUnit(CourseUnit* courseUnit)
 	return false;
 }
 
+void Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
+{
+	//CHECK IF GRADE IS ACCEPTABLE
+	if (grade < 10)
+		throw lowGrade(grade);
+
+	//CHECK IF STUDENT HAS COMPLETED THAT COURSE UNIT BEFORE
+	for (map<CourseUnit*, unsigned short int>::iterator it = completedCourseUnits.begin();
+		it != completedCourseUnits.end();
+		it++)
+	{
+		if (it->first == courseUnit) //STUDENT COMPLETED THE COURSE UNIT BEFORE
+		{
+			if (grade > it->second)  //WITH A LOWER GRADE
+			{
+				it->second = grade;
+				return;
+			}
+			else return; //WITH THE SAME OR HIGHER GRADE
+		}
+	}
+
+	completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
+	
+}
