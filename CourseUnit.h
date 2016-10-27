@@ -27,7 +27,12 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	CourseUnit(unsigned short int mnos, unsigned short int mnospc, string n, string a, Course* c);
+	CourseUnit(unsigned short int mnos, unsigned short int mnospc, string n, string a, Course* c) :
+		MAXIMUM_NUMBER_OF_STUDENTS(mnos),
+		MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS(mnospc),
+		name(n),
+		acronym(a),
+		course(c) {}
 	bool addStudent(Student* s);
 	bool removeStudent(Student* s);
 	void addProfessor(Tutor* t);
@@ -40,6 +45,7 @@ public:
 	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
 	unsigned short int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
 	unsigned short int getNumberOfStudents() const {return numberOfStudents;}
+	unsigned short int getNumberClasses() const { return classes.size(); }
 	vector<CourseUnitClass*> getClasses() const { return classes; }
 	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*> getCourseUnitProfessors() const { return courseUnitProfessors; }

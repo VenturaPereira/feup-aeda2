@@ -4,7 +4,7 @@
 
 #include "CourseUnit.h"
 
-class CourseUnitClass : public CourseUnit
+class CourseUnitClass 
 {
 private:
 	//MEMBER VARIABLES
@@ -15,7 +15,7 @@ private:
 	
 public:
 	//MEMBER FUNCTIONS
-	CourseUnitClass(CourseUnit* cu, unsigned short int cn);
+	CourseUnitClass(unsigned short int cn, CourseUnit* cu) : courseUnit(cu), classNumber(cn) {}
 	void addStudent(Student* s);
 	bool removeStudent(Student* s);
 

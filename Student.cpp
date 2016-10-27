@@ -22,7 +22,7 @@ void Student::assignID()
 
 bool Student::enrollClass(CourseUnitClass* courseUnitClass)
 {
-	if (courseUnitClass->getNumberOfStudents() >= courseUnitClass->getMaxStudentsPerClass()) //CHECK IF CLASS IS FULL
+	if (courseUnitClass->getNumberOfStudents() >= courseUnitClass->getCourseUnit()->getMaxStudentsPerClass()) //CHECK IF CLASS IS FULL
 		return false;
 	else
 	{
@@ -54,11 +54,14 @@ bool Student::enrollCourseUnit(CourseUnit* courseUnit)
 		itCourseUnitClass != (*itOfCourseUnit)->getClasses().end();
 		itCourseUnitClass++)
 	{
-		if (enrollClass((*itCourseUnitClass)))
+		if (enrollClass((*itCourseUnitClass))) //TRY TO ENROLL IN THAT CLASS
 			return true;
 	}
-	return false;
-}
+
+	//ALL CLASSES WERE FULL
+	//CREATE A NEW CLASS
+	courseUnit->addCourseUnitClass(new CourseUnitClass(courseUnit->getNumberClasses() + 1,courseUnit));
+} 
 
 void Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 {
@@ -75,7 +78,7 @@ void Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 		{
 			if (grade > it->second)  //WITH A LOWER GRADE
 			{
-				it->second = grade;
+				it->second = grade; //REPLACE GRADE
 				return;
 			}
 			else return; //WITH THE SAME OR HIGHER GRADE
