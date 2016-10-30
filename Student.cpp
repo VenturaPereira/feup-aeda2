@@ -26,7 +26,9 @@ bool Student::enrollClass(CourseUnitClass* courseUnitClass)
 		return false;
 	else
 	{
+		courseUnitClass->getCourseUnit()->addStudent(this);
 		courseUnitClass->addStudent(this); //ADD STUDENT TO CLASS
+		classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(courseUnitClass->getCourseUnit(), courseUnitClass));
 		return true;
 	}
 }
@@ -55,12 +57,16 @@ bool Student::enrollCourseUnit(CourseUnit* courseUnit)
 		itCourseUnitClass++)
 	{
 		if (enrollClass((*itCourseUnitClass))) //TRY TO ENROLL IN THAT CLASS
+		{
 			return true;
+		}
 	}
 
-	//ALL CLASSES WERE FULL
-	//CREATE A NEW CLASS
-	courseUnit->addCourseUnitClass(new CourseUnitClass(courseUnit->getNumberClasses() + 1,courseUnit));
+	//ALL CLASSES WERE FULL - CREATE A NEW CLASS AND ADD THE STUDENT
+	CourseUnitClass* newClass = new CourseUnitClass(courseUnit->getNumberClasses() + 1, courseUnit);
+	courseUnit->addCourseUnitClass(newClass);
+	enrollClass(newClass);
+	return true;
 } 
 
 void Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)

@@ -32,8 +32,8 @@ public:
 	bool removeCourseUnit(CourseUnit* cu);
 	void addStudent(Student* s);
 	bool removeStudent(Student* s);
-	void addProfessor(Tutor* s);
-	bool removeProfessor(Tutor* s);
+	void addProfessor(Tutor* p);
+	bool removeProfessor(Tutor* p);
 
 	//GETS
 	string getName() const { return name; }

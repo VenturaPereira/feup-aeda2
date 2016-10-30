@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #define NOMINMAX
 #include <windows.h>
@@ -94,7 +94,7 @@ T validInput(string &badInput, string &normalInput, vector<string> &tryAgain)
 		else cout << "File not found!\n";
 	}
 	return fileName;
-}*/
+}
 
 bool yesNoAnswer() {
 	string answer;
@@ -110,7 +110,11 @@ bool yesNoAnswer() {
 		else cerr << "Invalid Answer!\n";
 		cin.clear();
 	}
-}
+}*/
+
+bool leapYear(const unsigned short int &year);
+
+unsigned short int numberDays(const unsigned short int &year, const unsigned short int &month);
 
 class lowGrade
 {

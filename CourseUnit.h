@@ -33,7 +33,7 @@ public:
 		name(n),
 		acronym(a),
 		course(c) {}
-	bool addStudent(Student* s);
+	void addStudent(Student* s);
 	bool removeStudent(Student* s);
 	void addProfessor(Tutor* t);
 	bool removeProfessor(Tutor* t);
