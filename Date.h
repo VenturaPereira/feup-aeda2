@@ -23,12 +23,14 @@ public:
 	bool verifyDate();
 
 	//OPERATORS
-	friend istream& operator >> (istream &is, Date &date);
+	friend istream& operator>> (istream &is, Date &date);
+	friend ostream& operator<< (ostream &os, Date &date);
 	friend bool operator==(const Date &LHS, const Date &RHS);
 	friend bool operator<(const Date &LHS, const Date &RHS);
 	friend bool operator>(const Date &LHS, const Date &RHS);
 	friend bool operator<=(const Date &LHS, const Date &RHS);
 	friend bool operator>=(const Date &LHS, const Date &RHS);
+	
 
 	//GETS
 	unsigned short int getYear() const { return year; }

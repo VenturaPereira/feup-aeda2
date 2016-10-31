@@ -14,17 +14,17 @@ private:
 	//MEMBER VARIABLES
 	const string name, acronym, countryAcronym;
 	vector<College*> collegesVector;
-	static unsigned long long int lastStudentID;
+	unsigned long long int lastStudentID;
 
 public:
 	//MEMBER FUNCTIONS
-	University(string n, string a, string ca) : name(n), acronym(a), countryAcronym(ca) {}
+	University(string n, string a, string ca) : name(n), acronym(a), countryAcronym(ca) { lastStudentID = getLastStudentID(); }
+	void incrementLastStudentID();
 	void addCollege(College* c);
 	void removeCollege(College *c);
 		
 	//GETS
-	static unsigned long long int getLastStudentID();
-	void incLastStudentID() { lastStudentID++; }
+	unsigned long long int getLastStudentID();
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
 	string getCountryAcronym() const { return countryAcronym; }

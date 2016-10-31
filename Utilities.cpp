@@ -9,7 +9,7 @@ bool leapYear(const unsigned short int &year)
 	else return false;
 }
 
-unsigned int numberDays(const unsigned short int &year, const unsigned short int &month)
+unsigned short int numberDays(const unsigned short int &year, const unsigned short int &month)
 {
 	switch (month)
 	{
@@ -20,17 +20,17 @@ unsigned int numberDays(const unsigned short int &year, const unsigned short int
 	case 8:
 	case 10:
 	case 12:
-		return 31;
+		return (unsigned short int)31;
 	case 4:
 	case 6:
 	case 9:
 	case 11:
-		return 30;
+		return (unsigned short int)30;
 	case 2:
 		if (leapYear(year))
-			return 29;
-		else return 28;
+			return (unsigned short int)29;
+		else return (unsigned short int)28;
 	default:
-		return 0;
+		return (unsigned short int)0;
 	}
 }

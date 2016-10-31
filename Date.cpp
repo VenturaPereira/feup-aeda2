@@ -77,6 +77,12 @@ istream& operator >> (istream &is, Date &date)
 	return is;
 }
 
+ostream& operator<< (ostream &os, Date &date)
+{
+	os << date.getDateString();
+	return os;
+}
+
 bool operator==(const Date &LHS, const Date &RHS)
 {
 	return (LHS.getDateString() == RHS.getDateString());

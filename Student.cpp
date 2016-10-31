@@ -2,6 +2,13 @@
 
 #include "Student.h"
 
+Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getCollege())
+{
+	course = c;
+	assignID();
+	assignEmail();
+}
+
 void Student::assignEmail()
 {
 	email = getCourse()->getCollege()->getUniversity()->getAcronym()
@@ -17,7 +24,7 @@ void Student::assignEmail()
 void Student::assignID()
 {
 	ID = dateOfRegistration.getYear() * 100000 + 1 + getCourse()->getCollege()->getUniversity()->getLastStudentID();
-	getCourse()->getCollege()->getUniversity()->incLastStudentID();
+	course->getCollege()->getUniversity()->incrementLastStudentID();
 }
 
 bool Student::enrollClass(CourseUnitClass* courseUnitClass)

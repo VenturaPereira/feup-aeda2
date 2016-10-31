@@ -4,7 +4,10 @@
 #define ENROLLMENTSYSTEM_H
 
 //#include <vector>
-#include "CourseUnit.h"
+//#include "CourseUnit.h"
+//#include <iostream>
+#include "Utilities.h"
+#include "Student.h"
 using namespace std;
 
 class University;
@@ -19,7 +22,9 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc) {};
-	//bool assignTeachers(CourseUnit &cu);
+
+	//HANDLERS (COMMUNICATION WITH THE USER)
+	bool addStudentHandler(Course* c);
 
 	//GETS
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }

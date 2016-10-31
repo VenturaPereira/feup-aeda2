@@ -25,6 +25,7 @@ protected:
 	virtual void assignID();
 public:
 	//MEMBER FUNCTIONS
+	Student(string n, Date dob, Course* c);
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);
 	void completedClass(CourseUnit *courseUnit, unsigned short int grade);

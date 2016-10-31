@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 
 #define NOMINMAX
 #include <windows.h>
@@ -22,85 +22,70 @@ unsigned int getConsoleWidth() {
 
 extern const unsigned int CONSOLE_WIDTH = getConsoleWidth();
 
-void c(const string s) {
+/*void c(const string s) {
 	cout << setw(CONSOLE_WIDTH + s.length() / 2) << s << endl;
-}
+}*/
 
-template<typename T>
-T validInput(string badInput, string normalInput, string tryAgain)
+string enterString(string title, string requestMsg)
 {
 	string line;
-	T input;
-	cout << normalInput;
-	while (getline(cin, line))
-	{
-		istringstream iss(line);
-		iss >> ws >> input >> ws;
-		if (iss.fail() || !iss.eof())
-		{
-			cin.clear();
-			system("cls");
-			cerr << badInput;
-			cout << endl << endl << tryAgain << normalInput;
-		}
-		else return input;
-	}
-	cin.clear();
-	return NULL;
-}
-
-template<typename T>
-T validInput(string &badInput, string &normalInput, vector<string> &tryAgain)
-{
-	string line;
-	T input;
-	cout << endl << endl;
-	for (unsigned int i = 0; i < tryAgain.size(); i++)
-		c(tryAgain[i]);
-	cout << normalInput;
-	while (getline(cin, line))
-	{
-		istringstream iss(line);
-		iss >> ws >> input >> ws;
-		if (iss.fail() || !iss.eof())
-		{
-			cin.clear();
-			system("cls");
-			cerr << badInput;
-			cout << endl << endl;
-			for (unsigned int i = 0; i < tryAgain.size(); i++)
-				c(tryAgain[i]);
-			cout << normalInput;
-		}
-		else return input;
-	}
-	cin.clear();
-	return NULL;
-}
-
-/*string validFile(string fileType) {
-	string fileName;
 	while (true)
 	{
-		cout << "\nWhat's the name of your " << fileType << " file? ";
-		getline(cin, fileName);
+		system("CLS");
+		cin.clear();
+		cout << title << requestMsg;
+		getline(cin, line);
+		if (cin.eof())
+			throw EndOfFile();
+		else if (line.length() > 0)
+			return line;
+	}
+}
+
+template<typename T>
+T enterInput(string title, string requestMsg)
+{
+	string line;
+	T input;
+
+	while (true)
+	{
+		system("CLS");
+		cin.clear();
+		cout << title  << requestMsg;
+		getline(cin, line);
+		if (cin.eof())
+			throw EndOfFile();
+		istringstream iss(line);
+		iss >> input;
+		if (!iss.fail() && line.length() > 0)
+			return input;		
+	}
+}
+
+void validFile(string fileType) {
+	
+	string requestMsg = "\nWhat's the name of your " + fileType + " file? ";
+		
+	while (true)
+	{
+		string fileName = enterString("", requestMsg);
 		ifstream file(fileName);
 		if (file.is_open())
 		{
-			cout << "File found!\n";
+			cout << "\nFile found!\n";
 			file.close();
-			break;
+			return;
 		}
-		else cout << "File not found!\n";
+		else cout << "\nFile not found!\n";
 	}
-	return fileName;
 }
 
 bool yesNoAnswer() {
 	string answer;
 	while (true)
 	{
-		cout << "Answer: ";
+		cout << "\nAnswer: ";
 		getline(cin, answer);
 		transform(answer.begin(), answer.end(), answer.begin(), ::tolower);
 		if (answer == "y" || answer == "yes")
@@ -110,7 +95,7 @@ bool yesNoAnswer() {
 		else cerr << "Invalid Answer!\n";
 		cin.clear();
 	}
-}*/
+}
 
 bool leapYear(const unsigned short int &year);
 
@@ -123,4 +108,10 @@ private:
 public:
 	lowGrade(unsigned int g) : grade(g) {}
 	unsigned int getGrade() const { return grade; }
+};
+
+class EndOfFile
+{
+public:
+	EndOfFile() {}
 };

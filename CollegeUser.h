@@ -11,6 +11,7 @@ class CollegeUser
 {
 protected:
 	//MEMBER VARIABLES
+	College* college;
 	const string name;
 	string email;
 	unsigned long long int ID;
@@ -18,7 +19,7 @@ protected:
 	
 public:
 	//MEMBER FUNCTIONS
-	CollegeUser(string n, Date dob) : name(n), dateOfBirth(dob), dateOfRegistration() {}
+	CollegeUser(string n, Date dob, College* c) : name(n), dateOfBirth(dob), dateOfRegistration(), college(c) {}
 	virtual void assignEmail() = 0;
 	virtual void assignID() = 0;
 
