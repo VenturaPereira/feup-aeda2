@@ -1,19 +1,29 @@
-/*#include "Menu.h"
+#pragma once
 
-//TODO All Menus
-//TODO Do we create new class for every University or we do for only 1 University??
-unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max)
+#include "Menu.h"
+
+template <class FuntionReturn, class FunctionArguments>
+Menu<FuntionReturn, FunctionArguments>::Menu(string t, vector<string> &os, vector<FuntionReturn(*f)(FunctionArguments*)> &of)
 {
+	title = t;
+	optionsStr = os;
+	optionsFunctions = of;
+}
+
+template <class FuntionReturn, class FunctionArguments>
+bool Menu<FuntionReturn, FunctionArguments>::play(FunctionArguments* fa) const
+{
+	size_t minimum = 1, maximum = of.size() + 1;
 	unsigned int option;
-	do
+
+	while(true)
 	{
-		option = validInput<unsigned int>(badInput, normalInput, tryAgain);
-		if (option < min || option > max)
-		{
-			system("cls");  
-			cout << badInput;
+		option = enterInput<unsigned int>(title, optionsStr); //GET OPTIONS FROM USER
+		if (option >= minimum && option <= (maximum - 1)) {
+			of[option](fa); //CALL THE CORRESPONDENT FUNCTION
+			return true;
 		}
-		else break;
-	} while (true);
-	return option;
-}*/
+		else if (option == maximum) //EXIT
+			return false;
+	}
+}

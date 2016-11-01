@@ -1,7 +1,20 @@
-/*#pragma once
+#pragma once
 
-#include "University.h"
-#include "Student.h"
+#ifndef MENU_H
+#define MENU_H
+
 #include "Utilities.h"
 
-unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max);*/
+template <class FuntionReturn, class FunctionArguments>
+class Menu 
+{
+private:
+	string title;
+	vector<String> optionsStr;
+	vector<FuntionReturn(*functions)(FunctionArguments*)> optionsFunctions;
+public:
+	Menu(string t, vector<string> &os, vector<FuntionReturn(*f)(FunctionArguments*)> &of);
+	bool play(FunctionArguments* fa) const;
+};
+
+#endif
