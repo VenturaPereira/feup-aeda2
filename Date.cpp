@@ -51,7 +51,7 @@ void Date::setDate(string dayMonthYear)
 	istringstream iss(dayMonthYear);
 	char delimiter;
 	iss >> ws >> day >> ws >> delimiter >> ws >> month >> ws >> delimiter >> ws >> year >> ws;
-	if (iss.fail() || !iss.eof() || !verifyDate)
+	if (iss.fail() || !iss.eof() || !verifyDate())
 		valid = false;
 	else valid = true;
 }

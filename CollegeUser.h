@@ -5,7 +5,8 @@
 
 //#include <string>
 #include "Date.h"
-using namespace std;
+#include "College.h"
+
 
 class CollegeUser 
 {

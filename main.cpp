@@ -1,6 +1,4 @@
 #include "EnrollmentSystem.h"
-#include "University.h"
-#include "College.h"
 #include "Course.h"
 
 int main()

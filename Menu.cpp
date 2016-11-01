@@ -3,7 +3,7 @@
 #include "Menu.h"
 
 template <class FuntionReturn, class FunctionArguments>
-Menu<FuntionReturn, FunctionArguments>::Menu(string t, vector<string> &os, vector<FuntionReturn(*f)(FunctionArguments*)> &of)
+Menu<FuntionReturn, FunctionArguments>::Menu(string t, vector<string> &os, vector<FuntionReturn(*)(FunctionArguments*)> &of)
 {
 	title = t;
 	optionsStr = os;

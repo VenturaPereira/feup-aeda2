@@ -3,12 +3,9 @@
 #ifndef TUTOR_H
 #define TUTOR_H
 
-//#include <vector>
-using namespace std;
-
 #include "Course.h"
-#include "CourseUnit.h"
 #include "CourseUnitClass.h"
+
 class Tutor 
 {
 private:

@@ -8,10 +8,10 @@ bool EnrollmentSystem::addStudentHandler(Course* c)
 	try
 	{
 		string name = enterString("\nAdd Student\n\n", "Enter the name of the student [CTRL+Z to cancel] : ");
-		Date* dateOfBirth = NULL;
+		Date* dateOfBirth;
 		while (true)
 		{
-			dateOfBirth = new Date(enterInput<Date>("", "Enter the date of birth (DD-MM-YYYY) [CTRL+Z to cancel] : "));
+			dateOfBirth = new Date(enterString("", "Enter the date of birth (DD-MM-YYYY) [CTRL+Z to cancel] : "));
 			if (dateOfBirth->getValid())
 				break;
 			cout << "\nInvalid Date!\n";
