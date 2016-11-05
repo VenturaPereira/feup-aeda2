@@ -7,6 +7,23 @@ Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getColl
 	course = c;
 	assignID();
 	assignEmail();
+	assignTutor();
+}
+
+bool Student::assignTutor()
+{
+	vector<Tutor*>::iterator it = course->getProfessors().begin();
+	vector<Tutor*>::iterator minimumStudents = it;
+	if (course->getProfessors().size() == 0)
+		return false;
+	for (;it != course->getProfessors().end();it++)
+	{
+		if ((*it)->getStudents().size() < (*minimumStudents)->getStudents.size())
+			minimumStudents = it;
+	}
+	(*minimumStudents)->tutorStudent(this);
+	tutor = *minimumStudents;
+	return true;
 }
 
 void Student::assignEmail()

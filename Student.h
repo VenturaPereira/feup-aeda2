@@ -6,6 +6,7 @@
 #include "CollegeUser.h"
 #include "Course.h"
 #include "CourseUnitClass.h"
+#include "Tutor.h"
 #include <map>
 
 using namespace std;
@@ -17,12 +18,14 @@ protected:
 	Course* course;
 	map<CourseUnit*, unsigned short int> completedCourseUnits;
 	map<CourseUnit*, CourseUnitClass*> classesCurrentlyAtending;
+	Tutor* tutor;
 
 	virtual void assignEmail();
 	virtual void assignID();
 public:
 	//MEMBER FUNCTIONS
 	Student(string n, Date dob, Course* c);
+	bool assignTutor();
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);
 	void completedClass(CourseUnit *courseUnit, unsigned short int grade);

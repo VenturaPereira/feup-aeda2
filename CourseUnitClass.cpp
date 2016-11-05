@@ -19,3 +19,8 @@ bool CourseUnitClass::removeStudent(Student* s) {
 	return false;
 }
 
+void CourseUnitClass::setProfessor(Tutor* t)
+{
+	professor = t;
+}
+

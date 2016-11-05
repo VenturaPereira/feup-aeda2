@@ -3,12 +3,32 @@
 #include "University.h"
 
 
-unsigned long long int University::getLastStudentID()
-{
-	return (unsigned long long int)0; //TODO
-}
-
 void University::incrementLastStudentID()
 {
 	lastStudentID++;
+}
+
+void University::incrementLastProfessorID()
+{
+	lastProfessorID++;
+}
+
+void University::addCollege(College* c)
+{
+	collegesVector.push_back(c);
+}
+
+bool University::removeCollege(College *c)
+{
+	for (vector<College *> ::iterator it = collegesVector.begin();
+		it != collegesVector.end();
+		it++)
+	{
+		if ((*it) == c)
+		{
+			collegesVector.erase(it);
+			return true;
+		}
+	}
+	return false;
 }

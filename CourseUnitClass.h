@@ -12,13 +12,14 @@ private:
 	unsigned short int numberOfStudents;
 	vector<Student*> studentsInClass;
 	CourseUnit* courseUnit;
+	Tutor* professor;
 	
 public:
 	//MEMBER FUNCTIONS
 	CourseUnitClass(unsigned short int cn, CourseUnit* cu) : courseUnit(cu), classNumber(cn) {}
 	void addStudent(Student* s);
 	bool removeStudent(Student* s);
-
+	void setProfessor(Tutor* t);
 
 	//GETS
 	unsigned short int getNumberOfStudents() const { return numberOfStudents; }
