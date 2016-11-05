@@ -23,10 +23,50 @@ void center(const string s);
 string enterString(string title, string requestMsg);
 
 template<typename T>
-T enterInput(string title, string requestMsg);
+T enterInput(string title, string requestMsg)
+{
+	string line;
+	T input;
+
+	while (true)
+	{
+		system("CLS");
+		cin.clear();
+		cout << title << requestMsg;
+		getline(cin, line);
+		if (cin.eof())
+			throw EndOfFile();
+		istringstream iss(line);
+		iss >> input;
+		if (!iss.fail() && line.length() > 0)
+			return input;
+	}
+}
 
 template<typename T>
-T enterInput(string title, vector<string> options);
+T enterInput(string title, vector<string> options)
+{
+	string line;
+	T input;
+
+	while (true)
+	{
+		system("CLS");
+		cin.clear();
+		center(title);
+		for (size_t i = 0; i < options.size(); i++)
+			center(options[i]);
+		cout << "Select option: ";
+		getline(cin, line);
+		if (cin.eof())
+			throw EndOfFile();
+		istringstream iss(line);
+		iss >> input;
+		if (!iss.fail() && line.length() > 0)
+			return input;
+	}
+
+}
 
 void validFile(string fileType);
 
@@ -49,6 +89,16 @@ private:
 public:
 	lowGrade(unsigned int g) : grade(g) {}
 	unsigned int getGrade() const { return grade; }
+};
+
+template <class Type>
+class NotFound
+{
+private:
+	string name;
+public:
+	NotFound(string n) : name(n) {}
+	string getName() const { return name; }
 };
 
 #endif
