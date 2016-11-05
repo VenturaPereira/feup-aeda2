@@ -18,7 +18,7 @@ bool Student::assignTutor()
 		return false;
 	for (;it != course->getProfessors().end();it++)
 	{
-		if ((*it)->getStudents().size() < (*minimumStudents)->getStudents.size())
+		if ((*it)->getStudents().size() < (*minimumStudents)->getStudents().size())
 			minimumStudents = it;
 	}
 	(*minimumStudents)->tutorStudent(this);

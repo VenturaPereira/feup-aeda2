@@ -15,6 +15,7 @@ bool Tutor::teachClass(CourseUnitClass* c)
 	c->setProfessor(this);
 	c->getCourseUnit()->addProfessor(this);
 	currentlyTeaching.push_back(c->getCourseUnit());
+	return true;
 }
 
 void Tutor::assignEmail()

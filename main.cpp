@@ -9,10 +9,10 @@ int main()
 	system.getUniversities().push_back(UP); //ADD UP
 	
 	College* FEUP = new College("Faculdade de Engenharia da Universidade do Porto", "FEUP", UP);
-	system.getUniversities()[0]->getColleges().push_back(FEUP); //ADD FEUP
+	system.getUniversities()[0]->addCollege(FEUP); //ADD FEUP
 	
 	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);
-	system.getUniversities()[0]->getColleges()[0]->getCourses().push_back(MIEIC); //ADD MIEIC
+	system.getUniversities()[0]->getColleges()[0]->addCourse(MIEIC); //ADD MIEIC
 
 
 	return 0;
