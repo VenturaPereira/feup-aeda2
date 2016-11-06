@@ -2,7 +2,6 @@
 
 #include "University.h"
 
-
 void University::incrementLastStudentID()
 {
 	lastStudentID++;

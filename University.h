@@ -7,6 +7,7 @@
 using namespace std;
 
 class College;
+class Course;
 
 class University
 {

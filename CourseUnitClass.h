@@ -9,7 +9,6 @@ class CourseUnitClass
 private:
 	//MEMBER VARIABLES
 	const unsigned short int classNumber;
-	unsigned short int numberOfStudents;
 	vector<Student*> studentsInClass;
 	CourseUnit* courseUnit;
 	Tutor* professor;
@@ -22,7 +21,7 @@ public:
 	void setProfessor(Tutor* t);
 
 	//GETS
-	unsigned short int getNumberOfStudents() const { return numberOfStudents; }
+	unsigned short int getNumberOfStudents() const { return studentsInClass.size(); }
 	unsigned short int getClassNumber() const { return classNumber; }
 	vector<Student*> getStudentsInClass() const { return studentsInClass; }
 	CourseUnit* getCourseUnit() const { return courseUnit;}

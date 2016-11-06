@@ -5,8 +5,8 @@
 
 #include <string>
 #include <vector>
+#include "Course.h"
 
-class Course;
 class Student;
 class Tutor;
 class CourseUnitClass;
@@ -15,11 +15,10 @@ using namespace std;
 
 class CourseUnit
 {
-private:
+protected:
 	//MEMBER VARIABLES
-	const unsigned short int MAXIMUM_NUMBER_OF_STUDENTS, MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS;
+	const unsigned short int year, semester;
 	const string name, acronym;
-	unsigned short int numberOfStudents;
 	Course* course;
 	vector<Student*> studentsCurrentlyInCourseUnit;
 	vector<Tutor*> courseUnitProfessors;
@@ -27,13 +26,8 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	CourseUnit(unsigned short int mnos, unsigned short int mnospc, string n, string a, Course* c) :
-		MAXIMUM_NUMBER_OF_STUDENTS(mnos),
-		MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS(mnospc),
-		name(n),
-		acronym(a),
-		course(c) {}
-	void addStudent(Student* s);
+	CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s);
+	virtual bool addStudent(Student* s) = 0;
 	bool removeStudent(Student* s);
 	void addProfessor(Tutor* t);
 	bool removeProfessor(Tutor* t);
@@ -42,15 +36,51 @@ public:
 			
 
 	//GETS
-	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
-	unsigned short int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
-	unsigned short int getNumberOfStudents() const {return numberOfStudents;}
+	unsigned int getNumberOfStudents() const {return studentsCurrentlyInCourseUnit.size();}
 	unsigned short int getNumberClasses() const { return classes.size(); }
+	string getName() const { return name; }
 	vector<CourseUnitClass*> getClasses() const { return classes; }
 	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*> getCourseUnitProfessors() const { return courseUnitProfessors; }
 	Course* getCourse() const { return course; }
 
 };
+
+
+
+class OptionalCourseUnit : public CourseUnit
+{
+private:
+	//MEMBER VARIABLES
+	const string scientificArea;
+	const unsigned short int MAXIMUM_NUMBER_OF_STUDENTS;
+
+public:
+	//MEMBER FUNCTIONS
+	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa);
+	virtual bool addStudent(Student* s);
+
+	//GETS
+	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
+
+};
+
+
+class MandatoryCourseUnit : public CourseUnit
+{
+private:
+	//MEMBER VARIABLES
+	const unsigned int MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS;
+
+public:
+	//MEMBER FUNCTIONS
+	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s);
+	virtual bool addStudent(Student* s);
+
+	//GETS
+	unsigned int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
+
+};
+
 #endif
 

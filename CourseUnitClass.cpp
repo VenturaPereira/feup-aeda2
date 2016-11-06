@@ -6,7 +6,6 @@
 void CourseUnitClass::addStudent(Student* s)
 {
 	studentsInClass.push_back(s);
-	numberOfStudents = studentsInClass.size();
 }
 
 bool CourseUnitClass::removeStudent(Student* s) {
