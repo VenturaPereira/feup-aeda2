@@ -15,5 +15,10 @@ int main()
 	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);
 	system.getUniversities()[0]->getColleges()[0]->addCourse(MIEIC); //ADD MIEIC
 
+	vector<string> strings = { "1. 0i", "2. Bye" };
+	vector<int(*)(int)> functions;
+	Menu<int, int> mainMenu("Main", strings, functions);
+	mainMenu.play(0);
+
 	return 0;
 }
