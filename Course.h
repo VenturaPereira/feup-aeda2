@@ -2,18 +2,14 @@
 #ifndef COURSE_H
 #define COURSE_H
 
-//#include <vector>
-//#include <string>
-
-#include "College.h"
+#include <vector>
+#include <string>
 using namespace std;
 
+class College;
 class Tutor;
 class CourseUnit;
 class Student;
-
-//ADICIONAR MESTRADO/LICENCIATURAS/DOUTURAMENTOS COMO CLASSES DERIVADAS
-
 
 class Course
 {

@@ -1,6 +1,12 @@
 #pragma once
 
 #include "EnrollmentSystem.h"
+#include "Utilities.h"
+#include "University.h"
+#include "College.h"
+#include "Course.h"
+#include "Date.h"
+#include "Student.h"
 
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)

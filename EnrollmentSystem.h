@@ -3,9 +3,19 @@
 #ifndef ENROLLMENTSYSTEM_H
 #define ENROLLMENTSYSTEM_H
 
-#include "Student.h"
-
 class University;
+class College;
+class Course;
+class CourseUnit;
+class CourseUnitClass;
+class Student;
+class Tutor;
+class Date;
+
+#include <vector>
+#include <string>
+using namespace std;
+
 
 class EnrollmentSystem
 {

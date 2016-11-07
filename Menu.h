@@ -3,7 +3,11 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "Date.h"
+#include <string>
+#include <vector>
+#include "Utilities.h"
+using namespace std;
+
 
 template <class FuntionReturn, class FunctionArguments>
 class Menu 
@@ -36,7 +40,7 @@ bool Menu<FuntionReturn, FunctionArguments>::play(FunctionArguments fa)
 	{
 		option = enterInput<unsigned int>(title, optionsStr); //GET OPTIONS FROM USER
 		if (option >= minimum && option <= (maximum - 1)) {
-			optionsFunctions[option](fa); //CALL THE CORRESPONDENT FUNCTION
+			optionsFunctions[option-1](fa); //CALL THE CORRESPONDENT FUNCTION
 			return true;
 		}
 		else if (option == maximum) //EXIT

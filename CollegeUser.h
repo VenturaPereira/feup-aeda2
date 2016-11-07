@@ -3,10 +3,11 @@
 #ifndef COLLEGEUSER_H
 #define COLLEGEUSER_H
 
-//#include <string>
+#include <string>
 #include "Date.h"
-#include "College.h"
+using namespace std;
 
+class College;
 
 class CollegeUser 
 {

@@ -3,9 +3,14 @@
 #ifndef TUTOR_H
 #define TUTOR_H
 
-#include "Course.h"
-#include "CourseUnitClass.h"
 #include "CollegeUser.h"
+#include <vector>
+using namespace std;
+
+class Course;
+class CourseUnit;
+class Student;
+class CourseUnitClass;
 
 class Tutor : public CollegeUser
 {

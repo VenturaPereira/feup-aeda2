@@ -1,4 +1,9 @@
 #include "Tutor.h"
+#include "CourseUnitClass.h"
+#include "Course.h"
+#include "College.h"
+#include "CourseUnit.h"
+#include "University.h"
 
 void Tutor::tutorStudent(Student* s)
 {

@@ -2,7 +2,14 @@
 #ifndef COURSEUNITCLASS_H
 #define COURSEUNITCLASS_H
 
-#include "CourseUnit.h"
+#include <vector>
+#include <string>
+using namespace std;
+
+class CourseUnit;
+class Tutor;
+class Student;
+
 
 class CourseUnitClass 
 {

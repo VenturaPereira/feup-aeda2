@@ -2,14 +2,12 @@
 #ifndef COLLEGE_H
 #define COLLEGE_H
 
-//#include <string>
-//#include <vector>
-
+#include <string>
+#include <vector>
 using namespace std;
 
-#include "University.h"
-
 class Course;
+class University;
 
 class College
 {
@@ -21,7 +19,7 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	College(string n, string a, University* u) : name(n), acronym(a), university(u) {}
+	College(string n, string a, University* u);
 	void addCourse(Course* c);
 	bool removeCourse(Course* c);
 

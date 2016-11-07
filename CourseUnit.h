@@ -5,8 +5,8 @@
 
 #include <string>
 #include <vector>
-#include "Course.h"
 
+class Course;
 class Student;
 class Tutor;
 class CourseUnitClass;

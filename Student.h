@@ -2,12 +2,16 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include "Date.h"
 #include "CollegeUser.h"
-#include "Course.h"
-#include "CourseUnitClass.h"
-#include "Tutor.h"
+#include "Date.h"
+#include <string>
+#include <vector>
 #include <map>
+
+class Course;
+class CourseUnit;
+class CourseUnitClass;
+class Tutor;
 
 using namespace std;
 

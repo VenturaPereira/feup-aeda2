@@ -1,6 +1,10 @@
 #pragma once
 
+#include "University.h"
 #include "College.h"
+
+
+College::College(string n, string a, University* u): name(n), acronym(a), university(u) {}
 
 void College::addCourse(Course* c)
 {

@@ -1,6 +1,14 @@
 #pragma once
 
 #include "Student.h"
+#include "Course.h"
+#include "College.h"
+#include "University.h"
+#include "CourseUnit.h"
+#include "CourseUnitClass.h"
+#include "Tutor.h"
+#include "Utilities.h"
+
 
 Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getCollege())
 {
