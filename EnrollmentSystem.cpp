@@ -14,7 +14,7 @@ EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 	//TODO - ADD THE SORTING OPTIONS
 }
 
-Course* EnrollmentSystem::getCourse(string &courseName) const
+Course* EnrollmentSystem::getCourse(string &courseName)
 {
 	vector<University*>::const_iterator uniIt;
 	vector<College*>::const_iterator colIt;
@@ -40,7 +40,7 @@ Course* EnrollmentSystem::getCourse(string &courseName) const
 	throw NotFound<Course*>(courseName);
 }
 
-bool EnrollmentSystem::addStudentHandler()
+bool addStudentHandler(EnrollmentSystem& s)
 {
 	Student* student;
 	Date* dateOfBirth;
@@ -59,7 +59,7 @@ bool EnrollmentSystem::addStudentHandler()
 			system("PAUSE");
 		}
 		courseName = enterString("\nAdd Student\n\n", "Enter the name of the course [CTRL+Z to cancel] : ");
-		course = getCourse(courseName);
+		course = s.getCourse(courseName);
 	}
 	catch (EndOfFile &eof)
 	{

@@ -59,9 +59,11 @@ public:
 	//MEMBER FUNCTIONS
 	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa);
 	virtual bool addStudent(Student* s);
+	void show() const;
 
 	//GETS
 	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
+	string getScientificArea() const { return scientificArea; }
 
 };
 

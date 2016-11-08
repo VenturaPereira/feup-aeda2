@@ -1,6 +1,10 @@
 #pragma once
 
+#include <iostream>
 #include "CourseUnit.h"
+#include "Course.h"
+#include "College.h"
+#include "University.h"
 
 CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s)
 	: name(n), acronym(a), year(y), semester(s)
@@ -89,3 +93,18 @@ bool CourseUnit::removeCourseUnitClass(CourseUnitClass* cuc)
 	}
 	return false;
 }
+
+void OptionalCourseUnit::show() const
+{
+	cout << name << '\t'
+		<< acronym << '\t'
+		<< "Optional" << '\t'
+		<< scientificArea << '\t'
+		<< course->getName() << '\t'
+		<< course->getCollege()->getName() << '\t'
+		<< course->getCollege()->getUniversity()->getName() << '\t'
+		<< MAXIMUM_NUMBER_OF_STUDENTS << '\t'
+		<< year << '\t'
+		<< semester << '\t';
+}
+

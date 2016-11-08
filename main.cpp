@@ -3,6 +3,9 @@
 #include "College.h"
 #include "Course.h"
 #include "Menu.h"
+#include "CourseUnit.h"
+
+#define MNOSPC 30 //MAXIMUM NUMBER OF STUDENTS PER CLASS
 
 int run()
 {
@@ -17,11 +20,8 @@ int run()
 	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);
 	system.getUniversities()[0]->getColleges()[0]->addCourse(MIEIC); //ADD MIEIC
 
-	vector<string> strings = { "1. 0i", "2. Bye" };
-	vector<int(*)(int)> functions;
-	Menu<int, int> mainMenu("Main", strings, functions);
-	mainMenu.play(0);
-
+	//bool(*adh)(EnrollmentSystem&) = addStudentHandler;
+	
 	return 0;
 }
 

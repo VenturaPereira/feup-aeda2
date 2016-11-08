@@ -8,6 +8,7 @@ using namespace std;
 
 class College;
 class Course;
+class OptionalCourseUnit;
 
 class University
 {
@@ -24,7 +25,10 @@ public:
 	void incrementLastProfessorID();
 	void addCollege(College* c);
 	bool removeCollege(College *c);
-		
+	
+	//PRINT TO SCREEN
+	void showAllOptional(string scientificArea, OptionalCourseUnit* arg) const;
+				
 	//GETS
 	unsigned long long int getLastStudentID() { return lastStudentID; }
 	unsigned long long int getLastProfessorID() { return lastProfessorID; }
