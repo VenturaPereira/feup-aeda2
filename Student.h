@@ -36,10 +36,13 @@ public:
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);
 	bool completedClass(CourseUnit *courseUnit, unsigned short int grade);
+	bool completedAllCourseUnits(unsigned short int y);
+
 	
 	//SETS
 	void setStatus(string s) { status = s; }
 	void setCredits(unsigned int c) { credits = c; }
+	void setYear(unsigned short int y) { year = y; }
 
 	//GETS
 	Course* getCourse() const { return course; }
@@ -48,6 +51,7 @@ public:
 	unsigned short int getYear() const { return year; }
 	string getStatus() const { return status; }
 	unsigned int getCredits() const { return credits; }
+
 };
 
 #endif

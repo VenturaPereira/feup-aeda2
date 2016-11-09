@@ -8,7 +8,7 @@
 #include "CourseUnit.h"
 #include "Date.h"
 #include "Student.h"
-#include "CollegeUser.h"
+#include "CourseUnitClass.h"
 
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
@@ -76,6 +76,41 @@ Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
 		}
 	}
 	throw NotFound<Student*, unsigned long long int>(ID);
+}
+
+CourseUnit* EnrollmentSystem::getCourseUnit(string &courseUnitName)
+{
+	vector<University*>::iterator unIt;
+	for (unIt = universitiesVector.begin();
+		unIt != universitiesVector.end();
+		unIt++
+		)
+	{
+		vector<College*>::iterator colIt;
+		for (colIt = (*unIt)->getColleges().begin();
+			colIt != (*unIt)->getColleges().end();
+			colIt++
+			)
+		{
+			vector<Course*>::iterator courseIt;
+			for (courseIt = (*colIt)->getCourses().begin();
+				courseIt != (*colIt)->getCourses().end();
+				courseIt++
+				)
+			{
+				vector<CourseUnit*>::iterator cuIt;
+				for (cuIt = (*courseIt)->getCourseUnits().begin();
+					cuIt != (*courseIt)->getCourseUnits().end();
+					cuIt++
+					)
+				{
+					if ((*cuIt)->getName() == courseUnitName)
+						return (*cuIt);
+				}
+			}
+		}
+	}
+	throw NotFound<CourseUnit*, string>(courseUnitName);
 }
 
 bool addStudentHandler(EnrollmentSystem& s)
@@ -202,10 +237,17 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 {
 	Student* student;
 	unsigned long long int ID;
+	CourseUnit* courseUnit;
+	string courseUnitName;
+	unsigned short int grade;
 
 	try
 	{
 		ID = enterInput<unsigned long long int>("\nFinish Course Unit\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
+		student = s.getStudent(ID);
+		courseUnitName = enterString("\nFinish Course Unit\n\n", "Enter the name of the course unit [CTRL+Z to cancel] : ");
+		courseUnit = s.getCourseUnit(courseUnitName);
+		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
 		student = s.getStudent(ID);
 	}
 	catch (EndOfFile &eof)
@@ -218,6 +260,24 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 		cout << "Student " << nfs.getMember() << " not found!\n";
 		return false;
 	}
+	catch (NotFound<CourseUnit*, string> &nfcu)
+	{
+		cout << "Course Unit " << nfcu.getMember() << " not found!\n";
+		return false;
+	}
 
-	//TODO COMPLETE
+	student->completedClass(courseUnit, grade);
+	CourseUnitClass* courseUnitClass = student->getClassesCurrentlyAtending().at(courseUnit);
+	courseUnitClass->removeStudent(student); 
+	courseUnit->removeStudent(student);
+	
+	//CHECK IF STUDENT HAS COMPLETED ALL THE COURSE UNITS OF THE CURRENT YEAR
+	if (student->completedAllCourseUnits(student->getYear()))
+	{
+		//GET READY FOR NEXT YEAR
+		student->setCredits(0);
+		student->setYear(student->getYear() + 1);
+	}
+
+	return true;
 }

@@ -150,3 +150,22 @@ bool Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 	completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
 	return true;
 }
+
+bool Student::completedAllCourseUnits(unsigned short int y)
+{
+	vector<CourseUnit*> courseUnitsYear = this->getCourse()->getCourseUnits(y);
+
+	vector<CourseUnit*>::const_iterator cuIt;
+	for (cuIt = courseUnitsYear.begin();
+		cuIt != courseUnitsYear.end();
+		cuIt++)
+	{
+		//ONLY THE MANDATORY MATTER TO THIS
+		MandatoryCourseUnit* mcu = dynamic_cast<MandatoryCourseUnit*>((*cuIt));
+		if (mcu != NULL)
+			if (completedCourseUnits.find((*cuIt)) == completedCourseUnits.end())
+				return false;
+	}
+
+	return true;
+}

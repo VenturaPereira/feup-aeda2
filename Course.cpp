@@ -65,10 +65,10 @@ bool Course::removeProfessor(Tutor* p)
 	return false;
 }
 
-vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned short int y)
+vector<CourseUnit*> Course::getCourseUnits(unsigned short int y)
 {
-	vector<CourseUnit*> courseUnitsFromYear, notCompleted;
-	
+	vector<CourseUnit*> courseUnits;
+
 	if (y >= 1 && y <= 5)
 	{
 		//GATHER ALL THE COURSE UNITS FROM THE YEAR 
@@ -79,11 +79,25 @@ vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned shor
 		{
 			if ((*cuIt)->getYear() == y) //SAME YEAR AS ARGUMENT
 			{
-				courseUnitsFromYear.push_back(*cuIt);
+				courseUnits.push_back(*cuIt);
 			}
 		}
+	}
 
+	return courseUnits;
+}
+
+vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned short int y)
+{
+	vector<CourseUnit*> courseUnitsFromYear, notCompleted;
+	
+	if (y >= 1 && y <= 5)
+	{
+		//GATHER ALL THE COURSE UNITS FROM THE YEAR 
+		courseUnitsFromYear = getCourseUnits(y);
+		
 		//CHECK WHAT COURSE UNITS HAVE NOT BEEN COMPLETED
+		vector<CourseUnit*>::const_iterator cuIt;
 		for (cuIt = courseUnitsFromYear.begin();
 			cuIt != courseUnitsFromYear.end();
 			cuIt++)
@@ -101,3 +115,5 @@ vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned shor
 
 	return notCompleted;
 }
+
+
