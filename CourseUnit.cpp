@@ -100,11 +100,13 @@ void OptionalCourseUnit::show() const
 		<< acronym << '\t'
 		<< "Optional" << '\t'
 		<< scientificArea << '\t'
-		<< course->getName() << '\t'
-		<< course->getCollege()->getName() << '\t'
-		<< course->getCollege()->getUniversity()->getName() << '\t'
-		<< MAXIMUM_NUMBER_OF_STUDENTS << '\t'
-		<< year << '\t'
-		<< semester << '\t';
+		<< this->getNumberOfStudents()  << '/' << MAXIMUM_NUMBER_OF_STUDENTS << '\n';
+		
 }
 
+void MandatoryCourseUnit::show() const
+{
+	cout << name << '\t'
+		<< acronym << '\t'
+		<< "Mandatory" << '\n';
+}

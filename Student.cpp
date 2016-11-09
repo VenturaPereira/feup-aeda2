@@ -13,6 +13,7 @@
 Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getCollege())
 {
 	course = c;
+	year = 1;
 	assignID();
 	assignEmail();
 	assignTutor();

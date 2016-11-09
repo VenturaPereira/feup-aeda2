@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Course.h"
+#include "Student.h"
+#include "CourseUnit.h"
+#include <algorithm>
 
 void Course::addCourseUnit(CourseUnit* cu)
 {
@@ -60,4 +63,41 @@ bool Course::removeProfessor(Tutor* p)
 		}
 	}
 	return false;
+}
+
+vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned short int y)
+{
+	vector<CourseUnit*> courseUnitsFromYear, notCompleted;
+	
+	if (y >= 1 && y <= 5)
+	{
+		//GATHER ALL THE COURSE UNITS FROM THE YEAR 
+		vector<CourseUnit*>::const_iterator cuIt;
+		for (cuIt = courseUnits.begin();
+			cuIt != courseUnits.end();
+			cuIt++)
+		{
+			if ((*cuIt)->getYear() == y) //SAME YEAR AS ARGUMENT
+			{
+				courseUnitsFromYear.push_back(*cuIt);
+			}
+		}
+
+		//CHECK WHAT COURSE UNITS HAVE NOT BEEN COMPLETED
+		for (cuIt = courseUnitsFromYear.begin();
+			cuIt != courseUnitsFromYear.end();
+			cuIt++)
+		{
+			if (//CHECK IF ALREADY ATENDING THE COURSE UNIT OR IF THE STUDENT HAS ALREADY COMPLETED THE COURSE UNIT
+				find(s->getClassesCurrentlyAtending().begin(), s->getClassesCurrentlyAtending().end(), (*cuIt)) == s->getClassesCurrentlyAtending().end()
+				&& find(s->getCompletedCourseUnits().begin(), s->getCompletedCourseUnits().end(), (*cuIt)) == s->getCompletedCourseUnits().end()
+				)
+			{
+				notCompleted.push_back(*cuIt); //IF NOT TO BOTH, ADD TO NOTCOMPLETED
+			}
+		}
+
+	}
+
+	return notCompleted;
 }

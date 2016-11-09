@@ -23,6 +23,8 @@ protected:
 	map<CourseUnit*, unsigned short int> completedCourseUnits;
 	map<CourseUnit*, CourseUnitClass*> classesCurrentlyAtending;
 	Tutor* tutor;
+	unsigned short int year;
+	string status; //REGULAR STUDENT, WORKING STUDENT, SPECIAL NEEDS
 
 	virtual void assignEmail();
 	virtual void assignID();
@@ -33,11 +35,16 @@ public:
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);
 	void completedClass(CourseUnit *courseUnit, unsigned short int grade);
+	
+	//SETS
+	void setStatus(string s) { status = s; }
 
 	//GETS
 	Course* getCourse() const { return course; }
 	map<CourseUnit*, unsigned short int> getCompletedCourseUnits() const {return completedCourseUnits;}
 	map<CourseUnit*, CourseUnitClass*> getClassesCurrentlyAtending() const { return classesCurrentlyAtending; }
+	unsigned short int getYear() const { return year; }
+	string getStatus() const { return status; }
 };
 
 #endif

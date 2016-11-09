@@ -38,7 +38,7 @@ public:
 	vector<Student*> getStudents() const { return students; }
 	vector<Tutor*> getProfessors() const { return professors; }
 	College* getCollege() const { return college; }
-
+	vector<CourseUnit*> getCourseUnitsNotCompleted(Student* s, unsigned short int y);
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include "University.h"
 #include "College.h"
 #include "Course.h"
+#include "CourseUnit.h"
 #include "Date.h"
 #include "Student.h"
 
@@ -79,3 +80,78 @@ bool addStudentHandler(EnrollmentSystem& s)
 	return true;
 }
 
+bool removeStudentHandler(EnrollmentSystem& s)
+{
+	Student* student;
+	unsigned long long int ID;
+
+	try
+	{
+		ID = enterInput<unsigned long long int>("\nRemove Student\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
+		student = s.getStudent(ID);
+	}
+	catch (EndOfFile &eof)
+	{
+		cout << "\nAddition canceled!\n";
+		return false;
+	}
+	catch (NotFound<Student*> &nfs)
+	{
+		cout << "Student " << ID << " not found!\n";
+		return false;
+	}
+	
+	student->getCourse()->removeStudent(student);
+
+	return true;
+}
+
+bool enrollmentHandler(EnrollmentSystem& s)
+{
+	Student* student;
+	unsigned long long int ID;
+
+	try
+	{
+		ID = enterInput<unsigned long long int>("\nEnrollment System\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
+		student = s.getStudent(ID);
+	}
+	catch (EndOfFile &eof)
+	{
+		cout << "\nAddition canceled!\n";
+		return false;
+	}
+	catch (NotFound<Student*> &nfs)
+	{
+		cout << "Student " << ID << " not found!\n";
+		return false;
+	}
+	
+		vector<CourseUnit*> courseUnitsToShow = student->getCourse()->getCourseUnitsNotCompleted(student, student->getYear());
+		unsigned short int answer = 0;
+		try 
+		{
+			while (answer != (courseUnitsToShow.size() + 1) || courseUnitsToShow.size() == 0) //EXIT
+			{
+				system("CLS");
+				for (size_t i = 0; i < courseUnitsToShow.size(); i++) //SHOW AS MENU
+				{
+					cout << (i + 1) << ". ";
+					courseUnitsToShow[i]->show();
+				}
+				answer = enterInput<unsigned short int>(); //READ SELECTION
+				if (answer >= 1 && answer <= courseUnitsToShow.size()) 
+				{
+					student->enrollCourseUnit(courseUnitsToShow[answer - 1]);
+					courseUnitsToShow = student->getCourse()->getCourseUnitsNotCompleted(student, student->getYear()); //REFRESH MENU
+				}
+			}
+		}
+		catch (EndOfFile &eof)
+		{
+			cout << "Enrollment Canceled!\n";
+			return false;
+		}
+	
+	return courseUnitsToShow.size() == 0;
+}

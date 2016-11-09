@@ -68,6 +68,26 @@ T enterInput(string title, vector<string> options)
 
 }
 
+template<typename T>
+T enterInput()
+{
+	string line;
+	T input;
+
+	while (true)
+	{
+		cin.clear();
+		cout << "Answer: ";
+		getline(cin, line);
+		if (cin.eof())
+			throw EndOfFile();
+		istringstream iss(line);
+		iss >> input;
+		if (!iss.fail() && line.length() > 0)
+			return input;
+	}
+}
+
 void validFile(string fileType);
 
 bool yesNoAnswer();

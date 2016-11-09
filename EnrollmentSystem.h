@@ -43,19 +43,18 @@ public:
 	//HANDLERS (COMMUNICATION WITH THE USER)
 	friend bool addStudentHandler(EnrollmentSystem& s); //ADDS STUDENT TO COURSE
 	friend bool removeStudentHandler(EnrollmentSystem& s); //REMOVES STUDENT FROM COURSE
-	friend bool addProfessorHandler(EnrollmentSystem& s); //ADDS PROFESSOR TO COURSE UNIT (AND TO COURSE, IF NOT YET THERE)
-	friend bool removeProfessorHandler(EnrollmentSystem& s); //REMOVES PROFESSOR FROM COURSE UNIT (AND FROM COURSE)
-	friend bool addStudentToCourseUnitHandler(EnrollmentSystem& s); //ADDS STUDENT TO A COURSE UNIT
-	friend bool removeStudentFromCourseUnitHandler(EnrollmentSystem& s); //REMOVES STUDENT FROM COURSE UNIT
-	friend bool studentFinishedCourseUnitHandler(EnrollmentSystem& s);
-	friend bool addUniversityHandler(EnrollmentSystem& s);
-	friend bool removeUniversityHandler(EnrollmentSystem& s);
-	friend bool addCollegeHandler(EnrollmentSystem& s);
-	friend bool removeCollegeHandler(EnrollmentSystem& s);
-	friend bool addCourseHandler(EnrollmentSystem& s);
-	friend bool removeCourseHandler(EnrollmentSystem& s);
-	friend bool addCourseUnitHandler(EnrollmentSystem& s);
-	friend bool removeCourseUnitHandler(EnrollmentSystem& s);
+	//friend bool addProfessorHandler(EnrollmentSystem& s); //ADDS PROFESSOR TO COURSE UNIT (AND TO COURSE, IF NOT YET THERE)
+	//friend bool removeProfessorHandler(EnrollmentSystem& s); //REMOVES PROFESSOR FROM COURSE UNIT (AND FROM COURSE)
+	friend bool enrollmentHandler(EnrollmentSystem& s); //SHOWS THE COURSE UNITS AVAIABLE TO ENROLL AND ADDS A STUDENT TO THEM
+	friend bool studentFinishedCourseUnitHandler(EnrollmentSystem& s); //REMOVES THE STUDENT FROM THE COURSE UNIT IF THE GRADE IS HIGH ENOUGH
+	//friend bool addUniversityHandler(EnrollmentSystem& s);
+	//friend bool removeUniversityHandler(EnrollmentSystem& s);
+	//friend bool addCollegeHandler(EnrollmentSystem& s);
+	//friend bool removeCollegeHandler(EnrollmentSystem& s);
+	//friend bool addCourseHandler(EnrollmentSystem& s);
+	//friend bool removeCourseHandler(EnrollmentSystem& s);
+	//friend bool addCourseUnitHandler(EnrollmentSystem& s);
+	//friend bool removeCourseUnitHandler(EnrollmentSystem& s);
 	
 	//LOAD/SAVE FROM FILES
 	void loadStudents();
@@ -83,7 +82,6 @@ public:
 	Course* getCourse(string &courseName);
 	CourseUnit* getCourseUnit(string &courseUnitName);
 	Student* getStudent(unsigned long long int &ID);
-	Student* getStudent(string &name);
 	Tutor* getProfessor(unsigned long long int &ID);
 	Tutor* getProfessor(string &name);
 
