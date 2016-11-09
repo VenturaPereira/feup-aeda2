@@ -25,6 +25,7 @@ protected:
 	Tutor* tutor;
 	unsigned short int year;
 	string status; //REGULAR STUDENT, WORKING STUDENT, SPECIAL NEEDS
+	unsigned int credits; //CREDITS THIS YEAR
 
 	virtual void assignEmail();
 	virtual void assignID();
@@ -34,10 +35,11 @@ public:
 	bool assignTutor();
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);
-	void completedClass(CourseUnit *courseUnit, unsigned short int grade);
+	bool completedClass(CourseUnit *courseUnit, unsigned short int grade);
 	
 	//SETS
 	void setStatus(string s) { status = s; }
+	void setCredits(unsigned int c) { credits = c; }
 
 	//GETS
 	Course* getCourse() const { return course; }
@@ -45,6 +47,7 @@ public:
 	map<CourseUnit*, CourseUnitClass*> getClassesCurrentlyAtending() const { return classesCurrentlyAtending; }
 	unsigned short int getYear() const { return year; }
 	string getStatus() const { return status; }
+	unsigned int getCredits() const { return credits; }
 };
 
 #endif

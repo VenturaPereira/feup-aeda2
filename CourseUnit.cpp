@@ -6,20 +6,20 @@
 #include "College.h"
 #include "University.h"
 
-CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s)
-	: name(n), acronym(a), year(y), semester(s)
+CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int credits)
+	: name(n), acronym(a), year(y), semester(s), credits(credits)
 {
 	course = c;
 }
 
-OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa)
-	: CourseUnit(n,a,c,y,s), MAXIMUM_NUMBER_OF_STUDENTS(mnos), scientificArea(sa)
+OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, unsigned int cred)
+	: CourseUnit(n,a,c,y,s,cred), MAXIMUM_NUMBER_OF_STUDENTS(mnos), scientificArea(sa)
 {
 
 }
 
-MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s)
-	: CourseUnit(n, a, c, y, s), MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS(mnospc)
+MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int cred)
+	: CourseUnit(n, a, c, y, s, cred), MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS(mnospc)
 {
 
 }

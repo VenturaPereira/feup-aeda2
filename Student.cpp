@@ -14,6 +14,7 @@ Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getColl
 {
 	course = c;
 	year = 1;
+	credits = 0;
 	assignID();
 	assignEmail();
 	assignTutor();
@@ -125,12 +126,11 @@ bool Student::enrollCourseUnit(CourseUnit* courseUnit)
 	}
 }
 
-void Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
+bool Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 {
 	//CHECK IF GRADE IS ACCEPTABLE
 	if (grade < 10)
-		throw lowGrade(grade);
-
+		return false;
 	//CHECK IF STUDENT HAS COMPLETED THAT COURSE UNIT BEFORE
 	for (map<CourseUnit*, unsigned short int>::iterator it = completedCourseUnits.begin();
 		it != completedCourseUnits.end();
@@ -141,12 +141,12 @@ void Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 			if (grade > it->second)  //WITH A LOWER GRADE
 			{
 				it->second = grade; //REPLACE GRADE
-				return;
+				return true;
 			}
-			else return; //WITH THE SAME OR HIGHER GRADE
+			else return true; //WITH THE SAME OR HIGHER GRADE
 		}
 	}
 
 	completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
-
+	return true;
 }

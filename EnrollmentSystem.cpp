@@ -179,8 +179,13 @@ bool enrollmentHandler(EnrollmentSystem& s)
 				answer = enterInput<unsigned short int>(); //READ SELECTION
 				if (answer >= 1 && answer <= courseUnitsToShow.size()) 
 				{
-					student->enrollCourseUnit(courseUnitsToShow[answer - 1]);
-					courseUnitsToShow = student->getCourse()->getCourseUnitsNotCompleted(student, student->getYear()); //REFRESH MENU
+					if (student->getCredits() + courseUnitsToShow[answer - 1]->getCredits() <= s.getMaxCredits())
+					{
+						student->enrollCourseUnit(courseUnitsToShow[answer - 1]);
+						courseUnitsToShow = student->getCourse()->getCourseUnitsNotCompleted(student, student->getYear()); //REFRESH MENU
+						student->setCredits(student->getCredits() + courseUnitsToShow[answer - 1]->getCredits());
+					}
+					else cout << "Student cannot enroll this course unit. Maximum credits have been exceeded";
 				}
 			}
 		}
@@ -191,4 +196,28 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		}
 	
 	return courseUnitsToShow.size() == 0;
+}
+
+bool studentFinishedCourseUnitHandler(EnrollmentSystem& s) 
+{
+	Student* student;
+	unsigned long long int ID;
+
+	try
+	{
+		ID = enterInput<unsigned long long int>("\nFinish Course Unit\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
+		student = s.getStudent(ID);
+	}
+	catch (EndOfFile &eof)
+	{
+		cout << "\nAddition canceled!\n";
+		return false;
+	}
+	catch (NotFound<Student*, unsigned long long int> &nfs)
+	{
+		cout << "Student " << nfs.getMember() << " not found!\n";
+		return false;
+	}
+
+	//TODO COMPLETE
 }

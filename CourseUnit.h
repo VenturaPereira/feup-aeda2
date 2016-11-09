@@ -19,6 +19,7 @@ protected:
 	//MEMBER VARIABLES
 	const unsigned short int year, semester;
 	const string name, acronym;
+	const unsigned int credits;
 	Course* course;
 	vector<Student*> studentsCurrentlyInCourseUnit;
 	vector<Tutor*> courseUnitProfessors;
@@ -26,7 +27,7 @@ protected:
 
 public:
 	//MEMBER FUNCTIONS
-	CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s);
+	CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int credits);
 	virtual bool addStudent(Student* s) = 0;
 	virtual void show() const = 0;
 	bool removeStudent(Student* s);
@@ -41,11 +42,13 @@ public:
 	unsigned short int getNumberClasses() const { return classes.size(); }
 	unsigned short int getYear() const { return year; }
 	unsigned short int getSemester() const { return semester; }
+	unsigned int getCredits() const { return credits; }
 	string getName() const { return name; }
 	vector<CourseUnitClass*> getClasses() const { return classes; }
 	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*> getCourseUnitProfessors() const { return courseUnitProfessors; }
 	Course* getCourse() const { return course; }
+
 
 };
 
@@ -60,7 +63,7 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa);
+	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, unsigned int cred);
 	virtual bool addStudent(Student* s);
 	virtual void show() const;
 
@@ -79,7 +82,7 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s);
+	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int cred);
 	virtual bool addStudent(Student* s);
 	virtual void show() const;
 
