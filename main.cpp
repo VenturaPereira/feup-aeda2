@@ -4,6 +4,7 @@
 #include "Course.h"
 #include "Menu.h"
 #include "CourseUnit.h"
+#include "Utilities.h"
 
 //#define MNOSPC 30 //MAXIMUM NUMBER OF STUDENTS PER CLASS
 
@@ -27,7 +28,7 @@ int run()
 
 int main()
 {
-	run();
+	//run();
 	
 	return 0;
 }

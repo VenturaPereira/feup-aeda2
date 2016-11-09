@@ -15,7 +15,7 @@ class Tutor;
 
 using namespace std;
 
-class Student : protected CollegeUser
+class Student : public CollegeUser
 {
 protected:
 	//MEMBER VARIABLES

@@ -111,14 +111,14 @@ public:
 	unsigned int getGrade() const { return grade; }
 };
 
-template <class Type>
+template <class Type, class Member>
 class NotFound
 {
 private:
-	string name;
+	Member member;
 public:
-	NotFound(string n) : name(n) {}
-	string getName() const { return name; }
+	NotFound(Member m) : member(m) {}
+	Member getMember() const { return member; }
 };
 
 #endif

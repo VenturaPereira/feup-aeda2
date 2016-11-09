@@ -87,7 +87,7 @@ bool Student::enrollCourseUnit(CourseUnit* courseUnit)
 	}
 
 	if (itOfCourseUnit == getCourse()->getCourseUnits().end()) //THERE IS NO COURSE UNIT IN THE VECTOR THAT MATCHES THE ARGUMENT 
-		throw NotFound<CourseUnit>(courseUnit->getName());
+		throw NotFound<CourseUnit*, string>(courseUnit->getName());
 
 	if (courseUnit->addStudent(this)) //TRY TO ADD STUDENT TO COURSE UNIT
 	{

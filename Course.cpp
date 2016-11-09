@@ -3,7 +3,7 @@
 #include "Course.h"
 #include "Student.h"
 #include "CourseUnit.h"
-#include <algorithm>
+#include "Utilities.h"
 
 void Course::addCourseUnit(CourseUnit* cu)
 {
@@ -89,8 +89,8 @@ vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned shor
 			cuIt++)
 		{
 			if (//CHECK IF ALREADY ATENDING THE COURSE UNIT OR IF THE STUDENT HAS ALREADY COMPLETED THE COURSE UNIT
-				find(s->getClassesCurrentlyAtending().begin(), s->getClassesCurrentlyAtending().end(), (*cuIt)) == s->getClassesCurrentlyAtending().end()
-				&& find(s->getCompletedCourseUnits().begin(), s->getCompletedCourseUnits().end(), (*cuIt)) == s->getCompletedCourseUnits().end()
+				s->getClassesCurrentlyAtending().find((*cuIt)) == s->getClassesCurrentlyAtending().end()					
+				&& s->getCompletedCourseUnits().find((*cuIt)) == s->getCompletedCourseUnits().end()
 				)
 			{
 				notCompleted.push_back(*cuIt); //IF NOT TO BOTH, ADD TO NOTCOMPLETED

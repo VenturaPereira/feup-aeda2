@@ -8,6 +8,7 @@
 #include "CourseUnit.h"
 #include "Date.h"
 #include "Student.h"
+#include "CollegeUser.h"
 
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
@@ -38,7 +39,43 @@ Course* EnrollmentSystem::getCourse(string &courseName)
 			}
 		}
 	}
-	throw NotFound<Course*>(courseName);
+	throw NotFound<Course*, string>(courseName);
+}
+
+Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
+{
+	vector<University*>::iterator unIt;
+	for (unIt = universitiesVector.begin();
+		unIt != universitiesVector.end();
+		unIt++
+		)
+	{
+		vector<College*>::iterator colIt;
+		for (colIt = (*unIt)->getColleges().begin();
+			colIt != (*unIt)->getColleges().end();
+			colIt++
+			)
+		{
+			vector<Course*>::iterator courseIt;
+			for (courseIt = (*colIt)->getCourses().begin();
+				courseIt != (*colIt)->getCourses().end();
+				courseIt++
+				)
+			{
+				vector<Student*>::iterator sIt; 
+				for (sIt = (*courseIt)->getStudents().begin();
+					sIt != (*courseIt)->getStudents().end();
+					sIt++
+					)
+				{
+					if ((*sIt)->getID() == ID)
+						return (*sIt);
+
+				}
+			}
+		}
+	}
+	throw NotFound<Student*, unsigned long long int>(ID);
 }
 
 bool addStudentHandler(EnrollmentSystem& s)
@@ -67,9 +104,9 @@ bool addStudentHandler(EnrollmentSystem& s)
 		cout << "\nAddition canceled!\n";
 		return false;
 	}
-	catch (NotFound<Course*> &nf)
+	catch (NotFound<Course*, string> &nf)
 	{
-		cout << "Course " << nf.getName() << " not found!\n";
+		cout << "Course " << nf.getMember() << " not found!\n";
 		return false;
 	}
 	
@@ -95,9 +132,9 @@ bool removeStudentHandler(EnrollmentSystem& s)
 		cout << "\nAddition canceled!\n";
 		return false;
 	}
-	catch (NotFound<Student*> &nfs)
+	catch (NotFound<Student*, unsigned long long int> &nfs)
 	{
-		cout << "Student " << ID << " not found!\n";
+		cout << "Student " << nfs.getMember() << " not found!\n";
 		return false;
 	}
 	
@@ -121,9 +158,9 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		cout << "\nAddition canceled!\n";
 		return false;
 	}
-	catch (NotFound<Student*> &nfs)
+	catch (NotFound<Student*, unsigned long long int> &nfs)
 	{
-		cout << "Student " << ID << " not found!\n";
+		cout << "Student " << nfs.getMember() << " not found!\n";
 		return false;
 	}
 	

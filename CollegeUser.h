@@ -26,6 +26,7 @@ public:
 	virtual void assignID() = 0;
 
 	//GETS
+	unsigned long long int getID() const { return ID; }
 	string getName() const { return name; }
 	Date getDateOfRegistration() const { return dateOfRegistration; }
 	Date getDateOfBirth() const { return dateOfBirth; }
