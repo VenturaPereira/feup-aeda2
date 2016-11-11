@@ -266,7 +266,7 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 		return false;
 	}
 
-	student->completedClass(courseUnit, grade);
+	student->completedClass(courseUnit, grade); 
 	CourseUnitClass* courseUnitClass = student->getClassesCurrentlyAtending().at(courseUnit);
 	courseUnitClass->removeStudent(student); 
 	courseUnit->removeStudent(student);

@@ -154,18 +154,34 @@ bool Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 bool Student::completedAllCourseUnits(unsigned short int y)
 {
 	vector<CourseUnit*> courseUnitsYear = this->getCourse()->getCourseUnits(y);
+	unsigned short int optionalCredits;
 
 	vector<CourseUnit*>::const_iterator cuIt;
 	for (cuIt = courseUnitsYear.begin();
 		cuIt != courseUnitsYear.end();
 		cuIt++)
 	{
-		//ONLY THE MANDATORY MATTER TO THIS
+		//MANDATORY
 		MandatoryCourseUnit* mcu = dynamic_cast<MandatoryCourseUnit*>((*cuIt));
-		if (mcu != NULL)
-			if (completedCourseUnits.find((*cuIt)) == completedCourseUnits.end())
+		if (mcu != NULL) {
+			if (completedCourseUnits.find((*cuIt)) == completedCourseUnits.end()) {
 				return false;
+			}
+		}
+		//OPTIONAL
+		else if (year != 4 && year != 5) 
+		{
+			 if (completedCourseUnits.find((*cuIt)) != completedCourseUnits.end())
+				optionalCredits += (*cuIt)->getCredits();
+		}
 	}
 
-	return true;
+	//MIEIC ONLY
+	if (year != 4 && year != 5)
+		return true;
+	else if (year == 4 && optionalCredits >= 18)
+		return true;
+	else if (year == 5 && optionalCredits >= 24)
+		return true;
+	else return false;
 }
