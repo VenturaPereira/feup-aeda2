@@ -22,7 +22,8 @@ public:
 	//MEMBER FUNCTIONS
 	bool teachClass(CourseUnitClass* c);
 	void tutorStudent(Student* s);
-
+	friend bool compareTutorName(Tutor & t1, Tutor & t2);
+	friend int compareTutorID(Tutor & t1, Tutor & t2);
 	//GETS
 	Course* getCourse() const { return course; }
 	vector<CourseUnit*> getAbleToTeach() const { return ableToTeach; }

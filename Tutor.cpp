@@ -42,3 +42,23 @@ void Tutor::assignID()
 	ID = course->getCollege()->getUniversity()->getLastStudentID() + 1;
 	course->getCollege()->getUniversity()->incrementLastProfessorID();
 }
+bool compareTutorName(Tutor & t1, Tutor & t2) {
+	if (((t1.getName()).compare(t2.getName())) == 0) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+int compareTutorID(Tutor & t1, Tutor & t2) {
+	int result = t1.ID - t2.ID;
+	if (result == 0) {
+		return 0; //sao iguais
+	}
+	else if (result > 0) {
+		return 1; // id de t1 e maior
+	}
+	else {
+		return -1;
+	}
+}

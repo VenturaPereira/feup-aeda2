@@ -61,3 +61,24 @@ bool CourseUnit::removeCourseUnitClass(CourseUnitClass* cuc)
 	}
 	return false;
 }
+int compareNumberStudents(CourseUnit & Cu1, CourseUnit & Cu2) {
+	int result = Cu1.getNumberOfStudents() - Cu2.getNumberOfStudents();
+	if (result == 0) {
+		return 0; // mesmo numero
+	}
+	else if (result > 0) {
+		return 1; //curso 1 tem mais alunos;
+	}
+	else {
+		return -1;
+	}
+
+}
+bool compareCourseUnitName(CourseUnit & Cu1, CourseUnit & Cu2) {
+	if (    ((Cu1.name).compare(Cu2.name)) == 0) {
+		return 1; // sao iguais
+	}
+	else {
+		return 0;
+	}
+}

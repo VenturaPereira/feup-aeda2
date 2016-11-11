@@ -39,8 +39,8 @@ public:
 	bool removeProfessor(Tutor* t);
 	void addCourseUnitClass(CourseUnitClass* cuc);
 	bool removeCourseUnitClass(CourseUnitClass* cuc);
-			
-
+	friend int compareNumberStudents(CourseUnit & Cu1, CourseUnit & Cu2);
+	friend bool compareCourseUnitName(CourseUnit & Cu1, CourseUnit & Cu2);
 	//GETS
 	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
 	unsigned short int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }

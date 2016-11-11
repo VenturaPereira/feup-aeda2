@@ -29,7 +29,8 @@ public:
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);
 	void completedClass(CourseUnit *courseUnit, unsigned short int grade);
-
+	friend int compareID(Student & s1, Student & s2);
+	friend bool compareName(Student & s1, Student & s2);
 	//GETS
 	Course* getCourse() const { return course; }
 	map<CourseUnit*, unsigned short int> getCompletedCourseUnits() const {return completedCourseUnits;}

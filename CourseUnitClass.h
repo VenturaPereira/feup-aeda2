@@ -20,7 +20,7 @@ public:
 	void addStudent(Student* s);
 	bool removeStudent(Student* s);
 	void setProfessor(Tutor* t);
-
+	friend int compareClassCrowd(CourseUnitClass & cc1, CourseUnitClass cc2);
 	//GETS
 	unsigned short int getNumberOfStudents() const { return numberOfStudents; }
 	unsigned short int getClassNumber() const { return classNumber; }
