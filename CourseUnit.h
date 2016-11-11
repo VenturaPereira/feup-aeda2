@@ -36,7 +36,11 @@ public:
 	void addCourseUnitClass(CourseUnitClass* cuc);
 	bool removeCourseUnitClass(CourseUnitClass* cuc);
 			
-
+	//COMPARES
+	friend bool compareCourseUnitByNumberStudents(CourseUnit* cu1, CourseUnit* cu2);
+	friend bool compareCourseUnitByName(CourseUnit* cu1, CourseUnit* cu2);
+	friend bool compareCourseUnitByTime(CourseUnit* cu1, CourseUnit* cu2);
+	
 	//GETS
 	unsigned int getNumberOfStudents() const {return studentsCurrentlyInCourseUnit.size();}
 	unsigned short int getNumberClasses() const { return classes.size(); }

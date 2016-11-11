@@ -29,8 +29,9 @@ public:
 	vector<Course*> getCourses() const { return courses; }
 	University* getUniversity() const {	return university; }
 
-	
-	
+	//COMPARES
+	friend bool compareCollegeByName(College* c1, College* c2);
+		
 };
 
 #endif

@@ -27,6 +27,10 @@ public:
 	bool removeStudent(Student* s);
 	void setProfessor(Tutor* t);
 
+	//COMPARES
+	friend bool compareCourseUnitClassByNumber(CourseUnitClass* cuc1, CourseUnitClass* cuc2);
+	friend bool compareCourseUnitClassByNumberStudents(CourseUnitClass* cuc1, CourseUnitClass* cuc2);
+
 	//GETS
 	unsigned short int getNumberOfStudents() const { return studentsInClass.size(); }
 	unsigned short int getClassNumber() const { return classNumber; }

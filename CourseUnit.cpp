@@ -110,3 +110,22 @@ void MandatoryCourseUnit::show() const
 		<< acronym << '\t'
 		<< "Mandatory" << '\n';
 }
+
+bool compareCourseUnitByNumberStudents(CourseUnit* cu1, CourseUnit* cu2)
+{
+	return (cu1->getNumberOfStudents() < cu2->getNumberOfStudents());
+}
+
+bool compareCourseUnitByName(CourseUnit* cu1, CourseUnit* cu2)
+{
+	return (cu1->name < cu2->name);
+}
+
+bool compareCourseUnitByTime(CourseUnit* cu1, CourseUnit* cu2)
+{
+	if (cu1->year < cu2->year)
+		return true;
+	else if (cu1->year > cu2->year)
+		return false;
+	else return (cu1->semester < cu2->semester);
+}

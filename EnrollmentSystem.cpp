@@ -9,11 +9,19 @@
 #include "Date.h"
 #include "Student.h"
 #include "CourseUnitClass.h"
+#include "Tutor.h"
 
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 {
-	//TODO - ADD THE SORTING OPTIONS
+	//LOAD DEFAULT SORTING OPTIONS
+	courseSortOption = &compareCourseByName;
+	courseUnitSortOption = &compareCourseUnitByTime;
+	courseUnitClassSortOption = &compareCourseUnitClassByNumber;
+	studentsSortOption = &compareStudentByID;
+	professorsSortOption = &compareProfessorByID;
+	universitySortOption = &compareUniversityByName;
+	collegeSortOption = &compareCollegeByName;
 }
 
 Course* EnrollmentSystem::getCourse(string &courseName)

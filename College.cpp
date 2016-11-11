@@ -25,3 +25,8 @@ bool College::removeCourse(Course* c)
 	}
 	return false;
 }
+
+bool compareCollegeByName(College* c1, College* c2)
+{
+	return c1->name < c2->name;
+}

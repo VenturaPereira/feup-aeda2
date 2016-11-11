@@ -28,6 +28,11 @@ public:
 	bool teachClass(CourseUnitClass* c);
 	void tutorStudent(Student* s);
 
+	//COMPARES
+	friend bool compareProfessorByName(Tutor* p1, Tutor* p2);
+	friend bool compareProfessorByID(Tutor* p1, Tutor* p2);
+	friend bool compareProfessorByBirth(Tutor* p1, Tutor* p2);
+
 	//GETS
 	Course* getCourse() const { return course; }
 	vector<CourseUnit*> getAbleToTeach() const { return ableToTeach; }

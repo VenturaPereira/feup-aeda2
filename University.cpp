@@ -62,3 +62,7 @@ void University::showAllOptional(string scientificArea, OptionalCourseUnit* arg)
 	}
 }
 
+bool compareUniversityByName(University* u1, University* u2)
+{
+	return u1->name < u2->name;
+}

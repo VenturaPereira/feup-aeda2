@@ -38,7 +38,12 @@ public:
 	bool completedClass(CourseUnit *courseUnit, unsigned short int grade);
 	bool completedAllCourseUnits(unsigned short int y);
 
-	
+	//COMPARES
+	friend bool compareStudentByID(Student* s1, Student* s2);
+	friend bool compareStudentByName(Student* s1, Student* s2);
+	friend bool compareStudentByCouseYear(Student* s1, Student* s2);
+	friend bool compareStudentByBirth(Student* s1, Student* s2);
+		
 	//SETS
 	void setStatus(string s) { status = s; }
 	void setCredits(unsigned int c) { credits = c; }

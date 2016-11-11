@@ -185,3 +185,23 @@ bool Student::completedAllCourseUnits(unsigned short int y)
 		return true;
 	else return false;
 }
+
+bool compareStudentByID(Student* s1, Student* s2)
+{
+	return s1->ID < s2->ID;
+}
+
+bool compareStudentByName(Student* s1, Student* s2)
+{
+	return s1->name < s2->name;
+}
+
+bool compareStudentByCouseYear(Student* s1, Student* s2)
+{
+	return s1->year < s2->year;
+}
+
+bool compareStudentByBirth(Student* s1, Student* s2)
+{
+	return s1->dateOfBirth < s2->dateOfBirth;
+}

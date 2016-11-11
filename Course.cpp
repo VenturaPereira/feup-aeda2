@@ -116,4 +116,7 @@ vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned shor
 	return notCompleted;
 }
 
-
+bool compareCourseByName(Course* c1, Course* c2) 
+{
+	return (c1->getName() < c2->getName());
+}

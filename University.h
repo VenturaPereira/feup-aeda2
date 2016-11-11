@@ -36,6 +36,9 @@ public:
 	string getAcronym() const { return acronym; }
 	string getCountryAcronym() const { return countryAcronym; }
 	vector<College*> getColleges() const { return collegesVector; }
+
+	//COMPARES
+	friend bool compareUniversityByName(University* u1, University* u2);
 	
 };
 
