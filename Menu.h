@@ -17,7 +17,7 @@ private:
 	vector<bool(*)()> optionsFunctions;
 public:
 	Menu(string t, vector<string> &os, vector<bool(*)()> &of);
-	friend bool play(Menu &m);
+	bool play();
 };
 
 
@@ -28,16 +28,16 @@ Menu::Menu(string t, vector<string> &os, vector<bool(*)()> &of)
 	optionsFunctions = of;
 }
 
-bool play(Menu &m)
+bool Menu::play()
 {
-	size_t minimum = 1, maximum = m.optionsFunctions.size() + 1;
+	size_t minimum = 1, maximum = optionsFunctions.size() + 1;
 	unsigned int option;
 
 	while (true)
 	{
-		option = enterInput<unsigned int>(m.title, m.optionsStr); //GET OPTIONS FROM USER
+		option = enterInput<unsigned int>(title, optionsStr); //GET OPTIONS FROM USER
 		if (option >= minimum && option <= (maximum - 1)) {
-			m.optionsFunctions[option-1](); //CALL THE CORRESPONDENT FUNCTION
+			optionsFunctions[option-1](); //CALL THE CORRESPONDENT FUNCTION
 			return true;
 		}
 		else if (option == maximum) //EXIT
