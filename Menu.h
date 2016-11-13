@@ -14,14 +14,14 @@ class Menu
 private:
 	string title;
 	vector<string> optionsStr;
-	vector<bool(*)()> optionsFunctions;
+	vector<void(*)()> optionsFunctions;
 public:
-	Menu(string t, vector<string> &os, vector<bool(*)()> &of);
+	Menu(string t, vector<string> &os, vector<void(*)()> &of);
 	friend bool play(Menu &m);
 };
 
 
-Menu::Menu(string t, vector<string> &os, vector<bool(*)()> &of)
+Menu::Menu(string t, vector<string> &os, vector<void(*)()> &of)
 {
 	title = t;
 	optionsStr = os;

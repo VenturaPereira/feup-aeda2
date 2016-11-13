@@ -24,30 +24,98 @@ EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 	collegeSortOption = &compareCollegeByName;
 }
 
-Course* EnrollmentSystem::getCourse(string &courseName)
+University* getUniversity(EnrollmentSystem &s)
 {
-	vector<University*>::const_iterator uniIt;
-	vector<College*>::const_iterator colIt;
-	vector<Course*>::const_iterator courseIt;
+	if (s.universitiesVector.size() == 0)
+		throw NotFound<University*, EnrollmentSystem>(s);
 
-	for (uniIt = universitiesVector.begin();
-		uniIt != universitiesVector.end();
-		uniIt++)
-	{
-		for (colIt = (*uniIt)->getColleges().begin();
-			colIt != (*uniIt)->getColleges().end();
-			colIt++)
+	int answer = -1;
+
+	while (answer <= 0 || answer > s.universitiesVector.size()) {
+		system("CLS");
+		for (size_t i = 0; i < s.universitiesVector.size(); i++) //SHOW AS MENU
 		{
-			for (courseIt = (*colIt)->getCourses().begin();
-				courseIt != (*colIt)->getCourses().end();
-				courseIt++)
-			{
-				if ((*courseIt)->getName() == courseName)
-					return *courseIt;
-			}
+			cout << (i + 1) << ". ";
+			cout << s.universitiesVector[i]->getName();
 		}
+		answer = enterInput<int>(); //READ SELECTION
 	}
-	throw NotFound<Course*, string>(courseName);
+
+	answer--;
+
+	return s.universitiesVector[answer];
+}
+
+College* getCollege(EnrollmentSystem &s)
+{
+	University* university = getUniversity(s);
+
+	int answer_2 = -1;
+
+	if (university->getColleges().size() == 0)
+		throw NotFound<College*, University*>(university);
+
+	while (answer_2 <= 0 || answer_2 > university->getColleges().size()) {
+		system("CLS");
+		for (size_t i = 0; i < university->getColleges().size(); i++) //SHOW AS MENU
+		{
+			cout << (i + 1) << ". ";
+			cout << university->getColleges()[i]->getName();
+		}
+		answer_2 = enterInput<int>(); //READ SELECTION
+	}
+
+	answer_2--;
+
+	return university->getColleges()[answer_2];
+}
+
+Course* getCourse(EnrollmentSystem &s)
+{
+	College* college = getCollege(s);
+
+	int answer_3 = -1;
+
+	if (college->getCourses().size() == 0)
+		throw NotFound<Course*, College*>(college);
+
+	while (answer_3 <= 0 || answer_3 > college->getCourses().size()) {
+		system("CLS");
+		for (size_t i = 0; i < college->getCourses().size(); i++) //SHOW AS MENU
+		{
+			cout << (i + 1) << ". ";
+			cout << college->getCourses()[i]->getName();
+		}
+		answer_3 = enterInput<int>(); //READ SELECTION
+	}
+
+	answer_3--;
+
+	return college->getCourses()[answer_3];
+}
+
+CourseUnit* getCourseUnit(EnrollmentSystem &s)
+{
+	Course* course = getCourse(s);
+
+	int answer_4 = -1;
+
+	if (course->getCourseUnits().size() == 0)
+		throw NotFound<CourseUnit*, Course*>(course);
+
+	while (answer_4 <= 0 || answer_4 > course->getCourseUnits().size()) {
+		system("CLS");
+		for (size_t i = 0; i < course->getCourseUnits().size(); i++) //SHOW AS MENU
+		{
+			cout << (i + 1) << ". ";
+			cout << course->getCourseUnits()[i]->getName();
+		}
+		answer_4 = enterInput<int>(); //READ SELECTION
+	}
+
+	answer_4--;
+
+	return course->getCourseUnits()[answer_4];
 }
 
 Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
@@ -86,47 +154,12 @@ Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
 	throw NotFound<Student*, unsigned long long int>(ID);
 }
 
-CourseUnit* EnrollmentSystem::getCourseUnit(string &courseUnitName)
-{
-	vector<University*>::iterator unIt;
-	for (unIt = universitiesVector.begin();
-		unIt != universitiesVector.end();
-		unIt++
-		)
-	{
-		vector<College*>::iterator colIt;
-		for (colIt = (*unIt)->getColleges().begin();
-			colIt != (*unIt)->getColleges().end();
-			colIt++
-			)
-		{
-			vector<Course*>::iterator courseIt;
-			for (courseIt = (*colIt)->getCourses().begin();
-				courseIt != (*colIt)->getCourses().end();
-				courseIt++
-				)
-			{
-				vector<CourseUnit*>::iterator cuIt;
-				for (cuIt = (*courseIt)->getCourseUnits().begin();
-					cuIt != (*courseIt)->getCourseUnits().end();
-					cuIt++
-					)
-				{
-					if ((*cuIt)->getName() == courseUnitName)
-						return (*cuIt);
-				}
-			}
-		}
-	}
-	throw NotFound<CourseUnit*, string>(courseUnitName);
-}
-
 bool addStudentHandler(EnrollmentSystem& s)
 {
 	Student* student;
 	Date* dateOfBirth;
 	Course* course;
-	string studentName, courseName;
+	string studentName;
 
 	try
 	{
@@ -139,17 +172,34 @@ bool addStudentHandler(EnrollmentSystem& s)
 			cout << "\nInvalid Date!\n";
 			system("PAUSE");
 		}
-		courseName = enterString("\nAdd Student\n\n", "Enter the name of the course [CTRL+Z to cancel] : ");
-		course = s.getCourse(courseName);
 	}
 	catch (EndOfFile &eof)
 	{
 		cout << "\nAddition canceled!\n";
 		return false;
 	}
-	catch (NotFound<Course*, string> &nf)
+	
+	try {
+		course = getCourse(s); //GET THE COURSE FROM THE USER
+	}
+	catch (EndOfFile &eof)
 	{
-		cout << "Course " << nf.getMember() << " not found!\n";
+		cout << "\nAddition canceled!\n";
+		return false;
+	}
+	catch (NotFound<University*, EnrollmentSystem> &nfu)
+	{
+		cout << "There are no universities in the system\n";
+		return false;
+	}
+	catch (NotFound<College*, University*> &nfc)
+	{
+		cout << "There are no colleges in: " << nfc.getMember()->getName() << endl;
+		return false;
+	}
+	catch (NotFound<Course*, College*> &nfco)
+	{
+		cout << "There are no courses in: " << nfco.getMember()->getName() << endl;
 		return false;
 	}
 	
@@ -246,17 +296,15 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	Student* student;
 	unsigned long long int ID;
 	CourseUnit* courseUnit;
-	string courseUnitName;
 	unsigned short int grade;
 
 	try
 	{
 		ID = enterInput<unsigned long long int>("\nFinish Course Unit\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
 		student = s.getStudent(ID);
-		courseUnitName = enterString("\nFinish Course Unit\n\n", "Enter the name of the course unit [CTRL+Z to cancel] : ");
-		courseUnit = s.getCourseUnit(courseUnitName);
-		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
+ 		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
 		student = s.getStudent(ID);
+		courseUnit = getCourseUnit(s);
 	}
 	catch (EndOfFile &eof)
 	{
@@ -268,11 +316,27 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 		cout << "Student " << nfs.getMember() << " not found!\n";
 		return false;
 	}
-	catch (NotFound<CourseUnit*, string> &nfcu)
+	catch (NotFound<University*, EnrollmentSystem> &nfu)
 	{
-		cout << "Course Unit " << nfcu.getMember() << " not found!\n";
+		cout << "There are no universities in the system\n";
 		return false;
 	}
+	catch (NotFound<College*, University*> &nfc)
+	{
+		cout << "There are no colleges in: " << nfc.getMember()->getName() << endl;
+		return false;
+	}
+	catch (NotFound<Course*, College*> &nfco)
+	{
+		cout << "There are no courses in: " << nfco.getMember()->getName() << endl;
+		return false;
+	}
+	catch (NotFound<CourseUnit*, Course*> &nfcu)
+	{
+		cout << "There are no course units in: " << nfcu.getMember()->getName() << endl;
+		return false;
+	}
+	
 
 	student->completedClass(courseUnit, grade); 
 	CourseUnitClass* courseUnitClass = student->getClassesCurrentlyAtending().at(courseUnit);

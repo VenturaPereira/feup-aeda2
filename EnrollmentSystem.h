@@ -54,36 +54,34 @@ public:
 	//friend bool addCourseHandler(EnrollmentSystem& s);
 	//friend bool removeCourseHandler(EnrollmentSystem& s);
 
-	
 	//LOAD/SAVE FROM FILES
 	void loadStudents();
 	void loadProfessors();
-	void loadUniversities();
-	void loadColleges();
-	void loadCourses();
-	void loadCourseUnits();
 	void loadCourseUnitClasses();
 	void saveStudents();
 	void saveProfessors();
-	void saveUniversities();
-	void saveColleges();
-	void saveCourses();
-	void saveCourseUnits();
 	void saveCourseUnitClasses();
+	//void loadUniversities();
+	//void loadColleges();
+	//void loadCourses();
+	//void loadCourseUnits();
+	//void saveUniversities();
+	//void saveColleges();
+	//void saveCourses();
+	//void saveCourseUnits();
+	
 	
 	//SORT FUNCTIONS
 
 	//GETS
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }
 	vector<University*> getUniversities() const { return universitiesVector; }
-	University* getUniversity(string &universityName);
-	College* getCollege(string &collegeName);
-	Course* getCourse(string &courseName);
-	CourseUnit* getCourseUnit(string &courseUnitName);
+	friend University* getUniversity(EnrollmentSystem &s);
+	friend College* getCollege(EnrollmentSystem &s);
+	friend Course* getCourse(EnrollmentSystem &s);
+	friend CourseUnit* getCourseUnit(EnrollmentSystem &s);
 	Student* getStudent(unsigned long long int &ID);
 	Tutor* getProfessor(unsigned long long int &ID);
-	Tutor* getProfessor(string &name);
-
 };
 
 #endif

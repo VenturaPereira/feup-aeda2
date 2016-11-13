@@ -154,7 +154,7 @@ bool Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 bool Student::completedAllCourseUnits(unsigned short int y)
 {
 	vector<CourseUnit*> courseUnitsYear = this->getCourse()->getCourseUnits(y);
-	unsigned short int optionalCredits;
+	unsigned short int optionalCredits = 0;
 
 	vector<CourseUnit*>::const_iterator cuIt;
 	for (cuIt = courseUnitsYear.begin();
