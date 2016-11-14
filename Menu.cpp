@@ -23,7 +23,14 @@ bool mainMenu(EnrollmentSystem &sys)
 	{
 		std::system("cls");
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-		{ "==============================", "WELCOME", "", "1 - Students", "2 - Professors", "3 - Information" , "4 - Options","5 - Exit                  ", "==============================" }, 1, 5);
+		{ "==============================",
+			"WELCOME", "",
+			"1 - Students              ",
+			"2 - Professors            ", 
+			"3 - Information           " ,
+			"4 - Options               ",
+			"5 - Exit                  ",
+			"==============================" }, 1, 5);
 		switch (option)
 		{
 		case 1:
