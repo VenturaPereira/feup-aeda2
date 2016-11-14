@@ -7,6 +7,7 @@
 #include <vector>
 #include "Utilities.h"
 #include "College.h"
+#include "EnrollmentSystem.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ using namespace std;
 
 
 unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max);
-bool MainMenu();
+bool MainMenu(EnrollmentSystem &sys);
 bool clientsInformationMenu(Store &store);
 bool transactionsInformationMenu(Store &store);
 bool informationMenu(Store &store);

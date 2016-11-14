@@ -1,6 +1,7 @@
 #pragma once
 #include "Menu.h"
 
+
 unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max)
 {
 	unsigned int option;
@@ -9,75 +10,70 @@ unsigned int menuOption(string badInput, string normalInput, vector<string> tryA
 		option = enterInput<unsigned int>(normalInput, tryAgain);
 		if (option < min || option > max)
 		{
-			system("cls");
+			std::system("cls");
 			cout << badInput;
 		}
 		else break;
 	} while (true);
 	return option;
 }
-bool MainMenu()
+bool MainMenu(EnrollmentSystem &sys)
 {
 	while (true)
 	{
-		system("cls");
+		std::system("cls");
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-		{ "==============================", "WELCOME TO UPORTO", "", "1 - Enroll", "2 - Cancel Enrollment", "3 - Stats" , "4 - Options","5 - Exit                  ", "==============================" }, 1, 5);
+		{ "==============================", "WELCOME", "", "1 - Students", "2 - Professors", "3 - Information" , "4 - Options","5 - Exit                  ", "==============================" }, 1, 5);
 		switch (option)
 		{
 		case 1:
-			if (EnrollMenu())
-				return false;
+			if (StudentsMenu(sys))
+				return true;
 			break;
 		case 2:
-			if (CancelEnrMenu())
-				return false;
+			if (ProfessorsMenu(sys))
+				return true;
 			break;
 		case 3:
-			if (StatsMenu())
-				return false;
+			if (InfoMenu(sys))
+				return true;
 			break;
 		case 4:
-			if (OptionsMenu())
-				return false;
+			if (OptionsMenu(sys))
+				return true;
 			break;
 		case 5:
 
 			cout << "\nAre you sure you want to exit? (Y/N)\n";
 			if (yesNoAnswer())
 				return false;
-			return true;
 
 		}
 	}
 }
-bool EnrollMenu(College &co)
+bool StudentsMenu(EnrollmentSystem &sys)
 {
 	while (true)
 	{
-		system("cls");
+		std::system("cls");
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-		{ "==============================", "Enrollment System", "", "1 - New Student (First Time)", "2 - Renew Enrollment", "3 - Stats" , "4 - Exit                  ", "==============================" }, 1, 4);
+		{ "==============================", "Enrollment System", "", "1 - Add Student", "2 - Remove Student", "3 - Enroll" , "4 - Back                  ", "==============================" }, 1, 4);
 		switch (option)
 		{
 		case 1:
-			if (EnrollMenu())
+			if (addStudentHandler(sys))
 				return false;
 			return true;
 		case 2:
-			if (CancelEnrMenu())
+			if (removeStudentHandler(sys))
 				return false;
 			break;
 		case 3:
-			if (StatsMenu())
+			if (enrollmentHandler(sys))
 				return false;
 			break;
 		case 4:
-
-			cout << "\nAre you sure you want to exit? (Y/N)\n";
-			if (yesNoAnswer())
-				return false;
-			return true;
+			return false;
 
 		}
 	}

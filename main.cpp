@@ -10,19 +10,19 @@
 
 int run()
 {
-	EnrollmentSystem system(75); //INITIALIZE SYSTEM
+	EnrollmentSystem sys(75); //INITIALIZE SYSTEM
 
 	University* UP = new University("Universidade do Porto", "up", "pt");
-	system.addUniversity(UP); //ADD UP
+	sys.addUniversity(UP); //ADD UP
 
 	College* FEUP = new College("Faculdade de Engenharia da Universidade do Porto", "FEUP", UP);
-	system.getUniversities()[0]->addCollege(FEUP); //ADD FEUP
+	sys.getUniversities()[0]->addCollege(FEUP); //ADD FEUP
 
 	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);
-	system.getUniversities()[0]->getColleges()[0]->addCourse(MIEIC); //ADD MIEIC
+	sys.getUniversities()[0]->getColleges()[0]->addCourse(MIEIC); //ADD MIEIC
 
 	//bool(*adh)(EnrollmentSystem&) = addStudentHandler;
-	
+	MainMenu(sys);
 	return 0;
 }
 
