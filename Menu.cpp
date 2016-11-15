@@ -17,7 +17,7 @@ unsigned int menuOption(string badInput, string normalInput, vector<string> tryA
 	} while (true);
 	return option;
 }
-bool MainMenu(EnrollmentSystem &sys)
+bool mainMenu(EnrollmentSystem &sys)
 {
 	while (true)
 	{
@@ -34,19 +34,19 @@ bool MainMenu(EnrollmentSystem &sys)
 		switch (option)
 		{
 		case 1:
-			if (StudentsMenu(sys))
+			if (studentsMenu(sys))
 				return true;
 			break;
 		case 2:
-			if (ProfessorsMenu(sys))
+			if (professorsMenu(sys))
 				return true;
 			break;
 		case 3:
-			if (InfoMenu(sys))
+			if (infoMenu(sys))
 				return true;
 			break;
 		case 4:
-			if (OptionsMenu(sys))
+			if (optionsMenu(sys))
 				return true;
 			break;
 		case 5:
@@ -58,26 +58,32 @@ bool MainMenu(EnrollmentSystem &sys)
 		}
 	}
 }
-bool StudentsMenu(EnrollmentSystem &sys)
+bool studentsMenu(EnrollmentSystem &sys)
 {
 	while (true)
 	{
 		std::system("cls");
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-		{ "==============================", "Enrollment System", "", "1 - Add Student", "2 - Remove Student", "3 - Enroll" , "4 - Back                  ", "==============================" }, 1, 4);
+		{ "==============================",
+			"Enrollment System", "",
+			"1 - Add Student           ",
+			"2 - Remove Student        ", 
+			"3 - Enroll                " , 
+			"4 - Back                  ", 
+			"==============================" }, 1, 4);
 		switch (option)
 		{
 		case 1:
 			if (addStudentHandler(sys))
-				return false;
-			return true;
+				return true;
+			break;
 		case 2:
 			if (removeStudentHandler(sys))
-				return false;
+				return true;
 			break;
 		case 3:
 			if (enrollmentHandler(sys))
-				return false;
+				return true;
 			break;
 		case 4:
 			return false;
@@ -85,47 +91,52 @@ bool StudentsMenu(EnrollmentSystem &sys)
 		}
 	}
 }
-bool clientsInformationMenu(Store &store)
+bool professorsMenu(EnrollmentSystem &sys)
 {
-	system("cls");
+	std::system("cls");
 	unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 	{ "-------------------------------------",
-		"Read Clients File", "",
-		"1 - Read all clients' information",
-		"2 - Read a client's information  ", "",
-		"3 - Back                         ",
-		"-------------------------------------" }, 1, 3);
+		"Professors", "",
+		"1 - Add Professor                ",
+		"2 - Remove Professor             ",
+		"3 - Grade Students               ", "",
+		"4 - Back                         ",
+		"-------------------------------------" }, 1, 4);
 	switch (option)
 	{
+		/*
 	case 1:
-		store.displayAllClients();
-		system("pause");
+		addProfessorHandler(sys);
+		//system("pause");
 		return true;
 	case 2:
-		store.displayClient();
-		system("pause");
-		return true;
+		removeProfessorHandler(sys);
+		//system("pause");
+		return true; */
 	case 3:
+		studentFinishedCourseUnitHandler(sys);
+		return true;
+	case 4:
 		return false;
 	}
 }
-bool transactionsInformationMenu(Store &store)
+bool infoMenu(EnrollmentSystem &sys)
 {
 	system("cls");
 	unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 	{ "---------------------------------------",
-		"Read Transactions File", "",
-		"1 - Read all transactions          ",
-		"2 - Read a client's transactions   ",
-		"3 - Read transactions by day       ",
-		"4 - Read transactions between dates", "",
+		"Information", "",
+		"1 - Read all Universities          ",
+		"2 - Read all Courses               ",
+		"3 - Read all Students              ",
+		"4 - Read all Professors            ", "",
 		"5 - Back                           ",
 		"---------------------------------------" }, 1, 5);
-
+	/*
 	switch (option)
 	{
 	case 1:
-		store.displayAllTransactions();
+		();
 		system("pause");
 		return true;
 	case 2:
@@ -142,8 +153,10 @@ bool transactionsInformationMenu(Store &store)
 		return true;
 	case 5:
 		return false;
-	}
+	}*/
+	return false;
 }
+/*
 bool informationMenu(Store &store)
 {
 	while (true)
@@ -341,7 +354,7 @@ bool transactionsMenu(Store &store)
 	case 3:
 		return false;
 	}
-}
+}*/ /*
 bool sortClientOptions(Store &store)
 {
 	system("cls");
@@ -415,8 +428,8 @@ bool sortTransactionsOptions(Store &store)
 	case 3:
 		return false;
 	}
-}
-bool optionsMenu(Store &store)
+}*/
+bool optionsMenu(EnrollmentSystem &sys)
 {
 	while (true)
 	{
@@ -429,10 +442,10 @@ bool optionsMenu(Store &store)
 			"3 - Change transaction sorting options", "",
 			"4 - Back                              ",
 			"------------------------------------------", }, 1, 4);
-		switch (option)
+		/*switch (option)
 		{
 		case 1:
-		{
+
 			if (sortClientOptions(store))
 			{
 				store.makeMapClientsName();
@@ -440,30 +453,32 @@ bool optionsMenu(Store &store)
 				return true;
 			}
 			break;
-		}
+
 		case 2:
-		{
+
 			if (sortProductsOptions(store))
 			{
 				store.makeMapProducts();
 				return true;
 			}
 			break;
-		}
+
 		case 3:
-		{
+
 			if (sortTransactionsOptions(store))
 			{
 				store.makeMapTransactions();
 				return true;
 			}
 			break;
-		}
+
 		case 4:
 			return false;
-		}
+
+		}*/
 	}
 }
+/*
 bool mainMenu(Store &store)
 {
 	while (true)
@@ -560,4 +575,4 @@ bool mainMenu(Store &store)
 		}
 		}
 	}
-}
+}*/
