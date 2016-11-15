@@ -154,6 +154,19 @@ Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
 	throw NotFound<Student*, unsigned long long int>(ID);
 }
 
+void EnrollmentSystem::removeUniversity(University* u)
+{
+	vector<University*>::iterator it;
+	it = find(universitiesVector.begin(), universitiesVector.end(), u);
+	if (it != universitiesVector.end()) {
+		universitiesVector.erase(it);
+		return;
+	}
+	else
+		throw NotFound<University*, string>(u->getName());
+
+}
+
 bool addStudentHandler(EnrollmentSystem& s)
 {
 	Student* student;
@@ -233,6 +246,32 @@ bool removeStudentHandler(EnrollmentSystem& s)
 	}
 	
 	student->getCourse()->removeStudent(student);
+
+	return true;
+}
+
+bool removeUniversityHandler(EnrollmentSystem& s) {
+	University* uni;
+	string name;
+
+	try
+	{
+		cout << "\nRemove University\n\n";
+		uni = getUniversity(s);
+		s.removeUniversity(uni);
+	}
+	catch (EndOfFile &eof)
+	{
+		cout << "\Remove canceled!\n";
+		return false;
+	}
+	catch (NotFound<University*, string> &nfu)
+	{
+		cout << "University " << nfu.getMember() << " not found!\n";
+		return false;
+	}
+
+	cout << "University Erased";
 
 	return true;
 }

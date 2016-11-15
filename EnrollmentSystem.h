@@ -48,7 +48,7 @@ public:
 	friend bool enrollmentHandler(EnrollmentSystem& s); //SHOWS THE COURSE UNITS AVAIABLE TO ENROLL AND ADDS A STUDENT TO THEM
 	friend bool studentFinishedCourseUnitHandler(EnrollmentSystem& s); //REMOVES THE STUDENT FROM THE COURSE UNIT IF THE GRADE IS HIGH ENOUGH
 	//friend bool addUniversityHandler(EnrollmentSystem& s);
-	//friend bool removeUniversityHandler(EnrollmentSystem& s);
+	friend bool removeUniversityHandler(EnrollmentSystem& s);
 	//friend bool addCollegeHandler(EnrollmentSystem& s);
 	//friend bool removeCollegeHandler(EnrollmentSystem& s);
 	//friend bool addCourseHandler(EnrollmentSystem& s);
