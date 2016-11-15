@@ -354,3 +354,79 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 
 	return true;
 }
+
+bool EnrollmentSystem::changeCourseUnitSortOption(unsigned short int &option)
+{
+	vector<bool(*)(CourseUnit*, CourseUnit*)> options = {
+		compareCourseUnitByName,
+		compareCourseUnitByNumberStudents,
+		compareCourseUnitByTime
+	};
+
+	size_t minimum = 1, maximum = options.size() + 1;
+
+	if (option >= minimum && option <= (maximum - 1)) {
+		courseUnitSortOption = options[option - 1]; //CALL THE CORRESPONDENT FUNCTION
+		return true;
+	}
+	else if (option == maximum) //EXIT
+		return true;
+	else return false; //CALL THE FUNCTION AGAIN
+}
+
+bool EnrollmentSystem::changeCourseUnitClassSortOption(unsigned short int &option)
+{
+	vector<bool(*)(CourseUnitClass*, CourseUnitClass*)> options = {
+		compareCourseUnitClassByNumber,
+		compareCourseUnitClassByNumberStudents
+	};
+
+	size_t minimum = 1, maximum = options.size() + 1;
+
+	if (option >= minimum && option <= (maximum - 1)) {
+		courseUnitClassSortOption = options[option - 1]; //CALL THE CORRESPONDENT FUNCTION
+		return true;
+	}
+	else if (option == maximum) //EXIT
+		return true;
+	else return false; //CALL THE FUNCTION AGAIN
+}
+
+bool EnrollmentSystem::changeStudentsSortOption(unsigned short int &option)
+{
+	vector<bool(*)(Student*, Student*)> options = {
+		compareStudentByID,
+		compareStudentByName,
+		compareStudentByBirth,
+		compareStudentByCouseYear,
+	};
+
+	size_t minimum = 1, maximum = options.size() + 1;
+
+	if (option >= minimum && option <= (maximum - 1)) {
+		studentsSortOption = options[option - 1]; //CALL THE CORRESPONDENT FUNCTION
+		return true;
+	}
+	else if (option == maximum) //EXIT
+		return true;
+	else return false; //CALL THE FUNCTION AGAIN
+}
+
+bool EnrollmentSystem::changeProfessorsSortOption(unsigned short int &option)
+{
+	vector<bool(*)(Tutor*, Tutor*)> options = {
+		compareProfessorByID,
+		compareProfessorByName,
+		compareProfessorByBirth
+	};
+
+	size_t minimum = 1, maximum = options.size() + 1;
+
+	if (option >= minimum && option <= (maximum - 1)) {
+		professorsSortOption = options[option - 1]; //CALL THE CORRESPONDENT FUNCTION
+		return true;
+	}
+	else if (option == maximum) //EXIT
+		return true;
+	else return false; //CALL THE FUNCTION AGAIN
+}

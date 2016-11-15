@@ -121,6 +121,7 @@ bool Student::enrollCourseUnit(CourseUnit* courseUnit)
 			CourseUnitClass* newClass = new CourseUnitClass(courseUnit->getNumberClasses() + 1, courseUnit);
 			courseUnit->addCourseUnitClass(newClass);
 			enrollClass(newClass);
+			return true;
 		}
 		else return false; //THERE IS A CLASS AND IT'S FULL
 	}

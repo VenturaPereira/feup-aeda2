@@ -11,8 +11,6 @@
 
 using namespace std;
 
-#pragma once
-
 
 unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max);
 bool mainMenu(EnrollmentSystem &sys);
