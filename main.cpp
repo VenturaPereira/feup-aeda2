@@ -11,6 +11,7 @@
 
 int run()
 {
+
 	//START SYSTEM
 	EnrollmentSystem system(MAX_CREDITS); //INITIALIZE SYSTEM
 	University* UP = new University("Universidade do Porto", "up", "pt");

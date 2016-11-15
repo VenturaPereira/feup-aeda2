@@ -6,9 +6,31 @@
 #include <string>
 #include <vector>
 #include "Utilities.h"
+#include "College.h"
+#include "EnrollmentSystem.h"
+
 using namespace std;
 
+#pragma once
 
+
+unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max);
+bool mainMenu(EnrollmentSystem &sys);
+bool studentsMenu(EnrollmentSystem &sys);
+bool professorsMenu(EnrollmentSystem &sys);
+bool infoMenu(EnrollmentSystem &sys);
+/*
+bool modifyClientsMenu(Store &store);
+bool modifyProductsMenu(Store &store);
+bool clientsMenu(Store &store);
+bool productsMenu(Store &store);
+bool transactionsMenu(Store &store);
+bool sortClientOptions(Store &store);
+bool sortProductsOptions(Store &store);
+bool sortTransactionsOptions(Store &store); */
+bool optionsMenu(EnrollmentSystem &sys);
+
+/*
 class Menu 
 {
 private:
@@ -44,5 +66,5 @@ bool play(Menu &m)
 			return false;
 	}
 }
-
+*/
 #endif
