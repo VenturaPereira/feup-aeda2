@@ -18,11 +18,11 @@ int run()
 	College* FEUP = new College("Faculdade de Engenharia da Universidade do Porto", "FEUP", UP);
 	sys.getUniversities()[0]->addCollege(FEUP); //ADD FEUP
 
-	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informatica e Computacao", "MIEIC", FEUP);
+	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);
 	sys.getUniversities()[0]->getColleges()[0]->addCourse(MIEIC); //ADD MIEIC
 
 	//bool(*adh)(EnrollmentSystem&) = addStudentHandler;
-	mainMenu(sys);
+	MainMenu(sys);
 	return 0;
 }
 

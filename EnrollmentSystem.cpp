@@ -145,7 +145,6 @@ bool addStudentHandler(EnrollmentSystem& s)
 	catch (EndOfFile &eof)
 	{
 		cout << "\nAddition canceled!\n";
-		system("pause");
 		return false;
 	}
 	catch (NotFound<Course*, string> &nf)
