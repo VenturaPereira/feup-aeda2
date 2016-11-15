@@ -11,21 +11,7 @@
 
 int run()
 {
-<<<<<<< HEAD
-	EnrollmentSystem sys(75); //INITIALIZE SYSTEM
 
-	University* UP = new University("Universidade do Porto", "up", "pt");
-	sys.addUniversity(UP); //ADD UP
-
-	College* FEUP = new College("Faculdade de Engenharia da Universidade do Porto", "FEUP", UP);
-	sys.getUniversities()[0]->addCollege(FEUP); //ADD FEUP
-
-	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informatica e Computacao", "MIEIC", FEUP);
-	sys.getUniversities()[0]->getColleges()[0]->addCourse(MIEIC); //ADD MIEIC
-
-	//bool(*adh)(EnrollmentSystem&) = addStudentHandler;
-	mainMenu(sys);
-=======
 	//START SYSTEM
 	EnrollmentSystem system(MAX_CREDITS); //INITIALIZE SYSTEM
 	University* UP = new University("Universidade do Porto", "up", "pt");
@@ -54,7 +40,6 @@ int run()
 	
 	Menu startMenu("Start Menu", startMenuStrings, startMenuFunctions);*/
 
->>>>>>> refs/remotes/origin/RendoirBranch
 	return 0;
 }
 
