@@ -31,6 +31,9 @@ public:
 
 	//COMPARES
 	friend bool compareCollegeByName(College* c1, College* c2);
+
+	//OPERATORS
+	friend ostream& operator<<(ostream& os, College const &c);
 		
 };
 

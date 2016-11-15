@@ -4,6 +4,11 @@
 #include "Student.h"
 #include "CourseUnit.h"
 #include "Utilities.h"
+#include "College.h"
+
+Course::Course(string n, string a, College* c) : name(n), acronym(a), college(c) {
+	c->addCourse(this);
+}
 
 void Course::addCourseUnit(CourseUnit* cu)
 {

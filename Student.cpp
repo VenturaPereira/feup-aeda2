@@ -18,6 +18,7 @@ Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getColl
 	assignID();
 	assignEmail();
 	assignTutor();
+	c->addStudent(this);
 }
 
 bool Student::assignTutor()

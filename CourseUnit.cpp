@@ -7,9 +7,9 @@
 #include "University.h"
 
 CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int credits)
-	: name(n), acronym(a), year(y), semester(s), credits(credits)
+	: name(n), acronym(a), year(y), semester(s), credits(credits), course(c)
 {
-	course = c;
+	c->addCourseUnit(this);
 }
 
 OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, unsigned int cred)

@@ -1,7 +1,11 @@
 #pragma once
 
 #include "CourseUnitClass.h"
+#include "CourseUnit.h"
 
+CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit* cu) : courseUnit(cu), classNumber(cn) {
+	cu->addCourseUnitClass(this);
+}
 
 void CourseUnitClass::addStudent(Student* s)
 {

@@ -23,7 +23,7 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	Course(string n, string a, College* c) : name(n), acronym(a), college(c) {}
+	Course(string n, string a, College* c);
 	void addCourseUnit(CourseUnit* cu);
 	bool removeCourseUnit(CourseUnit* cu);
 	void addStudent(Student* s);

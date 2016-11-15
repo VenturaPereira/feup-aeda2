@@ -25,6 +25,7 @@ private:
 	virtual void assignID();
 public:
 	//MEMBER FUNCTIONS
+	Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att);
 	bool teachClass(CourseUnitClass* c);
 	void tutorStudent(Student* s);
 

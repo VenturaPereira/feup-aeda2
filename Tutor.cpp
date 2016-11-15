@@ -5,6 +5,12 @@
 #include "CourseUnit.h"
 #include "University.h"
 
+Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
+	: CollegeUser(n, dob, c->getCollege()), course(c)
+{
+	c->addProfessor(this);
+}
+
 void Tutor::tutorStudent(Student* s)
 {
 	students.push_back(s);
