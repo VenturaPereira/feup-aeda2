@@ -411,7 +411,7 @@ bool removeUniversityHandler(EnrollmentSystem& s) {
 	}
 	catch (EndOfFile &eof)
 	{
-		cout << "\Remove canceled!\n";
+		cout << "\nRemove canceled!\n";
 		return false;
 	}
 	catch (NotFound<University*, string> &nfu)
