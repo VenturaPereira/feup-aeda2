@@ -207,3 +207,60 @@ bool compareStudentByBirth(Student* s1, Student* s2)
 {
 	return s1->dateOfBirth < s2->dateOfBirth;
 }
+
+ofstream& operator<<(ofstream& file, const Student *s)
+{
+	file << s->getCourse()->getCollege()->getUniversity()->getAcronym()
+		<< ';'
+		<< s->getCourse()->getCollege()->getAcronym()
+		<< ';'
+		<< s->getCourse()->getAcronym()
+		<< ';'
+		<< s->name
+		<< ';'
+		<< s->getDateOfBirth().getDateString()
+		<< ';'
+		<< s->status
+		<< ';'
+		<< s->credits
+		<< ';'
+		<< s->year
+		<< ';'
+		<< s->tutor->getID()
+		<< ';'
+		<< '{';
+
+	map<CourseUnit*, unsigned short>::const_iterator ccuIt;
+	for (ccuIt = s->completedCourseUnits.begin();
+		ccuIt != s->completedCourseUnits.end();
+		ccuIt++)
+	{
+		file << '(' << ccuIt->first->getAcronym() << ',' << ccuIt->second << ')';
+		map<CourseUnit*, unsigned short>::const_iterator it = s->completedCourseUnits.end();
+		it--;
+		if (ccuIt != it)
+			file << ',';
+	}
+
+	file << '}'
+		<< ';'
+		<< '{';
+
+	map<CourseUnit*, CourseUnitClass*>::const_iterator ccaIt;
+	for (ccaIt = s->classesCurrentlyAtending.begin();
+		ccaIt != s->classesCurrentlyAtending.end();
+		ccaIt++)
+	{
+		file << '(' << ccaIt->first->getAcronym() << ',' << ccaIt->second->getClassNumber() << ')';
+		map<CourseUnit*, CourseUnitClass*>::const_iterator it = s->classesCurrentlyAtending.end();
+		it--;
+		if (ccaIt != it)
+			file << ',';
+	}
+
+	file << '}'
+		<< endl;
+
+	return file;
+}
+

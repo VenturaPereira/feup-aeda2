@@ -4,6 +4,8 @@
 #include "College.h"
 #include "CourseUnit.h"
 #include "University.h"
+#include <fstream>
+#include "Student.h"
 
 Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
 	: CollegeUser(n, dob, c->getCollege()), course(c)
@@ -67,4 +69,50 @@ bool compareProfessorByID(Tutor* p1, Tutor* p2)
 bool compareProfessorByBirth(Tutor* p1, Tutor* p2)
 {
 	return p1->dateOfBirth < p2->dateOfBirth;
+}
+
+ofstream& operator<<(ofstream& file, const Tutor *t)
+{
+	file << t->getCourse()->getCollege()->getUniversity()->getAcronym()
+		<< ';'
+		<< t->getCourse()->getCollege()->getAcronym()
+		<< ';'
+		<< t->getCourse()->getAcronym()
+		<< ';'
+		<< t->name
+		<< ';'
+		<< t->getDateOfBirth().getDateString()
+		<< ';'
+		<< '{';
+
+	for (unsigned int i = 0; i < t->ableToTeach.size(); i++) {
+		file << t->ableToTeach[i]->getAcronym();
+		if (i != t->ableToTeach.size() - 1)
+			file << ',';
+	}
+
+	file << '}'
+		<< ';'
+		<< '{';
+
+	for (unsigned int i = 0; i < t->currentlyTeaching.size(); i++) {
+		file << t->currentlyTeaching[i]->getAcronym();
+		if (i != t->ableToTeach.size() - 1)
+			file << ',';
+	}
+
+	file << '}'
+		<< ';'
+		<< '{';
+
+	for (unsigned int i = 0; i < t->students.size(); i++) {
+		file << t->students[i]->getID();
+		if (i != t->students.size() - 1)
+			file << ',';
+	}
+
+	file << '}'
+		<< endl;
+
+	return file;
 }
