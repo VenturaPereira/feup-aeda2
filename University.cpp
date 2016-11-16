@@ -4,6 +4,7 @@
 #include "College.h"
 #include "Course.h"
 #include "CourseUnit.h"
+#include "Utilities.h"
 
 
 void University::incrementLastStudentID()
@@ -65,4 +66,10 @@ void University::showAllOptional(string scientificArea, OptionalCourseUnit* arg)
 bool compareUniversityByName(University* u1, University* u2)
 {
 	return u1->name < u2->name;
+}
+
+ofstream& operator<<(ofstream &file, const University *uni)
+{
+	file << uni->getName() << ";" << uni->getAcronym() << ";" << uni->getCountryAcronym() << endl;
+	return file;
 }

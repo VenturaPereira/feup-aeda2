@@ -40,6 +40,8 @@ public:
 	//COMPARES
 	friend bool compareUniversityByName(University* u1, University* u2);
 	
+	//OPERATORS
+	friend ofstream& operator<<(ofstream &file, const University *uni);
 };
 
 #endif
