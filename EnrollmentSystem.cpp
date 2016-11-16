@@ -24,6 +24,88 @@ EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 	collegeSortOption = &compareCollegeByName;
 }
 
+void EnrollmentSystem::loadUniversities() {
+	string line;
+	ifstream file;
+
+	file.open(unifile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			string name, acr, country;
+			char delimiter;
+			istringstream iss(line);
+
+			getline(iss, name, delimiter);
+			getline(iss, acr, delimiter);
+			getline(iss, country, '\n');
+
+			addUniversity(new University(name, acr, country));
+		}
+		file.close();
+	}
+}
+
+void EnrollmentSystem::loadColleges(){
+	ifstream file;
+	string line, uni, name, acr;
+	char ch;
+	University *univ;
+
+	file.open(collegefile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			istringstream iss(line);
+			getline(iss, uni, ch);
+			bool exists = false;
+			vector<University*>::iterator it;
+			for (it = universitiesVector.begin(); it != universitiesVector.end(); it++) {
+				if ((*it)->getAcronym() == uni)
+					exists = true;
+			}
+			if (exists) {
+				getline(iss, name, ch);
+				getline(iss, acr, '\n');
+				(*it)->addCollege(new College(name, acr, it));
+			}
+		}
+		file.close();
+	}
+}
+
+void EnrollmentSystem::loadCourses() {
+	ifstream file;
+	string line, uni, name, acr;
+	char ch;
+	University *univ;
+	College *col;
+
+	file.open(collegefile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			istringstream iss(line);
+			getline(iss, uni, ch);
+			bool exists = false;
+			vector<University*>::iterator it;
+			for (it = universitiesVector.begin(); it != universitiesVector.end(); it++) {
+				if ((*it)->getAcronym() == uni)
+					exists = true;
+			}
+			if (exists) {
+				getline(iss, name, ch);
+				getline(iss, acr, '\n');
+				(*it)->addCollege(new College(name, acr, it));
+			}
+		}
+		file.close();
+	}
+}
+
 University* getUniversity(EnrollmentSystem &s)
 {
 	if (s.universitiesVector.size() == 0)

@@ -22,6 +22,10 @@ class EnrollmentSystem
 private:
 	//MEMBER VARIABLES
 	const unsigned int MAXIMUM_CREDITS;
+	string unifile = "universities.txt";
+	string collegefile = "colleges.txt";
+	string course = "course.txt";
+	string studentsfile = "students.txt";
 	vector<University*> universitiesVector;
 
 	//SORTING OPTIONS (POINTERS TO THE SORTING FUNCTIONS)
@@ -61,9 +65,9 @@ public:
 	void saveStudents();
 	void saveProfessors();
 	void saveCourseUnitClasses();
-	//void loadUniversities();
-	//void loadColleges();
-	//void loadCourses();
+	void loadUniversities();
+	void loadColleges();
+	void loadCourses();
 	//void loadCourseUnits();
 	//void saveUniversities();
 	//void saveColleges();
