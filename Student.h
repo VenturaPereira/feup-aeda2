@@ -57,6 +57,9 @@ public:
 	string getStatus() const { return status; }
 	double getCredits() const { return credits; }
 
+	//PRINT TO SCREEN
+	void show() const;
+
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, const Student *s);
 };

@@ -39,6 +39,9 @@ public:
 
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, const CourseUnitClass *cuc);
+
+	//PRINT TO SCREEN
+	void show() const;
 };
 
 #endif

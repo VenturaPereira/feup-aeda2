@@ -53,6 +53,9 @@ public:
 	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*> getCourseUnitProfessors() const { return courseUnitProfessors; }
 	Course* getCourse() const { return course; }
+
+	//PRINT TO SCREEN
+	virtual void show() = 0;
 };
 
 
@@ -76,6 +79,10 @@ public:
 
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, const OptionalCourseUnit *ocu);
+
+	//PRINT TO SCREEN
+	virtual void show() const;
+	virtual void showAllClasses() const;
 };
 
 
@@ -96,6 +103,10 @@ public:
 
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, const MandatoryCourseUnit *mcu);
+
+	//PRINT TO SCREEN
+	virtual void show() const;
+	virtual void showAllClasses() const;
 };
 
 #endif

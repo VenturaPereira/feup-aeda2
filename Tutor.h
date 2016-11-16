@@ -40,6 +40,9 @@ public:
 	vector<CourseUnit*>	getCurrentlyTeaching() const { return currentlyTeaching; }
 	vector<Student*> getStudents() const { return students; }
 
+	//PRINT TO SCREEN
+	void show() const;
+	
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, const Tutor *t);
 };

@@ -27,6 +27,8 @@ public:
 	bool removeCollege(College *c);
 	
 	//PRINT TO SCREEN
+	void show() const;
+	void showAllColleges() const;
 	void showAllOptional(string scientificArea, OptionalCourseUnit* arg) const;
 				
 	//GETS

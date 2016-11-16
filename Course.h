@@ -44,6 +44,10 @@ public:
 	vector<CourseUnit*> getCourseUnits(unsigned short int y);
 	vector<CourseUnit*> getCourseUnitsNotCompleted(Student* s, unsigned short int y);
 
+	//PRINT TO SCREEN
+	void show() const;
+	void showAllCourseUnits() const;
+	
 	//OPERATORS
 	friend ofstream& operator<<(ofstream &file, const Course *c);
 };

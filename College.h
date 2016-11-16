@@ -33,6 +33,10 @@ public:
 	//COMPARES
 	friend bool compareCollegeByName(College* c1, College* c2);
 
+	//PRINT TO SCREEN
+	void show() const;
+	void showCourses() const;
+
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, const College *c);
 		
