@@ -51,7 +51,6 @@ void EnrollmentSystem::loadColleges(){
 	ifstream file;
 	string line, uni, name, acr;
 	char ch;
-	University *univ;
 
 	file.open(collegefile);
 	if (file.is_open())
@@ -69,7 +68,7 @@ void EnrollmentSystem::loadColleges(){
 			if (exists) {
 				getline(iss, name, ch);
 				getline(iss, acr, '\n');
-				new College(name, acr, it);
+				new College(name, acr, (*it));
 			}
 		}
 		file.close();
@@ -81,7 +80,6 @@ void EnrollmentSystem::loadCourses() {
 	string line, uni, col, name, acr;
 	char ch;
 	University *univ;
-	College *fac;
 
 	file.open(collegefile);
 	if (file.is_open())
@@ -108,7 +106,7 @@ void EnrollmentSystem::loadCourses() {
 				if (existscol) {
 					getline(iss, name, ch);
 					getline(iss, acr, '\n');
-					new College(name, acr, itcol));
+					new Course(name, acr, (*itcol));
 				}
 			}
 		}
