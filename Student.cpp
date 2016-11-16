@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "Student.h"
@@ -118,27 +117,4 @@ void Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 
 	completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
 	
-}
-
-int compareID(Student & s1, Student & s2) {
-	int comparacao = s1.ID - s2.ID;
-	if (comparacao > 0) {
-		return 1; // se o de s1 for maior
-	}
-	else if (comparacao == 0) {
-		return 0; //se forem iguais
-	}
-	else {
-		return -1; //se o de s2 for maior
-	}
-}
-
-bool compareName(Student & s1, Student & s2) {
-	if (((s1.getName()).compare(s2.getName())) == 0) {
-		return 1; //sao iguais;
-	}
-	else {
-		return 0;
-	}
-
 }

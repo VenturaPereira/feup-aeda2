@@ -34,7 +34,7 @@ public:
 	bool removeStudent(Student* s);
 	void addProfessor(Tutor* p);
 	bool removeProfessor(Tutor* p);
-	friend bool comparaCourseName(Course & c1, Course & c2);
+
 	//GETS
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }

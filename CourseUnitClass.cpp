@@ -23,15 +23,4 @@ void CourseUnitClass::setProfessor(Tutor* t)
 {
 	professor = t;
 }
-int compareClassCrowd(CourseUnitClass & cc1, CourseUnitClass cc2) {
-	int result = cc1.getNumberOfStudents() - cc2.getNumberOfStudents();
-	if (result == 0) {
-		return 0; // mesmo numero de alunos
-	}
-	else if (result > 0) {
-		return 1;
-	}
-	else {
-		return -1;
-	}
-}
+
