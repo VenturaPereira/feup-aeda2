@@ -75,6 +75,8 @@ public:
 	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
 	string getScientificArea() const { return scientificArea; }
 
+	//OPERATORS
+	friend ofstream& operator<<(ofstream& file, const OptionalCourseUnit *ocu);
 };
 
 
@@ -93,6 +95,8 @@ public:
 	//GETS
 	unsigned int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
 
+	//OPERATORS
+	friend ofstream& operator<<(ofstream& file, const MandatoryCourseUnit *mcu);
 };
 
 #endif

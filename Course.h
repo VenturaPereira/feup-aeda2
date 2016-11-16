@@ -43,6 +43,9 @@ public:
 	College* getCollege() const { return college; }
 	vector<CourseUnit*> getCourseUnits(unsigned short int y);
 	vector<CourseUnit*> getCourseUnitsNotCompleted(Student* s, unsigned short int y);
+
+	//OPERATORS
+	friend ofstream& operator<<(ofstream &file, const Course *c);
 };
 
 #endif

@@ -22,6 +22,7 @@ public:
 	College(string n, string a, University* u);
 	void addCourse(Course* c);
 	bool removeCourse(Course* c);
+	void show() const;
 
 	//GETS
 	string getName() const { return name; }
@@ -33,7 +34,7 @@ public:
 	friend bool compareCollegeByName(College* c1, College* c2);
 
 	//OPERATORS
-	friend ostream& operator<<(ostream& os, College const &c);
+	friend ofstream& operator<<(ofstream& file, const College *c);
 		
 };
 

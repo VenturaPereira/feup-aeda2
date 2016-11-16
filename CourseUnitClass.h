@@ -36,6 +36,9 @@ public:
 	unsigned short int getClassNumber() const { return classNumber; }
 	vector<Student*> getStudentsInClass() const { return studentsInClass; }
 	CourseUnit* getCourseUnit() const { return courseUnit;}
+
+	//OPERATORS
+	friend ofstream& operator<<(ofstream& file, const CourseUnitClass *cuc);
 };
 
 #endif

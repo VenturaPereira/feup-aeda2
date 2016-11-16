@@ -34,11 +34,10 @@ bool compareCollegeByName(College* c1, College* c2)
 	return c1->name < c2->name;
 }
 
-ostream& operator<<(ostream& os, College const &c)
+void College::show() const
 {
-	os << c.getName()
-		<< setw(CONSOLE_WIDTH * 1.5 - c.getName().size())
-		<< c.getAcronym()
+	cout << name
+		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< acronym
 		<< endl;
-	return os;
 }

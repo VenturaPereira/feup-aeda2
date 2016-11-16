@@ -1,1 +1,1 @@
-up;feup;mieic;Algoritmos e Estruturas de Dados;AEDA;2;1;7.5
+up;feup;mieic;Algoritmos e Estruturas de Dados;AEDA;Mandatory;30;2;1;7.5

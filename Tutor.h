@@ -39,6 +39,9 @@ public:
 	vector<CourseUnit*> getAbleToTeach() const { return ableToTeach; }
 	vector<CourseUnit*>	getCurrentlyTeaching() const { return currentlyTeaching; }
 	vector<Student*> getStudents() const { return students; }
+
+	//OPERATORS
+	friend ofstream& operator<<(ofstream& file, const Tutor *t);
 };
 
 #endif
