@@ -117,6 +117,57 @@ void EnrollmentSystem::loadCourses() {
 	}
 }
 
+
+void EnrollmentSystem::loadStudents() {
+	ifstream file;
+	string line, uni, col, course, name, dateStr;
+	char ch = ';';
+
+	file.open(studentsfile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			istringstream iss(line);
+			getline(iss, uni, ch);
+			bool existsuni = false;
+			vector<University*>::iterator ituni;
+			for (ituni = universitiesVector.begin(); ituni != universitiesVector.end(); ituni++) {
+				if ((*ituni)->getAcronym() == uni)
+					existsuni = true;
+			}
+			if (existsuni) {
+				getline(iss, col, ch);
+				bool existscol = false;
+				vector<College*> collegesvec = (*ituni)->getColleges();
+				vector<College*>::iterator itcol;
+				for (itcol = collegesvec.begin(); itcol != collegesvec.end(); itcol++) {
+					if ((*itcol)->getAcronym() == col)
+						existscol = true;
+				}
+				if (existscol) {
+					getline(iss, course, ch);
+					bool existscourse = false;
+					vector<Course*> coursevec = (*itcol)->getCourses();
+					vector<Course*>::iterator itcourse;
+					for (itcourse = coursevec.begin(); itcourse != coursevec.end(); itcourse++) {
+						if ((*itcourse)->getAcronym() == course)
+							existscourse = true;
+					}
+					if (existscourse) {
+						getline(iss, name, ch);
+						getline(iss, dateStr, '\n');
+						Date inscDate(dateStr);
+						new Student(name, inscDate, (*itcourse));
+					}
+				}
+			}
+		}
+
+		file.close();
+	}
+}
+
 University* getUniversity(EnrollmentSystem &s)
 {
 	if (s.universitiesVector.size() == 0)
