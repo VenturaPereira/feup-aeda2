@@ -29,7 +29,6 @@ public:
 	//MEMBER FUNCTIONS
 	CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, double credits);
 	virtual bool addStudent(Student* s) = 0;
-	virtual void show() const = 0;
 	bool removeStudent(Student* s);
 	void addProfessor(Tutor* t);
 	bool removeProfessor(Tutor* t);
@@ -55,7 +54,8 @@ public:
 	Course* getCourse() const { return course; }
 
 	//PRINT TO SCREEN
-	virtual void show() = 0;
+	virtual void show() const = 0;
+	virtual void showAllClasses() const = 0;
 };
 
 
@@ -71,7 +71,6 @@ public:
 	//MEMBER FUNCTIONS
 	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, unsigned int cred);
 	virtual bool addStudent(Student* s);
-	virtual void show() const;
 
 	//GETS
 	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
@@ -96,7 +95,6 @@ public:
 	//MEMBER FUNCTIONS
 	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int cred);
 	virtual bool addStudent(Student* s);
-	virtual void show() const;
 
 	//GETS
 	unsigned int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }

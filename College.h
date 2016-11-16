@@ -22,7 +22,6 @@ public:
 	College(string n, string a, University* u);
 	void addCourse(Course* c);
 	bool removeCourse(Course* c);
-	void show() const;
 
 	//GETS
 	string getName() const { return name; }

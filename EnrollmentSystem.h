@@ -26,7 +26,7 @@ private:
 	string collegefile = "colleges.txt";
 	string course = "course.txt";
 	string studentsfile = "students.txt";
-	//bool save;
+	bool save;
 	vector<University*> universitiesVector;
 
 	//SORTING OPTIONS (POINTERS TO THE SORTING FUNCTIONS)
