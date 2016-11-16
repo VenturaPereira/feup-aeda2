@@ -14,6 +14,9 @@
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 {
+	loadUniversities();
+	loadColleges();
+	loadCourses();
 	//LOAD DEFAULT SORTING OPTIONS
 	courseSortOption = &compareCourseByName;
 	courseUnitSortOption = &compareCourseUnitByTime;
@@ -34,7 +37,7 @@ void EnrollmentSystem::loadUniversities() {
 		while (getline(file, line))
 		{
 			string name, acr, country;
-			char delimiter;
+			char delimiter = ';';
 			istringstream iss(line);
 
 			getline(iss, name, delimiter);
@@ -50,7 +53,7 @@ void EnrollmentSystem::loadUniversities() {
 void EnrollmentSystem::loadColleges(){
 	ifstream file;
 	string line, uni, name, acr;
-	char ch;
+	char ch = ';';
 
 	file.open(collegefile);
 	if (file.is_open())
@@ -78,7 +81,7 @@ void EnrollmentSystem::loadColleges(){
 void EnrollmentSystem::loadCourses() {
 	ifstream file;
 	string line, uni, col, name, acr;
-	char ch;
+	char ch = ';';
 	University *univ;
 
 	file.open(collegefile);

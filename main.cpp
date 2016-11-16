@@ -12,12 +12,13 @@
 int run()
 {
 
-	//START SYSTEM
+	//START SYSTEM 
 	EnrollmentSystem system(MAX_CREDITS); //INITIALIZE SYSTEM
-	University* UP = new University("Universidade do Porto", "up", "pt");
+	/*University* UP = new University("Universidade do Porto", "up", "pt");
 	College* FEUP = new College("Faculdade de Engenharia da Universidade do Porto", "FEUP", UP);
-	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);
+	Course* MIEIC = new Course("Mestrado Integrado em Engenharia Informática e Computação", "MIEIC", FEUP);*/
 
+	while(mainMenu(system)){}
 	return 0;
 }
 

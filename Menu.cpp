@@ -132,13 +132,12 @@ bool infoMenu(EnrollmentSystem &sys)
 		"4 - Read all Professors            ", "",
 		"5 - Back                           ",
 		"---------------------------------------" }, 1, 5);
-	/*
+	
 	switch (option)
 	{
 	case 1:
-		();
 		system("pause");
-		return true;
+		return true;/*
 	case 2:
 		store.displayTransactionsByClient();
 		system("pause");
@@ -150,10 +149,10 @@ bool infoMenu(EnrollmentSystem &sys)
 	case 4:
 		store.displayTransactionsBetweenDates();
 		system("pause");
-		return true;
+		return true;*/
 	case 5:
 		return false;
-	}*/
+	}
 	return false;
 }
 /*
