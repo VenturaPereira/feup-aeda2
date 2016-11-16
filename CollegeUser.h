@@ -3,10 +3,11 @@
 #ifndef COLLEGEUSER_H
 #define COLLEGEUSER_H
 
-//#include <string>
+#include <string>
 #include "Date.h"
-#include "College.h"
+using namespace std;
 
+class College;
 
 class CollegeUser 
 {
@@ -25,6 +26,7 @@ public:
 	virtual void assignID() = 0;
 
 	//GETS
+	unsigned long long int getID() const { return ID; }
 	string getName() const { return name; }
 	Date getDateOfRegistration() const { return dateOfRegistration; }
 	Date getDateOfBirth() const { return dateOfBirth; }

@@ -68,6 +68,26 @@ T enterInput(string title, vector<string> options)
 
 }
 
+template<typename T>
+T enterInput()
+{
+	string line;
+	T input;
+
+	while (true)
+	{
+		cin.clear();
+		cout << "Answer: ";
+		getline(cin, line);
+		if (cin.eof())
+			throw EndOfFile();
+		istringstream iss(line);
+		iss >> input;
+		if (!iss.fail() && line.length() > 0)
+			return input;
+	}
+}
+
 void validFile(string fileType);
 
 bool yesNoAnswer();
@@ -82,23 +102,14 @@ public:
 	EndOfFile() {}
 };
 
-class lowGrade
-{
-private:
-	unsigned int grade;
-public:
-	lowGrade(unsigned int g) : grade(g) {}
-	unsigned int getGrade() const { return grade; }
-};
-
-template <class Type>
+template <class Type, class Member>
 class NotFound
 {
 private:
-	string name;
+	Member member;
 public:
-	NotFound(string n) : name(n) {}
-	string getName() const { return name; }
+	NotFound(Member m) : member(m) {}
+	Member getMember() const { return member; }
 };
 
 #endif

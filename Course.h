@@ -2,18 +2,14 @@
 #ifndef COURSE_H
 #define COURSE_H
 
-//#include <vector>
-//#include <string>
-
-#include "College.h"
+#include <vector>
+#include <string>
 using namespace std;
 
+class College;
 class Tutor;
 class CourseUnit;
 class Student;
-
-//ADICIONAR MESTRADO/LICENCIATURAS/DOUTURAMENTOS COMO CLASSES DERIVADAS
-
 
 class Course
 {
@@ -27,13 +23,17 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	Course(string n, string a, College* c) : name(n), acronym(a), college(c) {}
+	Course(string n, string a, College* c);
 	void addCourseUnit(CourseUnit* cu);
 	bool removeCourseUnit(CourseUnit* cu);
 	void addStudent(Student* s);
 	bool removeStudent(Student* s);
 	void addProfessor(Tutor* p);
 	bool removeProfessor(Tutor* p);
+
+	//COMPARES
+	friend bool compareCourseByName(Course* c1, Course* c2);
+
 
 	//GETS
 	string getName() const { return name; }
@@ -42,7 +42,8 @@ public:
 	vector<Student*> getStudents() const { return students; }
 	vector<Tutor*> getProfessors() const { return professors; }
 	College* getCollege() const { return college; }
-
+	vector<CourseUnit*> getCourseUnits(unsigned short int y);
+	vector<CourseUnit*> getCourseUnitsNotCompleted(Student* s, unsigned short int y);
 };
 
 #endif

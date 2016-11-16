@@ -1,4 +1,15 @@
 #include "Tutor.h"
+#include "CourseUnitClass.h"
+#include "Course.h"
+#include "College.h"
+#include "CourseUnit.h"
+#include "University.h"
+
+Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
+	: CollegeUser(n, dob, c->getCollege()), course(c)
+{
+	c->addProfessor(this);
+}
 
 void Tutor::tutorStudent(Student* s)
 {
@@ -39,6 +50,21 @@ void Tutor::assignEmail()
 
 void Tutor::assignID()
 {
-	ID = course->getCollege()->getUniversity()->getLastStudentID() + 1;
+	ID = course->getCollege()->getUniversity()->getLastProfessorID() + 1;
 	course->getCollege()->getUniversity()->incrementLastProfessorID();
+}
+
+bool compareProfessorByName(Tutor* p1, Tutor* p2) 
+{
+	return p1->name < p2->name;
+}
+
+bool compareProfessorByID(Tutor* p1, Tutor* p2)
+{
+	return p1->ID < p2->ID;
+}
+
+bool compareProfessorByBirth(Tutor* p1, Tutor* p2)
+{
+	return p1->dateOfBirth < p2->dateOfBirth;
 }

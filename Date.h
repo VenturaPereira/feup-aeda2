@@ -3,8 +3,8 @@
 #ifndef DATE_H
 #define DATE_H
 
-#include "Utilities.h"
-#include <ctime>
+#include <string>
+using namespace std;
 
 class Date
 {

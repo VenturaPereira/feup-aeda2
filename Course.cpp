@@ -1,6 +1,14 @@
 #pragma once
 
 #include "Course.h"
+#include "Student.h"
+#include "CourseUnit.h"
+#include "Utilities.h"
+#include "College.h"
+
+Course::Course(string n, string a, College* c) : name(n), acronym(a), college(c) {
+	c->addCourse(this);
+}
 
 void Course::addCourseUnit(CourseUnit* cu)
 {
@@ -60,4 +68,60 @@ bool Course::removeProfessor(Tutor* p)
 		}
 	}
 	return false;
+}
+
+vector<CourseUnit*> Course::getCourseUnits(unsigned short int y)
+{
+	vector<CourseUnit*> courseUnits;
+
+	if (y >= 1 && y <= 5)
+	{
+		//GATHER ALL THE COURSE UNITS FROM THE YEAR 
+		vector<CourseUnit*>::const_iterator cuIt;
+		for (cuIt = courseUnits.begin();
+			cuIt != courseUnits.end();
+			cuIt++)
+		{
+			if ((*cuIt)->getYear() == y) //SAME YEAR AS ARGUMENT
+			{
+				courseUnits.push_back(*cuIt);
+			}
+		}
+	}
+
+	return courseUnits;
+}
+
+vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned short int y)
+{
+	vector<CourseUnit*> courseUnitsFromYear, notCompleted;
+	
+	if (y >= 1 && y <= 5)
+	{
+		//GATHER ALL THE COURSE UNITS FROM THE YEAR 
+		courseUnitsFromYear = getCourseUnits(y);
+		
+		//CHECK WHAT COURSE UNITS HAVE NOT BEEN COMPLETED
+		vector<CourseUnit*>::const_iterator cuIt;
+		for (cuIt = courseUnitsFromYear.begin();
+			cuIt != courseUnitsFromYear.end();
+			cuIt++)
+		{
+			if (//CHECK IF ALREADY ATENDING THE COURSE UNIT OR IF THE STUDENT HAS ALREADY COMPLETED THE COURSE UNIT
+				s->getClassesCurrentlyAtending().find((*cuIt)) == s->getClassesCurrentlyAtending().end()					
+				&& s->getCompletedCourseUnits().find((*cuIt)) == s->getCompletedCourseUnits().end()
+				)
+			{
+				notCompleted.push_back(*cuIt); //IF NOT TO BOTH, ADD TO NOTCOMPLETED
+			}
+		}
+
+	}
+
+	return notCompleted;
+}
+
+bool compareCourseByName(Course* c1, Course* c2) 
+{
+	return (c1->getName() < c2->getName());
 }

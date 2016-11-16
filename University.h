@@ -7,6 +7,8 @@
 using namespace std;
 
 class College;
+class Course;
+class OptionalCourseUnit;
 
 class University
 {
@@ -23,7 +25,10 @@ public:
 	void incrementLastProfessorID();
 	void addCollege(College* c);
 	bool removeCollege(College *c);
-		
+	
+	//PRINT TO SCREEN
+	void showAllOptional(string scientificArea, OptionalCourseUnit* arg) const;
+				
 	//GETS
 	unsigned long long int getLastStudentID() { return lastStudentID; }
 	unsigned long long int getLastProfessorID() { return lastProfessorID; }
@@ -31,6 +36,9 @@ public:
 	string getAcronym() const { return acronym; }
 	string getCountryAcronym() const { return countryAcronym; }
 	vector<College*> getColleges() const { return collegesVector; }
+
+	//COMPARES
+	friend bool compareUniversityByName(University* u1, University* u2);
 	
 };
 
