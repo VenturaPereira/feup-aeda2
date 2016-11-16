@@ -26,6 +26,7 @@ private:
 	string collegefile = "colleges.txt";
 	string course = "course.txt";
 	string studentsfile = "students.txt";
+	bool save;
 	vector<University*> universitiesVector;
 
 	//SORTING OPTIONS (POINTERS TO THE SORTING FUNCTIONS)
@@ -43,6 +44,16 @@ public:
 	EnrollmentSystem(unsigned int mc);
 	void addUniversity(University* u) { universitiesVector.push_back(u); }
 	void removeUniversity(University* u);
+	template<typename T>
+	void saveToFiles(vector<T*> &vector, string &fileName)
+	{
+		ofstream file;
+		file.open(fileName);
+		file << vector.size() << endl;
+		for (unsigned int i = 0; i < vector.size(); i++)
+			file << vector[i];
+		file.close();
+	}
 
 	//HANDLERS (COMMUNICATION WITH THE USER)
 	friend bool addStudentHandler(EnrollmentSystem& s); //ADDS STUDENT TO COURSE
@@ -59,6 +70,9 @@ public:
 	//friend bool removeCourseHandler(EnrollmentSystem& s);
 
 	//LOAD/SAVE FROM FILES
+	void loadHandler();
+	void saveHandler();
+
 	void loadStudents();
 	void loadProfessors();
 	void loadCourseUnitClasses();
@@ -68,8 +82,8 @@ public:
 	void loadUniversities();
 	void loadColleges();
 	void loadCourses();
-	//void loadCourseUnits();
-	//void saveUniversities();
+	void loadCourseUnits();
+	//void saveUniversities(); IT WILL NOT BE NEEDED
 	//void saveColleges();
 	//void saveCourses();
 	//void saveCourseUnits();
@@ -82,6 +96,7 @@ public:
 
 	//GETS
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }
+	bool getChanged() const { return save; }
 	vector<University*> getUniversities() const { return universitiesVector; }
 	friend University* getUniversity(EnrollmentSystem &s);
 	friend College* getCollege(EnrollmentSystem &s);
@@ -89,6 +104,8 @@ public:
 	friend CourseUnit* getCourseUnit(EnrollmentSystem &s);
 	Student* getStudent(unsigned long long int &ID);
 	Tutor* getProfessor(unsigned long long int &ID);
+
+
 };
 
 #endif

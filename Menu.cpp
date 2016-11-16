@@ -2,8 +2,7 @@
 #include "Menu.h"
 
 
-unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max)
-{
+unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max){
 	unsigned int option;
 	do
 	{
@@ -17,8 +16,8 @@ unsigned int menuOption(string badInput, string normalInput, vector<string> tryA
 	} while (true);
 	return option;
 }
-bool mainMenu(EnrollmentSystem &sys)
-{
+
+bool mainMenu(EnrollmentSystem &sys){
 	while (true)
 	{
 		std::system("cls");
@@ -50,16 +49,27 @@ bool mainMenu(EnrollmentSystem &sys)
 				return true;
 			break;
 		case 5:
-
 			cout << "\nAre you sure you want to exit? (Y/N)\n";
-			if (yesNoAnswer())
-				return false;
-
+			if (yesNoAnswer()){
+				if (sys.getChanged()){
+					cout << "\nDo you want to save your changes? (Y/N)\n";
+					if (yesNoAnswer()){
+						cout << "\n\nSaving. Don't turn off the power!";
+						sys.saveHandler();
+						cout << "\n\nSaving complete!\n\n";
+						return true;
+					}
+					return true;
+				}
+				return true;
+			}
+			else
+				break;
 		}
 	}
 }
-bool studentsMenu(EnrollmentSystem &sys)
-{
+
+bool studentsMenu(EnrollmentSystem &sys){
 	while (true)
 	{
 		std::system("cls");
@@ -91,8 +101,8 @@ bool studentsMenu(EnrollmentSystem &sys)
 		}
 	}
 }
-bool professorsMenu(EnrollmentSystem &sys)
-{
+
+bool professorsMenu(EnrollmentSystem &sys){
 	std::system("cls");
 	unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 	{ "-------------------------------------",
@@ -120,8 +130,8 @@ bool professorsMenu(EnrollmentSystem &sys)
 		return false;
 	}
 }
-bool infoMenu(EnrollmentSystem &sys)
-{
+
+bool infoMenu(EnrollmentSystem &sys){
 	system("cls");
 	unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 	{ "---------------------------------------",

@@ -14,9 +14,8 @@
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 {
-	loadUniversities();
-	loadColleges();
-	loadCourses();
+	save = false;
+	loadHandler();
 	//LOAD DEFAULT SORTING OPTIONS
 	courseSortOption = &compareCourseByName;
 	courseUnitSortOption = &compareCourseUnitByTime;
@@ -25,6 +24,13 @@ EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 	professorsSortOption = &compareProfessorByID;
 	universitySortOption = &compareUniversityByName;
 	collegeSortOption = &compareCollegeByName;
+}
+
+void EnrollmentSystem::loadHandler() {
+	loadUniversities();
+	loadColleges();
+	loadCourses();
+	loadStudents();
 }
 
 void EnrollmentSystem::loadUniversities() {
@@ -116,7 +122,6 @@ void EnrollmentSystem::loadCourses() {
 		file.close();
 	}
 }
-
 
 void EnrollmentSystem::loadStudents() {
 	ifstream file;
@@ -613,3 +618,8 @@ bool EnrollmentSystem::changeProfessorsSortOption(unsigned short int &option)
 		return true;
 	else return false; //CALL THE FUNCTION AGAIN
 }
+
+void EnrollmentSystem::saveHandler() {
+	saveToFiles(getUniversities(), unifile);
+}
+
