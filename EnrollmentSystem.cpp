@@ -69,7 +69,7 @@ void EnrollmentSystem::loadColleges(){
 			if (exists) {
 				getline(iss, name, ch);
 				getline(iss, acr, '\n');
-				(*it)->addCollege(new College(name, acr, it));
+				new College(name, acr, it);
 			}
 		}
 		file.close();
@@ -78,10 +78,10 @@ void EnrollmentSystem::loadColleges(){
 
 void EnrollmentSystem::loadCourses() {
 	ifstream file;
-	string line, uni, name, acr;
+	string line, uni, col, name, acr;
 	char ch;
 	University *univ;
-	College *col;
+	College *fac;
 
 	file.open(collegefile);
 	if (file.is_open())
@@ -90,16 +90,26 @@ void EnrollmentSystem::loadCourses() {
 		{
 			istringstream iss(line);
 			getline(iss, uni, ch);
-			bool exists = false;
-			vector<University*>::iterator it;
-			for (it = universitiesVector.begin(); it != universitiesVector.end(); it++) {
-				if ((*it)->getAcronym() == uni)
-					exists = true;
+			bool existsuni = false;
+			vector<University*>::iterator ituni;
+			for (ituni = universitiesVector.begin(); ituni != universitiesVector.end(); ituni++) {
+				if ((*ituni)->getAcronym() == uni)
+					existsuni = true;
 			}
-			if (exists) {
-				getline(iss, name, ch);
-				getline(iss, acr, '\n');
-				(*it)->addCollege(new College(name, acr, it));
+			if (existsuni) {
+				getline(iss, col, ch);
+				bool existscol = false;
+				vector<College*> collegesvec = (*ituni)->getColleges();
+				vector<College*>::iterator itcol;
+				for (itcol = collegesvec.begin(); itcol != collegesvec.end(); itcol++) {
+					if ((*itcol)->getAcronym() == col)
+						existscol = true;
+				}
+				if (existscol) {
+					getline(iss, name, ch);
+					getline(iss, acr, '\n');
+					new College(name, acr, itcol));
+				}
 			}
 		}
 		file.close();
