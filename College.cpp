@@ -41,3 +41,14 @@ void College::show() const
 		<< acronym
 		<< endl;
 }
+
+ofstream& operator<<(ofstream& file, const College *c)
+{
+	file << c->university->getAcronym()
+		<< ';'
+		<< c->name
+		<< ';'
+		<< c->acronym
+		<< endl;
+	return file;
+}

@@ -48,12 +48,11 @@ public:
 	unsigned short int getSemester() const { return semester; }
 	double getCredits() const { return credits; }
 	string getName() const { return name; }
+	string getAcronym() const { return acronym; }
 	vector<CourseUnitClass*> getClasses() const { return classes; }
 	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*> getCourseUnitProfessors() const { return courseUnitProfessors; }
 	Course* getCourse() const { return course; }
-
-
 };
 
 

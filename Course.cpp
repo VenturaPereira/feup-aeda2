@@ -5,6 +5,7 @@
 #include "CourseUnit.h"
 #include "Utilities.h"
 #include "College.h"
+#include "University.h"
 
 Course::Course(string n, string a, College* c) : name(n), acronym(a), college(c) {
 	c->addCourse(this);
@@ -124,4 +125,17 @@ vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned shor
 bool compareCourseByName(Course* c1, Course* c2) 
 {
 	return (c1->getName() < c2->getName());
+}
+
+ofstream& operator<<(ofstream &file, const Course *c)
+{
+	file << c->getCollege()->getUniversity()->getAcronym()
+		<< ';'
+		<< c->getCollege()->getAcronym()
+		<< ';'
+		<< c->name
+		<< ';'
+		<< c->acronym
+		<< endl;
+	return file;
 }
