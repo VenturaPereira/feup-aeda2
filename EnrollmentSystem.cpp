@@ -34,6 +34,11 @@ void EnrollmentSystem::loadHandler() {
 }
 
 void EnrollmentSystem::loadUniversities() {
+	
+	/*
+	FORMAT
+	NAME;ACRONYM;COUNTRY_ACRONYM
+	*/
 	string line;
 	ifstream file;
 
@@ -57,8 +62,15 @@ void EnrollmentSystem::loadUniversities() {
 }
 
 void EnrollmentSystem::loadColleges(){
+	
+	/*
+	FORMAT
+	UNIVERSITY_ACRONYM;NAME;ACRONYM
+	*/
+
 	ifstream file;
 	string line, uni, name, acr;
+	University* uniPtr;
 	char ch = ';';
 
 	file.open(collegefile);
@@ -68,27 +80,31 @@ void EnrollmentSystem::loadColleges(){
 		{
 			istringstream iss(line);
 			getline(iss, uni, ch);
-			bool exists = false;
-			vector<University*>::iterator it;
-			for (it = universitiesVector.begin(); it != universitiesVector.end(); it++) {
-				if ((*it)->getAcronym() == uni)
-					exists = true;
+			getline(iss, name, ch);
+			getline(iss, acr, '\n');
+			try {
+				uniPtr = getUniversity(uni);
 			}
-			if (exists) {
-				getline(iss, name, ch);
-				getline(iss, acr, '\n');
-				new College(name, acr, (*it));
+			catch (...){
+				continue;
 			}
+			new College(name, acr, uniPtr);
 		}
 		file.close();
 	}
 }
 
 void EnrollmentSystem::loadCourses() {
+
+	/*
+	FORMAT
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;NAME;ACRONYM
+	*/
+
 	ifstream file;
 	string line, uni, col, name, acr;
 	char ch = ';';
-	University *univ;
+	College *collegePtr;
 
 	file.open(collegefile);
 	if (file.is_open())
@@ -97,35 +113,57 @@ void EnrollmentSystem::loadCourses() {
 		{
 			istringstream iss(line);
 			getline(iss, uni, ch);
-			bool existsuni = false;
-			vector<University*>::iterator ituni;
-			for (ituni = universitiesVector.begin(); ituni != universitiesVector.end(); ituni++) {
-				if ((*ituni)->getAcronym() == uni)
-					existsuni = true;
+			getline(iss, col, ch);
+			getline(iss, name, ch);
+			getline(iss, acr, '\n');
+
+			try {
+				University* uniPtr = getUniversity(uni);
+				collegePtr = getCollege(col, uniPtr);
 			}
-			if (existsuni) {
-				getline(iss, col, ch);
-				bool existscol = false;
-				vector<College*> collegesvec = (*ituni)->getColleges();
-				vector<College*>::iterator itcol;
-				for (itcol = collegesvec.begin(); itcol != collegesvec.end(); itcol++) {
-					if ((*itcol)->getAcronym() == col)
-						existscol = true;
-				}
-				if (existscol) {
-					getline(iss, name, ch);
-					getline(iss, acr, '\n');
-					new Course(name, acr, (*itcol));
-				}
+			catch (...)	{
+				continue;
 			}
+
+			new Course(name, acr, collegePtr);
+
 		}
+
 		file.close();
 	}
 }
 
+//TODO - COMPLETE ACCORDING TO NEW FORMAT
+void EnrollmentSystem::loadCourseUnits()
+{
+	/*
+	FORMAT
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;ACRONYM;YEAR;SEMESTER;CREDITS
+	*/
+}
+
+//TODO - COMPLETE ACCORDING TO NEW FORMAT
+void EnrollmentSystem::loadCourseUnitClasses() 
+{
+	/*
+	FORMAT
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;COURSE_UNIT_ACRONYM;CLASS_NUMBER_;PROFESSOR_ID
+	*/
+}
+
+//TODO - COMPLETE ACCORDING TO NEW FORMAT
 void EnrollmentSystem::loadStudents() {
+	
+	/*
+	FORMAT
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;STATUS;CREDITS;YEAR;TUTOR_NAME;
+	{(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),...};
+	{(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),...}
+	*/
+		
 	ifstream file;
 	string line, uni, col, course, name, dateStr;
+	Course* coursePtr;
 	char ch = ';';
 
 	file.open(studentsfile);
@@ -135,42 +173,67 @@ void EnrollmentSystem::loadStudents() {
 		{
 			istringstream iss(line);
 			getline(iss, uni, ch);
-			bool existsuni = false;
-			vector<University*>::iterator ituni;
-			for (ituni = universitiesVector.begin(); ituni != universitiesVector.end(); ituni++) {
-				if ((*ituni)->getAcronym() == uni)
-					existsuni = true;
-			}
-			if (existsuni) {
-				getline(iss, col, ch);
-				bool existscol = false;
-				vector<College*> collegesvec = (*ituni)->getColleges();
-				vector<College*>::iterator itcol;
-				for (itcol = collegesvec.begin(); itcol != collegesvec.end(); itcol++) {
-					if ((*itcol)->getAcronym() == col)
-						existscol = true;
-				}
-				if (existscol) {
-					getline(iss, course, ch);
-					bool existscourse = false;
-					vector<Course*> coursevec = (*itcol)->getCourses();
-					vector<Course*>::iterator itcourse;
-					for (itcourse = coursevec.begin(); itcourse != coursevec.end(); itcourse++) {
-						if ((*itcourse)->getAcronym() == course)
-							existscourse = true;
-					}
-					if (existscourse) {
-						getline(iss, name, ch);
-						getline(iss, dateStr, '\n');
-						Date inscDate(dateStr);
-						new Student(name, inscDate, (*itcourse));
-					}
-				}
-			}
-		}
+			getline(iss, col, ch);
+			getline(iss, course, ch);
+			getline(iss, name, ch);
+			getline(iss, dateStr, '\n');
+			Date birthDate(dateStr);
 
-		file.close();
+			try {
+				University* uniPtr = getUniversity(uni);
+				College* colPtr = getCollege(col, uniPtr);
+				coursePtr = getCourse(course, colPtr);
+			}
+			catch (...) {
+				continue;
+			}
+			new Student(name, birthDate, coursePtr);
+		}
+	
+	file.close();
 	}
+}
+
+//TODO - COMPLETE ACCORDING TO NEW FORMAT
+void EnrollmentSystem::loadProfessors()
+{
+	/*
+	FORMAT
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;
+	{ABLE_TO_TEACH,ABLE_TO_TEACH,ABLE_TO_TEACH,...};
+	{TEACHING,TEACHING,TEACHING,...};
+	{STUDENT_ID,STUDENT_ID,STUDENT_ID,...}
+	*/
+}
+
+University* EnrollmentSystem::getUniversity(string &acronym)
+{
+	vector<University*>::iterator it;
+	for (it = universitiesVector.begin(); it != universitiesVector.end(); it++){
+		if ((*it)->getAcronym() == acronym)
+			return (*it);
+	}
+	throw NotFound<University*, string>(acronym);
+}
+
+College* EnrollmentSystem::getCollege(string &acronym, University* university)
+{
+	vector<College*>::iterator it;
+	for (it = university->getColleges().begin(); it != university->getColleges().end(); it++) {
+		if ((*it)->getAcronym() == acronym)
+			return (*it);
+	}
+	throw NotFound<College*, string>(acronym);
+}
+
+Course* EnrollmentSystem::getCourse(string &acronym, College* college)
+{
+	vector<Course*>::iterator it;
+	for (it = college->getCourses().begin(); it != college->getCourses().end(); it++) {
+		if ((*it)->getAcronym() == acronym)
+			return (*it);
+	}
+	throw NotFound<Course*, string>(acronym);
 }
 
 University* getUniversity(EnrollmentSystem &s)
@@ -536,7 +599,7 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	if (student->completedAllCourseUnits(student->getYear()))
 	{
 		//GET READY FOR NEXT YEAR
-		student->setCredits(0);
+		student->setCredits(double(0));
 		student->setYear(student->getYear() + 1);
 	}
 
@@ -620,6 +683,6 @@ bool EnrollmentSystem::changeProfessorsSortOption(unsigned short int &option)
 }
 
 void EnrollmentSystem::saveHandler() {
-	saveToFiles(getUniversities(), unifile);
+	//saveToFiles(getUniversities(), unifile);
 }
 

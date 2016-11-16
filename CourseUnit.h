@@ -19,7 +19,7 @@ protected:
 	//MEMBER VARIABLES
 	const unsigned short int year, semester;
 	const string name, acronym;
-	const unsigned int credits;
+	const double credits;
 	Course* course;
 	vector<Student*> studentsCurrentlyInCourseUnit;
 	vector<Tutor*> courseUnitProfessors;
@@ -27,7 +27,7 @@ protected:
 
 public:
 	//MEMBER FUNCTIONS
-	CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int credits);
+	CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, double credits);
 	virtual bool addStudent(Student* s) = 0;
 	virtual void show() const = 0;
 	bool removeStudent(Student* s);
@@ -46,7 +46,7 @@ public:
 	unsigned short int getNumberClasses() const { return classes.size(); }
 	unsigned short int getYear() const { return year; }
 	unsigned short int getSemester() const { return semester; }
-	unsigned int getCredits() const { return credits; }
+	double getCredits() const { return credits; }
 	string getName() const { return name; }
 	vector<CourseUnitClass*> getClasses() const { return classes; }
 	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }

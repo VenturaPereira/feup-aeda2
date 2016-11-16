@@ -1,3 +1,1 @@
-up;FEUP;MIEIC;Joao Seixas;08/09/2015
-up;FEUP;MIEIC;Daniel Marques;09/09/2015
-up;FEUP;MIEIC;Ventura Pereira;15/10/2016
+up;feup;MIEIC;Daniel Marques;08/09/2015;Regular Student;0.0;1;António Ferreira;{(AEDA,20),(TCOM,18)};{(LCOM, 2), (MNUM, 3)}

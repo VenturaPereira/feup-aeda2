@@ -13,7 +13,6 @@ unsigned int getConsoleWidth() {
 
 const unsigned int CONSOLE_WIDTH = getConsoleWidth();
 
-
 void center(const string s) {
 	cout << setw(CONSOLE_WIDTH + s.length() / 2) << s << endl;
 }

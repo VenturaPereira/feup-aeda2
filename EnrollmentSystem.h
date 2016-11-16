@@ -44,7 +44,9 @@ public:
 	EnrollmentSystem(unsigned int mc);
 	void addUniversity(University* u) { universitiesVector.push_back(u); }
 	void removeUniversity(University* u);
-	template<typename T>
+	
+	/*
+	template<class T>
 	void saveToFiles(vector<T*> &vector, string &fileName)
 	{
 		ofstream file;
@@ -53,7 +55,7 @@ public:
 		for (unsigned int i = 0; i < vector.size(); i++)
 			file << vector[i];
 		file.close();
-	}
+	}*/
 
 	//HANDLERS (COMMUNICATION WITH THE USER)
 	friend bool addStudentHandler(EnrollmentSystem& s); //ADDS STUDENT TO COURSE
@@ -69,24 +71,26 @@ public:
 	//friend bool addCourseHandler(EnrollmentSystem& s);
 	//friend bool removeCourseHandler(EnrollmentSystem& s);
 
-	//LOAD/SAVE FROM FILES
+	//LOAD AND SAVE FROM FILES
 	void loadHandler();
 	void saveHandler();
+
+	void saveStudents();
+	void saveProfessors();
+	void saveCourseUnitClasses();
+	void saveUniversities();
+	void saveColleges();
+	void saveCourses();
+	void saveCourseUnits();
 
 	void loadStudents();
 	void loadProfessors();
 	void loadCourseUnitClasses();
-	void saveStudents();
-	void saveProfessors();
-	void saveCourseUnitClasses();
 	void loadUniversities();
 	void loadColleges();
 	void loadCourses();
 	void loadCourseUnits();
-	//void saveUniversities(); IT WILL NOT BE NEEDED
-	//void saveColleges();
-	//void saveCourses();
-	//void saveCourseUnits();
+	
 	
 	//SORT FUNCTIONS
 	bool changeCourseUnitSortOption(unsigned short int &option);
@@ -104,6 +108,11 @@ public:
 	friend CourseUnit* getCourseUnit(EnrollmentSystem &s);
 	Student* getStudent(unsigned long long int &ID);
 	Tutor* getProfessor(unsigned long long int &ID);
+	University* getUniversity(string &acronym);
+	College* getCollege(string &acronym, University* university);
+	Course* getCourse(string &acronym, College* college);
+
+
 
 
 };

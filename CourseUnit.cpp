@@ -6,7 +6,7 @@
 #include "College.h"
 #include "University.h"
 
-CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int credits)
+CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, double credits)
 	: name(n), acronym(a), year(y), semester(s), credits(credits), course(c)
 {
 	c->addCourseUnit(this);

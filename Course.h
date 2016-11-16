@@ -10,7 +10,6 @@ class College;
 class Tutor;
 class CourseUnit;
 class Student;
-
 class Course
 {
 private:

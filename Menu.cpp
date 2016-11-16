@@ -1,6 +1,7 @@
 #pragma once
-#include "Menu.h"
 
+#include "Menu.h"
+#include "Utilities.h"
 
 unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max){
 	unsigned int option;
