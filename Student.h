@@ -32,7 +32,7 @@ protected:
 public:
 	//MEMBER FUNCTIONS
 	Student(string n, Date dob, Course* c);
-	Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> ccu, map<CourseUnit*, CourseUnitClass*> cca, unsigned long long int id);
+	Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
 	bool assignTutor();
 	bool enrollCourseUnit(CourseUnit* courseUnit);
 	bool enrollClass(CourseUnitClass* courseUnitClass);

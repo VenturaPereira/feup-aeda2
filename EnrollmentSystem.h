@@ -22,10 +22,13 @@ class EnrollmentSystem
 private:
 	//MEMBER VARIABLES
 	const unsigned int MAXIMUM_CREDITS;
-	string unifile = "universities.txt";
-	string collegefile = "colleges.txt";
-	string course = "course.txt";
-	string studentsfile = "students.txt";
+	string universityFile = "universities.txt",
+		collegesFile = "colleges.txt",
+		coursesFile = "courses.txt",
+		courseUnitsFile = "courseunits.txt",
+		courseUnitClassesFile = "courseunitclasses.txt",
+		studentsFile = "students.txt",
+		professorsFile = "tutors.txt";
 	bool save;
 	vector<University*> universitiesVector;
 

@@ -22,7 +22,7 @@ Student::Student(string n, Date dob, Course* c)
 	c->addStudent(this);
 }
 
-Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> ccu, map<CourseUnit*, CourseUnitClass*> cca, unsigned long long int id)
+Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
 	: CollegeUser(n, dob, c->getCollege()),
 	tutor(t), year(y), credits(cr), status(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {

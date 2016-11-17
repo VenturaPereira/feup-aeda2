@@ -45,7 +45,7 @@ void EnrollmentSystem::loadUniversities() {
 	string line;
 	ifstream file;
 
-	file.open(unifile);
+	file.open(universityFile);
 	if (file.is_open())
 	{
 		while (getline(file, line))
@@ -78,7 +78,7 @@ void EnrollmentSystem::loadColleges(){
 	University* uniPtr;
 	char ch = ';';
 
-	file.open(collegefile);
+	file.open(collegesFile);
 	if (file.is_open())
 	{
 		while (getline(file, line))
@@ -111,7 +111,7 @@ void EnrollmentSystem::loadCourses() {
 	char ch = ';';
 	College *collegePtr;
 
-	file.open(collegefile);
+	file.open(coursesFile);
 	if (file.is_open())
 	{
 		while (getline(file, line))
@@ -179,7 +179,7 @@ void EnrollmentSystem::loadStudents() {
 	map<CourseUnit*, unsigned short int> ccu;
 	map<CourseUnit*, CourseUnitClass*> cca;
 
-	file.open(studentsfile);
+	file.open(studentsFile);
 	if (file.is_open())
 	{
 		while (getline(file, line))
@@ -267,15 +267,70 @@ void EnrollmentSystem::loadStudents() {
 	}
 }
 
-//TODO - COMPLETE ACCORDING TO NEW FORMAT
+//VERIFY
 void EnrollmentSystem::loadProfessors()
 {
 	/*
 	FORMAT
-	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;ID;
 	{ABLE_TO_TEACH,ABLE_TO_TEACH,ABLE_TO_TEACH,...};
 	{TEACHING,TEACHING,TEACHING,...};
 	*/
+
+	ifstream file;
+	string line, uni, col, course, name, dateStr, ableToTeachStr, teachingStr;
+	unsigned long long int ID;
+	Course* coursePtr;
+	vector<CourseUnit*> ableToTeach, currentlyTeaching;
+
+	file.open(professorsFile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			char ch = ';';
+			istringstream iss(line);
+			getline(iss, uni, ch);
+			getline(iss, col, ch);
+			getline(iss, course, ch);
+			getline(iss, name, ch);
+			getline(iss, dateStr, ch);
+			Date birthDate(dateStr);
+			iss >> ws >> ID >> ws >> ch;
+
+
+			try {
+				University* uniPtr = getUniversity(uni);
+				College* colPtr = getCollege(col, uniPtr);
+				coursePtr = getCourse(course, colPtr);
+
+				getline(iss, ableToTeachStr, ch);
+				istringstream iss_2(ableToTeachStr);
+				string courseUnitStr;
+				char endCh;
+
+				while (getline(iss_2, courseUnitStr, ',')){
+					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+					ableToTeach.push_back(courseUnitPtr);
+				}
+
+				getline(iss, teachingStr, '\n');
+				istringstream iss_4(teachingStr);
+
+				while (getline(iss_4, courseUnitStr, ',')){
+					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+					currentlyTeaching.push_back(courseUnitPtr);
+				}
+				
+			}
+			catch (...) {
+				continue;
+			}
+			new Tutor(name, birthDate, coursePtr, ID, currentlyTeaching, ableToTeach);
+		}
+
+		file.close();
+	}
 }
 
 University* EnrollmentSystem::getUniversity(string &acronym)
@@ -755,7 +810,7 @@ bool EnrollmentSystem::changeProfessorsSortOption(unsigned short int &option)
 }
 
 void EnrollmentSystem::saveHandler() {
-	//saveToFiles(getUniversities(), unifile);
+	//saveToFiles(getUniversities(), universityFile);
 }
 
 Tutor* EnrollmentSystem::getProfessor(unsigned long long int &ID, Course* course)

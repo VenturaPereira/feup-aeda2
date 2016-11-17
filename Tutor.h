@@ -26,6 +26,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att);
+	Tutor(string n, Date dob, Course* c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att); 
 	bool teachClass(CourseUnitClass* c);
 	void tutorStudent(Student* s);
 

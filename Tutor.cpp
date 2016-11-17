@@ -8,8 +8,20 @@
 #include "Student.h"
 
 Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
-	: CollegeUser(n, dob, c->getCollege()), course(c)
+	: CollegeUser(n, dob, c->getCollege()), course(c),
+	ableToTeach(att)
 {
+	assignID();
+	assignEmail();
+	c->addProfessor(this);
+}
+
+Tutor::Tutor(string n, Date dob, Course* c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att)
+	: CollegeUser(n, dob, c->getCollege()), course(c),
+	ableToTeach(att), currentlyTeaching(ct)
+{
+	setID(ID);
+	assignEmail();
 	c->addProfessor(this);
 }
 
@@ -82,6 +94,8 @@ ofstream& operator<<(ofstream& file, const Tutor *t)
 		<< t->name
 		<< ';'
 		<< t->getDateOfBirth().getDateString()
+		<< ';'
+		<< t->ID
 		<< ';'
 		<< '{';
 
