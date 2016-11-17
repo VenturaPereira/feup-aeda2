@@ -101,8 +101,8 @@ ofstream& operator<<(ofstream& file, const Tutor *t)
 			file << ',';
 	}
 
-	file << '}'
-		<< ';'
+	file << '}';
+		/*<< ';'
 		<< '{';
 
 	for (unsigned int i = 0; i < t->students.size(); i++) {
@@ -111,8 +111,8 @@ ofstream& operator<<(ofstream& file, const Tutor *t)
 			file << ',';
 	}
 
-	file << '}'
-		<< endl;
+	file << '}'*/
+	file << endl;
 
 	return file;
 }
