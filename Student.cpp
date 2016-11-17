@@ -10,7 +10,8 @@
 #include "Utilities.h"
 
 
-Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getCollege())
+Student::Student(string n, Date dob, Course* c) 
+	: CollegeUser(n, dob, c->getCollege())
 {
 	course = c;
 	year = 1;
@@ -19,6 +20,24 @@ Student::Student(string n, Date dob, Course* c) : CollegeUser(n, dob, c->getColl
 	assignEmail();
 	assignTutor();
 	c->addStudent(this);
+}
+
+Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> ccu, map<CourseUnit*, CourseUnitClass*> cca, unsigned long long int id)
+	: CollegeUser(n, dob, c->getCollege()),
+	tutor(t), year(y), credits(cr), status(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
+{
+	setID(id);
+	assignEmail();
+	c->addStudent(this);
+	map<CourseUnit*, CourseUnitClass*>::iterator mapIt;
+	for (mapIt = cca.begin();
+		mapIt != cca.end();
+		mapIt++) 
+	{
+		mapIt->first->addStudentWithoutCheck(this);
+		mapIt->second->addStudent(this);
+	}
+	t->tutorStudent(this);
 }
 
 bool Student::assignTutor()

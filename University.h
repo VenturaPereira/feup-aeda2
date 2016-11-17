@@ -21,6 +21,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	University(string n, string a, string ca) : name(n), acronym(a), countryAcronym(ca), lastProfessorID(0), lastStudentID(0) {}
+	University(string n, string a, string ca, unsigned long long int lsid, unsigned long long int lpid) : name(n), acronym(a), countryAcronym(ca), lastProfessorID(lpid), lastStudentID(lsid) {}
 	void incrementLastStudentID();
 	void incrementLastProfessorID();
 	void addCollege(College* c);

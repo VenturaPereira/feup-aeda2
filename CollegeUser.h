@@ -30,6 +30,9 @@ public:
 	string getName() const { return name; }
 	Date getDateOfRegistration() const { return dateOfRegistration; }
 	Date getDateOfBirth() const { return dateOfBirth; }
+
+	//SETS
+	void setID(unsigned long long int id) { ID = id; }
 	
 };
 

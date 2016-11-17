@@ -33,7 +33,6 @@ void EnrollmentSystem::loadHandler() {
 	loadStudents();
 }
 
-//TODO - COMPLETE ACCORDING TO NEW FORMAT
 void EnrollmentSystem::loadUniversities() {
 	
 	/*
@@ -50,13 +49,15 @@ void EnrollmentSystem::loadUniversities() {
 		{
 			string name, acr, country;
 			char delimiter = ';';
+			unsigned long long int lsid, lpid;
 			istringstream iss(line);
 
 			getline(iss, name, delimiter);
 			getline(iss, acr, delimiter);
-			getline(iss, country, '\n');
+			getline(iss, country, delimiter);
+			iss >> ws >> lsid >> ws >> delimiter >> ws >> lpid;
 
-			addUniversity(new University(name, acr, country));
+			addUniversity(new University(name, acr, country, lsid, lpid));
 		}
 		file.close();
 	}
@@ -156,43 +157,105 @@ void EnrollmentSystem::loadCourseUnitClasses()
 	*/
 }
 
-//TODO - COMPLETE ACCORDING TO NEW FORMAT
+//VERIFY
 void EnrollmentSystem::loadStudents() {
 	
 	/*
 	FORMAT
-	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;STATUS;CREDITS;YEAR;TUTOR_ID;
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;STATUS;CREDITS;YEAR;ID;TUTOR_ID;
 	{(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),...};
 	{(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),...}
 	*/
 		
 	ifstream file;
-	string line, uni, col, course, name, dateStr;
+	string line, uni, col, course, name, dateStr, status, ccuStr, ccaStr;
+	unsigned long long int ID, tutor_ID;
+	unsigned short int credits, year;
+	Tutor* tutorPtr;
 	Course* coursePtr;
-	char ch = ';';
+	map<CourseUnit*, unsigned short int> ccu;
+	map<CourseUnit*, CourseUnitClass*> cca;
 
 	file.open(studentsfile);
 	if (file.is_open())
 	{
 		while (getline(file, line))
 		{
+			char ch = ';';
 			istringstream iss(line);
 			getline(iss, uni, ch);
 			getline(iss, col, ch);
 			getline(iss, course, ch);
 			getline(iss, name, ch);
-			getline(iss, dateStr, '\n');
+			getline(iss, dateStr, ch);
 			Date birthDate(dateStr);
+			getline(iss, status, ch);
+			iss >> ws >> year
+				>> ws >> ch
+				>> ws >> ID
+				>> ws >> ch
+				>> ws >> tutor_ID
+				>> ws >> ch;
+
 
 			try {
 				University* uniPtr = getUniversity(uni);
 				College* colPtr = getCollege(col, uniPtr);
 				coursePtr = getCourse(course, colPtr);
+				tutorPtr = getProfessor(tutor_ID, uniPtr);
+
+				getline(iss, ccuStr, ch);
+				istringstream iss_2(ccuStr);
+				char endCh;
+				string pair;
+				bool firstIt = true;
+
+				while (getline(iss_2, pair, ')'))
+				{
+					if (!firstIt)
+						iss_2 >> endCh; //REMOVE ',' IF NOT THE FIRST ITERATION
+					else firstIt = false;
+					string courseUnitStr;
+					unsigned short int grade;
+					istringstream iss_3(pair);
+					iss_3 >> endCh; //REMOVES '('
+					getline(iss_3, courseUnitStr, ','); //GETS THE COURSE UNIT STR
+					iss_3 >> grade; //GETS THE GRADE
+
+					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+
+					ccu.insert(std::pair<CourseUnit*, unsigned short int>(courseUnitPtr, grade));
+				}
+
+				getline(iss, ccaStr, '\n');
+				istringstream iss_4(ccuStr);
+				firstIt = true;
+
+				while (getline(iss_4, pair, ')'))
+				{
+					if (!firstIt)
+						iss_4 >> endCh; //REMOVE ',' IF NOT THE FIRST ITERATION
+					else firstIt = false;
+					string courseUnitStr;
+					unsigned int classNumber;
+					istringstream iss_5(pair);
+					iss_5 >> endCh; //REMOVES '('
+					getline(iss_5, courseUnitStr, ','); //GETS THE COURSE UNIT STR
+					iss_5 >> classNumber; //GETS THE CLASS NUMBER
+
+					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+
+					cca.insert(std::pair<CourseUnit*, CourseUnitClass*>(
+						courseUnitPtr,
+						getCourseUnitClass(classNumber, courseUnitPtr)));
+				}
+
+
 			}
 			catch (...) {
 				continue;
 			}
-			new Student(name, birthDate, coursePtr);
+			new Student(name, birthDate, coursePtr, tutorPtr, year, credits, status, ccu, cca, ID);
 		}
 	
 	file.close();

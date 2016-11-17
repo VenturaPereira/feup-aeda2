@@ -1,2 +1,2 @@
-Universidade do Porto;up;pt
-Universidade do Minho;um;pt
+Universidade do Porto;up;pt;201600000;0
+Universidade do Minho;um;pt;201600000;0

@@ -34,6 +34,7 @@ public:
 	bool removeProfessor(Tutor* t);
 	void addCourseUnitClass(CourseUnitClass* cuc);
 	bool removeCourseUnitClass(CourseUnitClass* cuc);
+	void addStudentWithoutCheck(Student* s);
 			
 	//COMPARES
 	friend bool compareCourseUnitByNumberStudents(CourseUnit* cu1, CourseUnit* cu2);

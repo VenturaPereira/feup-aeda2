@@ -25,6 +25,11 @@ MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a
 
 }
 
+void CourseUnit::addStudentWithoutCheck(Student* s)
+{
+	studentsCurrentlyInCourseUnit.push_back(s);
+}
+
 bool OptionalCourseUnit::addStudent(Student* s)
 {
 	if (getNumberOfStudents() >= MAXIMUM_NUMBER_OF_STUDENTS) {
