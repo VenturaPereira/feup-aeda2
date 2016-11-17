@@ -49,17 +49,17 @@ public:
 	void removeUniversity(University* u);
 	void showUniversities();
 	
-	/*
+	
 	template<class T>
-	void saveToFiles(vector<T*> &vector, string &fileName)
+	friend void saveToFiles(vector<T*> const &vector, string &fileName)
 	{
 		ofstream file;
 		file.open(fileName);
-		file << vector.size() << endl;
+		//file << vector.size() << endl;
 		for (unsigned int i = 0; i < vector.size(); i++)
 			file << vector[i];
 		file.close();
-	}*/
+	}
 
 	//HANDLERS (COMMUNICATION WITH THE USER)
 	friend bool addStudentHandler(EnrollmentSystem& s); //ADDS STUDENT TO COURSE
@@ -78,14 +78,6 @@ public:
 	//LOAD AND SAVE FROM FILES
 	void loadHandler();
 	void saveHandler();
-
-	void saveStudents();
-	void saveProfessors();
-	void saveCourseUnitClasses();
-	void saveUniversities();
-	void saveColleges();
-	void saveCourses();
-	void saveCourseUnits();
 
 	void loadStudents();
 	void loadProfessors();
@@ -117,6 +109,14 @@ public:
 	Course* getCourse(string &acronym, College* college);
 	CourseUnit* getCourseUnit(string &acronym, Course* course);
 	CourseUnitClass* getCourseUnitClass(unsigned int &classNumber, CourseUnit* courseUnit);
+	vector<College*> getAllColleges();
+	vector<Course*> getAllCourses();
+	vector<CourseUnit*> getAllCourseUnits();
+	vector<CourseUnitClass*> getAllCourseUnitClasses();
+	vector<Student*> getAllStudents();
+	vector<Tutor*> getAllProfessors();
+
+
 
 
 

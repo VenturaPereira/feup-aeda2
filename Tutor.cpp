@@ -32,14 +32,17 @@ void Tutor::tutorStudent(Student* s)
 
 bool Tutor::teachClass(CourseUnitClass* c)
 {
-	if (find(currentlyTeaching.begin(), currentlyTeaching.end(), c->getCourseUnit()) != currentlyTeaching.end()) //ALREADY TEACHING
-		return false;
 	if (find(ableToTeach.begin(), ableToTeach.end(), c->getCourseUnit()) == ableToTeach.end()) //NOT ABLE TO TEACH
 		return false;
-	
+		
 	c->setProfessor(this);
-	c->getCourseUnit()->addProfessor(this);
-	currentlyTeaching.push_back(c->getCourseUnit());
+
+	if (find(currentlyTeaching.begin(), currentlyTeaching.end(), c->getCourseUnit()) == currentlyTeaching.end()) //NOT TEACHING
+	{
+		c->getCourseUnit()->addProfessor(this);
+		currentlyTeaching.push_back(c->getCourseUnit());
+	}
+		
 	return true;
 }
 

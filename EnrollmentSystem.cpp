@@ -210,13 +210,61 @@ void EnrollmentSystem::loadCourseUnits()
 
 }
 
-//TODO - COMPLETE ACCORDING TO NEW FORMAT
+//VERIFY
 void EnrollmentSystem::loadCourseUnitClasses() 
 {
 	/*
 	FORMAT
 	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;COURSE_UNIT_ACRONYM;CLASS_NUMBER;PROFESSOR_ID
 	*/
+
+	ifstream file;
+	string line, uni, col, course, courseUnit;
+	unsigned short int classNumber;
+	unsigned long long int professor_id;
+	char ch = ';';
+	CourseUnit* courseUnitPtr;
+	Course* coursePtr;
+	Tutor* professor;
+
+	file.open(courseUnitClassesFile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			istringstream iss(line);
+			getline(iss, uni, ch);
+			getline(iss, col, ch);
+			getline(iss, course, ch);
+			getline(iss, courseUnit, ch);
+			
+			try {
+				University* uniPtr = getUniversity(uni);
+				College* collegePtr = getCollege(col, uniPtr);
+				coursePtr = getCourse(course, collegePtr);
+				courseUnitPtr = getCourseUnit(courseUnit, coursePtr);
+			}
+			catch (...) {
+				continue;
+			}
+
+			iss >> ws >> classNumber
+				>> ws >> ch
+				>> ws >> professor_id;
+
+			try {
+				professor = getProfessor(professor_id, coursePtr);
+			}
+			catch (...) {
+				continue;
+			}
+
+			new CourseUnitClass(classNumber, courseUnitPtr, professor);
+		}
+
+		file.close();
+	}
+
 }
 
 //VERIFY
@@ -869,7 +917,13 @@ bool EnrollmentSystem::changeProfessorsSortOption(unsigned short int &option)
 }
 
 void EnrollmentSystem::saveHandler() {
-	//saveToFiles(getUniversities(), universityFile);
+	saveToFiles(getAllStudents(), studentsFile);
+	saveToFiles(getAllCourseUnitClasses(), courseUnitClassesFile);
+	saveToFiles(getAllProfessors(), professorsFile);
+	saveToFiles(getAllCourseUnits(), courseUnitsFile);
+	saveToFiles(getAllCourses(), coursesFile);
+	saveToFiles(getAllColleges(), collegesFile);
+	saveToFiles(universitiesVector, universityFile);
 }
 
 Tutor* EnrollmentSystem::getProfessor(unsigned long long int &ID, Course* course)
@@ -911,3 +965,61 @@ CourseUnitClass* EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber,
 	throw NotFound<CourseUnitClass*, CourseUnit*>(courseUnit);
 }
 
+vector<College*> EnrollmentSystem::getAllColleges()
+{
+	vector<College*> colleges;
+	for (unsigned int i = 0; i < universitiesVector.size(); i++){
+		colleges.insert(colleges.begin(), universitiesVector[i]->getColleges().begin(), universitiesVector[i]->getColleges().end());
+	}
+	return colleges;
+}
+
+vector<Course*> EnrollmentSystem::getAllCourses()
+{
+	vector<College*> colleges = getAllColleges();
+	vector<Course*> courses;
+	for (unsigned int i = 0; i < colleges.size(); i++) {
+		courses.insert(courses.begin(), colleges[i]->getCourses().begin(), colleges[i]->getCourses().end());
+	}
+	return courses;
+}
+
+vector<CourseUnit*> EnrollmentSystem::getAllCourseUnits()
+{
+	vector<Course*> courses = getAllCourses();
+	vector<CourseUnit*> courseUnits;
+	for (unsigned int i = 0; i < courses.size(); i++) {
+		courseUnits.insert(courseUnits.begin(), courses[i]->getCourseUnits().begin(), courses[i]->getCourseUnits().end());
+	}
+	return courseUnits;
+}
+
+vector<CourseUnitClass*> EnrollmentSystem::getAllCourseUnitClasses()
+{
+	vector<CourseUnit*> courseUnits = getAllCourseUnits();
+	vector<CourseUnitClass*> courseUnitClasses;
+	for (unsigned int i = 0; i < courseUnits.size(); i++) {
+		courseUnitClasses.insert(courseUnitClasses.begin(), courseUnits[i]->getClasses().begin(), courseUnits[i]->getClasses().end());
+	}
+	return courseUnitClasses;
+}
+
+vector<Student*> EnrollmentSystem::getAllStudents()
+{
+	vector<Student*> students;
+	vector<Course*> courses = getAllCourses();
+	for (unsigned int i = 0; i < courses.size(); i++) {
+		students.insert(students.begin(), courses[i]->getStudents().begin(), courses[i]->getStudents().end());
+	}
+	return students;
+}
+
+vector<Tutor*> EnrollmentSystem::getAllProfessors()
+{
+	vector<Tutor*> professors;
+	vector<Course*> courses = getAllCourses();
+	for (unsigned int i = 0; i < courses.size(); i++) {
+		professors.insert(professors.begin(), courses[i]->getProfessors().begin(), courses[i]->getProfessors().end());
+	}
+	return professors;
+}

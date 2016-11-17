@@ -9,6 +9,27 @@
 #include <fstream>
 
 CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit* cu) : courseUnit(cu), classNumber(cn) {
+	assignTeacher();
+	cu->addCourseUnitClass(this);
+}
+
+void CourseUnitClass::assignTeacher()
+{
+	vector<Tutor*>::iterator it;
+	for (it = getCourseUnit()->getCourse()->getProfessors().begin();
+		it != getCourseUnit()->getCourse()->getProfessors().end();
+		it++
+		)
+	{
+		if ((*it)->teachClass(this))
+			return;
+	}
+}
+
+CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit* cu, Tutor* t) 
+	: courseUnit(cu), classNumber(cn)
+{
+	professor = t;
 	cu->addCourseUnitClass(this);
 }
 
