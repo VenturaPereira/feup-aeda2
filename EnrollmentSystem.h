@@ -108,7 +108,7 @@ public:
 	friend Course* getCourse(EnrollmentSystem &s);
 	friend CourseUnit* getCourseUnit(EnrollmentSystem &s);
 	Student* getStudent(unsigned long long int &ID);
-	Tutor* getProfessor(unsigned long long int &ID, University* uni);
+	Tutor* getProfessor(unsigned long long int &ID, Course* course);
 	University* getUniversity(string &acronym);
 	College* getCollege(string &acronym, University* university);
 	Course* getCourse(string &acronym, College* college);

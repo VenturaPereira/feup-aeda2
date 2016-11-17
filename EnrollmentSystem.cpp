@@ -190,7 +190,9 @@ void EnrollmentSystem::loadStudents() {
 			getline(iss, dateStr, ch);
 			Date birthDate(dateStr);
 			getline(iss, status, ch);
-			iss >> ws >> year
+			iss >> ws >> credits
+				>> ws >> ch
+				>> ws >> year
 				>> ws >> ch
 				>> ws >> ID
 				>> ws >> ch
@@ -202,7 +204,7 @@ void EnrollmentSystem::loadStudents() {
 				University* uniPtr = getUniversity(uni);
 				College* colPtr = getCollege(col, uniPtr);
 				coursePtr = getCourse(course, colPtr);
-				tutorPtr = getProfessor(tutor_ID, uniPtr);
+				tutorPtr = getProfessor(tutor_ID, coursePtr);
 
 				getline(iss, ccuStr, ch);
 				istringstream iss_2(ccuStr);
@@ -751,5 +753,44 @@ bool EnrollmentSystem::changeProfessorsSortOption(unsigned short int &option)
 
 void EnrollmentSystem::saveHandler() {
 	//saveToFiles(getUniversities(), unifile);
+}
+
+Tutor* EnrollmentSystem::getProfessor(unsigned long long int &ID, Course* course)
+{
+	vector<Tutor*>::iterator it;
+	for (it = course->getProfessors().begin();
+		it != course->getProfessors().end();
+		it++)
+	{
+		if ((*it)->getID() == ID)
+			return (*it);
+	}
+	throw NotFound<Tutor*, Course*>(course);
+}
+
+CourseUnit* EnrollmentSystem::getCourseUnit(string &acronym, Course* course)
+{
+	vector<CourseUnit*>::iterator it;
+	for (it = course->getCourseUnits().begin();
+		it != course->getCourseUnits().end();
+		it++)
+	{
+		if ((*it)->getAcronym() == acronym)
+			return (*it);
+	}
+	throw NotFound<CourseUnit*, Course*>(course);
+}
+
+CourseUnitClass* EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber, CourseUnit* courseUnit)
+{
+	vector<CourseUnitClass*>::iterator it;
+	for (it = courseUnit->getClasses().begin();
+		it != courseUnit->getClasses().end();
+		it++)
+	{
+		if ((*it)->getClassNumber() == classNumber)
+			return (*it);
+	}
+	throw NotFound<CourseUnitClass*, CourseUnit*>(courseUnit);
 }
 
