@@ -10,19 +10,18 @@
 CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, double credits)
 	: name(n), acronym(a), year(y), semester(s), credits(credits), course(c)
 {
-	c->addCourseUnit(this);
 }
 
 OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, unsigned int cred)
 	: CourseUnit(n,a,c,y,s,cred), MAXIMUM_NUMBER_OF_STUDENTS(mnos), scientificArea(sa)
 {
-
+	c->addCourseUnit(this);
 }
 
 MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int cred)
 	: CourseUnit(n, a, c, y, s, cred), MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS(mnospc)
 {
-
+	c->addCourseUnit(this);
 }
 
 void CourseUnit::addStudentWithoutCheck(Student* s)

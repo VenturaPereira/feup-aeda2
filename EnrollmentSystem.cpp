@@ -138,7 +138,7 @@ void EnrollmentSystem::loadCourses() {
 	}
 }
 
-//TODO - COMPLETE ACCORDING TO NEW FORMAT
+//VERIFY
 void EnrollmentSystem::loadCourseUnits()
 {
 	/*
@@ -149,6 +149,65 @@ void EnrollmentSystem::loadCourseUnits()
 
 	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;ACRONYM;OPTIONAL;MAX_NUM_STUDENTS;SCIENTIFIC_AREA;YEAR;SEMESTER;CREDITS
 	*/
+
+	ifstream file;
+	string line, uni, col, course, name, acr, type, scientificArea;
+	unsigned short int year, semester, max_num_students_per_class, max_num_students;
+	double credits;
+	char ch = ';';
+	Course* coursePtr;
+
+	file.open(courseUnitsFile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			istringstream iss(line);
+			getline(iss, uni, ch);
+			getline(iss, col, ch);
+			getline(iss, course, ch);
+			getline(iss, name, ch);
+			getline(iss, acr, ch);
+
+			try {
+				University* uniPtr = getUniversity(uni);
+				College* collegePtr = getCollege(col, uniPtr);
+				coursePtr = getCourse(course, collegePtr);
+			}
+			catch (...) {
+				continue;
+			}
+			
+			getline(iss, type, ch);
+
+			if (type == "Mandatory") {
+				iss >> ws >> max_num_students_per_class
+					>> ws >> ch
+					>> ws >> year
+					>> ws >> ch
+					>> ws >> semester
+					>> ws >> ch
+					>> ws >> credits;
+				new MandatoryCourseUnit(max_num_students_per_class, name, acr, coursePtr, year, semester, credits);
+			}
+			else if (type == "Optional") {
+				iss >> ws >> max_num_students
+					>> ws >> ch;
+				getline(iss, scientificArea, ch);
+				iss	>> ws >> year
+					>> ws >> ch
+					>> ws >> semester
+					>> ws >> ch
+					>> ws >> credits;
+				new OptionalCourseUnit(max_num_students, name, acr, coursePtr, year, semester, scientificArea, credits);
+			}
+			else continue;
+
+		}
+
+		file.close();
+	}
+
 }
 
 //TODO - COMPLETE ACCORDING TO NEW FORMAT
