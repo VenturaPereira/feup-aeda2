@@ -56,7 +56,7 @@ public:
 
 	//PRINT TO SCREEN
 	virtual void show() const = 0;
-	virtual void showAllClasses() const = 0;
+	//virtual void showAllClasses() const = 0;
 };
 
 
@@ -82,7 +82,7 @@ public:
 
 	//PRINT TO SCREEN
 	virtual void show() const;
-	virtual void showAllClasses() const;
+	//virtual void showAllClasses() const;
 };
 
 
@@ -105,7 +105,7 @@ public:
 
 	//PRINT TO SCREEN
 	virtual void show() const;
-	virtual void showAllClasses() const;
+	//virtual void showAllClasses() const;
 };
 
 #endif

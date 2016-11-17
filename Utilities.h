@@ -53,7 +53,7 @@ T enterInput(string title, vector<string> options)
 	{
 		system("CLS");
 		cin.clear();
-		center(title);
+		//center(title);
 		for (size_t i = 0; i < options.size(); i++)
 			center(options[i]);
 		cout << "Select option: ";

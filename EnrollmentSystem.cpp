@@ -30,6 +30,9 @@ void EnrollmentSystem::loadHandler() {
 	loadUniversities();
 	loadColleges();
 	loadCourses();
+	loadCourseUnits();
+	loadProfessors();
+	loadCourseUnitClasses();
 	loadStudents();
 }
 
