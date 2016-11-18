@@ -210,7 +210,6 @@ void EnrollmentSystem::loadCourseUnits()
 
 }
 
-//VERIFY
 void EnrollmentSystem::loadCourseUnitClasses() 
 {
 	/*
@@ -267,7 +266,6 @@ void EnrollmentSystem::loadCourseUnitClasses()
 
 }
 
-//VERIFY
 void EnrollmentSystem::loadStudents() {
 	
 	/*
@@ -280,7 +278,8 @@ void EnrollmentSystem::loadStudents() {
 	ifstream file;
 	string line, uni, col, course, name, dateStr, status, ccuStr, ccaStr;
 	unsigned long long int ID, tutor_ID;
-	unsigned short int credits, year;
+	unsigned short int year;
+	double credits;
 	Tutor* tutorPtr;
 	Course* coursePtr;
 	map<CourseUnit*, unsigned short int> ccu;
@@ -317,6 +316,8 @@ void EnrollmentSystem::loadStudents() {
 				tutorPtr = getProfessor(tutor_ID, coursePtr);
 
 				getline(iss, ccuStr, ch);
+				ccuStr.erase(0, 1); //REMOVES '{'
+				ccuStr.erase(ccuStr.size() - 1, 1); //REMOVES '}'
 				istringstream iss_2(ccuStr);
 				char endCh;
 				string pair;
@@ -325,12 +326,12 @@ void EnrollmentSystem::loadStudents() {
 				while (getline(iss_2, pair, ')'))
 				{
 					if (!firstIt)
-						iss_2 >> endCh; //REMOVE ',' IF NOT THE FIRST ITERATION
+						pair.erase(0, 1); //REMOVE ',' IF NOT THE FIRST ITERATION
 					else firstIt = false;
 					string courseUnitStr;
 					unsigned short int grade;
+					pair.erase(0,1); //REMOVES '('
 					istringstream iss_3(pair);
-					iss_3 >> endCh; //REMOVES '('
 					getline(iss_3, courseUnitStr, ','); //GETS THE COURSE UNIT STR
 					iss_3 >> grade; //GETS THE GRADE
 
@@ -340,18 +341,20 @@ void EnrollmentSystem::loadStudents() {
 				}
 
 				getline(iss, ccaStr, '\n');
-				istringstream iss_4(ccuStr);
+				ccaStr.erase(0, 1); //REMOVES '{'
+				ccaStr.erase(ccaStr.size() - 1, 1); //REMOVES '}'
+				istringstream iss_4(ccaStr);
 				firstIt = true;
 
 				while (getline(iss_4, pair, ')'))
 				{
 					if (!firstIt)
-						iss_4 >> endCh; //REMOVE ',' IF NOT THE FIRST ITERATION
+						pair.erase(0,1); //REMOVE ',' IF NOT THE FIRST ITERATION
 					else firstIt = false;
 					string courseUnitStr;
 					unsigned int classNumber;
+					pair.erase(0, 1); //REMOVES '('
 					istringstream iss_5(pair);
-					iss_5 >> endCh; //REMOVES '('
 					getline(iss_5, courseUnitStr, ','); //GETS THE COURSE UNIT STR
 					iss_5 >> classNumber; //GETS THE CLASS NUMBER
 
