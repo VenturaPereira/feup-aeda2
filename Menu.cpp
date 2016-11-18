@@ -128,11 +128,13 @@ bool infoMenu(EnrollmentSystem &sys){
 		{ "---------------------------------------",
 			"Information", "",
 			"1 - Read all Universities          ",
-			"2 - Read all Courses               ",
-			"3 - Read all Students              ",
-			"4 - Read all Professors            ", "",
-			"5 - Back                           ",
-			"---------------------------------------" }, 1, 5);
+			"2 - Read all Colleges              ",
+			"3 - Read all Courses               ",
+			"4 - Read all Course Units          ",
+			"5 - Read all Students              ",
+			"6 - Read all Professors            ", "",
+			"7 - Back                           ",
+			"---------------------------------------" }, 1, 7);
 
 		switch (option)
 		{
@@ -140,6 +142,7 @@ bool infoMenu(EnrollmentSystem &sys){
 			system("pause");
 			return true;
 		case 2:
+
 			system("pause");
 			return true;
 		case 3:
@@ -149,25 +152,31 @@ bool infoMenu(EnrollmentSystem &sys){
 			system("pause");
 			return true;
 		case 5:
+			system("pause");
+			return true;
+		case 6:
+			system("pause");
+			return true;
+		case 7:
 			return false;
 		}
 	}
 }
 
-//MODIFY FOR THIS PROJECT
+//TODO CHECK  --- > MODIFY FOR THIS PROJECT  --- 
 bool optionsMenu(EnrollmentSystem &sys)
 {
 	while (true)
 	{
 		system("cls");
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-		{ "------------------------------------------",
+		{ "--------------------------------------------",
 			"Options", "",
-			"1 - Change client sorting options     ",
-			"2 - Change product sorting options    ",
-			"3 - Change transaction sorting options", "",
-			"4 - Back                              ",
-			"------------------------------------------", }, 1, 4);
+			"1 - Change Students sorting options    ",
+			"2 - Change Professors sorting options  ",
+			"3 - Change Course Units sorting options", "",
+			"4 - Back                               ",
+			"--------------------------------------------", }, 1, 4);
 		
 
 		switch (option)
