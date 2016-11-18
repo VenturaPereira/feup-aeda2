@@ -47,7 +47,10 @@ public:
 	EnrollmentSystem(unsigned int mc);
 	void addUniversity(University* u) { universitiesVector.push_back(u); }
 	void removeUniversity(University* u);
+
+	//PRINT TO SCREEN
 	void showUniversities();
+	void showColleges();
 	
 	
 	template<class T>

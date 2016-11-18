@@ -1042,3 +1042,16 @@ void EnrollmentSystem::showUniversities()
 		(*it)->show();
 	}
 }
+
+void EnrollmentSystem::showColleges()
+{
+	vector<College*> colleges = getAllColleges();
+	vector<College*>::iterator it;
+	for (it = colleges.begin();
+		it != colleges.end();
+		it++
+		)
+	{
+		(*it)->show();
+	}
+}
