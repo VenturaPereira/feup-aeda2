@@ -1031,3 +1031,14 @@ vector<Tutor*> EnrollmentSystem::getAllProfessors()
 	}
 	return professors;
 }
+
+void EnrollmentSystem::showUniversities()
+{
+	vector<University*>::iterator it;
+	for (it = universitiesVector.begin();
+		it != universitiesVector.end();
+		it++
+		){
+		(*it)->show();
+	}
+}

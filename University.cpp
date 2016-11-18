@@ -82,3 +82,11 @@ ofstream& operator<<(ofstream &file, University *uni)
 		<< endl;
 	return file;
 }
+
+void University::show() const
+{
+	cout << name
+		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< acronym
+		<< endl;
+}
