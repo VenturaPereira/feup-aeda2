@@ -1055,3 +1055,68 @@ void EnrollmentSystem::showColleges()
 		(*it)->show();
 	}
 }
+
+void EnrollmentSystem::showCourses()
+{
+	vector<Course*> courses = getAllCourses();
+	vector<Course*>::iterator it;
+	for (it = courses.begin();
+		it != courses.end();
+		it++
+		)
+	{
+		(*it)->show();
+	}
+}
+
+void EnrollmentSystem::showCourseUnits()
+{
+	vector<CourseUnit*> courseUnits = getAllCourseUnits();
+	vector<CourseUnit*>::iterator it;
+	for (it = courseUnits.begin();
+		it != courseUnits.end();
+		it++
+		)
+	{
+		(*it)->show();
+	}
+}
+
+void EnrollmentSystem::showProfessors()
+{
+	vector<Tutor*> professors = getAllProfessors();
+	vector<Tutor*>::iterator it;
+	for (it = professors.begin();
+		it != professors.end();
+		it++
+		)
+	{
+		(*it)->show();
+	}
+}
+
+void EnrollmentSystem::showStudents()
+{
+	vector<Student*> students = getAllStudents();
+	vector<Student*>::iterator it;
+	for (it = students.begin();
+		it != students.end();
+		it++
+		)
+	{
+		(*it)->show();
+	}
+}
+
+void EnrollmentSystem::showCourseUnitClasses()
+{
+	vector<CourseUnitClass*> courseUnitClasses = getAllCourseUnitClasses();
+	vector<CourseUnitClass*>::iterator it;
+	for (it = courseUnitClasses.begin();
+		it != courseUnitClasses.end();
+		it++
+		)
+	{
+		(*it)->show();
+	}
+}

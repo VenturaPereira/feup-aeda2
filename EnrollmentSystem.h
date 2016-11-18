@@ -51,14 +51,18 @@ public:
 	//PRINT TO SCREEN
 	void showUniversities();
 	void showColleges();
-	
-	
+	void showCourses();
+	void showCourseUnits();
+	void showCourseUnitClasses();	
+	void showProfessors();
+	void showStudents();
+
+
 	template<class T>
 	friend void saveToFiles(vector<T*> const &vector, string &fileName)
 	{
 		ofstream file;
 		file.open(fileName);
-		//file << vector.size() << endl;
 		for (unsigned int i = 0; i < vector.size(); i++)
 			file << vector[i];
 		file.close();
