@@ -1132,7 +1132,7 @@ void EnrollmentSystem::showStudents()
 	}
 	else cout << "There are no students\n";
 }
-
+/*
 void EnrollmentSystem::showCourseUnitClasses()
 {
 	vector<CourseUnitClass*> courseUnitClasses = getAllCourseUnitClasses();
@@ -1149,3 +1149,4 @@ void EnrollmentSystem::showCourseUnitClasses()
 	}
 	else cout << "There are no classes";
 }
+*/

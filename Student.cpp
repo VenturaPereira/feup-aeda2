@@ -28,7 +28,6 @@ Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, 
 {
 	setID(id);
 	assignEmail();
-	c->addStudent(this);
 	map<CourseUnit*, CourseUnitClass*>::iterator mapIt;
 	for (mapIt = cca.begin();
 		mapIt != cca.end();
@@ -38,6 +37,7 @@ Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, 
 		mapIt->second->addStudent(this);
 	}
 	t->tutorStudent(this);
+	c->addStudent(this);
 }
 
 bool Student::assignTutor()
