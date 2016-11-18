@@ -37,7 +37,7 @@ public:
 	unsigned short int getNumberOfStudents() const { return studentsInClass.size(); }
 	unsigned short int getClassNumber() const { return classNumber; }
 	vector<Student*>& getStudentsInClass() { return studentsInClass; }
-	CourseUnit*& getCourseUnit() {return courseUnit;}
+	CourseUnit* getCourseUnit() {return courseUnit;}
 
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, CourseUnitClass *cuc);

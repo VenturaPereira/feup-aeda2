@@ -27,7 +27,7 @@ public:
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
 	vector<Course*>& getCourses() { return courses; }
-	University*& getUniversity() {	return university; }
+	University* getUniversity() {	return university; }
 
 	//COMPARES
 	friend bool compareCollegeByName(College* c1, College* c2);

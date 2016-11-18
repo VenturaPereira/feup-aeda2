@@ -40,7 +40,7 @@ public:
 	vector<CourseUnit*>& getCourseUnits() { return courseUnits; }
 	vector<Student*>& getStudents() { return students; }
 	vector<Tutor*>& getProfessors() { return professors; }
-	College*& getCollege() { return college; }
+	College* getCollege() { return college; }
 	vector<CourseUnit*> getCourseUnits(unsigned short int y);
 	vector<CourseUnit*> getCourseUnitsNotCompleted(Student* s, unsigned short int y);
 

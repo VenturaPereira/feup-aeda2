@@ -36,7 +36,7 @@ public:
 	friend bool compareProfessorByBirth(Tutor* p1, Tutor* p2);
 
 	//GETS
-	Course*& getCourse() { return course; }
+	Course* getCourse() { return course; }
 	vector<CourseUnit*>& getAbleToTeach() { return ableToTeach; }
 	vector<CourseUnit*>& getCurrentlyTeaching() { return currentlyTeaching; }
 	vector<Student*>& getStudents() { return students; }

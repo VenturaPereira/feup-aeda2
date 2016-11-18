@@ -51,7 +51,7 @@ public:
 	void setYear(unsigned short int y) { year = y; }
 
 	//GETS
-	Course*& getCourse() { return course; }
+	Course* getCourse() { return course; }
 	map<CourseUnit*, unsigned short int>& getCompletedCourseUnits() {return completedCourseUnits;}
 	map<CourseUnit*, CourseUnitClass*>& getClassesCurrentlyAtending() { return classesCurrentlyAtending; }
 	unsigned short int getYear() const { return year; }

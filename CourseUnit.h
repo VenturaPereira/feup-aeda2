@@ -52,7 +52,7 @@ public:
 	vector<CourseUnitClass*>& getClasses() { return classes; }
 	vector<Student*>& getStudentsCurrentlyInCourseUnit() { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*>& getCourseUnitProfessors() { return courseUnitProfessors; }
-	Course*& getCourse() { return course; }
+	Course* getCourse() { return course; }
 
 	//PRINT TO SCREEN
 	virtual void show() const = 0;
