@@ -144,7 +144,7 @@ void Course::show() const{
 	cout << college->getAcronym()
 		<< setw(CONSOLE_WIDTH * 0.5 - college->getAcronym().size())
 		<< name
-		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< setw(CONSOLE_WIDTH * 0.75 - name.size())
 		<< acronym
 		<< endl;
 }
