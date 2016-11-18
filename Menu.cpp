@@ -139,6 +139,7 @@ bool infoMenu(EnrollmentSystem &sys){
 		switch (option)
 		{
 		case 1:
+			sys.showUniversities();
 			system("pause");
 			return true;
 		case 2:
