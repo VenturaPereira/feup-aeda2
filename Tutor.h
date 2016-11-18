@@ -36,16 +36,16 @@ public:
 	friend bool compareProfessorByBirth(Tutor* p1, Tutor* p2);
 
 	//GETS
-	Course* getCourse() const { return course; }
-	vector<CourseUnit*> getAbleToTeach() const { return ableToTeach; }
-	vector<CourseUnit*>	getCurrentlyTeaching() const { return currentlyTeaching; }
-	vector<Student*> getStudents() const { return students; }
+	Course*& getCourse() { return course; }
+	vector<CourseUnit*>& getAbleToTeach() { return ableToTeach; }
+	vector<CourseUnit*>& getCurrentlyTeaching() { return currentlyTeaching; }
+	vector<Student*>& getStudents() { return students; }
 
 	//PRINT TO SCREEN
 	void show() const;
 	
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, const Tutor *t);
+	friend ofstream& operator<<(ofstream& file, Tutor *t);
 };
 
 #endif

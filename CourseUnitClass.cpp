@@ -63,7 +63,7 @@ bool compareCourseUnitClassByNumberStudents(CourseUnitClass* cuc1, CourseUnitCla
 	return (cuc1->getNumberOfStudents() < cuc2->getNumberOfStudents());
 }
 
-ofstream& operator<<(ofstream& file, const CourseUnitClass *cuc)
+ofstream& operator<<(ofstream& file, CourseUnitClass *cuc)
 {
 	file << cuc->getCourseUnit()->getCourse()->getCollege()->getUniversity()->getAcronym()
 		<< ';'

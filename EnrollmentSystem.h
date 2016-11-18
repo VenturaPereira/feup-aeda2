@@ -65,7 +65,7 @@ public:
 	friend bool addStudentHandler(EnrollmentSystem& s); //ADDS STUDENT TO COURSE
 	friend bool removeStudentHandler(EnrollmentSystem& s); //REMOVES STUDENT FROM COURSE
 	friend bool addProfessorHandler(EnrollmentSystem& s); //ADDS PROFESSOR TO COURSE UNIT (AND TO COURSE, IF NOT YET THERE)
-	friend bool removeProfessorHandler(EnrollmentSystem& s); //REMOVES PROFESSOR FROM COURSE UNIT (AND FROM COURSE)
+	friend bool removeProfessorHandler(EnrollmentSystem& s); //REMOVES PROFESSOR FROM COURSE 
 	friend bool enrollmentHandler(EnrollmentSystem& s); //SHOWS THE COURSE UNITS AVAIABLE TO ENROLL AND ADDS A STUDENT TO THEM
 	friend bool studentFinishedCourseUnitHandler(EnrollmentSystem& s); //REMOVES THE STUDENT FROM THE COURSE UNIT IF THE GRADE IS HIGH ENOUGH
 	//friend bool addUniversityHandler(EnrollmentSystem& s);
@@ -97,18 +97,18 @@ public:
 	//GETS
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }
 	bool getChanged() const { return save; }
-	vector<University*> getUniversities() const { return universitiesVector; }
-	friend University* getUniversity(EnrollmentSystem &s);
-	friend College* getCollege(EnrollmentSystem &s);
-	friend Course* getCourse(EnrollmentSystem &s);
-	friend CourseUnit* getCourseUnit(EnrollmentSystem &s);
-	Student* getStudent(unsigned long long int &ID);
-	Tutor* getProfessor(unsigned long long int &ID, Course* course);
-	University* getUniversity(string &acronym);
-	College* getCollege(string &acronym, University* university);
-	Course* getCourse(string &acronym, College* college);
-	CourseUnit* getCourseUnit(string &acronym, Course* course);
-	CourseUnitClass* getCourseUnitClass(unsigned int &classNumber, CourseUnit* courseUnit);
+	vector<University*>& getUniversities() { return universitiesVector; }
+	friend University*& getUniversity(EnrollmentSystem &s);
+	friend College*& getCollege(EnrollmentSystem &s);
+	friend Course*& getCourse(EnrollmentSystem &s);
+	friend CourseUnit*& getCourseUnit(EnrollmentSystem &s);
+	Student*& getStudent(unsigned long long int &ID);
+	Tutor*& getProfessor(unsigned long long int &ID, Course* course);
+	University*& getUniversity(string &acronym);
+	College*& getCollege(string &acronym, University* university);
+	Course*& getCourse(string &acronym, College* college);
+	CourseUnit*& getCourseUnit(string &acronym, Course* course);
+	CourseUnitClass*& getCourseUnitClass(unsigned int &classNumber, CourseUnit* courseUnit);
 	vector<College*> getAllColleges();
 	vector<Course*> getAllCourses();
 	vector<CourseUnit*> getAllCourseUnits();
@@ -116,11 +116,7 @@ public:
 	vector<Student*> getAllStudents();
 	vector<Tutor*> getAllProfessors();
 
-
-
-
-
-
+	
 };
 
 #endif

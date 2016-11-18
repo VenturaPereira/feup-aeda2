@@ -38,13 +38,13 @@ public:
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
 	string getCountryAcronym() const { return countryAcronym; }
-	vector<College*> getColleges() const { return collegesVector; }
+	vector<College*>& getColleges() { return collegesVector; }
 
 	//COMPARES
 	friend bool compareUniversityByName(University* u1, University* u2);
 	
 	//OPERATORS
-	friend ofstream& operator<<(ofstream &file, const University *uni);
+	friend ofstream& operator<<(ofstream &file, University *uni);
 };
 
 #endif

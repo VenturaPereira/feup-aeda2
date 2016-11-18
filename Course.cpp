@@ -78,7 +78,7 @@ vector<CourseUnit*> Course::getCourseUnits(unsigned short int y)
 	if (y >= 1 && y <= 5)
 	{
 		//GATHER ALL THE COURSE UNITS FROM THE YEAR 
-		vector<CourseUnit*>::const_iterator cuIt;
+		vector<CourseUnit*>::iterator cuIt;
 		for (cuIt = courseUnits.begin();
 			cuIt != courseUnits.end();
 			cuIt++)
@@ -127,7 +127,7 @@ bool compareCourseByName(Course* c1, Course* c2)
 	return (c1->getName() < c2->getName());
 }
 
-ofstream& operator<<(ofstream &file, const Course *c)
+ofstream& operator<<(ofstream &file, Course *c)
 {
 	file << c->getCollege()->getUniversity()->getAcronym()
 		<< ';'

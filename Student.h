@@ -51,9 +51,9 @@ public:
 	void setYear(unsigned short int y) { year = y; }
 
 	//GETS
-	Course* getCourse() const { return course; }
-	map<CourseUnit*, unsigned short int> getCompletedCourseUnits() const {return completedCourseUnits;}
-	map<CourseUnit*, CourseUnitClass*> getClassesCurrentlyAtending() const { return classesCurrentlyAtending; }
+	Course*& getCourse() { return course; }
+	map<CourseUnit*, unsigned short int>& getCompletedCourseUnits() {return completedCourseUnits;}
+	map<CourseUnit*, CourseUnitClass*>& getClassesCurrentlyAtending() { return classesCurrentlyAtending; }
 	unsigned short int getYear() const { return year; }
 	string getStatus() const { return status; }
 	double getCredits() const { return credits; }
@@ -62,7 +62,7 @@ public:
 	void show() const;
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, const Student *s);
+	friend ofstream& operator<<(ofstream& file, Student *s);
 };
 
 #endif

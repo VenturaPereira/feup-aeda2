@@ -37,10 +37,10 @@ public:
 	//GETS
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
-	vector<CourseUnit*> getCourseUnits() const { return courseUnits; }
-	vector<Student*> getStudents() const { return students; }
-	vector<Tutor*> getProfessors() const { return professors; }
-	College* getCollege() const { return college; }
+	vector<CourseUnit*>& getCourseUnits() { return courseUnits; }
+	vector<Student*>& getStudents() { return students; }
+	vector<Tutor*>& getProfessors() { return professors; }
+	College*& getCollege() { return college; }
 	vector<CourseUnit*> getCourseUnits(unsigned short int y);
 	vector<CourseUnit*> getCourseUnitsNotCompleted(Student* s, unsigned short int y);
 
@@ -49,7 +49,7 @@ public:
 	void showAllCourseUnits() const;
 	
 	//OPERATORS
-	friend ofstream& operator<<(ofstream &file, const Course *c);
+	friend ofstream& operator<<(ofstream &file, Course *c);
 };
 
 #endif

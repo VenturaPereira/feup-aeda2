@@ -49,10 +49,10 @@ public:
 	double getCredits() const { return credits; }
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
-	vector<CourseUnitClass*> getClasses() const { return classes; }
-	vector<Student*> getStudentsCurrentlyInCourseUnit() const { return studentsCurrentlyInCourseUnit; }
-	vector<Tutor*> getCourseUnitProfessors() const { return courseUnitProfessors; }
-	Course* getCourse() const { return course; }
+	vector<CourseUnitClass*>& getClasses() { return classes; }
+	vector<Student*>& getStudentsCurrentlyInCourseUnit() { return studentsCurrentlyInCourseUnit; }
+	vector<Tutor*>& getCourseUnitProfessors() { return courseUnitProfessors; }
+	Course*& getCourse() { return course; }
 
 	//PRINT TO SCREEN
 	virtual void show() const = 0;
@@ -70,7 +70,7 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, unsigned int cred);
+	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, double cred);
 	virtual bool addStudent(Student* s);
 
 	//GETS
@@ -78,7 +78,7 @@ public:
 	string getScientificArea() const { return scientificArea; }
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, const OptionalCourseUnit *ocu);
+	friend ofstream& operator<<(ofstream& file, OptionalCourseUnit *ocu);
 
 	//PRINT TO SCREEN
 	virtual void show() const;
@@ -94,14 +94,14 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int cred);
+	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, double cred);
 	virtual bool addStudent(Student* s);
 
 	//GETS
 	unsigned int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, const MandatoryCourseUnit *mcu);
+	friend ofstream& operator<<(ofstream& file, MandatoryCourseUnit *mcu);
 
 	//PRINT TO SCREEN
 	virtual void show() const;

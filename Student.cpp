@@ -227,7 +227,7 @@ bool compareStudentByBirth(Student* s1, Student* s2)
 	return s1->dateOfBirth < s2->dateOfBirth;
 }
 
-ofstream& operator<<(ofstream& file, const Student *s)
+ofstream& operator<<(ofstream& file, Student *s)
 {
 	file << s->getCourse()->getCollege()->getUniversity()->getAcronym()
 		<< ';'
@@ -244,6 +244,8 @@ ofstream& operator<<(ofstream& file, const Student *s)
 		<< s->credits
 		<< ';'
 		<< s->year
+		<< ';'
+		<< s->ID
 		<< ';'
 		<< s->tutor->getID()
 		<< ';'

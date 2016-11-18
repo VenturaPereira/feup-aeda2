@@ -26,8 +26,8 @@ public:
 	//GETS
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
-	vector<Course*> getCourses() const { return courses; }
-	University* getUniversity() const {	return university; }
+	vector<Course*>& getCourses() { return courses; }
+	University*& getUniversity() {	return university; }
 
 	//COMPARES
 	friend bool compareCollegeByName(College* c1, College* c2);
@@ -37,7 +37,7 @@ public:
 	void showCourses() const;
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, const College *c);
+	friend ofstream& operator<<(ofstream& file, College *c);
 		
 };
 

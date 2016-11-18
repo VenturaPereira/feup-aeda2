@@ -86,7 +86,7 @@ bool compareProfessorByBirth(Tutor* p1, Tutor* p2)
 	return p1->dateOfBirth < p2->dateOfBirth;
 }
 
-ofstream& operator<<(ofstream& file, const Tutor *t)
+ofstream& operator<<(ofstream& file, Tutor *t)
 {
 	file << t->getCourse()->getCollege()->getUniversity()->getAcronym()
 		<< ';'

@@ -12,13 +12,13 @@ CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsi
 {
 }
 
-OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, unsigned int cred)
+OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, double cred)
 	: CourseUnit(n,a,c,y,s,cred), MAXIMUM_NUMBER_OF_STUDENTS(mnos), scientificArea(sa)
 {
 	c->addCourseUnit(this);
 }
 
-MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, unsigned int cred)
+MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, double cred)
 	: CourseUnit(n, a, c, y, s, cred), MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS(mnospc)
 {
 	c->addCourseUnit(this);
@@ -135,7 +135,7 @@ bool compareCourseUnitByTime(CourseUnit* cu1, CourseUnit* cu2)
 	else return (cu1->semester < cu2->semester);
 }
 
-ofstream& operator<<(ofstream& file, const OptionalCourseUnit *ocu)
+ofstream& operator<<(ofstream& file, OptionalCourseUnit *ocu)
 {
 	file << ocu->getCourse()->getCollege()->getUniversity()->getAcronym()
 		<< ';'
@@ -163,7 +163,7 @@ ofstream& operator<<(ofstream& file, const OptionalCourseUnit *ocu)
 	return file;
 }
 
-ofstream& operator<<(ofstream& file, const MandatoryCourseUnit *mcu)
+ofstream& operator<<(ofstream& file, MandatoryCourseUnit *mcu)
 {
 	file << mcu->getCourse()->getCollege()->getUniversity()->getAcronym()
 		<< ';'
