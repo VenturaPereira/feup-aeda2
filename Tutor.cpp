@@ -49,10 +49,11 @@ bool Tutor::teachClass(CourseUnitClass* c)
 void Tutor::assignEmail()
 {
 	string inicials;
-	for (size_t i = 0; i < name.size(); i++)
+	for (int i = 0; i < name.size(); i++)
 	{
-		if (isupper(name[i]))
-			inicials += name[i];
+		if(iswalpha(name[i]))
+			if (iswupper(name[i]))
+				inicials += name[i];
 	}
 	if (inicials.size() == 0)
 		email = name;

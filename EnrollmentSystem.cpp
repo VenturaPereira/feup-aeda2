@@ -139,7 +139,6 @@ void EnrollmentSystem::loadCourses() {
 	}
 }
 
-//VERIFY
 void EnrollmentSystem::loadCourseUnits()
 {
 	/*
@@ -375,7 +374,6 @@ void EnrollmentSystem::loadStudents() {
 	}
 }
 
-//VERIFY
 void EnrollmentSystem::loadProfessors()
 {
 	/*
@@ -413,6 +411,8 @@ void EnrollmentSystem::loadProfessors()
 				coursePtr = getCourse(course, colPtr);
 
 				getline(iss, ableToTeachStr, ch);
+				ableToTeachStr.erase(0, 1); //REMOVE '{'
+				ableToTeachStr.erase(ableToTeachStr.size()-1, 1); //REMOVE '}'
 				istringstream iss_2(ableToTeachStr);
 				string courseUnitStr;
 				char endCh;
@@ -423,6 +423,8 @@ void EnrollmentSystem::loadProfessors()
 				}
 
 				getline(iss, teachingStr, '\n');
+				teachingStr.erase(0, 1); //REMOVE '{'
+				teachingStr.erase(teachingStr.size() - 1, 1); //REMOVE '}'
 				istringstream iss_4(teachingStr);
 
 				while (getline(iss_4, courseUnitStr, ',')){
