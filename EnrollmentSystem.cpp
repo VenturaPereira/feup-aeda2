@@ -1034,89 +1034,118 @@ vector<Tutor*> EnrollmentSystem::getAllProfessors()
 
 void EnrollmentSystem::showUniversities()
 {
-	vector<University*>::iterator it;
-	for (it = universitiesVector.begin();
-		it != universitiesVector.end();
-		it++
-		){
-		(*it)->show();
+	if (universitiesVector.size() != 0)
+	{
+		cout << "\nUniversities\n\n";
+		vector<University*>::iterator it;
+		for (it = universitiesVector.begin();
+			it != universitiesVector.end();
+			it++
+			) {
+			(*it)->show();
+		}
 	}
+	else cout << "There are no universities";
 }
 
 void EnrollmentSystem::showColleges()
 {
 	vector<College*> colleges = getAllColleges();
-	vector<College*>::iterator it;
-	for (it = colleges.begin();
-		it != colleges.end();
-		it++
-		)
-	{
-		(*it)->show();
+	if (colleges.size() != 0) {
+		cout << "\nColleges\n\n";
+		vector<College*>::iterator it;
+		for (it = colleges.begin();
+			it != colleges.end();
+			it++
+			)
+		{
+			(*it)->show();
+		}
 	}
+	else cout << "There are no colleges\n";
 }
 
 void EnrollmentSystem::showCourses()
 {
 	vector<Course*> courses = getAllCourses();
-	vector<Course*>::iterator it;
-	for (it = courses.begin();
-		it != courses.end();
-		it++
-		)
-	{
-		(*it)->show();
+	if (courses.size() != 0) {
+		cout << "\nCourses\n\n";
+		vector<Course*>::iterator it;
+		for (it = courses.begin();
+			it != courses.end();
+			it++
+			)
+		{
+			(*it)->show();
+		}
 	}
+	else cout << "There are no courses\n";
 }
 
 void EnrollmentSystem::showCourseUnits()
 {
 	vector<CourseUnit*> courseUnits = getAllCourseUnits();
-	vector<CourseUnit*>::iterator it;
-	for (it = courseUnits.begin();
-		it != courseUnits.end();
-		it++
-		)
-	{
-		(*it)->show();
+	if (courseUnits.size() != 0) {
+		cout << "\nCourseUnit\n\n";
+		vector<CourseUnit*>::iterator it;
+		for (it = courseUnits.begin();
+			it != courseUnits.end();
+			it++
+			)
+		{
+			(*it)->show();
+		}
 	}
+	else cout << "There are no course units\n";
 }
 
 void EnrollmentSystem::showProfessors()
 {
 	vector<Tutor*> professors = getAllProfessors();
-	vector<Tutor*>::iterator it;
-	for (it = professors.begin();
-		it != professors.end();
-		it++
-		)
-	{
-		(*it)->show();
+	if (professors.size() != 0) {
+		cout << "\nProfessors\n\n";
+		vector<Tutor*>::iterator it;
+		for (it = professors.begin();
+			it != professors.end();
+			it++
+			)
+		{
+			(*it)->show();
+		}
 	}
+	else cout << "There are no professors\n";
 }
 
 void EnrollmentSystem::showStudents()
 {
 	vector<Student*> students = getAllStudents();
-	vector<Student*>::iterator it;
-	for (it = students.begin();
-		it != students.end();
-		it++
-		)
-	{
-		(*it)->show();
+	if (students.size() != 0) {
+		cout << "\nStudents\n\n";
+		vector<Student*>::iterator it;
+		for (it = students.begin();
+			it != students.end();
+			it++
+			)
+		{
+			(*it)->show();
+		}
 	}
+	else cout << "There are no students\n";
 }
 
 void EnrollmentSystem::showCourseUnitClasses()
 {
 	vector<CourseUnitClass*> courseUnitClasses = getAllCourseUnitClasses();
-	vector<CourseUnitClass*>::iterator it;
-	for (it = courseUnitClasses.begin();
-		it != courseUnitClasses.end();
-		it++
-		)
-	{
-		(*it)->show();
+	if (courseUnitClasses.size() != 0) {
+		cout << "\nClasses\n\n";
+		vector<CourseUnitClass*>::iterator it;
+		for (it = courseUnitClasses.begin();
+			it != courseUnitClasses.end();
+			it++
+			)
+		{
+			(*it)->show();
+		}
 	}
+	else cout << "There are no classes";
 }
