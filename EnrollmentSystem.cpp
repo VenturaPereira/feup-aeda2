@@ -446,7 +446,7 @@ void EnrollmentSystem::loadProfessors()
 	}
 }
 
-University*& EnrollmentSystem::getUniversity(string &acronym)
+University* EnrollmentSystem::getUniversity(string &acronym)
 {
 	vector<University*>::iterator it;
 	for (it = universitiesVector.begin(); it != universitiesVector.end(); it++){
@@ -456,7 +456,7 @@ University*& EnrollmentSystem::getUniversity(string &acronym)
 	throw NotFound<University*, string>(acronym);
 }
 
-College*& EnrollmentSystem::getCollege(string &acronym, University* university)
+College* EnrollmentSystem::getCollege(string &acronym, University* university)
 {
 	vector<College*>::iterator it;
 	for (it = university->getColleges().begin();
@@ -468,7 +468,7 @@ College*& EnrollmentSystem::getCollege(string &acronym, University* university)
 	throw NotFound<College*, string>(acronym);
 }
 
-Course*& EnrollmentSystem::getCourse(string &acronym, College* college)
+Course* EnrollmentSystem::getCourse(string &acronym, College* college)
 {
 	vector<Course*>::iterator it;
 	for (it = college->getCourses().begin(); it != college->getCourses().end(); it++) {
@@ -478,7 +478,7 @@ Course*& EnrollmentSystem::getCourse(string &acronym, College* college)
 	throw NotFound<Course*, string>(acronym);
 }
 
-University*& getUniversity(EnrollmentSystem &s)
+University* getUniversity(EnrollmentSystem &s)
 {
 	if (s.universitiesVector.size() == 0)
 		throw NotFound<University*, EnrollmentSystem>(s);
@@ -500,7 +500,7 @@ University*& getUniversity(EnrollmentSystem &s)
 	return s.universitiesVector[answer];
 }
 
-College*& getCollege(EnrollmentSystem &s)
+College* getCollege(EnrollmentSystem &s)
 {
 	University* university = getUniversity(s);
 
@@ -524,7 +524,7 @@ College*& getCollege(EnrollmentSystem &s)
 	return university->getColleges()[answer_2];
 }
 
-Course*& getCourse(EnrollmentSystem &s)
+Course* getCourse(EnrollmentSystem &s)
 {
 	College* college = getCollege(s);
 
@@ -548,7 +548,7 @@ Course*& getCourse(EnrollmentSystem &s)
 	return college->getCourses()[answer_3];
 }
 
-CourseUnit*& getCourseUnit(EnrollmentSystem &s)
+CourseUnit* getCourseUnit(EnrollmentSystem &s)
 {
 	Course* course = getCourse(s);
 
@@ -572,7 +572,7 @@ CourseUnit*& getCourseUnit(EnrollmentSystem &s)
 	return course->getCourseUnits()[answer_4];
 }
 
-Student*& EnrollmentSystem::getStudent(unsigned long long int &ID)
+Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
 {
 	vector<University*>::iterator unIt;
 	for (unIt = universitiesVector.begin();
@@ -934,7 +934,7 @@ void EnrollmentSystem::saveHandler() {
 	saveToFiles(universitiesVector, universityFile);
 }
 
-Tutor*& EnrollmentSystem::getProfessor(unsigned long long int &ID, Course* course)
+Tutor* EnrollmentSystem::getProfessor(unsigned long long int &ID, Course* course)
 {
 	vector<Tutor*>::iterator it;
 	for (it = course->getProfessors().begin();
@@ -947,7 +947,7 @@ Tutor*& EnrollmentSystem::getProfessor(unsigned long long int &ID, Course* cours
 	throw NotFound<Tutor*, Course*>(course);
 }
 
-CourseUnit*& EnrollmentSystem::getCourseUnit(string &acronym, Course* course)
+CourseUnit* EnrollmentSystem::getCourseUnit(string &acronym, Course* course)
 {
 	vector<CourseUnit*>::iterator it;
 	for (it = course->getCourseUnits().begin();
@@ -960,7 +960,7 @@ CourseUnit*& EnrollmentSystem::getCourseUnit(string &acronym, Course* course)
 	throw NotFound<CourseUnit*, Course*>(course);
 }
 
-CourseUnitClass*& EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber, CourseUnit* courseUnit)
+CourseUnitClass* EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber, CourseUnit* courseUnit)
 {
 	vector<CourseUnitClass*>::iterator it;
 	for (it = courseUnit->getClasses().begin();

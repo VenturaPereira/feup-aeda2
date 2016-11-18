@@ -8,20 +8,21 @@
 using namespace std;
 
 class College;
+class Course;
 
 class CollegeUser 
 {
 protected:
 	//MEMBER VARIABLES
 	College* college;
-	const string name;
+	string name;
 	string email;
 	unsigned long long int ID;
-	const Date dateOfRegistration, dateOfBirth;
+	Date dateOfRegistration, dateOfBirth;
 	
 public:
 	//MEMBER FUNCTIONS
-	CollegeUser(string n, Date dob, College* c) : name(n), dateOfBirth(dob), dateOfRegistration(), college(c) {}
+	CollegeUser(string n, Date dob, Course* c);
 	virtual void assignEmail() = 0;
 	virtual void assignID() = 0;
 

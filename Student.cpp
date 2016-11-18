@@ -11,7 +11,7 @@
 
 
 Student::Student(string n, Date dob, Course* c) 
-	: CollegeUser(n, dob, c->getCollege())
+	: CollegeUser(n, dob, c)
 {
 	course = c;
 	year = 1;
@@ -23,9 +23,10 @@ Student::Student(string n, Date dob, Course* c)
 }
 
 Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
-	: CollegeUser(n, dob, c->getCollege()),
+	: CollegeUser(n, dob, c),
 	tutor(t), year(y), credits(cr), status(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {
+	course = c;
 	setID(id);
 	assignEmail();
 	map<CourseUnit*, CourseUnitClass*>::iterator mapIt;
@@ -58,14 +59,14 @@ bool Student::assignTutor()
 
 void Student::assignEmail()
 {
-	email = getCourse()->getCollege()->getUniversity()->getAcronym()
+	email = course->getCollege()->getUniversity()->getAcronym()
 		+ to_string(ID)
 		+ '@'
-		+ getCourse()->getCollege()->getAcronym()
+		+ course->getCollege()->getAcronym()
 		+ '.'
-		+ getCourse()->getCollege()->getUniversity()->getAcronym()
+		+ course->getCollege()->getUniversity()->getAcronym()
 		+ '.'
-		+ getCourse()->getCollege()->getUniversity()->getCountryAcronym();
+		+ course->getCollege()->getUniversity()->getCountryAcronym();
 }
 
 void Student::assignID()

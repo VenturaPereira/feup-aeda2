@@ -9,7 +9,7 @@
 #include "Utilities.h"
 
 Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
-	: CollegeUser(n, dob, c->getCollege()), course(c),
+	: CollegeUser(n, dob, c), course(c),
 	ableToTeach(att)
 {
 	assignID();
@@ -18,7 +18,7 @@ Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
 }
 
 Tutor::Tutor(string n, Date dob, Course* c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att)
-	: CollegeUser(n, dob, c->getCollege()), course(c),
+	: CollegeUser(n, dob, c), course(c),
 	ableToTeach(att), currentlyTeaching(ct)
 {
 	setID(ID);
