@@ -285,3 +285,17 @@ ofstream& operator<<(ofstream& file, Student *s)
 	return file;
 }
 
+void Student::show() const{
+	cout << course->getCollege()->getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getCollege()->getAcronym().size())
+		<< course->getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
+		<< name
+		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< ID
+		<< tutor->getName()
+		<< setw(CONSOLE_WIDTH * 1.5 - tutor->getName().size())
+		<< status 
+		<< endl;
+}
+

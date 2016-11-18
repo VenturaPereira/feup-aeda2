@@ -6,6 +6,7 @@
 #include "University.h"
 #include <fstream>
 #include "Student.h"
+#include "Utilities.h"
 
 Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
 	: CollegeUser(n, dob, c->getCollege()), course(c),
@@ -133,4 +134,15 @@ ofstream& operator<<(ofstream& file, Tutor *t)
 	file << endl;
 
 	return file;
+}
+
+void Tutor::show() const {
+	cout << course->getCollege()->getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getCollege()->getAcronym().size())
+		<< course->getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
+		<< name
+		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< ID
+		<< endl;
 }

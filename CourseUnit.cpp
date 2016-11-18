@@ -5,6 +5,7 @@
 #include "Course.h"
 #include "College.h"
 #include "University.h"
+#include "Utilities.h"
 #include <fstream>
 
 CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, double credits)
@@ -101,19 +102,33 @@ bool CourseUnit::removeCourseUnitClass(CourseUnitClass* cuc)
 
 void OptionalCourseUnit::show() const
 {
-	cout << name << '\t'
-		<< acronym << '\t'
-		<< "Optional" << '\t'
-		<< scientificArea << '\t'
-		<< this->getNumberOfStudents()  << '/' << MAXIMUM_NUMBER_OF_STUDENTS << '\n';
-		
+	cout << course->getAcronym() 
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
+		<< name
+		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< acronym 
+		<< setw(CONSOLE_WIDTH * 0.5 - acronym.size())
+		<< "Optional " << "\t" 
+		<< year << "A " 
+		<< semester << "S\t"
+		<< credits
+		<< endl;
+
 }
 
 void MandatoryCourseUnit::show() const
 {
-	cout << name << '\t'
-		<< acronym << '\t'
-		<< "Mandatory" << '\n';
+	cout << course->getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
+		<< name
+		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< acronym
+		<< setw(CONSOLE_WIDTH * 0.5 - acronym.size())
+		<< "Mandatory" << "\t"
+		<< year << "A "
+		<< semester << "S\t"
+		<< credits
+		<< endl;
 }
 
 bool compareCourseUnitByNumberStudents(CourseUnit* cu1, CourseUnit* cu2)

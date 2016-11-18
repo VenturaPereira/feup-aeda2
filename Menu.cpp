@@ -143,19 +143,23 @@ bool infoMenu(EnrollmentSystem &sys){
 			system("pause");
 			return true;
 		case 2:
-
+			sys.showColleges();
 			system("pause");
 			return true;
 		case 3:
+			sys.showCourses();
 			system("pause");
 			return true;
 		case 4:
+			sys.showCourseUnits();
 			system("pause");
 			return true;
 		case 5:
+			sys.showStudents();
 			system("pause");
 			return true;
 		case 6:
+			sys.showProfessors();
 			system("pause");
 			return true;
 		case 7:

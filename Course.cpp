@@ -139,3 +139,12 @@ ofstream& operator<<(ofstream &file, Course *c)
 		<< endl;
 	return file;
 }
+
+void Course::show() const{
+	cout << college->getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - college->getAcronym().size())
+		<< name
+		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
+		<< acronym
+		<< endl;
+}
