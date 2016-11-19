@@ -43,16 +43,7 @@ bool mainMenu(EnrollmentSystem &sys){
 		case 5:
 			cout << "\nAre you sure you want to exit? (Y/N)\n";
 			if (yesNoAnswer()){
-				if (sys.getChanged()){
-					cout << "\nDo you want to save your changes? (Y/N)\n";
-					if (yesNoAnswer()){
-						cout << "\n\nSaving. Don't turn off the power!";
-						sys.saveHandler();
-						cout << "\n\nSaving complete!\n\n";
-						return true;
-					}
-					return true;
-				}
+				sys.saveHandler();
 				return true;
 			}
 			else
@@ -132,10 +123,11 @@ bool infoMenu(EnrollmentSystem &sys){
 			"2 - Read all Colleges              ",
 			"3 - Read all Courses               ",
 			"4 - Read all Course Units          ",
-			"5 - Read all Students              ",
-			"6 - Read all Professors            ", "",
-			"7 - Back                           ",
-			"---------------------------------------" }, 1, 7);
+			"5 - Read all Course Unit Classes   ",
+			"6 - Read all Students              ",
+			"7 - Read all Professors            ", "",
+			"8 - Back                           ",
+			"---------------------------------------" }, 1, 8);
 
 		switch (option)
 		{
@@ -156,33 +148,37 @@ bool infoMenu(EnrollmentSystem &sys){
 			system("pause");
 			return true;
 		case 5:
-			sys.showStudents();
+			sys.showCourseUnitClasses();
 			system("pause");
 			return true;
 		case 6:
-			sys.showProfessors();
+			sys.showStudents();
 			system("pause");
 			return true;
 		case 7:
+			sys.showProfessors();
+			system("pause");
+			return true;
+		case 8:
 			return false;
 		}
 	}
 }
 
-//TODO CHECK  --- > MODIFY FOR THIS PROJECT  --- 
 bool optionsMenu(EnrollmentSystem &sys)
 {
 	while (true)
 	{
 		system("cls");
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-		{ "--------------------------------------------",
+		{ "--------------------------------------------------",
 			"Options", "",
-			"1 - Change Students sorting options    ",
-			"2 - Change Professors sorting options  ",
-			"3 - Change Course Units sorting options", "",
-			"4 - Back                               ",
-			"--------------------------------------------", }, 1, 4);
+			"1 - Change Students sorting options          ",
+			"2 - Change Professors sorting options        ",
+			"3 - Change Course Units sorting options      ",
+			"4 - Change Course Units Class sorting options", "",
+			"5 - Back                                     ",
+			"-------------------------------------------------", }, 1, 5);
 		
 
 		switch (option)
@@ -191,10 +187,13 @@ bool optionsMenu(EnrollmentSystem &sys)
 			sortingStudentsMenu(sys);
 			return true;
 		case 2:
+			sortingProfessorsMenu(sys);
 			return true;
 		case 3:
+			sortingCourseUnitMenu(sys);
 			return true;
 		case 4:
+			sortingCourseUnitClassMenu(sys);
 			return true;
 		case 5:
 			return false;
@@ -212,7 +211,46 @@ bool sortingStudentsMenu(EnrollmentSystem &sys) {
 			"1 - Sort by ID                         ",
 			"2 - Sort by Name                       ",
 			"3 - Sort by Age                        ",
-			"4 - Sort by Course Year                ", "",
+			"4 - Sort by Course Year                ",
+			"5 - Sort by Registration Date          ", "",
+			"6 - Back                               ",
+			"--------------------------------------------", }, 1, 6);
+
+
+		switch (option)
+		{
+		case 1:
+			sys.changeStudentsSortOption(option);
+			return true;
+		case 2:
+			sys.changeStudentsSortOption(option);
+			return true;
+		case 3:
+			sys.changeStudentsSortOption(option);
+			return true;
+		case 4:
+			sys.changeStudentsSortOption(option);
+			return true;
+		case 5:
+			sys.changeStudentsSortOption(option);
+			return true;
+		case 6: 
+			return false;
+		}
+	}
+}
+
+bool sortingProfessorsMenu(EnrollmentSystem &sys) {
+	while (true)
+	{
+		system("cls");
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		{ "--------------------------------------------",
+			"Professors Sorting Options", "",
+			"1 - Sort by ID                         ",
+			"2 - Sort by Name                       ",
+			"3 - Sort by Age                        ",
+			"4 - Sort by Registration Date          ", "",
 			"5 - Back                               ",
 			"--------------------------------------------", }, 1, 5);
 
@@ -220,16 +258,16 @@ bool sortingStudentsMenu(EnrollmentSystem &sys) {
 		switch (option)
 		{
 		case 1:
-			sys.changeStudentsSortOption(option);
+			sys.changeProfessorsSortOption(option);
 			return true;
 		case 2:
-			sys.changeStudentsSortOption(option);
+			sys.changeProfessorsSortOption(option);
 			return true;
 		case 3:
-			sys.changeStudentsSortOption(option);
+			sys.changeProfessorsSortOption(option);
 			return true;
 		case 4:
-			sys.changeStudentsSortOption(option);
+			sys.changeProfessorsSortOption(option);
 			return true;
 		case 5:
 			return false;
@@ -237,374 +275,61 @@ bool sortingStudentsMenu(EnrollmentSystem &sys) {
 	}
 }
 
-/*
-bool mainMenu(Store &store)
-{
+bool sortingCourseUnitMenu(EnrollmentSystem &sys) {
 	while (true)
 	{
 		system("cls");
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-		{ "=======================================",
-			"Main Menu", "",
-			"1 - Information                    ",
-			"2 - Clients Management             ",
-			"3 - Products Management            ",
-			"4 - Transactions Management        ",
-			"5 - Recommend Products to Client   ",
-			"6 - Recommend Products to BottomTen", "",
-			"7 - Options                        ",
-			"8 - Return to Files' Names Menu    ",
-			"9 - Exit App                       ",
-			"=======================================" }, 1, 9);
+		{ "--------------------------------------------",
+			"Course Unit Sorting Options", "",
+			"1 - Sort by Name                       ",
+			"2 - Sort by Number of Students         ",
+			"3 - Sort by Time                       ", "",     //TODO CHANGE THIS AND ?? ADD SORTING BY CREDITS ???
+			"4 - Back                               ",
+			"--------------------------------------------", }, 1, 4);
+
 
 		switch (option)
 		{
 		case 1:
-		{
-			informationMenu(store);
-			break;
-		}
+			sys.changeCourseUnitSortOption(option);
+			return true;
 		case 2:
-		{
-			clientsMenu(store);
-			break;
-		}
+			sys.changeCourseUnitSortOption(option);
+			return true;
 		case 3:
-		{
-			productsMenu(store);
-			break;
-		}
+			sys.changeCourseUnitSortOption(option);
+			return true;
 		case 4:
-		{
-			transactionsMenu(store);
-			break;
-		}
-		case 5:
-		{
-			store.advertising();
-			system("pause");
-			break;
-		}
-		case 6:
-		{
-			store.makeBottomTenVectors();
-			store.advertisingBottomTen();
-			system("pause");
-			break;
-		}
-		case 7:
-			optionsMenu(store);
-			break;
-		case 8:
-		{
-			if (store.getClientChanged() || store.getProductsChanged() || store.getTransactionsChanged())
-			{
-				cout << "\nDo you want to save your changes? (Y/N)\n";
-				if (yesNoAnswer())
-				{
-					cout << "\n\nSaving. Don't turn off the power!";
-					store.saveChanges();
-					cout << "\n\nSaving complete!\n\n";
-					return false;
-				}
-				return false;
-			}
 			return false;
 		}
-		case 9:
+	}
+}
+
+bool sortingCourseUnitClassMenu(EnrollmentSystem &sys) {
+	while (true)
+	{
+		system("cls");
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		{ "--------------------------------------------",
+			"Course Unit Sorting Options", "",
+			"1 - Sort by Number                     ",
+			"2 - Sort by Number of Students         ", "", 
+			"3 - Back                               ",
+			"--------------------------------------------", }, 1, 3);
+
+
+		switch (option)
 		{
-			cout << "\nAre you sure you want to exit? (Y/N)\n";
-			if (yesNoAnswer())
-			{
-				if (store.getClientChanged() || store.getProductsChanged() || store.getTransactionsChanged())
-				{
-					cout << "\nDo you want to save your changes? (Y/N)\n";
-					if (yesNoAnswer())
-					{
-						cout << "\n\nSaving. Don't turn off the power!";
-						store.saveChanges();
-						cout << "\n\nSaving complete!\n\n";
-						return true;
-					}
-					return true;
-				}
-				return true;
-			}
-			else break;
-		}
+		case 1:
+			sys.changeCourseUnitSortOption(option);
+			return true;
+		case 2:
+			sys.changeCourseUnitSortOption(option);
+			return true;
+		case 3:
+			return false;
 		}
 	}
-}*/
-/*
-bool informationMenu(Store &store)
-{
-while (true)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{ "-----------------------------------",
-"Which file do you wish to read?", "",
-"1 - Clients File     ",
-"2 - Products File    ",
-"3 - Transactions File", "",
-"4 - Back             ",
-"-----------------------------------" }, 1, 4);
+}
 
-switch (option)
-{
-case 1:
-{
-if (clientsInformationMenu(store))
-return true;
-break;
-}
-case 2:
-{
-store.displayProducts();
-system("pause");
-return true;
-}
-case 3:
-{
-if (transactionsInformationMenu(store))
-return true;
-break;
-}
-case 4:
-return false;
-}
-}
-}
-bool modifyClientsMenu(Store &store)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{
-"-------------------------------",
-"What do you want to modify?", "",
-"1 - Name  ",
-"2 - Amount", "",
-"3 - Back  ",
-"-------------------------------" }, 1, 3);
-
-switch (option)
-{
-case 1:
-store.setClientsChanged(store.correctClientName());
-system("pause");
-return true;
-case 2:
-store.setClientsChanged(store.modifyClientAmount());
-system("pause");
-return true;
-case 3:
-return false;
-}
-}
-bool modifyProductsMenu(Store &store)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{
-"-------------------------------",
-"What do you want to modify?", "",
-"1 - Name ",
-"2 - Price", "",
-"3 - Back ",
-"-------------------------------" }, 1, 3);
-
-switch (option)
-{
-case 1:
-store.setProductsChanged(store.changeProductName());
-system("pause");
-return true;
-case 2:
-store.setProductsChanged(store.changeProductPrice());
-system("pause");
-return true;
-case 3:
-return false;
-}
-}
-bool clientsMenu(Store &store)
-{
-while (true)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{ "----------------------",
-"Clients Management", "",
-"1 - Add Clients   ",
-"2 - Remove Clients",
-"3 - Modify Clients", "",
-"4 - Back          ",
-"----------------------" }, 1, 4);
-
-switch (option)
-{
-case 1:
-{
-store.setClientsChanged(store.addClient());
-system("pause");
-return true;
-}
-case 2:
-{
-store.setClientsChanged(store.removeClient());
-system("pause");
-return true;
-}
-case 3:
-{
-if (modifyClientsMenu(store))
-return true;
-break;
-}
-case 4:
-return false;
-}
-}
-}
-bool productsMenu(Store &store)
-{
-while (true)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{ "-----------------------",
-"Products Management", "",
-"1 - Add Products   ",
-"2 - Remove Products",
-"3 - Modify Products", "",
-"4 - Back           ",
-"-----------------------" }, 1, 4);
-
-switch (option)
-{
-case 1:
-{
-store.setProductsChanged(store.addProduct());
-system("pause");
-return true;
-}
-case 2:
-{
-store.setProductsChanged(store.removeProduct());
-system("pause");
-return true;
-}
-case 3:
-{
-if (modifyProductsMenu(store))
-return true;
-break;
-}
-case 4:
-return false;
-}
-}
-}
-bool transactionsMenu(Store &store)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{ "---------------------------",
-"Transactions Management", "",
-"1 - Add Transactions   ",
-"2 - Cancel Transactions", "",
-"3 - Back               ",
-"---------------------------" }, 1, 3);
-
-switch (option)
-{
-case 1:
-{
-store.setTransactionsChanged(store.addTransaction());
-system("pause");
-return true;
-}
-case 2:
-{
-store.setTransactionsChanged(store.cancelTransaction());
-system("pause");
-return true;
-}
-case 3:
-return false;
-}
-}*/ /*
-bool sortClientOptions(Store &store)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{ "------------------------------",
-"Client Sorting Options", "",
-"1 - Sort by ID            ",
-"2 - Sort by Names         ",
-"3 - Sort by Subscribe Date",
-"4 - Sort by Sum           ", "",
-"5 - Back                  ",
-"------------------------------", }, 1, 5);
-switch (option)
-{
-case 1:
-store.sortStore(store.getClientsVector());
-return true;
-case 2:
-store.sortStore(store.getClientsVector(), compareClientByName);
-return true;
-case 3:
-store.sortStore(store.getClientsVector(), compareClientBySubscribeDate);
-return true;
-case 4:
-store.sortStore(store.getClientsVector(), compareClientBySum);
-return true;
-case 5:
-return false;
-}
-}
-bool sortProductsOptions(Store &store)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{ "---------------------------",
-"Product Sorting Options", "",
-"1 - Sort by Names",
-"2 - Sort by Price", "",
-"3 - Back         ",
-"---------------------------", }, 1, 3);
-switch (option)
-{
-case 1:
-store.sortStore(store.getProductsVector());
-return true;
-case 2:
-store.sortStore(store.getProductsVector(), compareProductByPrice);
-return true;
-case 3:
-return false;
-}
-}
-bool sortTransactionsOptions(Store &store)
-{
-system("cls");
-unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
-{ "-------------------------------",
-"Transaction Sorting Options", "",
-"1 - Sort by ID  ",
-"2 - Sort by Date", "",
-"3 - Back        ",
-"-------------------------------", }, 1, 3);
-switch (option)
-{
-case 1:
-store.sortStore(store.getTransactionsVector(), compareTransactionByID);
-return true;
-case 2:
-store.sortStore(store.getTransactionsVector());
-return true;
-case 3:
-return false;
-}
-}*/
