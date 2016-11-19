@@ -398,6 +398,9 @@ void EnrollmentSystem::loadProfessors()
 	{
 		while (getline(file, line))
 		{
+			ableToTeach.clear();
+			currentlyTeaching.clear();
+
 			char ch = ';';
 			istringstream iss(line);
 			getline(iss, uni, ch);
@@ -776,7 +779,10 @@ bool enrollmentHandler(EnrollmentSystem& s)
 				{
 					if (student->getCredits() + courseUnitsToShow[answer - 1]->getCredits() <= s.getMaxCredits())
 					{
-						student->enrollCourseUnit(*(courseUnitsToShow[answer - 1]));
+						student->enrollCourseUnit(s.getCourseUnit(
+							(courseUnitsToShow[answer - 1])->getAcronym(),
+							student->getCourse()));
+
 						student->setCredits(student->getCredits() + (*courseUnitsToShow[answer - 1]).getCredits());
 						courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear()); //REFRESH MENU
 					}
