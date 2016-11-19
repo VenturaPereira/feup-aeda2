@@ -85,11 +85,12 @@ void CourseUnitClass::show() const
 {
 	cout
 		<< left
-		<< setw(CONSOLE_WIDTH * 0.8)
+		<< setw(CONSOLE_WIDTH * 0.5)
 		<< courseUnit->getName()
 		<< '\t'
 		<< classNumber
-		<< setw(CONSOLE_WIDTH * 0.8)
+		<< '\t'
+		<< setw(CONSOLE_WIDTH * 0.5)
 		<< professor->getName()
 		<< '\t'
 		<< getNumberOfStudents()

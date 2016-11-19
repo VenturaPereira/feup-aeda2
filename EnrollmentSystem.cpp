@@ -753,29 +753,32 @@ bool enrollmentHandler(EnrollmentSystem& s)
 	catch (NotFound<Student*, unsigned long long int> &nfs)
 	{
 		cout << "Student " << nfs.getMember() << " not found!\n";
+		system("PAUSE");
 		return false;
 	}
 	
 		vector<CourseUnit*> courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear());
-		unsigned short int answer = 0;
+	
+		unsigned int answer = 0;
 		try 
 		{
-			while (answer != (courseUnitsToShow.size() + 1) || courseUnitsToShow.size() == 0) //EXIT
+			while (answer != (courseUnitsToShow.size() + 1) && courseUnitsToShow.size() != 0) //EXIT
 			{
-				system("CLS");
-				for (size_t i = 0; i < courseUnitsToShow.size(); i++) //SHOW AS MENU
+				size_t i;
+				for (i = 0; i < courseUnitsToShow.size(); i++) //SHOW AS MENU
 				{
 					cout << (i + 1) << ". ";
 					courseUnitsToShow[i]->show();
 				}
-				answer = enterInput<unsigned short int>(); //READ SELECTION
+				cout << (i+1) << ". Exit";
+				answer = enterInput<unsigned int>(); //READ SELECTION
 				if (answer >= 1 && answer <= courseUnitsToShow.size()) 
 				{
 					if (student->getCredits() + courseUnitsToShow[answer - 1]->getCredits() <= s.getMaxCredits())
 					{
 						student->enrollCourseUnit(*(courseUnitsToShow[answer - 1]));
+						student->setCredits(student->getCredits() + (*courseUnitsToShow[answer - 1]).getCredits());
 						courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear()); //REFRESH MENU
-						student->setCredits(student->getCredits() + courseUnitsToShow[answer - 1]->getCredits());
 					}
 					else cout << "Student cannot enroll this course unit. Maximum credits have been exceeded";
 				}
