@@ -24,7 +24,7 @@ bool Course::removeCourseUnit(CourseUnit& cu)
 	{
 		if ((*it) == &cu)
 		{
-			delete(*it);
+			courseUnits.erase(it);
 			return true;
 		}
 	}

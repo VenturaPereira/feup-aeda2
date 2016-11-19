@@ -623,7 +623,7 @@ void EnrollmentSystem::removeUniversity(University& u)
 	vector<University*>::iterator it;
 	it = find(universitiesVector.begin(), universitiesVector.end(), &u);
 	if (it != universitiesVector.end()) {
-		delete(*it);
+		universitiesVector.erase(it);
 		return;
 	}
 	else
@@ -706,8 +706,8 @@ bool removeStudentHandler(EnrollmentSystem& s)
 		cout << "Student " << nfs.getMember() << " not found!\n";
 		return false;
 	}
-	
-	delete(student);
+
+	student->getCourse().removeStudent(*student);
 	
 	return true;
 }
@@ -720,7 +720,7 @@ bool removeUniversityHandler(EnrollmentSystem& s) {
 	{
 		cout << "\nRemove University\n\n";
 		uni = &getUniversity(s);
-		delete(uni);
+		s.removeUniversity(*uni);
 	}
 	catch (EndOfFile &eof)
 	{
