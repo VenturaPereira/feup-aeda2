@@ -5,22 +5,22 @@
 #include "Utilities.h"
 
 
-College::College(string n, string a, University* u): name(n), acronym(a), university(u) {
-	u->addCollege(this);
+College::College(string n, string a, University& u): name(n), acronym(a), university(&u) {
+	u.addCollege(*this);
 }
 
-void College::addCourse(Course* c)
+void College::addCourse(Course& c)
 {
-	courses.push_back(c);
+	courses.push_back(&c);
 }
 
-bool College::removeCourse(Course* c)
+bool College::removeCourse(Course& c)
 {
 	for (vector<Course *> ::const_iterator it = courses.begin();
 		it != courses.end();
 		it++)
 	{
-		if ((*it) == c) 
+		if ((*it) == &c) 
 		{
 			courses.erase(it);
 			return true;

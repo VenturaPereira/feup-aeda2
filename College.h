@@ -19,22 +19,21 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	College(string n, string a, University* u);
-	void addCourse(Course* c);
-	bool removeCourse(Course* c);
+	College(string n, string a, University& u);
+	void addCourse(Course& c);
+	bool removeCourse(Course& c);
 
 	//GETS
 	string getName() const { return name; }
 	string getAcronym() const { return acronym; }
 	vector<Course*>& getCourses() { return courses; }
-	University* getUniversity() {	return university; }
+	University& getUniversity() {	return *university; }
 
 	//COMPARES
 	friend bool compareCollegeByName(College* c1, College* c2);
 
 	//PRINT TO SCREEN
 	void show() const;
-	void showCourses() const;
 
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, College *c);

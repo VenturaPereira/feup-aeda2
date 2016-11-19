@@ -23,11 +23,11 @@ private:
 	void assignTeacher();
 public:
 	//MEMBER FUNCTIONS
-	CourseUnitClass(unsigned short int cn, CourseUnit* cu);
-	CourseUnitClass(unsigned short int cn, CourseUnit* cu, Tutor* t);
-	void addStudent(Student* s);
-	bool removeStudent(Student* s);
-	void setProfessor(Tutor* t);
+	CourseUnitClass(unsigned short int cn, CourseUnit& cu);
+	CourseUnitClass(unsigned short int cn, CourseUnit& cu, Tutor& t);
+	void addStudent(Student& s);
+	bool removeStudent(Student& s);
+	void setProfessor(Tutor& t);
 
 	//COMPARES
 	friend bool compareCourseUnitClassByNumber(CourseUnitClass* cuc1, CourseUnitClass* cuc2);
@@ -37,7 +37,7 @@ public:
 	unsigned short int getNumberOfStudents() const { return studentsInClass.size(); }
 	unsigned short int getClassNumber() const { return classNumber; }
 	vector<Student*>& getStudentsInClass() { return studentsInClass; }
-	CourseUnit* getCourseUnit() {return courseUnit;}
+	CourseUnit& getCourseUnit() {return *courseUnit;}
 
 	//OPERATORS
 	friend ofstream& operator<<(ofstream& file, CourseUnitClass *cuc);

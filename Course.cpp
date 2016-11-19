@@ -7,22 +7,22 @@
 #include "College.h"
 #include "University.h"
 
-Course::Course(string n, string a, College* c) : name(n), acronym(a), college(c) {
-	c->addCourse(this);
+Course::Course(string n, string a, College& c) : name(n), acronym(a), college(&c) {
+	c.addCourse(*this);
 }
 
-void Course::addCourseUnit(CourseUnit* cu)
+void Course::addCourseUnit(CourseUnit& cu)
 {
-	courseUnits.push_back(cu);
+	courseUnits.push_back(&cu);
 }
 
-bool Course::removeCourseUnit(CourseUnit* cu)
+bool Course::removeCourseUnit(CourseUnit& cu)
 {
 	for (vector<CourseUnit *> ::const_iterator it = courseUnits.begin();
 		it != courseUnits.end();
 		it++)
 	{
-		if ((*it) == cu)
+		if ((*it) == &cu)
 		{
 			courseUnits.erase(it);
 			return true;
@@ -31,18 +31,18 @@ bool Course::removeCourseUnit(CourseUnit* cu)
 	return false;
 }
 
-void Course::addStudent(Student* s)
+void Course::addStudent(Student& s)
 {
-	students.push_back(s);
+	students.push_back(&s);
 }
 
-bool Course::removeStudent(Student* s)
+bool Course::removeStudent(Student& s)
 {
 	for (vector<Student *> ::const_iterator it = students.begin();
 		it != students.end();
 		it++)
 	{
-		if ((*it) == s)
+		if ((*it) == &s)
 		{
 			students.erase(it);
 			return true;
@@ -51,18 +51,18 @@ bool Course::removeStudent(Student* s)
 	return false;
 }
 
-void Course::addProfessor(Tutor* p)
+void Course::addProfessor(Tutor& p)
 {
-	professors.push_back(p);
+	professors.push_back(&p);
 }
 
-bool Course::removeProfessor(Tutor* p)
+bool Course::removeProfessor(Tutor& p)
 {
 	for (vector<Tutor *> ::const_iterator it = professors.begin();
 		it != professors.end();
 		it++)
 	{
-		if ((*it) == p)
+		if ((*it) == &p)
 		{
 			professors.erase(it);
 			return true;
@@ -93,7 +93,7 @@ vector<CourseUnit*> Course::getCourseUnits(unsigned short int y)
 	return courseUnits;
 }
 
-vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned short int y)
+vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student& s, unsigned short int y)
 {
 	vector<CourseUnit*> courseUnitsFromYear, notCompleted;
 	
@@ -109,8 +109,8 @@ vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student* s, unsigned shor
 			cuIt++)
 		{
 			if (//CHECK IF ALREADY ATENDING THE COURSE UNIT OR IF THE STUDENT HAS ALREADY COMPLETED THE COURSE UNIT
-				s->getClassesCurrentlyAtending().find((*cuIt)) == s->getClassesCurrentlyAtending().end()					
-				&& s->getCompletedCourseUnits().find((*cuIt)) == s->getCompletedCourseUnits().end()
+				s.getClassesCurrentlyAtending().find((*cuIt)) == s.getClassesCurrentlyAtending().end()					
+				&& s.getCompletedCourseUnits().find((*cuIt)) == s.getCompletedCourseUnits().end()
 				)
 			{
 				notCompleted.push_back(*cuIt); //IF NOT TO BOTH, ADD TO NOTCOMPLETED
@@ -129,9 +129,9 @@ bool compareCourseByName(Course* c1, Course* c2)
 
 ofstream& operator<<(ofstream &file, Course *c)
 {
-	file << c->getCollege()->getUniversity()->getAcronym()
+	file << c->getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< c->getCollege()->getAcronym()
+		<< c->getCollege().getAcronym()
 		<< ';'
 		<< c->name
 		<< ';'

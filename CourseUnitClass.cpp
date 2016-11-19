@@ -8,39 +8,39 @@
 #include "Tutor.h"
 #include <fstream>
 
-CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit* cu) : courseUnit(cu), classNumber(cn) {
+CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit& cu) : courseUnit(&cu), classNumber(cn) {
 	assignTeacher();
-	cu->addCourseUnitClass(this);
+	cu.addCourseUnitClass(*this);
 }
 
 void CourseUnitClass::assignTeacher()
 {
 	vector<Tutor*>::iterator it;
-	for (it = getCourseUnit()->getCourse()->getProfessors().begin();
-		it != getCourseUnit()->getCourse()->getProfessors().end();
+	for (it = getCourseUnit().getCourse().getProfessors().begin();
+		it != getCourseUnit().getCourse().getProfessors().end();
 		it++
 		)
 	{
-		if ((*it)->teachClass(this))
+		if ((*it)->teachClass(*this))
 			return;
 	}
 }
 
-CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit* cu, Tutor* t) 
-	: courseUnit(cu), classNumber(cn)
+CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit& cu, Tutor& t) 
+	: courseUnit(&cu), classNumber(cn)
 {
-	professor = t;
-	cu->addCourseUnitClass(this);
+	professor = &t;
+	cu.addCourseUnitClass(*this);
 }
 
-void CourseUnitClass::addStudent(Student* s)
+void CourseUnitClass::addStudent(Student& s)
 {
-	studentsInClass.push_back(s);
+	studentsInClass.push_back(&s);
 }
 
-bool CourseUnitClass::removeStudent(Student* s) {
+bool CourseUnitClass::removeStudent(Student& s) {
 	for (vector<Student *> ::const_iterator it = studentsInClass.begin(); it != studentsInClass.end(); it++) {
-		if ((*it) == s) {
+		if ((*it) == &s) {
 			studentsInClass.erase(it);
 			return true;
 		}
@@ -48,9 +48,9 @@ bool CourseUnitClass::removeStudent(Student* s) {
 	return false;
 }
 
-void CourseUnitClass::setProfessor(Tutor* t)
+void CourseUnitClass::setProfessor(Tutor& t)
 {
-	professor = t;
+	professor = &t;
 }
 
 bool compareCourseUnitClassByNumber(CourseUnitClass* cuc1, CourseUnitClass* cuc2)
@@ -65,13 +65,13 @@ bool compareCourseUnitClassByNumberStudents(CourseUnitClass* cuc1, CourseUnitCla
 
 ofstream& operator<<(ofstream& file, CourseUnitClass *cuc)
 {
-	file << cuc->getCourseUnit()->getCourse()->getCollege()->getUniversity()->getAcronym()
+	file << cuc->getCourseUnit().getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< cuc->getCourseUnit()->getCourse()->getCollege()->getAcronym()
+		<< cuc->getCourseUnit().getCourse().getCollege().getAcronym()
 		<< ';'
-		<< cuc->getCourseUnit()->getCourse()->getAcronym()
+		<< cuc->getCourseUnit().getCourse().getAcronym()
 		<< ';'
-		<< cuc->getCourseUnit()->getAcronym()
+		<< cuc->getCourseUnit().getAcronym()
 		<< ';'
 		<< cuc->classNumber
 		<< ';'

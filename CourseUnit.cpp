@@ -8,50 +8,50 @@
 #include "Utilities.h"
 #include <fstream>
 
-CourseUnit::CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, double credits)
-	: name(n), acronym(a), year(y), semester(s), credits(credits), course(c)
+CourseUnit::CourseUnit(string n, string a, Course& c, unsigned short int y, unsigned short int s, double credits)
+	: name(n), acronym(a), year(y), semester(s), credits(credits), course(&c)
 {
 }
 
-OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, double cred)
+OptionalCourseUnit::OptionalCourseUnit(unsigned int mnos, string n, string a, Course& c, unsigned short int y, unsigned short int s, string sa, double cred)
 	: CourseUnit(n,a,c,y,s,cred), MAXIMUM_NUMBER_OF_STUDENTS(mnos), scientificArea(sa)
 {
-	c->addCourseUnit(this);
+	c.addCourseUnit(*this);
 }
 
-MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, double cred)
+MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course& c, unsigned short int y, unsigned short int s, double cred)
 	: CourseUnit(n, a, c, y, s, cred), MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS(mnospc)
 {
-	c->addCourseUnit(this);
+	c.addCourseUnit(*this);
 }
 
-void CourseUnit::addStudentWithoutCheck(Student* s)
+void CourseUnit::addStudentWithoutCheck(Student& s)
 {
-	studentsCurrentlyInCourseUnit.push_back(s);
+	studentsCurrentlyInCourseUnit.push_back(&s);
 }
 
-bool OptionalCourseUnit::addStudent(Student* s)
+bool OptionalCourseUnit::addStudent(Student& s)
 {
 	if (getNumberOfStudents() >= MAXIMUM_NUMBER_OF_STUDENTS) {
 		return false;
 	}
-	studentsCurrentlyInCourseUnit.push_back(s);
+	studentsCurrentlyInCourseUnit.push_back(&s);
 	return true;
 }
 
-bool MandatoryCourseUnit::addStudent(Student* s)
+bool MandatoryCourseUnit::addStudent(Student& s)
 {
-	studentsCurrentlyInCourseUnit.push_back(s);
+	studentsCurrentlyInCourseUnit.push_back(&s);
 	return true;
 }
 
-bool CourseUnit::removeStudent(Student* s)
+bool CourseUnit::removeStudent(Student& s)
 {
 	for (vector<Student *> ::const_iterator it = studentsCurrentlyInCourseUnit.begin();
 		it != studentsCurrentlyInCourseUnit.end();
 		it++)
 	{
-		if ((*it) == s)
+		if ((*it) == &s)
 		{
 			studentsCurrentlyInCourseUnit.erase(it);
 			return true;
@@ -60,18 +60,18 @@ bool CourseUnit::removeStudent(Student* s)
 	return false;
 }
 
-void CourseUnit::addProfessor(Tutor* t)
+void CourseUnit::addProfessor(Tutor& t)
 {
-	courseUnitProfessors.push_back(t);
+	courseUnitProfessors.push_back(&t);
 }
 
-bool CourseUnit::removeProfessor(Tutor* t)
+bool CourseUnit::removeProfessor(Tutor& t)
 {
 	for (vector<Tutor *> ::const_iterator it = courseUnitProfessors.begin();
 		it != courseUnitProfessors.end();
 		it++)
 	{
-		if ((*it) == t)
+		if ((*it) == &t)
 		{
 			courseUnitProfessors.erase(it);
 			return true;
@@ -80,18 +80,18 @@ bool CourseUnit::removeProfessor(Tutor* t)
 	return false;
 }
 
-void CourseUnit::addCourseUnitClass(CourseUnitClass* cuc)
+void CourseUnit::addCourseUnitClass(CourseUnitClass& cuc)
 {
-	classes.push_back(cuc);
+	classes.push_back(&cuc);
 }
 
-bool CourseUnit::removeCourseUnitClass(CourseUnitClass* cuc)
+bool CourseUnit::removeCourseUnitClass(CourseUnitClass& cuc)
 {
 	for (vector<CourseUnitClass *> ::const_iterator it = classes.begin();
 		it != classes.end();
 		it++)
 	{
-		if ((*it) == cuc)
+		if ((*it) == &cuc)
 		{
 			classes.erase(it);
 			return true;
@@ -152,11 +152,11 @@ bool compareCourseUnitByTime(CourseUnit* cu1, CourseUnit* cu2)
 
 ofstream& operator<<(ofstream& file, OptionalCourseUnit *ocu)
 {
-	file << ocu->getCourse()->getCollege()->getUniversity()->getAcronym()
+	file << ocu->getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< ocu->getCourse()->getCollege()->getAcronym()
+		<< ocu->getCourse().getCollege().getAcronym()
 		<< ';'
-		<< ocu->getCourse()->getAcronym()
+		<< ocu->getCourse().getAcronym()
 		<< ';'
 		<< ocu->name
 		<< ';'
@@ -180,11 +180,11 @@ ofstream& operator<<(ofstream& file, OptionalCourseUnit *ocu)
 
 ofstream& operator<<(ofstream& file, MandatoryCourseUnit *mcu)
 {
-	file << mcu->getCourse()->getCollege()->getUniversity()->getAcronym()
+	file << mcu->getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< mcu->getCourse()->getCollege()->getAcronym()
+		<< mcu->getCourse().getCollege().getAcronym()
 		<< ';'
-		<< mcu->getCourse()->getAcronym()
+		<< mcu->getCourse().getAcronym()
 		<< ';'
 		<< mcu->name
 		<< ';'

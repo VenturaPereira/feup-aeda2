@@ -25,10 +25,10 @@ private:
 	virtual void assignID();
 public:
 	//MEMBER FUNCTIONS
-	Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att);
-	Tutor(string n, Date dob, Course* c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att); 
-	bool teachClass(CourseUnitClass* c);
-	void tutorStudent(Student* s);
+	Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att);
+	Tutor(string n, Date dob, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att); 
+	bool teachClass(CourseUnitClass& c);
+	void tutorStudent(Student& s);
 
 	//COMPARES
 	friend bool compareProfessorByName(Tutor* p1, Tutor* p2);
@@ -36,7 +36,7 @@ public:
 	friend bool compareProfessorByBirth(Tutor* p1, Tutor* p2);
 
 	//GETS
-	Course* getCourse() { return course; }
+	Course& getCourse() { return *course; }
 	vector<CourseUnit*>& getAbleToTeach() { return ableToTeach; }
 	vector<CourseUnit*>& getCurrentlyTeaching() { return currentlyTeaching; }
 	vector<Student*>& getStudents() { return students; }

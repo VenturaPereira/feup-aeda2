@@ -24,13 +24,12 @@ public:
 	University(string n, string a, string ca, unsigned long long int lsid, unsigned long long int lpid) : name(n), acronym(a), countryAcronym(ca), lastProfessorID(lpid), lastStudentID(lsid) {}
 	void incrementLastStudentID();
 	void incrementLastProfessorID();
-	void addCollege(College* c);
-	bool removeCollege(College *c);
+	void addCollege(College& c);
+	bool removeCollege(College& c);
 	
 	//PRINT TO SCREEN
 	void show() const;
-	void showAllColleges() const;
-	void showAllOptional(string scientificArea, OptionalCourseUnit* arg) const;
+	void showAllOptional(string scientificArea, OptionalCourseUnit& arg) const;
 				
 	//GETS
 	unsigned long long int getLastStudentID() { return lastStudentID; }

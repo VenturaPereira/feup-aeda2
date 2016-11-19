@@ -17,18 +17,18 @@ void University::incrementLastProfessorID()
 	lastProfessorID++;
 }
 
-void University::addCollege(College* c)
+void University::addCollege(College& c)
 {
-	collegesVector.push_back(c);
+	collegesVector.push_back(&c);
 }
 
-bool University::removeCollege(College *c)
+bool University::removeCollege(College& c)
 {
 	for (vector<College *> ::iterator it = collegesVector.begin();
 		it != collegesVector.end();
 		it++)
 	{
-		if ((*it) == c)
+		if ((*it) == &c)
 		{
 			collegesVector.erase(it);
 			return true;
@@ -37,7 +37,7 @@ bool University::removeCollege(College *c)
 	return false;
 }
 
-void University::showAllOptional(string scientificArea, OptionalCourseUnit* arg) const
+void University::showAllOptional(string scientificArea, OptionalCourseUnit& arg) const
 {
 	vector<College*>::const_iterator colIt;
 	vector<Course*>::const_iterator courseIt;
@@ -56,7 +56,7 @@ void University::showAllOptional(string scientificArea, OptionalCourseUnit* arg)
 			{
 				OptionalCourseUnit* ocu = dynamic_cast<OptionalCourseUnit*>((*cuIt));
 				if (ocu != NULL)
-					if(ocu->getScientificArea() == scientificArea && arg != ocu) //SAME SCIENTIFIC AREA, BUT NOT THE SAME COURSE UNIT AS THE ARGUMENT
+					if(ocu->getScientificArea() == scientificArea && &arg != ocu) //SAME SCIENTIFIC AREA, BUT NOT THE SAME COURSE UNIT AS THE ARGUMENT
 						ocu->show();
 			}
 		}

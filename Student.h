@@ -30,12 +30,12 @@ protected:
 	virtual void assignID();
 public:
 	//MEMBER FUNCTIONS
-	Student(string n, Date dob, Course* c);
-	Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
+	Student(string n, Date dob, Course& c);
+	Student(string n, Date dob, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
 	bool assignTutor();
-	bool enrollCourseUnit(CourseUnit* courseUnit);
-	bool enrollClass(CourseUnitClass* courseUnitClass);
-	bool completedClass(CourseUnit *courseUnit, unsigned short int grade);
+	bool enrollCourseUnit(CourseUnit& courseUnit);
+	bool enrollClass(CourseUnitClass& courseUnitClass);
+	bool completedClass(CourseUnit& courseUnit, unsigned short int grade);
 	bool completedAllCourseUnits(unsigned short int y);
 
 	//COMPARES
@@ -50,7 +50,7 @@ public:
 	void setYear(unsigned short int y) { year = y; }
 
 	//GETS
-	Course* getCourse() { return course; }
+	Course& getCourse() { return *course; }
 	map<CourseUnit*, unsigned short int>& getCompletedCourseUnits() {return completedCourseUnits;}
 	map<CourseUnit*, CourseUnitClass*>& getClassesCurrentlyAtending() { return classesCurrentlyAtending; }
 	unsigned short int getYear() const { return year; }

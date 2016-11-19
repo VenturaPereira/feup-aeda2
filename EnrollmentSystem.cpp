@@ -60,7 +60,7 @@ void EnrollmentSystem::loadUniversities() {
 			getline(iss, country, delimiter);
 			iss >> ws >> lsid >> ws >> delimiter >> ws >> lpid;
 
-			addUniversity(new University(name, acr, country, lsid, lpid));
+			addUniversity(*(new University(name, acr, country, lsid, lpid)));
 		}
 		file.close();
 	}
@@ -88,12 +88,12 @@ void EnrollmentSystem::loadColleges(){
 			getline(iss, name, ch);
 			getline(iss, acr, '\n');
 			try {
-				uniPtr = getUniversity(uni);
+				uniPtr = &getUniversity(uni);
 			}
 			catch (...){
 				continue;
 			}
-			new College(name, acr, uniPtr);
+			new College(name, acr, *uniPtr);
 		}
 		file.close();
 	}
@@ -124,14 +124,14 @@ void EnrollmentSystem::loadCourses() {
 			getline(iss, acr, '\n');
 
 			try {
-				uniPtr = getUniversity(uni);
-				collegePtr = getCollege(col, uniPtr);
+				uniPtr = &getUniversity(uni);
+				collegePtr = &getCollege(col, *uniPtr);
 			}
 			catch (...)	{
 				continue;
 			}
 
-			new Course(name, acr, collegePtr);
+			new Course(name, acr, *collegePtr);
 
 		}
 
@@ -170,9 +170,9 @@ void EnrollmentSystem::loadCourseUnits()
 			getline(iss, acr, ch);
 
 			try {
-				University* uniPtr = getUniversity(uni);
-				College* collegePtr = getCollege(col, uniPtr);
-				coursePtr = getCourse(course, collegePtr);
+				University* uniPtr = &getUniversity(uni);
+				College* collegePtr = &getCollege(col, *uniPtr);
+				coursePtr = &getCourse(course, *collegePtr);
 			}
 			catch (...) {
 				continue;
@@ -188,7 +188,7 @@ void EnrollmentSystem::loadCourseUnits()
 					>> ws >> semester
 					>> ws >> ch
 					>> ws >> credits;
-				new MandatoryCourseUnit(max_num_students_per_class, name, acr, coursePtr, year, semester, credits);
+				new MandatoryCourseUnit(max_num_students_per_class, name, acr, *coursePtr, year, semester, credits);
 			}
 			else if (type == "Optional") {
 				iss >> ws >> max_num_students
@@ -199,7 +199,7 @@ void EnrollmentSystem::loadCourseUnits()
 					>> ws >> semester
 					>> ws >> ch
 					>> ws >> credits;
-				new OptionalCourseUnit(max_num_students, name, acr, coursePtr, year, semester, scientificArea, credits);
+				new OptionalCourseUnit(max_num_students, name, acr, *coursePtr, year, semester, scientificArea, credits);
 			}
 			else continue;
 
@@ -238,10 +238,10 @@ void EnrollmentSystem::loadCourseUnitClasses()
 			getline(iss, courseUnit, ch);
 			
 			try {
-				University* uniPtr = getUniversity(uni);
-				College* collegePtr = getCollege(col, uniPtr);
-				coursePtr = getCourse(course, collegePtr);
-				courseUnitPtr = getCourseUnit(courseUnit, coursePtr);
+				University* uniPtr = &getUniversity(uni);
+				College* collegePtr = &getCollege(col, *uniPtr);
+				coursePtr = &getCourse(course, *collegePtr);
+				courseUnitPtr = &getCourseUnit(courseUnit, *coursePtr);
 			}
 			catch (...) {
 				continue;
@@ -252,13 +252,13 @@ void EnrollmentSystem::loadCourseUnitClasses()
 				>> ws >> professor_id;
 
 			try {
-				professor = getProfessor(professor_id, coursePtr);
+				professor = &getProfessor(professor_id, *coursePtr);
 			}
 			catch (...) {
 				continue;
 			}
 
-			new CourseUnitClass(classNumber, courseUnitPtr, professor);
+			new CourseUnitClass(classNumber, *courseUnitPtr, *professor);
 		}
 
 		file.close();
@@ -310,10 +310,10 @@ void EnrollmentSystem::loadStudents() {
 
 
 			try {
-				University* uniPtr = getUniversity(uni);
-				College* colPtr = getCollege(col, uniPtr);
-				coursePtr = getCourse(course, colPtr);
-				tutorPtr = getProfessor(tutor_ID, coursePtr);
+				University* uniPtr = &getUniversity(uni);
+				College* colPtr = &getCollege(col, *uniPtr);
+				coursePtr = &getCourse(course, *colPtr);
+				tutorPtr = &getProfessor(tutor_ID, *coursePtr);
 
 				getline(iss, ccuStr, ch);
 				ccuStr.erase(0, 1); //REMOVES '{'
@@ -335,7 +335,7 @@ void EnrollmentSystem::loadStudents() {
 					getline(iss_3, courseUnitStr, ','); //GETS THE COURSE UNIT STR
 					iss_3 >> grade; //GETS THE GRADE
 
-					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+					CourseUnit* courseUnitPtr = &getCourseUnit(courseUnitStr, *coursePtr);
 
 					ccu.insert(std::pair<CourseUnit*, unsigned short int>(courseUnitPtr, grade));
 				}
@@ -358,11 +358,11 @@ void EnrollmentSystem::loadStudents() {
 					getline(iss_5, courseUnitStr, ','); //GETS THE COURSE UNIT STR
 					iss_5 >> classNumber; //GETS THE CLASS NUMBER
 
-					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+					CourseUnit* courseUnitPtr = &getCourseUnit(courseUnitStr, *coursePtr);
 
 					cca.insert(std::pair<CourseUnit*, CourseUnitClass*>(
 						courseUnitPtr,
-						getCourseUnitClass(classNumber, courseUnitPtr)));
+						&getCourseUnitClass(classNumber, *courseUnitPtr)));
 				}
 
 
@@ -370,7 +370,7 @@ void EnrollmentSystem::loadStudents() {
 			catch (...) {
 				continue;
 			}
-			new Student(name, birthDate, coursePtr, tutorPtr, year, credits, status, ccu, cca, ID);
+			new Student(name, birthDate, *coursePtr, *tutorPtr, year, credits, status, ccu, cca, ID);
 		}
 	
 	file.close();
@@ -409,9 +409,9 @@ void EnrollmentSystem::loadProfessors()
 
 
 			try {
-				University* uniPtr = getUniversity(uni);
-				College* colPtr = getCollege(col, uniPtr);
-				coursePtr = getCourse(course, colPtr);
+				University* uniPtr = &getUniversity(uni);
+				College* colPtr = &getCollege(col, *uniPtr);
+				coursePtr = &getCourse(course, *colPtr);
 
 				getline(iss, ableToTeachStr, ch);
 				ableToTeachStr.erase(0, 1); //REMOVE '{'
@@ -421,7 +421,7 @@ void EnrollmentSystem::loadProfessors()
 				char endCh;
 
 				while (getline(iss_2, courseUnitStr, ',')){
-					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+					CourseUnit* courseUnitPtr = &getCourseUnit(courseUnitStr, *coursePtr);
 					ableToTeach.push_back(courseUnitPtr);
 				}
 
@@ -431,7 +431,7 @@ void EnrollmentSystem::loadProfessors()
 				istringstream iss_4(teachingStr);
 
 				while (getline(iss_4, courseUnitStr, ',')){
-					CourseUnit* courseUnitPtr = getCourseUnit(courseUnitStr, coursePtr);
+					CourseUnit* courseUnitPtr = &getCourseUnit(courseUnitStr, *coursePtr);
 					currentlyTeaching.push_back(courseUnitPtr);
 				}
 				
@@ -439,46 +439,46 @@ void EnrollmentSystem::loadProfessors()
 			catch (...) {
 				continue;
 			}
-			new Tutor(name, birthDate, coursePtr, ID, currentlyTeaching, ableToTeach);
+			new Tutor(name, birthDate, *coursePtr, ID, currentlyTeaching, ableToTeach);
 		}
 
 		file.close();
 	}
 }
 
-University* EnrollmentSystem::getUniversity(string &acronym)
+University& EnrollmentSystem::getUniversity(string &acronym)
 {
 	vector<University*>::iterator it;
 	for (it = universitiesVector.begin(); it != universitiesVector.end(); it++){
 		if ((*it)->getAcronym() == acronym)
-			return (*it);
+			return *(*it);
 	}
 	throw NotFound<University*, string>(acronym);
 }
 
-College* EnrollmentSystem::getCollege(string &acronym, University* university)
+College& EnrollmentSystem::getCollege(string &acronym, University& university)
 {
 	vector<College*>::iterator it;
-	for (it = university->getColleges().begin();
-		it != university->getColleges().end();
+	for (it = university.getColleges().begin();
+		it != university.getColleges().end();
 		it++) {
 		if ((*it)->getAcronym() == acronym)
-			return (*it);
+			return *(*it);
 	}
 	throw NotFound<College*, string>(acronym);
 }
 
-Course* EnrollmentSystem::getCourse(string &acronym, College* college)
+Course& EnrollmentSystem::getCourse(string &acronym, College& college)
 {
 	vector<Course*>::iterator it;
-	for (it = college->getCourses().begin(); it != college->getCourses().end(); it++) {
+	for (it = college.getCourses().begin(); it != college.getCourses().end(); it++) {
 		if ((*it)->getAcronym() == acronym)
-			return (*it);
+			return *(*it);
 	}
 	throw NotFound<Course*, string>(acronym);
 }
 
-University* getUniversity(EnrollmentSystem &s)
+University& getUniversity(EnrollmentSystem &s)
 {
 	if (s.universitiesVector.size() == 0)
 		throw NotFound<University*, EnrollmentSystem>(s);
@@ -490,19 +490,20 @@ University* getUniversity(EnrollmentSystem &s)
 		for (size_t i = 0; i < s.universitiesVector.size(); i++) //SHOW AS MENU
 		{
 			cout << (i + 1) << ". ";
-			cout << s.universitiesVector[i]->getName();
+			cout << s.universitiesVector[i]->getName() << endl;
 		}
+		cout << endl;
 		answer = enterInput<int>(); //READ SELECTION
 	}
 
 	answer--;
 
-	return s.universitiesVector[answer];
+	return *(s.universitiesVector[answer]);
 }
 
-College* getCollege(EnrollmentSystem &s)
+College& getCollege(EnrollmentSystem &s)
 {
-	University* university = getUniversity(s);
+	University* university = &getUniversity(s);
 
 	int answer_2 = -1;
 
@@ -521,12 +522,12 @@ College* getCollege(EnrollmentSystem &s)
 
 	answer_2--;
 
-	return university->getColleges()[answer_2];
+	return *(university->getColleges()[answer_2]);
 }
 
-Course* getCourse(EnrollmentSystem &s)
+Course& getCourse(EnrollmentSystem &s)
 {
-	College* college = getCollege(s);
+	College* college = &getCollege(s);
 
 	int answer_3 = -1;
 
@@ -545,12 +546,12 @@ Course* getCourse(EnrollmentSystem &s)
 
 	answer_3--;
 
-	return college->getCourses()[answer_3];
+	return *(college->getCourses()[answer_3]);
 }
 
-CourseUnit* getCourseUnit(EnrollmentSystem &s)
+CourseUnit& getCourseUnit(EnrollmentSystem &s)
 {
-	Course* course = getCourse(s);
+	Course* course = &getCourse(s);
 
 	int answer_4 = -1;
 
@@ -569,10 +570,10 @@ CourseUnit* getCourseUnit(EnrollmentSystem &s)
 
 	answer_4--;
 
-	return course->getCourseUnits()[answer_4];
+	return *(course->getCourseUnits()[answer_4]);
 }
 
-Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
+Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
 {
 	vector<University*>::iterator unIt;
 	for (unIt = universitiesVector.begin();
@@ -599,7 +600,7 @@ Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
 					)
 				{
 					if ((*sIt)->getID() == ID)
-						return (*sIt);
+						return *(*sIt);
 
 				}
 			}
@@ -608,23 +609,22 @@ Student* EnrollmentSystem::getStudent(unsigned long long int &ID)
 	throw NotFound<Student*, unsigned long long int>(ID);
 }
 
-void EnrollmentSystem::removeUniversity(University* u)
+void EnrollmentSystem::removeUniversity(University& u)
 {
 	vector<University*>::iterator it;
-	it = find(universitiesVector.begin(), universitiesVector.end(), u);
+	it = find(universitiesVector.begin(), universitiesVector.end(), &u);
 	if (it != universitiesVector.end()) {
 		universitiesVector.erase(it);
 		return;
 	}
 	else
-		throw NotFound<University*, string>(u->getName());
+		throw NotFound<University*, string>(u.getName());
 
 }
 
 bool addStudentHandler(EnrollmentSystem& s)
 {
-	Student* student;
-	Date* dateOfBirth;
+	Date dateOfBirth;
 	Course* course;
 	string studentName;
 
@@ -633,8 +633,8 @@ bool addStudentHandler(EnrollmentSystem& s)
 		studentName = enterString("\nAdd Student\n\n", "Enter the name of the student [CTRL+Z to cancel] : ");
 		while (true)
 		{
-			dateOfBirth = new Date(enterString("\nAdd Student\n\n", "Enter the date of birth (DD-MM-YYYY) [CTRL+Z to cancel] : "));
-			if (dateOfBirth->getValid())
+			dateOfBirth = Date(enterString("\nAdd Student\n\n", "Enter the date of birth (DD-MM-YYYY) [CTRL+Z to cancel] : "));
+			if (dateOfBirth.getValid())
 				break;
 			cout << "\nInvalid Date!\n";
 			system("PAUSE");
@@ -648,7 +648,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 	}
 	
 	try {
-		course = getCourse(s); //GET THE COURSE FROM THE USER
+		course = &getCourse(s); //GET THE COURSE FROM THE USER
 	}
 	catch (EndOfFile &eof)
 	{
@@ -670,10 +670,8 @@ bool addStudentHandler(EnrollmentSystem& s)
 		cout << "There are no courses in: " << nfco.getMember()->getName() << endl;
 		return false;
 	}
-	
-	student = new Student(studentName, *dateOfBirth, course);
-	
-	course->addStudent(student);
+		
+	new Student(studentName, dateOfBirth, *course);
 
 	return true;
 }
@@ -686,7 +684,7 @@ bool removeStudentHandler(EnrollmentSystem& s)
 	try
 	{
 		ID = enterInput<unsigned long long int>("\nRemove Student\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
-		student = s.getStudent(ID);
+		student = &(s.getStudent(ID));
 	}
 	catch (EndOfFile &eof)
 	{
@@ -699,7 +697,7 @@ bool removeStudentHandler(EnrollmentSystem& s)
 		return false;
 	}
 	
-	student->getCourse()->removeStudent(student);
+	student->getCourse().removeStudent(*student);
 
 	return true;
 }
@@ -711,8 +709,8 @@ bool removeUniversityHandler(EnrollmentSystem& s) {
 	try
 	{
 		cout << "\nRemove University\n\n";
-		uni = getUniversity(s);
-		s.removeUniversity(uni);
+		uni = &getUniversity(s);
+		s.removeUniversity(*uni);
 	}
 	catch (EndOfFile &eof)
 	{
@@ -738,7 +736,7 @@ bool enrollmentHandler(EnrollmentSystem& s)
 	try
 	{
 		ID = enterInput<unsigned long long int>("\nEnrollment System\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
-		student = s.getStudent(ID);
+		student = &(s.getStudent(ID));
 	}
 	catch (EndOfFile &eof)
 	{
@@ -751,7 +749,7 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		return false;
 	}
 	
-		vector<CourseUnit*> courseUnitsToShow = student->getCourse()->getCourseUnitsNotCompleted(student, student->getYear());
+		vector<CourseUnit*> courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear());
 		unsigned short int answer = 0;
 		try 
 		{
@@ -768,8 +766,8 @@ bool enrollmentHandler(EnrollmentSystem& s)
 				{
 					if (student->getCredits() + courseUnitsToShow[answer - 1]->getCredits() <= s.getMaxCredits())
 					{
-						student->enrollCourseUnit(courseUnitsToShow[answer - 1]);
-						courseUnitsToShow = student->getCourse()->getCourseUnitsNotCompleted(student, student->getYear()); //REFRESH MENU
+						student->enrollCourseUnit(*(courseUnitsToShow[answer - 1]));
+						courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear()); //REFRESH MENU
 						student->setCredits(student->getCredits() + courseUnitsToShow[answer - 1]->getCredits());
 					}
 					else cout << "Student cannot enroll this course unit. Maximum credits have been exceeded";
@@ -795,10 +793,10 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	try
 	{
 		ID = enterInput<unsigned long long int>("\nFinish Course Unit\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
-		student = s.getStudent(ID);
+		student = &(s.getStudent(ID));
  		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
-		student = s.getStudent(ID);
-		courseUnit = getCourseUnit(s);
+		student = &(s.getStudent(ID));
+		courseUnit = &getCourseUnit(s);
 	}
 	catch (EndOfFile &eof)
 	{
@@ -832,10 +830,10 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	}
 	
 
-	student->completedClass(courseUnit, grade); 
+	student->completedClass(*courseUnit, grade); 
 	CourseUnitClass* courseUnitClass = student->getClassesCurrentlyAtending().at(courseUnit);
-	courseUnitClass->removeStudent(student); 
-	courseUnit->removeStudent(student);
+	courseUnitClass->removeStudent(*student); 
+	courseUnit->removeStudent(*student);
 	
 	//CHECK IF STUDENT HAS COMPLETED ALL THE COURSE UNITS OF THE CURRENT YEAR
 	if (student->completedAllCourseUnits(student->getYear()))
@@ -934,43 +932,43 @@ void EnrollmentSystem::saveHandler() {
 	saveToFiles(universitiesVector, universityFile);
 }
 
-Tutor* EnrollmentSystem::getProfessor(unsigned long long int &ID, Course* course)
+Tutor& EnrollmentSystem::getProfessor(unsigned long long int &ID, Course& course)
 {
 	vector<Tutor*>::iterator it;
-	for (it = course->getProfessors().begin();
-		it != course->getProfessors().end();
+	for (it = course.getProfessors().begin();
+		it != course.getProfessors().end();
 		it++)
 	{
 		if ((*it)->getID() == ID)
-			return (*it);
+			return *(*it);
 	}
-	throw NotFound<Tutor*, Course*>(course);
+	throw NotFound<Tutor*, Course*>(&course);
 }
 
-CourseUnit* EnrollmentSystem::getCourseUnit(string &acronym, Course* course)
+CourseUnit& EnrollmentSystem::getCourseUnit(string &acronym, Course& course)
 {
 	vector<CourseUnit*>::iterator it;
-	for (it = course->getCourseUnits().begin();
-		it != course->getCourseUnits().end();
+	for (it = course.getCourseUnits().begin();
+		it != course.getCourseUnits().end();
 		it++)
 	{
 		if ((*it)->getAcronym() == acronym)
-			return (*it);
+			return *(*it);
 	}
-	throw NotFound<CourseUnit*, Course*>(course);
+	throw NotFound<CourseUnit*, Course*>(&course);
 }
 
-CourseUnitClass* EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber, CourseUnit* courseUnit)
+CourseUnitClass& EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber, CourseUnit& courseUnit)
 {
 	vector<CourseUnitClass*>::iterator it;
-	for (it = courseUnit->getClasses().begin();
-		it != courseUnit->getClasses().end();
+	for (it = courseUnit.getClasses().begin();
+		it != courseUnit.getClasses().end();
 		it++)
 	{
 		if ((*it)->getClassNumber() == classNumber)
-			return (*it);
+			return *(*it);
 	}
-	throw NotFound<CourseUnitClass*, CourseUnit*>(courseUnit);
+	throw NotFound<CourseUnitClass*, CourseUnit*>(&courseUnit);
 }
 
 vector<College*> EnrollmentSystem::getAllColleges()

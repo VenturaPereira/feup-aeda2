@@ -27,14 +27,14 @@ protected:
 
 public:
 	//MEMBER FUNCTIONS
-	CourseUnit(string n, string a, Course* c, unsigned short int y, unsigned short int s, double credits);
-	virtual bool addStudent(Student* s) = 0;
-	bool removeStudent(Student* s);
-	void addProfessor(Tutor* t);
-	bool removeProfessor(Tutor* t);
-	void addCourseUnitClass(CourseUnitClass* cuc);
-	bool removeCourseUnitClass(CourseUnitClass* cuc);
-	void addStudentWithoutCheck(Student* s);
+	CourseUnit(string n, string a, Course& c, unsigned short int y, unsigned short int s, double credits);
+	virtual bool addStudent(Student& s) = 0;
+	bool removeStudent(Student& s);
+	void addProfessor(Tutor& t);
+	bool removeProfessor(Tutor& t);
+	void addCourseUnitClass(CourseUnitClass& cuc);
+	bool removeCourseUnitClass(CourseUnitClass& cuc);
+	void addStudentWithoutCheck(Student& s);
 			
 	//COMPARES
 	friend bool compareCourseUnitByNumberStudents(CourseUnit* cu1, CourseUnit* cu2);
@@ -52,11 +52,10 @@ public:
 	vector<CourseUnitClass*>& getClasses() { return classes; }
 	vector<Student*>& getStudentsCurrentlyInCourseUnit() { return studentsCurrentlyInCourseUnit; }
 	vector<Tutor*>& getCourseUnitProfessors() { return courseUnitProfessors; }
-	Course* getCourse() { return course; }
+	Course& getCourse() { return *course; }
 
 	//PRINT TO SCREEN
 	virtual void show() const = 0;
-	//virtual void showAllClasses() const = 0;
 };
 
 
@@ -70,8 +69,8 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	OptionalCourseUnit(unsigned int mnos, string n, string a, Course* c, unsigned short int y, unsigned short int s, string sa, double cred);
-	virtual bool addStudent(Student* s);
+	OptionalCourseUnit(unsigned int mnos, string n, string a, Course& c, unsigned short int y, unsigned short int s, string sa, double cred);
+	virtual bool addStudent(Student& s);
 
 	//GETS
 	unsigned short int getMaxStudents() const { return MAXIMUM_NUMBER_OF_STUDENTS; }
@@ -82,7 +81,6 @@ public:
 
 	//PRINT TO SCREEN
 	virtual void show() const;
-	//virtual void showAllClasses() const;
 };
 
 
@@ -94,8 +92,8 @@ private:
 
 public:
 	//MEMBER FUNCTIONS
-	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course* c, unsigned short int y, unsigned short int s, double cred);
-	virtual bool addStudent(Student* s);
+	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course& c, unsigned short int y, unsigned short int s, double cred);
+	virtual bool addStudent(Student& s);
 
 	//GETS
 	unsigned int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
@@ -105,7 +103,6 @@ public:
 
 	//PRINT TO SCREEN
 	virtual void show() const;
-	//virtual void showAllClasses() const;
 };
 
 #endif

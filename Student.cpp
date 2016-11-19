@@ -10,23 +10,23 @@
 #include "Utilities.h"
 
 
-Student::Student(string n, Date dob, Course* c) 
+Student::Student(string n, Date dob, Course& c) 
 	: CollegeUser(n, dob, c)
 {
-	course = c;
+	course = &c;
 	year = 1;
 	credits = double(0);
 	assignID();
 	assignEmail();
 	assignTutor();
-	c->addStudent(this);
+	c.addStudent(*this);
 }
 
-Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
+Student::Student(string n, Date dob, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
 	: CollegeUser(n, dob, c),
-	tutor(t), year(y), credits(cr), status(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
+	tutor(&t), year(y), credits(cr), status(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {
-	course = c;
+	course = &c;
 	setID(id);
 	assignEmail();
 	map<CourseUnit*, CourseUnitClass*>::iterator mapIt;
@@ -34,11 +34,11 @@ Student::Student(string n, Date dob, Course* c, Tutor* t, unsigned short int y, 
 		mapIt != cca.end();
 		mapIt++) 
 	{
-		mapIt->first->addStudentWithoutCheck(this);
-		mapIt->second->addStudent(this);
+		mapIt->first->addStudentWithoutCheck(*this);
+		mapIt->second->addStudent(*this);
 	}
-	t->tutorStudent(this);
-	c->addStudent(this);
+	t.tutorStudent(*this);
+	c.addStudent(*this);
 }
 
 bool Student::assignTutor()
@@ -52,73 +52,73 @@ bool Student::assignTutor()
 		if ((*it)->getStudents().size() < (*minimumStudents)->getStudents().size())
 			minimumStudents = it;
 	}
-	(*minimumStudents)->tutorStudent(this);
+	(*minimumStudents)->tutorStudent(*this);
 	tutor = *minimumStudents;
 	return true;
 }
 
 void Student::assignEmail()
 {
-	email = course->getCollege()->getUniversity()->getAcronym()
+	email = course->getCollege().getUniversity().getAcronym()
 		+ to_string(ID)
 		+ '@'
-		+ course->getCollege()->getAcronym()
+		+ course->getCollege().getAcronym()
 		+ '.'
-		+ course->getCollege()->getUniversity()->getAcronym()
+		+ course->getCollege().getUniversity().getAcronym()
 		+ '.'
-		+ course->getCollege()->getUniversity()->getCountryAcronym();
+		+ course->getCollege().getUniversity().getCountryAcronym();
 }
 
 void Student::assignID()
 {
-	ID = dateOfRegistration.getYear() * 100000 + 1 + getCourse()->getCollege()->getUniversity()->getLastStudentID();
-	course->getCollege()->getUniversity()->incrementLastStudentID();
+	ID = dateOfRegistration.getYear() * 100000 + 1 + course->getCollege().getUniversity().getLastStudentID();
+	course->getCollege().getUniversity().incrementLastStudentID();
 }
 
-bool Student::enrollClass(CourseUnitClass* courseUnitClass)
+bool Student::enrollClass(CourseUnitClass& courseUnitClass)
 {
-	MandatoryCourseUnit* castIt = dynamic_cast<MandatoryCourseUnit*>(courseUnitClass->getCourseUnit());
+	MandatoryCourseUnit* castIt = dynamic_cast<MandatoryCourseUnit*>(&(courseUnitClass.getCourseUnit()));
 	if (castIt != NULL) //IT'S MANDATORY
 	{
 		//CHECK IF CLASS IS FULL
-		if (courseUnitClass->getNumberOfStudents() < castIt->getMaxStudentsPerClass())
+		if (courseUnitClass.getNumberOfStudents() < castIt->getMaxStudentsPerClass())
 		{
-			courseUnitClass->addStudent(this);
-			classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(courseUnitClass->getCourseUnit(), courseUnitClass));
+			courseUnitClass.addStudent(*this);
+			classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(&(courseUnitClass.getCourseUnit()), &courseUnitClass));
 			return true;
 		}
 		else return false;
 	}
 	//IT'S OPTIONAL ADD THE STUDENT
-	courseUnitClass->addStudent(this); //ADD STUDENT TO CLASS
-	classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(courseUnitClass->getCourseUnit(), courseUnitClass));
+	courseUnitClass.addStudent(*this); //ADD STUDENT TO CLASS
+	classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(&(courseUnitClass.getCourseUnit()), &courseUnitClass));
 	return true;
 
 }
 
-bool Student::enrollCourseUnit(CourseUnit* courseUnit)
+bool Student::enrollCourseUnit(CourseUnit& courseUnit)
 {
 	//FIND THE ARGUMENT IN THE VECTOR OF COURSE UNITS
 	vector<CourseUnit*>::iterator itOfCourseUnit;
-	for (itOfCourseUnit = getCourse()->getCourseUnits().begin();
-		itOfCourseUnit != getCourse()->getCourseUnits().end();
+	for (itOfCourseUnit = course->getCourseUnits().begin();
+		itOfCourseUnit != course->getCourseUnits().end();
 		itOfCourseUnit++)
 	{
-		if (*itOfCourseUnit == courseUnit)
+		if (*itOfCourseUnit == &courseUnit)
 			break;
 	}
 
-	if (itOfCourseUnit == getCourse()->getCourseUnits().end()) //THERE IS NO COURSE UNIT IN THE VECTOR THAT MATCHES THE ARGUMENT 
-		throw NotFound<CourseUnit*, string>(courseUnit->getName());
+	if (itOfCourseUnit == course->getCourseUnits().end()) //THERE IS NO COURSE UNIT IN THE VECTOR THAT MATCHES THE ARGUMENT 
+		throw NotFound<CourseUnit*, string>(courseUnit.getName());
 
-	if (courseUnit->addStudent(this)) //TRY TO ADD STUDENT TO COURSE UNIT
+	if (courseUnit.addStudent(*this)) //TRY TO ADD STUDENT TO COURSE UNIT
 	{
 		vector<CourseUnitClass*>::iterator itCourseUnitClass;
 		for (itCourseUnitClass = (*itOfCourseUnit)->getClasses().begin();
 			itCourseUnitClass != (*itOfCourseUnit)->getClasses().end();
 			itCourseUnitClass++)
 		{
-			if (enrollClass((*itCourseUnitClass))) //TRY TO ADD STUDENT TO CLASS
+			if (enrollClass(*(*itCourseUnitClass))) //TRY TO ADD STUDENT TO CLASS
 				return true;
 		}
 	}
@@ -126,29 +126,29 @@ bool Student::enrollCourseUnit(CourseUnit* courseUnit)
 
 
 	//ALL CLASSES WERE FULL - CREATE A NEW CLASS AND ADD THE STUDENT
-	MandatoryCourseUnit* castIt = dynamic_cast<MandatoryCourseUnit*>(courseUnit);
+	MandatoryCourseUnit* castIt = dynamic_cast<MandatoryCourseUnit*>(&courseUnit);
 	if (castIt != NULL) //IT'S MANDATORY
 	{
-		CourseUnitClass* newClass = new CourseUnitClass(courseUnit->getNumberClasses() + 1, courseUnit);
-		courseUnit->addCourseUnitClass(newClass);
-		enrollClass(newClass);
+		CourseUnitClass* newClass = new CourseUnitClass(courseUnit.getNumberClasses() + 1, courseUnit);
+		courseUnit.addCourseUnitClass(*newClass);
+		enrollClass(*newClass);
 		return true;
 	}
 	else //IT'S OPTIONAL
 	{
-		OptionalCourseUnit* castIt = dynamic_cast<OptionalCourseUnit*>(courseUnit);
+		OptionalCourseUnit* castIt = dynamic_cast<OptionalCourseUnit*>(&courseUnit);
 		if (castIt->getClasses().size() == 0) //THERE ARE NO CLASSES, CREATE ONE
 		{
-			CourseUnitClass* newClass = new CourseUnitClass(courseUnit->getNumberClasses() + 1, courseUnit);
-			courseUnit->addCourseUnitClass(newClass);
-			enrollClass(newClass);
+			CourseUnitClass* newClass = new CourseUnitClass(courseUnit.getNumberClasses() + 1, courseUnit);
+			courseUnit.addCourseUnitClass(*newClass);
+			enrollClass(*newClass);
 			return true;
 		}
 		else return false; //THERE IS A CLASS AND IT'S FULL
 	}
 }
 
-bool Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
+bool Student::completedClass(CourseUnit& courseUnit, unsigned short int grade)
 {
 	//CHECK IF GRADE IS ACCEPTABLE
 	if (grade < 10)
@@ -158,7 +158,7 @@ bool Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 		it != completedCourseUnits.end();
 		it++)
 	{
-		if (it->first == courseUnit) //STUDENT COMPLETED THE COURSE UNIT BEFORE
+		if (it->first == &courseUnit) //STUDENT COMPLETED THE COURSE UNIT BEFORE
 		{
 			if (grade > it->second)  //WITH A LOWER GRADE
 			{
@@ -169,13 +169,13 @@ bool Student::completedClass(CourseUnit* courseUnit, unsigned short int grade)
 		}
 	}
 
-	completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
+	completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(&courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
 	return true;
 }
 
 bool Student::completedAllCourseUnits(unsigned short int y)
 {
-	vector<CourseUnit*> courseUnitsYear = this->getCourse()->getCourseUnits(y);
+	vector<CourseUnit*> courseUnitsYear = this->getCourse().getCourseUnits(y);
 	double optionalCredits = 0.0;
 
 	vector<CourseUnit*>::const_iterator cuIt;
@@ -230,11 +230,11 @@ bool compareStudentByBirth(Student* s1, Student* s2)
 
 ofstream& operator<<(ofstream& file, Student *s)
 {
-	file << s->getCourse()->getCollege()->getUniversity()->getAcronym()
+	file << s->course->getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< s->getCourse()->getCollege()->getAcronym()
+		<< s->course->getCollege().getAcronym()
 		<< ';'
-		<< s->getCourse()->getAcronym()
+		<< s->course->getAcronym()
 		<< ';'
 		<< s->name
 		<< ';'
@@ -287,8 +287,8 @@ ofstream& operator<<(ofstream& file, Student *s)
 }
 
 void Student::show() const{
-	cout << course->getCollege()->getAcronym()
-		<< setw(CONSOLE_WIDTH * 0.5 - course->getCollege()->getAcronym().size())
+	cout << course->getCollege().getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getCollege().getAcronym().size())
 		<< course->getAcronym()
 		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
 		<< name

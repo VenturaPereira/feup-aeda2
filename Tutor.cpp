@@ -8,40 +8,40 @@
 #include "Student.h"
 #include "Utilities.h"
 
-Tutor::Tutor(string n, Date dob, Course* c, vector<CourseUnit*> att)
-	: CollegeUser(n, dob, c), course(c),
+Tutor::Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att)
+	: CollegeUser(n, dob, c), course(&c),
 	ableToTeach(att)
 {
 	assignID();
 	assignEmail();
-	c->addProfessor(this);
+	c.addProfessor(*this);
 }
 
-Tutor::Tutor(string n, Date dob, Course* c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att)
-	: CollegeUser(n, dob, c), course(c),
+Tutor::Tutor(string n, Date dob, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att)
+	: CollegeUser(n, dob, c), course(&c),
 	ableToTeach(att), currentlyTeaching(ct)
 {
 	setID(ID);
 	assignEmail();
-	c->addProfessor(this);
+	c.addProfessor(*this);
 }
 
-void Tutor::tutorStudent(Student* s)
+void Tutor::tutorStudent(Student& s)
 {
-	students.push_back(s);
+	students.push_back(&s);
 }
 
-bool Tutor::teachClass(CourseUnitClass* c)
+bool Tutor::teachClass(CourseUnitClass& c)
 {
-	if (find(ableToTeach.begin(), ableToTeach.end(), c->getCourseUnit()) == ableToTeach.end()) //NOT ABLE TO TEACH
+	if (find(ableToTeach.begin(), ableToTeach.end(), &(c.getCourseUnit())) == ableToTeach.end()) //NOT ABLE TO TEACH
 		return false;
 		
-	c->setProfessor(this);
+	c.setProfessor(*this);
 
-	if (find(currentlyTeaching.begin(), currentlyTeaching.end(), c->getCourseUnit()) == currentlyTeaching.end()) //NOT TEACHING
+	if (find(currentlyTeaching.begin(), currentlyTeaching.end(), &(c.getCourseUnit())) == currentlyTeaching.end()) //NOT TEACHING
 	{
-		c->getCourseUnit()->addProfessor(this);
-		currentlyTeaching.push_back(c->getCourseUnit());
+		c.getCourseUnit().addProfessor(*this);
+		currentlyTeaching.push_back(&(c.getCourseUnit()));
 	}
 		
 	return true;
@@ -60,17 +60,17 @@ void Tutor::assignEmail()
 		email = name;
 	else email = inicials;
 	email += '@'
-		+ getCourse()->getCollege()->getAcronym()
+		+ course->getCollege().getAcronym()
 		+ '.'
-		+ getCourse()->getCollege()->getUniversity()->getAcronym()
+		+ course->getCollege().getUniversity().getAcronym()
 		+ '.'
-		+ getCourse()->getCollege()->getUniversity()->getCountryAcronym();
+		+ course->getCollege().getUniversity().getCountryAcronym();
 }
 
 void Tutor::assignID()
 {
-	ID = course->getCollege()->getUniversity()->getLastProfessorID() + 1;
-	course->getCollege()->getUniversity()->incrementLastProfessorID();
+	ID = course->getCollege().getUniversity().getLastProfessorID() + 1;
+	course->getCollege().getUniversity().incrementLastProfessorID();
 }
 
 bool compareProfessorByName(Tutor* p1, Tutor* p2) 
@@ -90,11 +90,11 @@ bool compareProfessorByBirth(Tutor* p1, Tutor* p2)
 
 ofstream& operator<<(ofstream& file, Tutor *t)
 {
-	file << t->getCourse()->getCollege()->getUniversity()->getAcronym()
+	file << t->getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< t->getCourse()->getCollege()->getAcronym()
+		<< t->getCourse().getCollege().getAcronym()
 		<< ';'
-		<< t->getCourse()->getAcronym()
+		<< t->getCourse().getAcronym()
 		<< ';'
 		<< t->name
 		<< ';'
@@ -137,8 +137,8 @@ ofstream& operator<<(ofstream& file, Tutor *t)
 }
 
 void Tutor::show() const {
-	cout << course->getCollege()->getAcronym()
-		<< setw(CONSOLE_WIDTH * 0.5 - course->getCollege()->getAcronym().size())
+	cout << course->getCollege().getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.5 - course->getCollege().getAcronym().size())
 		<< course->getAcronym()
 		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
 		<< name
