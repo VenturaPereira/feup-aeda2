@@ -63,19 +63,19 @@ bool compareCourseUnitClassByNumberStudents(CourseUnitClass* cuc1, CourseUnitCla
 	return (cuc1->getNumberOfStudents() < cuc2->getNumberOfStudents());
 }
 
-ofstream& operator<<(ofstream& file, CourseUnitClass *cuc)
+ofstream& CourseUnitClass::operator<<(ofstream& file)
 {
-	file << cuc->getCourseUnit().getCourse().getCollege().getUniversity().getAcronym()
+	file << this->getCourseUnit().getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< cuc->getCourseUnit().getCourse().getCollege().getAcronym()
+		<< this->getCourseUnit().getCourse().getCollege().getAcronym()
 		<< ';'
-		<< cuc->getCourseUnit().getCourse().getAcronym()
+		<< this->getCourseUnit().getCourse().getAcronym()
 		<< ';'
-		<< cuc->getCourseUnit().getAcronym()
+		<< this->getCourseUnit().getAcronym()
 		<< ';'
-		<< cuc->classNumber
+		<< this->classNumber
 		<< ';'
-		<< cuc->professor->getID()
+		<< this->professor->getID()
 		<< endl;
 
 	return file;

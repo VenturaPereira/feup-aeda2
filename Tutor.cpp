@@ -94,27 +94,27 @@ bool compareProfessorByRegistration(Tutor* p1, Tutor* p2)
 	return p1->dateOfRegistration < p2->dateOfRegistration;
 }
 
-ofstream& operator<<(ofstream& file, Tutor *t)
+ofstream& Tutor::operator<<(ofstream& file)
 {
-	file << t->getCourse().getCollege().getUniversity().getAcronym()
+	file << this->getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< t->getCourse().getCollege().getAcronym()
+		<< this->getCourse().getCollege().getAcronym()
 		<< ';'
-		<< t->getCourse().getAcronym()
+		<< this->getCourse().getAcronym()
 		<< ';'
-		<< t->name
+		<< this->name
 		<< ';'
-		<< t->getDateOfBirth().getDateString()
+		<< this->getDateOfBirth().getDateString()
 		<< ';'
-		<< t->getDateOfRegistration().getDateString()
+		<< this->getDateOfRegistration().getDateString()
 		<< ';'
-		<< t->ID
+		<< this->ID
 		<< ';'
 		<< '{';
 
-	for (unsigned int i = 0; i < t->ableToTeach.size(); i++) {
-		file << t->ableToTeach[i]->getAcronym();
-		if (i != t->ableToTeach.size() - 1)
+	for (unsigned int i = 0; i < this->ableToTeach.size(); i++) {
+		file << this->ableToTeach[i]->getAcronym();
+		if (i != this->ableToTeach.size() - 1)
 			file << ',';
 	}
 
@@ -122,24 +122,14 @@ ofstream& operator<<(ofstream& file, Tutor *t)
 		<< ';'
 		<< '{';
 
-	for (unsigned int i = 0; i < t->currentlyTeaching.size(); i++) {
-		file << t->currentlyTeaching[i]->getAcronym();
-		if (i != t->ableToTeach.size() - 1)
+	for (unsigned int i = 0; i < this->currentlyTeaching.size(); i++) {
+		file << this->currentlyTeaching[i]->getAcronym();
+		if (i != this->currentlyTeaching.size() - 1)
 			file << ',';
 	}
 
-	file << '}';
-		/*<< ';'
-		<< '{';
-
-	for (unsigned int i = 0; i < t->students.size(); i++) {
-		file << t->students[i]->getID();
-		if (i != t->students.size() - 1)
-			file << ',';
-	}
-
-	file << '}'*/
-	file << endl;
+	file << '}'
+		 << endl;
 
 	return file;
 }

@@ -68,17 +68,17 @@ bool compareUniversityByName(University* u1, University* u2)
 	return u1->name < u2->name;
 }
 
-ofstream& operator<<(ofstream &file, University *uni)
+ofstream& University::operator<<(ofstream &file)
 {
-	file << uni->name
+	file << this->name
 		<< ";" 
-		<< uni->acronym
+		<< this->acronym
 		<<";"
-		<< uni->countryAcronym
+		<< this->countryAcronym
 		<< ";"
-		<< uni->lastStudentID
+		<< this->lastStudentID
 		<< ";"
-		<< uni->lastProfessorID
+		<< this->lastProfessorID
 		<< endl;
 	return file;
 }

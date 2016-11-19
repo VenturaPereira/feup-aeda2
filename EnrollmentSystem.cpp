@@ -632,11 +632,12 @@ bool addStudentHandler(EnrollmentSystem& s)
 {
 	Date dateOfBirth;
 	Course* course;
-	string studentName;
+	string studentName, status;
 
 	try
 	{
 		studentName = enterString("\nAdd Student\n\n", "Enter the name of the student [CTRL+Z to cancel] : ");
+		status = enterString("\nAdd Student\n\n", "Enter the status of the student [CTRL+Z to cancel] : ");
 		while (true)
 		{
 			dateOfBirth = Date(enterString("\nAdd Student\n\n", "Enter the date of birth (DD-MM-YYYY) [CTRL+Z to cancel] : "));
@@ -677,7 +678,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 		return false;
 	}
 		
-	new Student(studentName, dateOfBirth, *course);
+	new Student(studentName, dateOfBirth, *course, status);
 
 	return true;
 }

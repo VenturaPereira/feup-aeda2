@@ -158,55 +158,56 @@ bool compareCourseUnitByTime(CourseUnit* cu1, CourseUnit* cu2)
 	else return (cu1->semester < cu2->semester);
 }
 
-ofstream& operator<<(ofstream& file, OptionalCourseUnit *ocu)
+ofstream& OptionalCourseUnit::operator<<(ofstream& file)
 {
-	file << ocu->getCourse().getCollege().getUniversity().getAcronym()
+	file << this->getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< ocu->getCourse().getCollege().getAcronym()
+		<< this->getCourse().getCollege().getAcronym()
 		<< ';'
-		<< ocu->getCourse().getAcronym()
+		<< this->getCourse().getAcronym()
 		<< ';'
-		<< ocu->name
+		<< this->name
 		<< ';'
-		<< ocu->acronym
+		<< this->acronym
 		<< ';'
 		<< "Optional"
 		<< ';'
-		<< ocu->MAXIMUM_NUMBER_OF_STUDENTS
+		<< this->MAXIMUM_NUMBER_OF_STUDENTS
 		<< ';'
-		<< ocu->scientificArea
+		<< this->scientificArea
 		<< ';'
-		<< ocu->year
+		<< this->year
 		<< ';'
-		<< ocu->semester
+		<< this->semester
 		<< ';'
-		<< ocu->credits
+		<< this->credits
 		<< endl;
 
 	return file;
 }
 
-ofstream& operator<<(ofstream& file, MandatoryCourseUnit *mcu)
+ofstream& MandatoryCourseUnit::operator<<(ofstream& file)
 {
-	file << mcu->getCourse().getCollege().getUniversity().getAcronym()
+
+	file << this->getCourse().getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< mcu->getCourse().getCollege().getAcronym()
+		<< this->getCourse().getCollege().getAcronym()
 		<< ';'
-		<< mcu->getCourse().getAcronym()
+		<< this->getCourse().getAcronym()
 		<< ';'
-		<< mcu->name
+		<< this->name
 		<< ';'
-		<< mcu->acronym
+		<< this->acronym
 		<< ';'
 		<< "Mandatory"
 		<< ';'
-		<< mcu->MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS
+		<< this->MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS
 		<< ';'
-		<< mcu->year
+		<< this->year
 		<< ';'
-		<< mcu->semester
+		<< this->semester
 		<< ';'
-		<< mcu->credits
+		<< this->credits
 		<< endl;
 
 	return file;

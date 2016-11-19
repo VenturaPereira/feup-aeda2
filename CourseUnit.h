@@ -56,6 +56,9 @@ public:
 
 	//PRINT TO SCREEN
 	virtual void show() const = 0;
+
+	//OPERATORS
+	virtual ofstream& operator<<(ofstream& file) = 0;
 };
 
 
@@ -77,7 +80,7 @@ public:
 	string getScientificArea() const { return scientificArea; }
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, OptionalCourseUnit *ocu);
+	virtual ofstream& operator<<(ofstream& file);
 
 	//PRINT TO SCREEN
 	virtual void show() const;
@@ -99,7 +102,7 @@ public:
 	unsigned int getMaxStudentsPerClass() const { return MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS; }
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, MandatoryCourseUnit *mcu);
+	virtual ofstream& operator<<(ofstream& file);
 
 	//PRINT TO SCREEN
 	virtual void show() const;

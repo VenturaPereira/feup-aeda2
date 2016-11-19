@@ -42,13 +42,13 @@ void College::show() const
 		<< endl;
 }
 
-ofstream& operator<<(ofstream& file, College *c)
+ofstream& College::operator<<(ofstream& file)
 {
-	file << c->university->getAcronym()
+	file << this->university->getAcronym()
 		<< ';'
-		<< c->name
+		<< this->name
 		<< ';'
-		<< c->acronym
+		<< this->acronym
 		<< endl;
 	return file;
 }

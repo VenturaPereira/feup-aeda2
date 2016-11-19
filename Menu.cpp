@@ -42,21 +42,14 @@ bool mainMenu(EnrollmentSystem &sys){
 			break;
 		case 5:
 			cout << "\nAre you sure you want to exit? (Y/N)\n";
-			if (yesNoAnswer()){
-				if (sys.getChanged()){
-					cout << "\nDo you want to save your changes? (Y/N)\n";
-					if (yesNoAnswer()){
-						cout << "\n\nSaving. Don't turn off the power!";
-						sys.saveHandler();
-						cout << "\n\nSaving complete!\n\n";
-						return true;
-					}
-					return true;
-				}
+			if (yesNoAnswer())
+			{
+				cout << "\n\nSaving. Don't turn off the power!";
+				sys.saveHandler();
+				cout << "\n\nSaving complete!\n\n";
 				return true;
 			}
-			else
-				break;
+			break;
 		}
 	}
 }

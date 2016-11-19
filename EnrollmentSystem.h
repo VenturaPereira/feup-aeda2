@@ -63,7 +63,7 @@ public:
 		ofstream file;
 		file.open(fileName);
 		for (unsigned int i = 0; i < vector.size(); i++)
-			file << vector[i];
+			(*vector[i]).operator<<(file);
 		file.close();
 	}
 

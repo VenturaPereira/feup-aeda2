@@ -36,7 +36,7 @@ public:
 	void show() const;
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, College *c);
+	ofstream& operator<<(ofstream& file);
 		
 };
 

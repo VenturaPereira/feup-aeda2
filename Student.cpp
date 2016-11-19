@@ -10,9 +10,10 @@
 #include "Utilities.h"
 
 
-Student::Student(string n, Date dob, Course& c) 
+Student::Student(string n, Date dob, Course& c, string s) 
 	: CollegeUser(n, dob, c)
 {
+	status = s;
 	course = &c;
 	year = 1;
 	credits = double(0);
@@ -234,39 +235,39 @@ bool compareStudentByRegistration(Student* s1, Student* s2)
 	return s1->dateOfRegistration < s2->dateOfRegistration;
 }
 
-ofstream& operator<<(ofstream& file, Student *s)
+ofstream& Student::operator<<(ofstream& file)
 {
-	file << s->course->getCollege().getUniversity().getAcronym()
+	file << this->course->getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< s->course->getCollege().getAcronym()
+		<< this->course->getCollege().getAcronym()
 		<< ';'
-		<< s->course->getAcronym()
+		<< this->course->getAcronym()
 		<< ';'
-		<< s->name
+		<< this->name
 		<< ';'
-		<< s->getDateOfBirth().getDateString()
+		<< this->getDateOfBirth().getDateString()
 		<< ';'
-		<< s->getDateOfRegistration().getDateString()
+		<< this->getDateOfRegistration().getDateString()
 		<< ';'
-		<< s->status
+		<< this->status
 		<< ';'
-		<< s->credits
+		<< this->credits
 		<< ';'
-		<< s->year
+		<< this->year
 		<< ';'
-		<< s->ID
+		<< this->ID
 		<< ';'
-		<< s->tutor->getID()
+		<< this->tutor->getID()
 		<< ';'
 		<< '{';
 
 	map<CourseUnit*, unsigned short>::const_iterator ccuIt;
-	for (ccuIt = s->completedCourseUnits.begin();
-		ccuIt != s->completedCourseUnits.end();
+	for (ccuIt = this->completedCourseUnits.begin();
+		ccuIt != this->completedCourseUnits.end();
 		ccuIt++)
 	{
 		file << '(' << ccuIt->first->getAcronym() << ',' << ccuIt->second << ')';
-		map<CourseUnit*, unsigned short>::const_iterator it = s->completedCourseUnits.end();
+		map<CourseUnit*, unsigned short>::const_iterator it = this->completedCourseUnits.end();
 		it--;
 		if (ccuIt != it)
 			file << ',';
@@ -277,12 +278,12 @@ ofstream& operator<<(ofstream& file, Student *s)
 		<< '{';
 
 	map<CourseUnit*, CourseUnitClass*>::const_iterator ccaIt;
-	for (ccaIt = s->classesCurrentlyAtending.begin();
-		ccaIt != s->classesCurrentlyAtending.end();
+	for (ccaIt = this->classesCurrentlyAtending.begin();
+		ccaIt != this->classesCurrentlyAtending.end();
 		ccaIt++)
 	{
 		file << '(' << ccaIt->first->getAcronym() << ',' << ccaIt->second->getClassNumber() << ')';
-		map<CourseUnit*, CourseUnitClass*>::const_iterator it = s->classesCurrentlyAtending.end();
+		map<CourseUnit*, CourseUnitClass*>::const_iterator it = this->classesCurrentlyAtending.end();
 		it--;
 		if (ccaIt != it)
 			file << ',';

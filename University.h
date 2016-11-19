@@ -43,7 +43,7 @@ public:
 	friend bool compareUniversityByName(University* u1, University* u2);
 	
 	//OPERATORS
-	friend ofstream& operator<<(ofstream &file, University *uni);
+	ofstream& operator<<(ofstream &file);
 };
 
 #endif

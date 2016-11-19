@@ -127,15 +127,15 @@ bool compareCourseByName(Course* c1, Course* c2)
 	return (c1->getName() < c2->getName());
 }
 
-ofstream& operator<<(ofstream &file, Course *c)
+ofstream& Course::operator<<(ofstream &file)
 {
-	file << c->getCollege().getUniversity().getAcronym()
+	file << this->getCollege().getUniversity().getAcronym()
 		<< ';'
-		<< c->getCollege().getAcronym()
+		<< this->getCollege().getAcronym()
 		<< ';'
-		<< c->name
+		<< this->name
 		<< ';'
-		<< c->acronym
+		<< this->acronym
 		<< endl;
 	return file;
 }

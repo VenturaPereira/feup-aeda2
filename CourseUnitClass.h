@@ -40,7 +40,7 @@ public:
 	CourseUnit& getCourseUnit() {return *courseUnit;}
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, CourseUnitClass *cuc);
+	ofstream& operator<<(ofstream& file);
 
 	//PRINT TO SCREEN
 	void show() const;

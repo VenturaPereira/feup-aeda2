@@ -30,7 +30,7 @@ protected:
 	virtual void assignID();
 public:
 	//MEMBER FUNCTIONS
-	Student(string n, Date dob, Course& c);
+	Student(string n, Date dob, Course& c, string s);
 	Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
 	bool assignTutor();
 	bool enrollCourseUnit(CourseUnit& courseUnit);
@@ -62,7 +62,7 @@ public:
 	void show() const;
 
 	//OPERATORS
-	friend ofstream& operator<<(ofstream& file, Student *s);
+	ofstream& operator<<(ofstream& file);
 };
 
 #endif
