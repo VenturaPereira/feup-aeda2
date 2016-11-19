@@ -22,7 +22,7 @@ bool College::removeCourse(Course& c)
 	{
 		if ((*it) == &c) 
 		{
-			courses.erase(it);
+			delete(*it);
 			return true;
 		}
 	}

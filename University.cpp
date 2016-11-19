@@ -30,7 +30,7 @@ bool University::removeCollege(College& c)
 	{
 		if ((*it) == &c)
 		{
-			collegesVector.erase(it);
+			delete(*it);
 			return true;
 		}
 	}
