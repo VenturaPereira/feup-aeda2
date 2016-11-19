@@ -5,8 +5,9 @@
 
 #include <string>
 #include <vector>
-#include "EnrollmentSystem.h"
 using namespace std;
+
+class EnrollmentSystem;
 
 unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max);
 bool mainMenu(EnrollmentSystem &sys);

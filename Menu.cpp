@@ -2,6 +2,7 @@
 
 #include "Menu.h"
 #include "Utilities.h"
+#include "EnrollmentSystem.h"
 
 unsigned int menuOption(string badInput, string normalInput, vector<string> tryAgain, unsigned int min, unsigned int max){
 	unsigned int option;
