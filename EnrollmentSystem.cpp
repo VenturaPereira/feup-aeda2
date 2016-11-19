@@ -14,7 +14,6 @@
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
 {
-	save = false;
 	loadHandler();
 	//LOAD DEFAULT SORTING OPTIONS
 	courseSortOption = &compareCourseByName;

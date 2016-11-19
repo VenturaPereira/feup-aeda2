@@ -29,7 +29,6 @@ private:
 		courseUnitClassesFile = "courseunitclasses.txt",
 		studentsFile = "students.txt",
 		professorsFile = "tutors.txt";
-	bool save;
 	vector<University*> universitiesVector;
 
 	//SORTING OPTIONS (POINTERS TO THE SORTING FUNCTIONS)
@@ -103,7 +102,6 @@ public:
 
 	//GETS
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }
-	bool getChanged() const { return save; }
 	vector<University*>& getUniversities() { return universitiesVector; }
 	friend University& getUniversity(EnrollmentSystem &s);
 	friend College& getCollege(EnrollmentSystem &s);
