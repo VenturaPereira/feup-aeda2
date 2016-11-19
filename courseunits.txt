@@ -1,4 +1,86 @@
 up;feup;mieic;Algoritmos e Estruturas de Dados;aeda;Mandatory;30;2;1;7.5
 up;feup;mieic;Algebra;alge;Mandatory;30;1;1;4.5
+<<<<<<< HEAD
+up;feup;mieic;Analise Matematica;amat;Mandatory;30;1;1;6
+up;feup;mieic;Arquitectura e Organizacao de Computadores;aoco;Mandatory;30;1;1;6
+up;feup;mieic;Fundamentos de Programacao;fpro;Mandatory;30;1;1;6
+up;feup;mieic;Matematica Discreta;mdis;Mandatory;30;1;1;6
+up;feup;mieic;Projeto FEUP;pf;Mandatory;30;1;1;1.5
+up;feup;mieic;Metodos Estatisticos;mest;30;1;2;4.5
+up;feup;mieic;Programacao;prog;Mandatory;30;1;2;7.5
+up;feup;mieic;Fisica I;fisi1;Mandatory;30;1;2;6
+up;feup;mieic;Complementos de Matematica;cmat;Mandatory;30;1;2;6
+up;feup;mieic;Microprocessadores e Computadores Pessoais;mpcp;Mandatory;30;1;2;6
+up;feup;mieic;Teoria da Computacao;tcom;Mandatory;30;2;1;6
+up;feup;mieic;Laboratorio de Computadores;lcom;Mandatory;30;2;1;6
+up;feup;mieic;Metodos Numericos;mnum;Mandatory;30;2;1;4.5
+up;feup;mieic;Fisica II;fisi2;Mandatory;30;2;1;6
+up;feup;mieic;Bases de Dados;bdad;Mandatory;30;2;2;6
+up;feup;mieic;Concepcao e Analise de Algoritmos;cal;Mandatory;30;2;2;6
+up;feup;mieic;Computacao Grafica;cgraf;Mandatory;30;2;2;6
+up;feup;mieic;Sistemas Operativos;sope;Mandatory;30;2;2;6
+up;feup;mieic;Laboratorio de Programacao Orientada por Objectos;lpoo;Mandatory;30;2;2;6
+up;feup;mieic;Programacao em Logica;plog;Mandatory;30;3;1;4.5
+up;feup;mieic;Laboratorio de Aplicacoes com Interface Grafica;laig;Mandatory;30;3;1;7.5
+up;feup;mieic;Engenharia de Software;esof;Mandatory;30;3;1;6
+up;feup;mieic;Redes de Computadores;rcom;Mandatory;30;3;1;6
+up;feup;mieic;Linguagens de Tecnologias Web;ltw;Mandatory;30;3;1;6
+up;feup;mieic;Laboratorio de Bases de Dados e Aplicacoes Web;lbaw;Mandatory;30;3;2;7.5
+up;feup;mieic;Inteligência Artificial;iart;Mandatory;30;3;2;6
+up;feup;mieic;Compiladores;comp;Mandatory;30;3;2;6
+up;feup;mieic;Sistemas Distribuídos;sdis;Mandatory;30;3;2;6
+up;feup;mieic;Proficiência Pessoal e Interpessoal;ppin;Mandatory;30;3;2;4.5
+up;feup;mieic;Sistemas de Informação;sinf;Mandatory;30;4;1;6
+up;feup;mieic;Laboratório de Desenvolvimento de Software;ldso;Mandatory;30;4;1;7.5
+up;feup;mieic;Gestão de Empresas;gemp;Mandatory;30;4;1;4.5
+up;feup;mieic;Agentes e Inteligência Artificial Distribuída;aiad;Mandatory;30;4;1;6
+up;feup;mieic;Métodos Formais em Engenharia de Software;mfes;Mandatory;30;4;1;6
+up;feup;mieic;Investigação Operacional;iope;Mandatory;30;4;2;4.5
+up;feup;mieic;Laboratório de Gestão de Projectos;lgpr;Mandatory;30;4;2;7.5
+up;feup;mieic;Algoritmos de Processamento de Sinal;apsi;Optional;15;Interaccao e Multimedia;4;2;6
+up;feup;mieic;Arquitectura de Sistemas de Software;asso;Optional;15;Engenharia de Software;4;2;6
+up;feup;mieic;Arquitectura e Gestao de Redes e Sistemas;agrs;Optional;15;Sistemas Operativos e Redes;4;2;6
+up;feup;mieic;Computação Paralela;cpar;Optional;15;Programacao;4;2;6
+up;feup;mieic;Comunicações Móveis;cmo;Optional;15;Sistemas Operativos e Redes;4;2;6
+up;feup;mieic;Desenvolvimento de Jogos de Computador;djco;Optional;15;Interaccao e Multimedia;4;2;6
+up;feup;mieic;Engenharia de Requisitos de Sistemas de Software;erss;Optional;15;Engenharia de Software;4;2;6
+up;feup;mieic;Gestao de Operacoes e Logistica;golo;Optional;15;Metodos Quantitativos e Gestao;4;2;6
+up;feup;mieic;Linguagens de Anotação e Processamento de Documentos;lapd;Optional;Sistemas de Informacao;15;4;2;6
+up;feup;mieic;Marketing;mark;Optional;15;Metodos Quantitativos e Gestao;4;2;6
+up;feup;mieic;Modelacao e Simulacao de Sistemas;mssi;Optional;15;Inteligencia Artificial;4;2;6
+up;feup;mieic;Multimédia e Novos Servicos;mnse;Optional;15;Interaccao e Multimedia;4;2;6
+up;feup;mieic;Segurança em Sistemas Informáticos;ssin;Optional;15;Sistemas Operativos e Redes;4;2;6
+up;feup;mieic;Sinais e Sensores;ssen;Optional;15;Automacao Industrial;4;2;6
+up;feup;mieic;Sistemas Críticos;scri;Optional;15;Automacao Industrial;4;2;6
+up;feup;mieic;Sistemas Embutidos e de Tempo Real;setr;Optional;15;Automacao Industrial;4;2;6
+up;feup;mieic;Sistemas Geoespaciais;sgeo;Optional;15;Sistemas de Informacao;4;2;6
+up;feup;mieic;Sistemas Industriais;sins;Optional;15;Automacao Industrial;4;2;6
+up;feup;mieic;Tecnologias de Bases de Dados;tbda;Optional;15;Sistemas de Informacao;4;2;6
+up;feup;mieic;Tecnologias de Distribuição e Integração;tdin;Optional;15;Sistemas Operativos e Redes;4;2;6
+up;feup;mieic;Analise de Projectos de Investimento;apin;Optional;15;Metodos Quantitativos e Gestao;5;1;6
+up;feup;mieic;Armazens de Dados;adad;Optional;15;Sistemas de Informacao;5;1;6
+up;feup;mieic;Arquitecturas Avancadas de Computadores;aaco;Optional;15;Arquitectura de Computadores;5;1;6
+up;feup;mieic;Computação Movel;cmov;Optional;15;Sistemas Operativos e Redes;5;1;6
+up;feup;mieic;Descricao, Armazenamento e Pesquisa de Informacao;dapi;Optional;15;Sistemas de Informacao;5;1;6
+up;feup;mieic;Extraccao de Conhecimento e Aprendizagem Computacional;ecac;Optional;15;Inteligencia Artificial;5;1;6
+up;feup;mieic;Gestão da Qualidade;gqua;Optional;15;Metodos Quantitativos e Gestao;5;1;6
+up;feup;mieic;Gestao de Informacao Empresarial;giem;Optional;15;Sistemas de Informacao;5;1;6
+up;feup;mieic;Interaccao Pessoa-Computador;ipco;Optional;15;Interaccao e Multimedia;5;1;6
+up;feup;mieic;Metodologias Ageis de Desenvolvimento de Software;mads;Optional;15;Engenharia de Software;5;1;6
+up;feup;mieic;Planeamento Estrategico de Sistemas de Informacao;pesi;Optional;15;Sistemas de Informacao;5;1;6
+up;feup;mieic;Processamento da Fala;pfal;Optional;15;Interaccao e Multimedia;5;1;6
+up;feup;mieic;Realidade Virtual e Aumentada;rvau;Optional;15;Interaccao e Multimedia;5;1;6
+up;feup;mieic;Robotica;robo;Optional;15;Inteligencia Artificial;5;1;6
+up;feup;mieic;Seguranca em Sistemas Informaticos;ssin;Optional;15;Sistemas Operativos e Redes;5;1;6
+up;feup;mieic;Seminario de Engenharia de Software e Sistemas de Informacao;sesi;Optional;15;Sistemas de Informacao;5;1;6
+up;feup;mieic;Seminario de Redes e Tecnologias da Informacao;srti;Optional;15;Sistemas Operativos e Redes;5;1;6
+up;feup;mieic;Seminario de Sistemas Inteligentes, Interaccao e Multimedia;ssim;Optional;15;Interaccao e Multimedia;5;1;6
+up;feup;mieic;Servicos de Rede e de Sistema;srsi;Optional;15;Sistemas Operativos e Redes;5;1;6
+up;feup;mieic;Sistemas de Apoio a Decisao;sade;Optional;15;Metodos Quantitativos e Gestao;5;1;6
+up;feup;mieic;Teste, Verificacao e Validacao de Software;tvvs;Optional;15;Engenharia de Software;5;1;6
+up;feup;mieic;Visao por Computador;vcom;Optional;15;Interaccao e Multimedia;5;1;6
+
+=======
 up;feup;mieic;Análise Matemática;amat;Mandatory;30;1;2;6
 up;feup;mieic;Matemática Discreta;mdis;Mandatory;30;1;1;6
+>>>>>>> origin/master
