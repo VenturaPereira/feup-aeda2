@@ -846,14 +846,8 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	}
 	
 
-	if (student->completedClass(*courseUnit, grade))
-	{
-		CourseUnitClass* courseUnitClass = student->getClassesCurrentlyAtending().at(courseUnit);
-		courseUnitClass->removeStudent(*student);
-		courseUnit->removeStudent(*student);
-	}
-	
-	
+	student->completedClass(*courseUnit, grade);
+		
 	//CHECK IF STUDENT HAS COMPLETED ALL THE COURSE UNITS OF THE CURRENT YEAR
 	if (student->completedAllCourseUnits(student->getYear()))
 	{

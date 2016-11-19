@@ -151,23 +151,32 @@ bool Student::enrollCourseUnit(CourseUnit& courseUnit)
 bool Student::completedClass(CourseUnit& courseUnit, unsigned short int grade)
 {
 	//CHECK IF GRADE IS ACCEPTABLE
-	if (grade < 10)
+	if (grade < 10 || grade > 20)
 		return false;
-	bool takingClass = false;
 	
 	//CHECK IF STUDENT IS TAKING THAT CLASS
 	for (map<CourseUnit*, CourseUnitClass*>::iterator it = classesCurrentlyAtending.begin();
 		it != classesCurrentlyAtending.end();
 		it++)
 	{
-		if (it->first == &courseUnit) //STUDENT COMPLETED THE COURSE UNIT BEFORE
+		if (it->first->getAcronym() == courseUnit.getAcronym())  //STUDENTS IS TAKING THE CLASS
 		{
-			takingClass = true;
+			completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(&courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
+
+			this->classesCurrentlyAtending.at(&courseUnit)->removeStudent(*this);
+
+			courseUnit.removeStudent(*this);
+
+			classesCurrentlyAtending.erase(it);
+
+			return true;
 		}
 	}
-	if (!takingClass)
-		return false;
 
+
+	return false;
+
+	/*
 	//CHECK IF STUDENT HAS COMPLETED THAT COURSE UNIT BEFORE
 	for (map<CourseUnit*, unsigned short int>::iterator it = completedCourseUnits.begin();
 		it != completedCourseUnits.end();
@@ -182,10 +191,9 @@ bool Student::completedClass(CourseUnit& courseUnit, unsigned short int grade)
 			}
 			else return true; //WITH THE SAME OR HIGHER GRADE
 		}
-	}
+	}*/
 
-	completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(&courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
-	return true;
+	
 }
 
 bool Student::completedAllCourseUnits(unsigned short int y)
