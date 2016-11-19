@@ -26,7 +26,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att);
-	Tutor(string n, Date dob, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att); 
+	Tutor(string n, Date dob, Date dor, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att); 
 	bool teachClass(CourseUnitClass& c);
 	void tutorStudent(Student& s);
 
@@ -34,6 +34,7 @@ public:
 	friend bool compareProfessorByName(Tutor* p1, Tutor* p2);
 	friend bool compareProfessorByID(Tutor* p1, Tutor* p2);
 	friend bool compareProfessorByBirth(Tutor* p1, Tutor* p2);
+	friend bool compareProfessorByRegistration(Tutor* p1, Tutor* p2);
 
 	//GETS
 	Course& getCourse() { return *course; }

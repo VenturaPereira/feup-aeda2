@@ -17,13 +17,14 @@ Tutor::Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att)
 	c.addProfessor(*this);
 }
 
-Tutor::Tutor(string n, Date dob, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att)
+Tutor::Tutor(string n, Date dob, Date dor, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att)
 	: CollegeUser(n, dob, c), course(&c),
 	ableToTeach(att), currentlyTeaching(ct)
 {
 	setID(ID);
 	assignEmail();
 	c.addProfessor(*this);
+	dateOfRegistration = dor;
 }
 
 void Tutor::tutorStudent(Student& s)
@@ -88,6 +89,11 @@ bool compareProfessorByBirth(Tutor* p1, Tutor* p2)
 	return p1->dateOfBirth < p2->dateOfBirth;
 }
 
+bool compareProfessorByRegistration(Tutor* p1, Tutor* p2)
+{
+	return p1->dateOfRegistration < p2->dateOfRegistration;
+}
+
 ofstream& operator<<(ofstream& file, Tutor *t)
 {
 	file << t->getCourse().getCollege().getUniversity().getAcronym()
@@ -99,6 +105,8 @@ ofstream& operator<<(ofstream& file, Tutor *t)
 		<< t->name
 		<< ';'
 		<< t->getDateOfBirth().getDateString()
+		<< ';'
+		<< t->getDateOfRegistration().getDateString()
 		<< ';'
 		<< t->ID
 		<< ';'

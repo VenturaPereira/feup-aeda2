@@ -31,7 +31,7 @@ protected:
 public:
 	//MEMBER FUNCTIONS
 	Student(string n, Date dob, Course& c);
-	Student(string n, Date dob, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
+	Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
 	bool assignTutor();
 	bool enrollCourseUnit(CourseUnit& courseUnit);
 	bool enrollClass(CourseUnitClass& courseUnitClass);
@@ -43,6 +43,7 @@ public:
 	friend bool compareStudentByName(Student* s1, Student* s2);
 	friend bool compareStudentByCouseYear(Student* s1, Student* s2);
 	friend bool compareStudentByBirth(Student* s1, Student* s2);
+	friend bool compareStudentByRegistration(Student* s1, Student* s2);
 		
 	//SETS
 	void setStatus(string s) { status = s; }

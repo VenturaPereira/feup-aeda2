@@ -22,11 +22,12 @@ Student::Student(string n, Date dob, Course& c)
 	c.addStudent(*this);
 }
 
-Student::Student(string n, Date dob, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
+Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
 	: CollegeUser(n, dob, c),
 	tutor(&t), year(y), credits(cr), status(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {
 	course = &c;
+	dateOfRegistration = dor;
 	setID(id);
 	assignEmail();
 	map<CourseUnit*, CourseUnitClass*>::iterator mapIt;
@@ -228,6 +229,11 @@ bool compareStudentByBirth(Student* s1, Student* s2)
 	return s1->dateOfBirth < s2->dateOfBirth;
 }
 
+bool compareStudentByRegistration(Student* s1, Student* s2)
+{
+	return s1->dateOfRegistration < s2->dateOfRegistration;
+}
+
 ofstream& operator<<(ofstream& file, Student *s)
 {
 	file << s->course->getCollege().getUniversity().getAcronym()
@@ -239,6 +245,8 @@ ofstream& operator<<(ofstream& file, Student *s)
 		<< s->name
 		<< ';'
 		<< s->getDateOfBirth().getDateString()
+		<< ';'
+		<< s->getDateOfRegistration().getDateString()
 		<< ';'
 		<< s->status
 		<< ';'

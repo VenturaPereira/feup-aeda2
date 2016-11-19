@@ -270,7 +270,7 @@ void EnrollmentSystem::loadStudents() {
 	
 	/*
 	FORMAT
-	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;STATUS;CREDITS;YEAR;ID;TUTOR_ID;
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;STATUS;CREDITS;YEAR;ID;TUTOR_ID;
 	{(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),...};
 	{(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),...}
 	*/
@@ -297,7 +297,9 @@ void EnrollmentSystem::loadStudents() {
 			getline(iss, course, ch);
 			getline(iss, name, ch);
 			getline(iss, dateStr, ch);
-			Date birthDate(dateStr);
+			Date birthDate(dateStr); 
+			getline(iss, dateStr, ch);
+			Date dateOfRegistration(dateStr);
 			getline(iss, status, ch);
 			iss >> ws >> credits
 				>> ws >> ch
@@ -370,7 +372,7 @@ void EnrollmentSystem::loadStudents() {
 			catch (...) {
 				continue;
 			}
-			new Student(name, birthDate, *coursePtr, *tutorPtr, year, credits, status, ccu, cca, ID);
+			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, credits, status, ccu, cca, ID);
 		}
 	
 	file.close();
@@ -381,7 +383,7 @@ void EnrollmentSystem::loadProfessors()
 {
 	/*
 	FORMAT
-	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;ID;
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;ID;
 	{ABLE_TO_TEACH,ABLE_TO_TEACH,ABLE_TO_TEACH,...};
 	{TEACHING,TEACHING,TEACHING,...};
 	*/
@@ -405,6 +407,8 @@ void EnrollmentSystem::loadProfessors()
 			getline(iss, name, ch);
 			getline(iss, dateStr, ch);
 			Date birthDate(dateStr);
+			getline(iss, dateStr, ch);
+			Date dateOfRegistration(dateStr);
 			iss >> ws >> ID >> ws >> ch;
 
 
@@ -439,7 +443,7 @@ void EnrollmentSystem::loadProfessors()
 			catch (...) {
 				continue;
 			}
-			new Tutor(name, birthDate, *coursePtr, ID, currentlyTeaching, ableToTeach);
+			new Tutor(name, birthDate, dateOfRegistration, *coursePtr, ID, currentlyTeaching, ableToTeach);
 		}
 
 		file.close();
@@ -893,6 +897,7 @@ bool EnrollmentSystem::changeStudentsSortOption(unsigned int &option)
 		compareStudentByName,
 		compareStudentByBirth,
 		compareStudentByCouseYear,
+		compareStudentByRegistration
 	};
 
 	size_t minimum = 1, maximum = options.size() + 1;
@@ -911,7 +916,8 @@ bool EnrollmentSystem::changeProfessorsSortOption(unsigned int &option)
 	vector<bool(*)(Tutor*, Tutor*)> options = {
 		compareProfessorByID,
 		compareProfessorByName,
-		compareProfessorByBirth
+		compareProfessorByBirth,
+		compareProfessorByRegistration
 	};
 
 	size_t minimum = 1, maximum = options.size() + 1;
@@ -1037,6 +1043,7 @@ void EnrollmentSystem::showUniversities()
 {
 	system("cls");
 	cout << "\nUniversities\n\n";
+	sort(universitiesVector.begin(), universitiesVector.end(), universitySortOption);
 	if (universitiesVector.size() != 0)
 	{
 		vector<University*>::iterator it;
@@ -1055,6 +1062,7 @@ void EnrollmentSystem::showColleges()
 	system("cls");
 	cout << "\nColleges\n\n";
 	vector<College*> colleges = getAllColleges();
+	sort(colleges.begin(), colleges.end(), collegeSortOption);
 	if (colleges.size() != 0) {
 		vector<College*>::iterator it;
 		for (it = colleges.begin();
@@ -1073,6 +1081,7 @@ void EnrollmentSystem::showCourses()
 	system("cls");
 	cout << "\nCourses\n\n";
 	vector<Course*> courses = getAllCourses();
+	sort(courses.begin(), courses.end(), courseSortOption);
 	if (courses.size() != 0) {
 		vector<Course*>::iterator it;
 		for (it = courses.begin();
@@ -1091,6 +1100,7 @@ void EnrollmentSystem::showCourseUnits()
 	system("cls");
 	cout << "\nCourseUnit\n\n";
 	vector<CourseUnit*> courseUnits = getAllCourseUnits();
+	sort(courseUnits.begin(), courseUnits.end(), courseUnitSortOption);
 	if (courseUnits.size() != 0) {
 		vector<CourseUnit*>::iterator it;
 		for (it = courseUnits.begin();
@@ -1109,6 +1119,7 @@ void EnrollmentSystem::showProfessors()
 	system("cls");
 	cout << "\nProfessors\n\n";
 	vector<Tutor*> professors = getAllProfessors();
+	sort(professors.begin(), professors.end(), professorsSortOption);
 	if (professors.size() != 0) {
 		vector<Tutor*>::iterator it;
 		for (it = professors.begin();
@@ -1127,6 +1138,7 @@ void EnrollmentSystem::showStudents()
 	system("cls");
 	cout << "\nStudents\n\n";
 	vector<Student*> students = getAllStudents();
+	sort(students.begin(), students.end(), studentsSortOption);
 	if (students.size() != 0) {
 		vector<Student*>::iterator it;
 		for (it = students.begin();
@@ -1145,6 +1157,7 @@ void EnrollmentSystem::showCourseUnitClasses()
 	system("cls");
 	cout << "\nClasses\n\n";
 	vector<CourseUnitClass*> courseUnitClasses = getAllCourseUnitClasses();
+	sort(courseUnitClasses.begin(), courseUnitClasses.end(), courseUnitClassSortOption);
 	if (courseUnitClasses.size() != 0) {
 		vector<CourseUnitClass*>::iterator it;
 		for (it = courseUnitClasses.begin();
