@@ -515,8 +515,9 @@ College& getCollege(EnrollmentSystem &s)
 		for (size_t i = 0; i < university->getColleges().size(); i++) //SHOW AS MENU
 		{
 			cout << (i + 1) << ". ";
-			cout << university->getColleges()[i]->getName();
+			cout << university->getColleges()[i]->getName() << endl;
 		}
+		cout << endl;
 		answer_2 = enterInput<int>(); //READ SELECTION
 	}
 
@@ -539,8 +540,9 @@ Course& getCourse(EnrollmentSystem &s)
 		for (size_t i = 0; i < college->getCourses().size(); i++) //SHOW AS MENU
 		{
 			cout << (i + 1) << ". ";
-			cout << college->getCourses()[i]->getName();
+			cout << college->getCourses()[i]->getName() << endl;
 		}
+		cout << endl;
 		answer_3 = enterInput<int>(); //READ SELECTION
 	}
 
@@ -563,8 +565,9 @@ CourseUnit& getCourseUnit(EnrollmentSystem &s)
 		for (size_t i = 0; i < course->getCourseUnits().size(); i++) //SHOW AS MENU
 		{
 			cout << (i + 1) << ". ";
-			cout << course->getCourseUnits()[i]->getName();
+			cout << course->getCourseUnits()[i]->getName() << endl;
 		}
+		cout << endl;
 		answer_4 = enterInput<int>(); //READ SELECTION
 	}
 
@@ -1032,9 +1035,10 @@ vector<Tutor*> EnrollmentSystem::getAllProfessors()
 
 void EnrollmentSystem::showUniversities()
 {
+	system("cls");
+	cout << "\nUniversities\n\n";
 	if (universitiesVector.size() != 0)
 	{
-		cout << "\nUniversities\n\n";
 		vector<University*>::iterator it;
 		for (it = universitiesVector.begin();
 			it != universitiesVector.end();
@@ -1048,9 +1052,10 @@ void EnrollmentSystem::showUniversities()
 
 void EnrollmentSystem::showColleges()
 {
+	system("cls");
+	cout << "\nColleges\n\n";
 	vector<College*> colleges = getAllColleges();
 	if (colleges.size() != 0) {
-		cout << "\nColleges\n\n";
 		vector<College*>::iterator it;
 		for (it = colleges.begin();
 			it != colleges.end();
@@ -1065,9 +1070,10 @@ void EnrollmentSystem::showColleges()
 
 void EnrollmentSystem::showCourses()
 {
+	system("cls");
+	cout << "\nCourses\n\n";
 	vector<Course*> courses = getAllCourses();
 	if (courses.size() != 0) {
-		cout << "\nCourses\n\n";
 		vector<Course*>::iterator it;
 		for (it = courses.begin();
 			it != courses.end();
@@ -1082,9 +1088,10 @@ void EnrollmentSystem::showCourses()
 
 void EnrollmentSystem::showCourseUnits()
 {
+	system("cls");
+	cout << "\nCourseUnit\n\n";
 	vector<CourseUnit*> courseUnits = getAllCourseUnits();
 	if (courseUnits.size() != 0) {
-		cout << "\nCourseUnit\n\n";
 		vector<CourseUnit*>::iterator it;
 		for (it = courseUnits.begin();
 			it != courseUnits.end();
@@ -1099,9 +1106,10 @@ void EnrollmentSystem::showCourseUnits()
 
 void EnrollmentSystem::showProfessors()
 {
+	system("cls");
+	cout << "\nProfessors\n\n";
 	vector<Tutor*> professors = getAllProfessors();
 	if (professors.size() != 0) {
-		cout << "\nProfessors\n\n";
 		vector<Tutor*>::iterator it;
 		for (it = professors.begin();
 			it != professors.end();
@@ -1116,9 +1124,10 @@ void EnrollmentSystem::showProfessors()
 
 void EnrollmentSystem::showStudents()
 {
+	system("cls");
+	cout << "\nStudents\n\n";
 	vector<Student*> students = getAllStudents();
 	if (students.size() != 0) {
-		cout << "\nStudents\n\n";
 		vector<Student*>::iterator it;
 		for (it = students.begin();
 			it != students.end();
@@ -1133,9 +1142,10 @@ void EnrollmentSystem::showStudents()
 /*
 void EnrollmentSystem::showCourseUnitClasses()
 {
+	system("cls");
+	cout << "\nClasses\n\n";
 	vector<CourseUnitClass*> courseUnitClasses = getAllCourseUnitClasses();
 	if (courseUnitClasses.size() != 0) {
-		cout << "\nClasses\n\n";
 		vector<CourseUnitClass*>::iterator it;
 		for (it = courseUnitClasses.begin();
 			it != courseUnitClasses.end();
