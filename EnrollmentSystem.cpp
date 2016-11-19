@@ -767,13 +767,14 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		{
 			while (answer != (courseUnitsToShow.size() + 1) && courseUnitsToShow.size() != 0) //EXIT
 			{
+				system("CLS");
 				size_t i;
 				for (i = 0; i < courseUnitsToShow.size(); i++) //SHOW AS MENU
 				{
 					cout << (i + 1) << ". ";
 					courseUnitsToShow[i]->show();
 				}
-				cout << (i+1) << ". Exit";
+				cout << endl << endl << (i+1) << ". Exit";
 				answer = enterInput<unsigned int>(); //READ SELECTION
 				if (answer >= 1 && answer <= courseUnitsToShow.size()) 
 				{
