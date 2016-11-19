@@ -55,6 +55,7 @@ public:
 	Course& getCourse() { return *course; }
 	map<CourseUnit*, unsigned short int>& getCompletedCourseUnits() {return completedCourseUnits;}
 	map<CourseUnit*, CourseUnitClass*>& getClassesCurrentlyAtending() { return classesCurrentlyAtending; }
+	vector<CourseUnit*> getCourseUnitsAttending();
 	unsigned short int getYear() const { return year; }
 	string getStatus() const { return status; }
 	double getCredits() const { return credits; }

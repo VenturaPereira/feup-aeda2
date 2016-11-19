@@ -6,13 +6,13 @@ up;feup;mieic;Matematica Discreta;mdis;Mandatory;30;1;1;6
 up;feup;mieic;Projeto FEUP;pf;Mandatory;30;1;1;1.5
 up;feup;mieic;Programacao;prog;Mandatory;30;1;2;7.5
 up;feup;mieic;Fisica I;fisi1;Mandatory;30;1;2;6
+up;feup;mieic;Algoritmos e Estruturas de Dados;aeda;Mandatory;30;2;1;7.5
 up;feup;mieic;Complementos de Matematica;cmat;Mandatory;30;1;2;6
 up;feup;mieic;Microprocessadores e Computadores Pessoais;mpcp;Mandatory;30;1;2;6
 up;feup;mieic;Teoria da Computacao;tcom;Mandatory;30;2;1;6
 up;feup;mieic;Laboratorio de Computadores;lcom;Mandatory;30;2;1;6
 up;feup;mieic;Metodos Numericos;mnum;Mandatory;30;2;1;4.5
 up;feup;mieic;Fisica II;fisi2;Mandatory;30;2;1;6
-up;feup;mieic;Algoritmos e Estruturas de Dados;aeda;Mandatory;30;2;1;7.5
 up;feup;mieic;Bases de Dados;bdad;Mandatory;30;2;2;6
 up;feup;mieic;Concepcao e Analise de Algoritmos;cal;Mandatory;30;2;2;6
 up;feup;mieic;Computacao Grafica;cgraf;Mandatory;30;2;2;6
@@ -77,5 +77,5 @@ up;feup;mieic;Servicos de Rede e de Sistema;srsi;Optional;15;Sistemas Operativos
 up;feup;mieic;Sistemas de Apoio a Decisao;sade;Optional;15;Metodos Quantitativos e Gestao;5;1;6
 up;feup;mieic;Teste, Verificacao e Validacao de Software;tvvs;Optional;15;Engenharia de Software;5;1;6
 up;feup;mieic;Visao por Computador;vcom;Optional;15;Interaccao e Multimedia;5;1;6
+up;feup;mieic;Preparação da Dissertação;diss;Mandatory;30;5;1;6
 up;feup;mieic;Dissertacao;diss;Mandatory;30;5;2;30
-up;feup;mieic;Preparação da Dissertação;diss;Mandatory;30;5;1;30

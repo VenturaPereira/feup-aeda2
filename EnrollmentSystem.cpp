@@ -804,13 +804,14 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 {
 	Student* student;
 	unsigned long long int ID;
-	CourseUnit* courseUnit;
+	Course* course;
 	unsigned short int grade;
 
 	try
 	{
 		ID = enterInput<unsigned long long int>("\nFinish Course Unit\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
 		student = &(s.getStudent(ID));
+		course = &(student->getCourse());
 	}
 	catch (EndOfFile &eof)
 	{
@@ -824,11 +825,47 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 		system("pause");
 		return false;
 	}
-
+	
 	while (true) {
+		vector<CourseUnit*> courseUnitsToShow;
+		unsigned int answer;
+
 		try {
-			courseUnit = &getCourseUnit(s);
-			grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
+
+		unsigned int i;
+
+		courseUnitsToShow = student->getCourseUnitsAttending();
+
+		system("cls");
+		if (courseUnitsToShow.size() == 0) {
+			cout << "\nThis student is not taking any classes\n";
+			system("pause");
+			return false;
+		}
+
+		for (i = 0; i < courseUnitsToShow.size(); i++) {
+			cout << (i + 1) << ". ";
+			courseUnitsToShow[i]->show();
+		}
+		cout << endl << endl << (i + 1) << ". Exit\n\n";
+		answer = enterInput<unsigned int>(); //READ SELECTION
+		answer--;
+
+		if (answer == courseUnitsToShow.size())
+			return true;
+				
+		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
+		
+
+		if (!student->completedClass(*courseUnitsToShow[answer], grade)) {
+			cout << "\nThe Student wasn't taking this course unit or the grade is invalid!\n." << endl;
+			system("pause");
+		}
+		else {
+			cout << "\nThe student has been graded!\n";
+			system("pause");
+		}
+
 		}
 		catch (EndOfFile &eof)
 		{
@@ -836,36 +873,7 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 			system("pause");
 			return false;
 		}
-		catch (NotFound<University*, EnrollmentSystem> &nfu)
-		{
-			cout << "There are no universities in the system\n";
-			system("pause");
-			return false;
-		}
-		catch (NotFound<College*, University*> &nfc)
-		{
-			cout << "There are no colleges in: " << nfc.getMember()->getName() << endl;
-			system("pause");
-			return false;
-		}
-		catch (NotFound<Course*, College*> &nfco)
-		{
-			cout << "There are no courses in: " << nfco.getMember()->getName() << endl;
-			system("pause");
-			return false;
-		}
-		catch (NotFound<CourseUnit*, Course*> &nfcu)
-		{
-			cout << "There are no course units in: " << nfcu.getMember()->getName() << endl;
-			system("pause");
-			return false;
-		}
-
-
-		if (!student->completedClass(*courseUnit, grade)) {
-			cout << "The Student wasn't taking this course unit!\n Canceled this grade." << endl;
-			system("pause");
-		}
+		
 
 		//CHECK IF STUDENT HAS COMPLETED ALL THE COURSE UNITS OF THE CURRENT YEAR
 		if (student->completedAllCourseUnits(student->getYear()))
@@ -876,6 +884,10 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 			cout << "Student finished this Course Year. Now he/she is currently in year " << student->getYear() << "." << endl;
 			system("pause");
 			break;
+		}
+		else {
+			cout << "\nStudent still has course units to complete in order to enroll the next year\n";
+			system("pause");
 		}
 	}
 	return true;

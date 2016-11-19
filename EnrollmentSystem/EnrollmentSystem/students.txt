@@ -1,1 +1,1 @@
-up;feup;mieic;daniel;10/10/10;19/11/2016;reg;0;2;201600001;300;{(alge,15),(amat,11),(aoco,10),(fpro,20),(mdis,17),(pf,15),(prog,17),(fisi1,18),(cmat,19),(mpcp,18)};{}
+up;feup;mieic;daniel;08/08/8;19/11/2016;reg;19.5;1;201600001;1;{(aoco,15),(mdis,16),(prog,20)};{}

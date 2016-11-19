@@ -231,6 +231,20 @@ bool Student::completedAllCourseUnits(unsigned short int y)
 	else return false;
 }
 
+vector<CourseUnit*> Student::getCourseUnitsAttending()
+{
+	vector<CourseUnit*> courseUnitsAttending;
+	map<CourseUnit*, CourseUnitClass*>::iterator it;
+	for (it = classesCurrentlyAtending.begin();
+		it != classesCurrentlyAtending.end();
+		it++
+		)
+	{
+		courseUnitsAttending.push_back(it->first);
+	}
+	return courseUnitsAttending;
+}
+
 bool compareStudentByID(Student* s1, Student* s2)
 {
 	return s1->ID < s2->ID;
