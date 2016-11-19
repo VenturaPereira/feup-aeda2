@@ -861,8 +861,11 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 			return false;
 		}
 
-
-		if (!student->completedClass(*courseUnit, grade)) {
+		if (grade < 10) {
+			cout << "The grade was insuficient for the student to pass. Until he/she finishes this unit he/she cannot proceed to the next year." << endl;
+			system("pause");
+		}
+		else if (!student->completedClass(*courseUnit, grade)) {
 			cout << "The Student wasn't taking this course unit!\n Canceled this grade." << endl;
 			system("pause");
 		}
