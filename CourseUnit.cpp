@@ -104,14 +104,13 @@ void OptionalCourseUnit::show() const
 {
 	cout 
 		<< left
-		<< setw(CONSOLE_WIDTH * 0.8)
+		<< setw(CONSOLE_WIDTH)
 		<< name
 		<< setw(CONSOLE_WIDTH * 0.2)
 		<< acronym
 		<< setw(CONSOLE_WIDTH * 0.2)
 		<< course->getAcronym() 
-		<< setw(9)
-		<< "Optional " << "\t" 
+		<< "Opt" << "\t" 
 		<< year << "\t"
 		<< semester << "\t"
 		<< credits
@@ -124,14 +123,13 @@ void MandatoryCourseUnit::show() const
 {
 	cout
 		<< left
-		<< setw(CONSOLE_WIDTH * 0.8)
+		<< setw(CONSOLE_WIDTH)
 		<< name
 		<< setw(CONSOLE_WIDTH * 0.2)
 		<< acronym
 		<< setw(CONSOLE_WIDTH * 0.2)
 		<< course->getAcronym()
-		<< setw(9)
-		<< "Mandatory" << "\t"
+		<< "Mand" << "\t"
 		<< year << "\t"
 		<< semester << "\t"
 		<< credits

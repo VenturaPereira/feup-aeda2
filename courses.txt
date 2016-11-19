@@ -1,2 +1,1 @@
 up;feup;Mestrado Integrado em Engenharia Informática e Computação;mieic
-up;feup;Mestrado Integrado em Engenharia Mecânica;miec
