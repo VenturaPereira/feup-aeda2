@@ -23,6 +23,7 @@ protected:
 public:
 	//MEMBER FUNCTIONS
 	CollegeUser(string n, Date dob, Course& c);
+	virtual ~CollegeUser() {}
 	virtual void assignEmail() = 0;
 	virtual void assignID() = 0;
 

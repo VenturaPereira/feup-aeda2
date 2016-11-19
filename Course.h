@@ -23,6 +23,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	Course(string n, string a, College& c);
+	~Course() {}
 	void addCourseUnit(CourseUnit& cu);
 	bool removeCourseUnit(CourseUnit& cu);
 	void addStudent(Student& s);

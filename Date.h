@@ -17,6 +17,7 @@ public:
 	Date();
 	Date(unsigned short int d, unsigned short int m, unsigned short int y);
 	Date(string dayMonthYear);
+	~Date() {}
 	bool verifyDate();
 
 	//OPERATORS

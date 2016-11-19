@@ -25,6 +25,7 @@ public:
 	//MEMBER FUNCTIONS
 	CourseUnitClass(unsigned short int cn, CourseUnit& cu);
 	CourseUnitClass(unsigned short int cn, CourseUnit& cu, Tutor& t);
+	~CourseUnitClass() {}
 	void addStudent(Student& s);
 	bool removeStudent(Student& s);
 	void setProfessor(Tutor& t);

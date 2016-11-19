@@ -28,6 +28,7 @@ protected:
 public:
 	//MEMBER FUNCTIONS
 	CourseUnit(string n, string a, Course& c, unsigned short int y, unsigned short int s, double credits);
+	virtual ~CourseUnit() {}
 	virtual bool addStudent(Student& s) = 0;
 	bool removeStudent(Student& s);
 	void addProfessor(Tutor& t);
@@ -73,6 +74,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	OptionalCourseUnit(unsigned int mnos, string n, string a, Course& c, unsigned short int y, unsigned short int s, string sa, double cred);
+	virtual ~OptionalCourseUnit() {}
 	virtual bool addStudent(Student& s);
 
 	//GETS
@@ -96,6 +98,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	MandatoryCourseUnit(unsigned int mnospc, string n, string a, Course& c, unsigned short int y, unsigned short int s, double cred);
+	virtual ~MandatoryCourseUnit() {}
 	virtual bool addStudent(Student& s);
 
 	//GETS

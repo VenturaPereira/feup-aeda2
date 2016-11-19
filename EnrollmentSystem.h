@@ -44,6 +44,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	EnrollmentSystem(unsigned int mc);
+	~EnrollmentSystem() {}
 	void addUniversity(University& u) { universitiesVector.push_back(&u); }
 	void removeUniversity(University& u);
 
