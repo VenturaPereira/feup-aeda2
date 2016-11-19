@@ -188,6 +188,7 @@ bool optionsMenu(EnrollmentSystem &sys)
 		switch (option)
 		{
 		case 1:
+			sortingStudentsMenu(sys);
 			return true;
 		case 2:
 			return true;
@@ -201,6 +202,40 @@ bool optionsMenu(EnrollmentSystem &sys)
 	}
 }
 
+bool sortingStudentsMenu(EnrollmentSystem &sys) {
+	while (true)
+	{
+		system("cls");
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		{ "--------------------------------------------",
+			"Students Sorting Options", "",
+			"1 - Sort by ID                         ",
+			"2 - Sort by Name                       ",
+			"3 - Sort by Age                        ",
+			"4 - Sort by Course Year                ", "",
+			"5 - Back                               ",
+			"--------------------------------------------", }, 1, 5);
+
+
+		switch (option)
+		{
+		case 1:
+			sys.changeStudentsSortOption((unsigned short int)option);
+			return true;
+		case 2:
+			sys.changeStudentsSortOption((unsigned short int)option);
+			return true;
+		case 3:
+			sys.changeStudentsSortOption((unsigned short int)option);
+			return true;
+		case 4:
+			sys.changeStudentsSortOption((unsigned short int)option);
+			return true;
+		case 5:
+			return false;
+		}
+	}
+}
 
 /*
 bool mainMenu(Store &store)
