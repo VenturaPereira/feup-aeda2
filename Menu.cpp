@@ -206,7 +206,7 @@ bool sortingStudentsMenu(EnrollmentSystem &sys) {
 	while (true)
 	{
 		system("cls");
-		unsigned short int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 		{ "--------------------------------------------",
 			"Students Sorting Options", "",
 			"1 - Sort by ID                         ",

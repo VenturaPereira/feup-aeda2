@@ -96,10 +96,10 @@ public:
 	
 	
 	//SORT FUNCTIONS
-	bool changeCourseUnitSortOption(unsigned short int &option);
-	bool changeCourseUnitClassSortOption(unsigned short int &option);
-	bool changeStudentsSortOption(unsigned short int &option);
-	bool changeProfessorsSortOption(unsigned short int &option);
+	bool changeCourseUnitSortOption(unsigned int &option);
+	bool changeCourseUnitClassSortOption(unsigned int &option);
+	bool changeStudentsSortOption(unsigned int &option);
+	bool changeProfessorsSortOption(unsigned int &option);
 
 	//GETS
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }

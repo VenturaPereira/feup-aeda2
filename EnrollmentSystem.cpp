@@ -849,7 +849,7 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	return true;
 }
 
-bool EnrollmentSystem::changeCourseUnitSortOption(unsigned short int &option)
+bool EnrollmentSystem::changeCourseUnitSortOption(unsigned int &option)
 {
 	vector<bool(*)(CourseUnit*, CourseUnit*)> options = {
 		compareCourseUnitByName,
@@ -868,7 +868,7 @@ bool EnrollmentSystem::changeCourseUnitSortOption(unsigned short int &option)
 	else return false; //CALL THE FUNCTION AGAIN
 }
 
-bool EnrollmentSystem::changeCourseUnitClassSortOption(unsigned short int &option)
+bool EnrollmentSystem::changeCourseUnitClassSortOption(unsigned int &option)
 {
 	vector<bool(*)(CourseUnitClass*, CourseUnitClass*)> options = {
 		compareCourseUnitClassByNumber,
@@ -886,7 +886,7 @@ bool EnrollmentSystem::changeCourseUnitClassSortOption(unsigned short int &optio
 	else return false; //CALL THE FUNCTION AGAIN
 }
 
-bool EnrollmentSystem::changeStudentsSortOption(unsigned short int &option)
+bool EnrollmentSystem::changeStudentsSortOption(unsigned int &option)
 {
 	vector<bool(*)(Student*, Student*)> options = {
 		compareStudentByID,
@@ -906,7 +906,7 @@ bool EnrollmentSystem::changeStudentsSortOption(unsigned short int &option)
 	else return false; //CALL THE FUNCTION AGAIN
 }
 
-bool EnrollmentSystem::changeProfessorsSortOption(unsigned short int &option)
+bool EnrollmentSystem::changeProfessorsSortOption(unsigned int &option)
 {
 	vector<bool(*)(Tutor*, Tutor*)> options = {
 		compareProfessorByID,
