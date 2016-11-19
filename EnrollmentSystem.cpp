@@ -810,9 +810,8 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	{
 		ID = enterInput<unsigned long long int>("\nFinish Course Unit\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
 		student = &(s.getStudent(ID));
- 		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
-		student = &(s.getStudent(ID));
 		courseUnit = &getCourseUnit(s);
+		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
 	}
 	catch (EndOfFile &eof)
 	{
@@ -846,10 +845,13 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	}
 	
 
-	student->completedClass(*courseUnit, grade); 
-	CourseUnitClass* courseUnitClass = student->getClassesCurrentlyAtending().at(courseUnit);
-	courseUnitClass->removeStudent(*student); 
-	courseUnit->removeStudent(*student);
+	if (student->completedClass(*courseUnit, grade))
+	{
+		CourseUnitClass* courseUnitClass = student->getClassesCurrentlyAtending().at(courseUnit);
+		courseUnitClass->removeStudent(*student);
+		courseUnit->removeStudent(*student);
+	}
+	
 	
 	//CHECK IF STUDENT HAS COMPLETED ALL THE COURSE UNITS OF THE CURRENT YEAR
 	if (student->completedAllCourseUnits(student->getYear()))

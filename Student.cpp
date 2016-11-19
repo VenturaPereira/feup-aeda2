@@ -153,6 +153,21 @@ bool Student::completedClass(CourseUnit& courseUnit, unsigned short int grade)
 	//CHECK IF GRADE IS ACCEPTABLE
 	if (grade < 10)
 		return false;
+	bool takingClass = false;
+	
+	//CHECK IF STUDENT IS TAKING THAT CLASS
+	for (map<CourseUnit*, CourseUnitClass*>::iterator it = classesCurrentlyAtending.begin();
+		it != classesCurrentlyAtending.end();
+		it++)
+	{
+		if (it->first == &courseUnit) //STUDENT COMPLETED THE COURSE UNIT BEFORE
+		{
+			takingClass = true;
+		}
+	}
+	if (!takingClass)
+		return false;
+
 	//CHECK IF STUDENT HAS COMPLETED THAT COURSE UNIT BEFORE
 	for (map<CourseUnit*, unsigned short int>::iterator it = completedCourseUnits.begin();
 		it != completedCourseUnits.end();

@@ -87,11 +87,9 @@ bool professorsMenu(EnrollmentSystem &sys){
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 		{ "-------------------------------------",
 			"Professors", "",
-			"1 - Add Professor                ",
-			"2 - Remove Professor             ",
-			"3 - Grade Students               ", "",
-			"4 - Back                         ",
-			"-------------------------------------" }, 1, 4);
+			"1 - Grade Students               ", "",
+			"2 - Back                         ",
+			"-------------------------------------" }, 1, 2);
 		switch (option)
 		{
 			/*
@@ -103,16 +101,15 @@ bool professorsMenu(EnrollmentSystem &sys){
 			removeProfessorHandler(sys);
 			//system("pause");
 			return true; */
-		case 3:
+		case 1:
 			studentFinishedCourseUnitHandler(sys);
 			return true;
-		case 4:
+		case 2:
 			return false;
 		}
 	}
 }
 
-//MODIFY FOR THIS PROJECT
 bool infoMenu(EnrollmentSystem &sys){
 	while (true)
 	{
