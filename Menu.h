@@ -24,7 +24,7 @@ bool sortClientOptions(Store &store);
 bool sortProductsOptions(Store &store);
 bool sortTransactionsOptions(Store &store); */
 bool optionsMenu(EnrollmentSystem &sys);
-
+bool sortingStudentsMenu(EnrollmentSystem &sys)
 /*
 class Menu 
 {
