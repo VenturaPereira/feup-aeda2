@@ -206,7 +206,7 @@ bool sortingStudentsMenu(EnrollmentSystem &sys) {
 	while (true)
 	{
 		system("cls");
-		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		unsigned short int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 		{ "--------------------------------------------",
 			"Students Sorting Options", "",
 			"1 - Sort by ID                         ",
@@ -220,16 +220,16 @@ bool sortingStudentsMenu(EnrollmentSystem &sys) {
 		switch (option)
 		{
 		case 1:
-			sys.changeStudentsSortOption((unsigned short int)option);
+			sys.changeStudentsSortOption(option);
 			return true;
 		case 2:
-			sys.changeStudentsSortOption((unsigned short int)option);
+			sys.changeStudentsSortOption(option);
 			return true;
 		case 3:
-			sys.changeStudentsSortOption((unsigned short int)option);
+			sys.changeStudentsSortOption(option);
 			return true;
 		case 4:
-			sys.changeStudentsSortOption((unsigned short int)option);
+			sys.changeStudentsSortOption(option);
 			return true;
 		case 5:
 			return false;
