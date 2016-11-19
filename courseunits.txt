@@ -1,5 +1,6 @@
 up;feup;mieic;Algoritmos e Estruturas de Dados;aeda;Mandatory;30;2;1;7.5
 up;feup;mieic;Algebra;alge;Mandatory;30;1;1;4.5
+<<<<<<< HEAD
 up;feup;mieic;Analise Matematica;amat;Mandatory;30;1;1;6
 up;feup;mieic;Arquitectura e Organizacao de Computadores;aoco;Mandatory;30;1;1;6
 up;feup;mieic;Fundamentos de Programacao;fpro;Mandatory;30;1;1;6
@@ -79,3 +80,7 @@ up;feup;mieic;Sistemas de Apoio a Decisao;sade;Optional;15;Metodos Quantitativos
 up;feup;mieic;Teste, Verificacao e Validacao de Software;tvvs;Optional;15;Engenharia de Software;5;1;6
 up;feup;mieic;Visao por Computador;vcom;Optional;15;Interaccao e Multimedia;5;1;6
 
+=======
+up;feup;mieic;Análise Matemática;amat;Mandatory;30;1;2;6
+up;feup;mieic;Matemática Discreta;mdis;Mandatory;30;1;1;6
+>>>>>>> origin/master

@@ -21,9 +21,12 @@ void CourseUnitClass::assignTeacher()
 		it++
 		)
 	{
-		if ((*it)->teachClass(*this))
+		if ((*it)->teachClass(*this)) {
+			setProfessor(*(*it));
 			return;
+		}
 	}
+
 }
 
 CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit& cu, Tutor& t) 

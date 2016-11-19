@@ -132,7 +132,6 @@ bool Student::enrollCourseUnit(CourseUnit& courseUnit)
 	if (castIt != NULL) //IT'S MANDATORY
 	{
 		CourseUnitClass* newClass = new CourseUnitClass(courseUnit.getNumberClasses() + 1, courseUnit);
-		courseUnit.addCourseUnitClass(*newClass);
 		enrollClass(*newClass);
 		return true;
 	}
@@ -142,7 +141,6 @@ bool Student::enrollCourseUnit(CourseUnit& courseUnit)
 		if (castIt->getClasses().size() == 0) //THERE ARE NO CLASSES, CREATE ONE
 		{
 			CourseUnitClass* newClass = new CourseUnitClass(courseUnit.getNumberClasses() + 1, courseUnit);
-			courseUnit.addCourseUnitClass(*newClass);
 			enrollClass(*newClass);
 			return true;
 		}

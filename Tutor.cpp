@@ -37,8 +37,6 @@ bool Tutor::teachClass(CourseUnitClass& c)
 	if (find(ableToTeach.begin(), ableToTeach.end(), &(c.getCourseUnit())) == ableToTeach.end()) //NOT ABLE TO TEACH
 		return false;
 		
-	c.setProfessor(*this);
-
 	if (find(currentlyTeaching.begin(), currentlyTeaching.end(), &(c.getCourseUnit())) == currentlyTeaching.end()) //NOT TEACHING
 	{
 		c.getCourseUnit().addProfessor(*this);

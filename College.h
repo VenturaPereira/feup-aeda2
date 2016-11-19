@@ -20,6 +20,7 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	College(string n, string a, University& u);
+	~College(){}
 	void addCourse(Course& c);
 	bool removeCourse(Course& c);
 
