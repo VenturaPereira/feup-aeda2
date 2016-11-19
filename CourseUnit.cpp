@@ -102,32 +102,40 @@ bool CourseUnit::removeCourseUnitClass(CourseUnitClass& cuc)
 
 void OptionalCourseUnit::show() const
 {
-	cout << course->getAcronym() 
-		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
+	cout 
+		<< left
+		<< setw(CONSOLE_WIDTH * 0.8)
 		<< name
-		<< setw(CONSOLE_WIDTH * 0.75 - name.size())
-		<< acronym 
-		<< setw(CONSOLE_WIDTH * 0.5 - acronym.size())
+		<< setw(CONSOLE_WIDTH * 0.2)
+		<< acronym
+		<< setw(CONSOLE_WIDTH * 0.2)
+		<< course->getAcronym() 
+		<< setw(9)
 		<< "Optional " << "\t" 
-		<< year << "A " 
-		<< semester << "S\t"
+		<< year << "\t"
+		<< semester << "\t"
 		<< credits
+		<< right
 		<< endl;
 
 }
 
 void MandatoryCourseUnit::show() const
 {
-	cout << course->getAcronym()
-		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
+	cout
+		<< left
+		<< setw(CONSOLE_WIDTH * 0.8)
 		<< name
-		<< setw(CONSOLE_WIDTH * 0.75 - name.size())
+		<< setw(CONSOLE_WIDTH * 0.2)
 		<< acronym
-		<< setw(CONSOLE_WIDTH * 0.5 - acronym.size())
+		<< setw(CONSOLE_WIDTH * 0.2)
+		<< course->getAcronym()
+		<< setw(9)
 		<< "Mandatory" << "\t"
-		<< year << "A "
-		<< semester << "S\t"
+		<< year << "\t"
+		<< semester << "\t"
 		<< credits
+		<< right
 		<< endl;
 }
 

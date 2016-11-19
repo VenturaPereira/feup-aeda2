@@ -1139,7 +1139,7 @@ void EnrollmentSystem::showStudents()
 	}
 	else cout << "There are no students\n";
 }
-/*
+
 void EnrollmentSystem::showCourseUnitClasses()
 {
 	system("cls");
@@ -1157,4 +1157,3 @@ void EnrollmentSystem::showCourseUnitClasses()
 	}
 	else cout << "There are no classes";
 }
-*/

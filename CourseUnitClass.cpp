@@ -6,7 +6,7 @@
 #include "Course.h"
 #include "University.h"
 #include "Tutor.h"
-#include <fstream>
+#include "Utilities.h"
 
 CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit& cu) : courseUnit(&cu), classNumber(cn) {
 	assignTeacher();
@@ -79,4 +79,20 @@ ofstream& operator<<(ofstream& file, CourseUnitClass *cuc)
 		<< endl;
 
 	return file;
+}
+
+void CourseUnitClass::show() const
+{
+	cout
+		<< left
+		<< setw(CONSOLE_WIDTH * 0.8)
+		<< courseUnit->getName()
+		<< '\t'
+		<< classNumber
+		<< setw(CONSOLE_WIDTH * 0.8)
+		<< professor->getName()
+		<< '\t'
+		<< getNumberOfStudents()
+		<< right
+		<< endl;
 }

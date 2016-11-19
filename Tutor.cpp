@@ -137,12 +137,21 @@ ofstream& operator<<(ofstream& file, Tutor *t)
 }
 
 void Tutor::show() const {
-	cout << course->getCollege().getAcronym()
-		<< setw(CONSOLE_WIDTH * 0.5 - course->getCollege().getAcronym().size())
-		<< course->getAcronym()
-		<< setw(CONSOLE_WIDTH * 0.5 - course->getAcronym().size())
+	cout
+		<< left
+		<< setw(CONSOLE_WIDTH * 0.5)
 		<< name
-		<< setw(CONSOLE_WIDTH * 1.5 - name.size())
 		<< ID
+		<< '\t'
+		<< setw(CONSOLE_WIDTH * 0.2)
+		<< course->getAcronym()
+		<< setw(CONSOLE_WIDTH * 0.2)
+		<< course->getCollege().getAcronym()
+		<< right
+		<< endl
+		<< '\t'
+		<< dateOfBirth.getDateString()
+		<< '\t'
+		<< dateOfRegistration.getDateString()
 		<< endl;
 }
