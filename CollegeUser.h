@@ -10,7 +10,7 @@ using namespace std;
 class College;
 class Course;
 
-/*
+/*!
 *	Parent Class for Students and Professors (Tutors)
 */
 class CollegeUser 

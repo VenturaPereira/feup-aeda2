@@ -16,7 +16,7 @@ class Date;
 #include <string>
 using namespace std;
 
-/*
+/*!
 *	Class for the Whole System
 */
 class EnrollmentSystem

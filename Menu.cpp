@@ -120,7 +120,7 @@ bool infoMenu(EnrollmentSystem &sys){
 			"2  - Read all Colleges             ",
 			"3  - Read all Courses              ",
 			"4  - Read all Course Units         ",
-			"5  - Read a Course Unit in Detail  "
+			"5  - Read a Course Unit in Detail  ",
 			"6  - Read all Course Unit Classes  ",
 			"7  - Read all Students             ",
 			"8  - Read a Student in Detail      ",
@@ -291,7 +291,7 @@ bool sortingCourseUnitMenu(EnrollmentSystem &sys) {
 			"Course Unit Sorting Options", "",
 			"1 - Sort by Name                       ",
 			"2 - Sort by Number of Students         ",
-			"3 - Sort by Time                       ", "",     //TODO CHANGE THIS AND ?? ADD SORTING BY CREDITS ???
+			"3 - Sort by Program Plan Schedule      ", "",     
 			"4 - Back                               ",
 			"--------------------------------------------", }, 1, 4);
 
