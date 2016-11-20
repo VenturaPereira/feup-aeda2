@@ -14,14 +14,26 @@
 #include <algorithm>
 using namespace std;
 
+/*
+ *	Returns Console Width
+ */
 unsigned int getConsoleWidth();
 
 extern const unsigned int CONSOLE_WIDTH;
 
+/*
+ *	Prints the Parameter s in the Center of the Screen
+ */
 void center(const string s);
 
+/*
+ *	Outputs title and Request Message and Waits for Input and Returns it
+ */
 string enterString(string title, string requestMsg);
 
+/*
+*	Template Function that Outputs Title and Request Message and Waits for Input and Returns it
+*/
 template<typename T>
 T enterInput(string title, string requestMsg)
 {
@@ -43,6 +55,9 @@ T enterInput(string title, string requestMsg)
 	}
 }
 
+/*
+*	Template Function that Outputs Title and Options and Waits for Input and Returns it
+*/
 template<typename T>
 T enterInput(string title, vector<string> options)
 {
@@ -68,6 +83,9 @@ T enterInput(string title, vector<string> options)
 
 }
 
+/*
+*	Template Function that Waits for Input and Returns it
+*/
 template<typename T>
 T enterInput()
 {
@@ -88,20 +106,33 @@ T enterInput()
 	}
 }
 
-void validFile(string fileType);
-
+/*
+*	Checks If Input of User is Yes Or No (or variants) and Returns It
+*/
 bool yesNoAnswer();
 
+/*
+*	Checks if a Year is 365 or 366 days
+*/
 bool leapYear(const unsigned short int &year);
 
+/*
+*	Gets the number of days of a given month and year(can be a leap year)
+*/
 unsigned short int numberDays(const unsigned short int &year, const unsigned short int &month);
 
+/*
+*	Class for Exceptions Handling
+*/
 class EndOfFile
 {
 public:
 	EndOfFile() {}
 };
 
+/*
+*	Template Class for Exceptions Handling
+*/
 template <class Type, class Member>
 class NotFound
 {

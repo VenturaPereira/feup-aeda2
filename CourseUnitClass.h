@@ -10,6 +10,9 @@ class CourseUnit;
 class Tutor;
 class Student;
 
+/*
+*	Class for Course Units Classes
+*/
 class CourseUnitClass 
 {
 private:
