@@ -7,7 +7,6 @@ up;feup;mieic;Manuel Torres;05/11/1974;05/01/2001;6;{pf};{}
 up;feup;mieic;Jorge Silva;13/12/1959;05/07/1999;7;{prog};{}
 up;feup;mieic;Jaime Villate;05/06/1972;05/01/1987;8;{fisi1};{}
 up;feup;mieic;Jose Barbosa;05/06/1963;05/01/1994;9;{cmat};{}
-up;feup;mieic;Jose Borges;05/06/1965;05/01/1985;10;{mest};{}
 up;feup;mieic;Joao Canas;05/06/1965;05/01/1985;11;{mpcp};{}
 up;feup;mieic;Daniel Silva;05/06/1965;05/01/1985;12;{tcom};{}
 up;feup;mieic;Jose Carvalho;05/06/1965;05/01/1985;13;{mnum};{}
@@ -16,7 +15,6 @@ up;feup;mieic;Henrique Cardoso;05/06/1965;05/01/1985;15;{aeda};{}
 up;feup;mieic;Pedro Souto;05/06/1965;05/01/1985;16;{lcom};{}
 up;feup;mieic;Joao Moreira;05/06/1965;05/01/1985;17;{bdad};{}
 up;feup;mieic;Rosaldo Rossetti;05/06/1965;05/01/1985;18;{cal};{}
-up;feup;mieic;Antonio Sousa;05/06/1965;05/01/1985;19;{cgra};{}
 up;feup;mieic;Hugo Ferreira;05/09/1980;05/08/2010;20;{sope};{}
 up;feup;mieic;Joao Faria;05/09/1980;05/08/2010;21;{lpoo};{}
 up;feup;mieic;Rui Silva;05/09/1980;05/08/2010;22;{plog};{}
@@ -37,7 +35,6 @@ up;feup;mieic;Ana Paiva;13/07/1975;16/12/2000;36;{mfes};{}
 up;feup;mieic;Maria Dias;13/07/1975;16/12/2000;37;{iope};{}
 up;feup;mieic;Gil Goncalves;13/07/1975;16/12/2000;38;{lgpr};{}
 up;feup;mieic;Luis Teixeira;13/07/1975;16/12/2000;39;{diss};{}
-up;feup;mieic;Maria Ribeiro;19/03/1955;05/01/1985;40;{pdis};{}
 up;feup;mieic;Fernando Fernandes;19/03/1955;05/01/1985;41;{apsi};{}
 up;feup;mieic;Miguel Marcelo;19/03/1955;05/01/1985;42;{asso};{}
 up;feup;mieic;Andreia Brandao;19/03/1955;05/01/1985;43;{agrs};{}

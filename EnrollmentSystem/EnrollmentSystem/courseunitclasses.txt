@@ -1,3 +1,0 @@
-up;feup;mieic;prog;1;7
-up;feup;mieic;mdis;1;5
-up;feup;mieic;aoco;1;4

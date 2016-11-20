@@ -1,10 +1,10 @@
 up;feup;mieic;Antonio Ferreira;05/06/1965;05/01/1985;1;{alge};{}
 up;feup;mieic;Joao Jacob;05/09/1980;05/08/2010;2;{fpro};{}
 up;feup;mieic;Rui Ribeiro;13/07/1975;16/12/2000;3;{amat};{}
-up;feup;mieic;Raul Vidal;19/03/1955;05/01/1985;4;{aoco};{aoco}
-up;feup;mieic;Gabriel David;19/10/1970;25/03/2002;5;{mdis};{mdis}
+up;feup;mieic;Raul Vidal;19/03/1955;05/01/1985;4;{aoco};{}
+up;feup;mieic;Gabriel David;19/10/1970;25/03/2002;5;{mdis};{}
 up;feup;mieic;Manuel Torres;05/11/1974;05/01/2001;6;{pf};{}
-up;feup;mieic;Jorge Silva;13/12/1959;05/07/1999;7;{prog};{prog}
+up;feup;mieic;Jorge Silva;13/12/1959;05/07/1999;7;{prog};{}
 up;feup;mieic;Jaime Villate;05/06/1972;05/01/1987;8;{fisi1};{}
 up;feup;mieic;Jose Barbosa;05/06/1963;05/01/1994;9;{cmat};{}
 up;feup;mieic;Joao Canas;05/06/1965;05/01/1985;11;{mpcp};{}
