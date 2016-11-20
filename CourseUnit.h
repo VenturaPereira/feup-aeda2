@@ -153,6 +153,11 @@ public:
 	*/
 	virtual void show() const = 0;
 
+	/*
+	*	Prints Course Unit to Screen In Detail -> Variants in Child Classes
+	*/
+	virtual void showInDetail() const = 0;
+
 	//OPERATORS
 	/*
 	*	Operator << for Saving Purposes -> Variants in Child Classes
@@ -209,6 +214,11 @@ public:
 	*	Prints Optional Course Unit in the Screen
 	*/
 	virtual void show() const;
+
+	/*
+	*	Prints Optional Course Unit to Screen In Detail
+	*/
+	virtual void showInDetail() const;
 };
 
 /*
@@ -254,6 +264,11 @@ public:
 	*	Prints Mandatory Course Unit in the Screen
 	*/
 	virtual void show() const;
+
+	/*
+	*	Prints Mandatory Course Unit to Screen In Detail
+	*/
+	virtual void showInDetail() const;
 };
 
 #endif

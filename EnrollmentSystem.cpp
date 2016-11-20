@@ -557,7 +557,7 @@ Course& getCourse(EnrollmentSystem &s)
 	return *(college->getCourses()[answer_3]);
 }
 
-CourseUnit& getCourseUnit(EnrollmentSystem &s)
+CourseUnit& getCourseUnitUser(EnrollmentSystem &s)
 {
 	Course* course = &getCourse(s);
 
@@ -1246,6 +1246,19 @@ void EnrollmentSystem::showStudentInDetail()
 		system("cls");
 		cout << "\nStudent Details\n\n\n";
 		s.showInDetail();
+	}
+	catch (...) {
+
+	}
+}
+
+void EnrollmentSystem::showCourseUnitInDetail()
+{
+	try {
+		system("cls");
+		CourseUnit* cuPtr = &getCourseUnitUser(*this);
+		cout << "\nCourse Unit Details\n\n\n";
+		cuPtr->showInDetail();
 	}
 	catch (...) {
 

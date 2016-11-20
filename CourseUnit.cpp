@@ -7,6 +7,8 @@
 #include "University.h"
 #include "Utilities.h"
 #include <fstream>
+#include "Student.h"
+#include "Tutor.h"
 
 CourseUnit::CourseUnit(string n, string a, Course& c, unsigned short int y, unsigned short int s, double credits)
 	: name(n), acronym(a), year(y), semester(s), credits(credits), course(&c)
@@ -209,4 +211,71 @@ ofstream& MandatoryCourseUnit::operator<<(ofstream& file)
 		<< endl;
 
 	return file;
+}
+
+void MandatoryCourseUnit::showInDetail() const
+{
+	cout
+		<< "Name: " << name << endl << endl
+		<< "Acronym: " << acronym << endl << endl
+		<< "Course: " << course->getAcronym() << endl << endl
+		<< "College: " << course->getCollege().getAcronym() << endl << endl
+		<< "University: " << course->getCollege().getUniversity().getAcronym() << endl << endl
+		<< "Year: " << year << endl << endl
+		<< "Semester: " << semester << endl << endl
+		<< "Credits: " << credits << endl << endl
+		<< "Type: Mandatory" << endl << endl
+		<< "Maximum number of students per class: " << MAXIMUM_NUMBER_OF_STUDENTS_PER_CLASS << endl << endl
+		<< "Number of classes: " << classes.size() << endl << endl;
+	
+	if (studentsCurrentlyInCourseUnit.size() != 0) {
+		cout << "\nStudents:\n";
+		for (unsigned int i = 0; i < studentsCurrentlyInCourseUnit.size(); i++)
+			cout << '\t'
+			<< studentsCurrentlyInCourseUnit[i]->getName()
+			<< endl;			
+	}
+	else cout << "\nThere are no students in this course unit\n\n";
+	
+	if (courseUnitProfessors.size() != 0) {
+		cout << "\nProfessors:\n";
+		for (unsigned int i = 0; i < courseUnitProfessors.size(); i++)
+			cout << '\t'
+			<< courseUnitProfessors[i]->getName()
+			<< endl;
+	}
+	else cout << "\nThere are no professors teaching this course unit\n\n";
+}
+
+void OptionalCourseUnit::showInDetail() const
+{
+	cout
+		<< "Name: " << name << endl << endl
+		<< "Acronym: " << acronym << endl << endl
+		<< "Course: " << course->getAcronym() << endl << endl
+		<< "College: " << course->getCollege().getAcronym() << endl << endl
+		<< "University: " << course->getCollege().getUniversity().getAcronym() << endl << endl
+		<< "Year: " << year << endl << endl
+		<< "Semester: " << semester << endl << endl
+		<< "Credits: " << credits << endl << endl
+		<< "Type: Optional" << endl << endl
+		<< "Maximum number of students: " << MAXIMUM_NUMBER_OF_STUDENTS << endl << endl
+		<< "Scientific Area: " << scientificArea << endl << endl;
+	if (studentsCurrentlyInCourseUnit.size() != 0) {
+		cout << "\nStudents:\n";
+		for (unsigned int i = 0; i < studentsCurrentlyInCourseUnit.size(); i++)
+			cout << '\t'
+			<< studentsCurrentlyInCourseUnit[i]->getName()
+			<< endl;
+	}
+	else cout << "\nThere are no students in this course unit\n\n";
+
+	if (courseUnitProfessors.size() != 0) {
+		cout << "\nProfessors:\n";
+		for (unsigned int i = 0; i < courseUnitProfessors.size(); i++)
+			cout << '\t'
+			<< courseUnitProfessors[i]->getName()
+			<< endl;
+	}
+	else cout << "\nThere are no professors teaching this course unit\n\n";
 }

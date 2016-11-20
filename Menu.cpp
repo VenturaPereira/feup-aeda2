@@ -116,16 +116,17 @@ bool infoMenu(EnrollmentSystem &sys){
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 		{ "---------------------------------------",
 			"Information", "",
-			"1 - Read all Universities          ",
-			"2 - Read all Colleges              ",
-			"3 - Read all Courses               ",
-			"4 - Read all Course Units          ",
-			"5 - Read all Course Unit Classes   ",
-			"6 - Read all Students              ",
-			"7 - Read a Student in Detail       ",
-			"8 - Read all Professors            ", "",
-			"9 - Back                           ",
-			"---------------------------------------" }, 1, 9);
+			"1  - Read all Universities         ",
+			"2  - Read all Colleges             ",
+			"3  - Read all Courses              ",
+			"4  - Read all Course Units         ",
+			"5  - Read a Course Unit in Detail  "
+			"6  - Read all Course Unit Classes  ",
+			"7  - Read all Students             ",
+			"8  - Read a Student in Detail      ",
+			"9  - Read all Professors           ", "",
+			"10 - Back                          ",
+			"---------------------------------------" }, 1, 10);
 
 		switch (option)
 		{
@@ -146,22 +147,26 @@ bool infoMenu(EnrollmentSystem &sys){
 			system("pause");
 			return true;
 		case 5:
-			sys.showCourseUnitClasses();
+			sys.showCourseUnitInDetail();
 			system("pause");
 			return true;
 		case 6:
-			sys.showStudents();
+			sys.showCourseUnitClasses();
 			system("pause");
 			return true;
 		case 7:
-			sys.showStudentInDetail();
+			sys.showStudents();
 			system("pause");
 			return true;
 		case 8:
-			sys.showProfessors();
+			sys.showStudentInDetail();
 			system("pause");
 			return true;
 		case 9:
+			sys.showProfessors();
+			system("pause");
+			return true;
+		case 10:
 			return false;
 		}
 	}

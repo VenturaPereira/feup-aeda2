@@ -103,6 +103,11 @@ public:
 	*	Prints to the screen Detailed Information about a Student
 	*/
 	void showStudentInDetail();
+	
+	/*!
+	*	Prints to the screen Detailed Information about a Course Unit
+	*/
+	void showCourseUnitInDetail();
 
 	/*!
 	*	Template Function To Save All Data Into Files
@@ -243,7 +248,7 @@ public:
 	/*!
 	*	Returns the Course Unit chosen by User
 	*/
-	friend CourseUnit& getCourseUnit(EnrollmentSystem &s);
+	friend CourseUnit& getCourseUnitUser(EnrollmentSystem &s);
 
 	/*!
 	*	Returns the Student with a given ID
