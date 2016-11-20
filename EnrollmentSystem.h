@@ -69,11 +69,24 @@ public:
 	}
 
 	//HANDLERS (COMMUNICATION WITH THE USER)
-	friend bool addStudentHandler(EnrollmentSystem& s); //ADDS STUDENT TO COURSE
-	friend bool removeStudentHandler(EnrollmentSystem& s); //REMOVES STUDENT FROM COURSE
-	//friend bool addProfessorHandler(EnrollmentSystem& s); //ADDS PROFESSOR TO COURSE UNIT (AND TO COURSE, IF NOT YET THERE)
-	//friend bool removeProfessorHandler(EnrollmentSystem& s); //REMOVES PROFESSOR FROM COURSE 
-	friend bool enrollmentHandler(EnrollmentSystem& s); //SHOWS THE COURSE UNITS AVAIABLE TO ENROLL AND ADDS A STUDENT TO THEM
+	/*!
+	* Adds Students to Course
+	*/
+	friend bool addStudentHandler(EnrollmentSystem& s); 
+
+	/*!
+	*	Removes Students from Course
+	*/
+	friend bool removeStudentHandler(EnrollmentSystem& s); 
+
+	/*!
+	*	Shows Course Units available to Enroll and Adds a Student to them
+	*/
+	friend bool enrollmentHandler(EnrollmentSystem& s); 
+
+	/*!
+	*	
+	*/
 	friend bool studentFinishedCourseUnitHandler(EnrollmentSystem& s); //REMOVES THE STUDENT FROM THE COURSE UNIT IF THE GRADE IS HIGH ENOUGH
 	//friend bool addUniversityHandler(EnrollmentSystem& s);
 	friend bool removeUniversityHandler(EnrollmentSystem& s);
@@ -102,6 +115,9 @@ public:
 	bool changeProfessorsSortOption(unsigned int &option);
 
 	//GETS
+	/*!
+	*		
+	*/
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }
 	vector<University*>& getUniversities() { return universitiesVector; }
 	friend University& getUniversity(EnrollmentSystem &s);
