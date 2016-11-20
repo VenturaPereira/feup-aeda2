@@ -100,6 +100,11 @@ public:
 	void showStudents();
 
 	/*!
+	*	Prints to the screen Detailed Information about a Student
+	*/
+	void showStudentInDetail();
+
+	/*!
 	*	Template Function To Save All Data Into Files
 	*/
 	template<class T>
@@ -211,7 +216,7 @@ public:
 	//GETS
 
 	/*!
-	*	Returns Maximum Credits in the University
+	*	Returns Maximum Credits of the System
 	*/
 	unsigned int getMaxCredits() const { return MAXIMUM_CREDITS; }
 

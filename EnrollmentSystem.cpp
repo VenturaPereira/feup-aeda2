@@ -1235,3 +1235,16 @@ void EnrollmentSystem::showCourseUnitClasses()
 	}
 	else cout << "There are no classes";
 }
+
+void EnrollmentSystem::showStudentInDetail()
+{
+	try {
+		cout << "\nEnter the ID of the student\n\n";
+		unsigned long long int id = enterInput<unsigned long long int>();
+		Student s = getStudent(id);
+		s.showInDetail();
+	}
+	catch (...) {
+
+	}
+}
