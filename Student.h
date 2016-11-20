@@ -153,6 +153,11 @@ public:
 	*/
 	void show() const;
 
+	/*!
+	*	Prints Student In Detail to the Screen
+	*/
+	void showInDetail() const;
+
 	//OPERATORS
 	/*!
 	*	Operator << for saving Student into Files

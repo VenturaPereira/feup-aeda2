@@ -356,3 +356,47 @@ void Student::show() const{
 		<< endl;
 }
 
+void Student::showInDetail() const {
+	cout
+		<< "Name: " << name << endl << endl
+		<< "ID: " << ID << endl << endl
+		<< "Date of Birth: " << dateOfBirth.getDateString() << endl << endl
+		<< "Date of Registration: " << dateOfRegistration.getDateString() << endl << endl
+		<< "Year: " << year << endl << endl
+		<< "Status: " << status << endl << endl
+		<< "Course: " << course->getAcronym()
+		<< " in " << course->getCollege().getAcronym() << " (" << course->getCollege().getUniversity().getAcronym() << ")" << endl << endl
+		<< "Tutor: " << tutor->getName() << endl;
+	
+	if (completedCourseUnits.size() != 0) {
+		cout << "\nCompleted course units:" << endl;
+		map<CourseUnit*, unsigned short int>::const_iterator ccIt;
+		for (ccIt = completedCourseUnits.begin();
+			ccIt != completedCourseUnits.end();
+			ccIt++) {
+			cout << '\t'
+				<< ccIt->first->getAcronym()
+				<< setw(CONSOLE_WIDTH*0.5 - ccIt->first->getAcronym().size())
+				<< ccIt->second << endl;
+		}
+	}
+	else cout << "\nStudent has not completed any course units yet!\n";
+	
+		if (classesCurrentlyAtending.size() != 0) {
+			map<CourseUnit*, CourseUnitClass*>::const_iterator caIt;
+			cout << "\nClasses currently attending:" << endl;
+			for (caIt = classesCurrentlyAtending.begin();
+				caIt != classesCurrentlyAtending.end();
+				caIt++) {
+				cout << '\t'
+					<< caIt->first->getAcronym()
+					<< setw(CONSOLE_WIDTH*0.5 - caIt->first->getAcronym().size())
+					<< caIt->second->getClassNumber() << endl;
+			}
+		}
+		else cout << "\nStudent is not attending any classes!\n";
+	
+	cout << endl << endl;
+}
+
+

@@ -122,9 +122,10 @@ bool infoMenu(EnrollmentSystem &sys){
 			"4 - Read all Course Units          ",
 			"5 - Read all Course Unit Classes   ",
 			"6 - Read all Students              ",
-			"7 - Read all Professors            ", "",
-			"8 - Back                           ",
-			"---------------------------------------" }, 1, 8);
+			"7 - Read a Student in Detail       ",
+			"8 - Read all Professors            ", "",
+			"9 - Back                           ",
+			"---------------------------------------" }, 1, 9);
 
 		switch (option)
 		{
@@ -153,10 +154,14 @@ bool infoMenu(EnrollmentSystem &sys){
 			system("pause");
 			return true;
 		case 7:
-			sys.showProfessors();
+			sys.showStudentInDetail();
 			system("pause");
 			return true;
 		case 8:
+			sys.showProfessors();
+			system("pause");
+			return true;
+		case 9:
 			return false;
 		}
 	}

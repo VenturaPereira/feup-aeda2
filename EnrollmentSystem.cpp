@@ -1239,9 +1239,12 @@ void EnrollmentSystem::showCourseUnitClasses()
 void EnrollmentSystem::showStudentInDetail()
 {
 	try {
+		system("cls");
 		cout << "\nEnter the ID of the student\n\n";
 		unsigned long long int id = enterInput<unsigned long long int>();
 		Student s = getStudent(id);
+		system("cls");
+		cout << "\nStudent Details\n\n\n";
 		s.showInDetail();
 	}
 	catch (...) {
