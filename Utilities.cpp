@@ -33,24 +33,6 @@ string enterString(string title, string requestMsg)
 	}
 }
 
-void validFile(string fileType) {
-
-	string requestMsg = "\nWhat's the name of your " + fileType + " file? ";
-
-	while (true)
-	{
-		string fileName = enterString("", requestMsg);
-		ifstream file(fileName);
-		if (file.is_open())
-		{
-			cout << "\nFile found!\n";
-			file.close();
-			return;
-		}
-		else cout << "\nFile not found!\n";
-	}
-}
-
 bool yesNoAnswer() {
 	string answer;
 	while (true)

@@ -14,6 +14,9 @@ class Tutor;
 
 using namespace std;
 
+/*
+*	Child Class of College User
+*/
 class Student : public CollegeUser
 {
 protected:
@@ -26,7 +29,14 @@ protected:
 	string status; //REGULAR STUDENT, WORKING STUDENT, SPECIAL NEEDS
 	double credits; //CREDITS THIS YEAR
 
+	/*
+	*	Assign Email to Student
+	*/
 	virtual void assignEmail();
+
+	/*
+	*	Assign ID to Student
+	*/
 	virtual void assignID();
 public:
 	//MEMBER FUNCTIONS

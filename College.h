@@ -9,6 +9,9 @@ using namespace std;
 class Course;
 class University;
 
+/*
+*	Class for Colleges
+*/
 class College
 {
 private:
