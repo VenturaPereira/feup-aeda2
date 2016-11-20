@@ -640,7 +640,32 @@ bool addStudentHandler(EnrollmentSystem& s)
 	try
 	{
 		studentName = enterString("\nAdd Student\n\n", "Enter the name of the student [CTRL+Z to cancel] : ");
-		status = enterString("\nAdd Student\n\n", "Enter the status of the student [CTRL+Z to cancel] : ");
+		vector<string> supportedStatus = {
+			"Estudante Regular",
+			"Trabalhador Estudante",
+			"Dirigente Associativo",
+			"Praticante de Desporto de Alto Rendimento",
+			"Pai e Mãe Estudante",
+			"Necessidades Educativas Especiais",
+			"Militar",
+			"Bombeiro",
+			"Praticante de Confissões Religiosas",
+			"Estudante-atleta da U.Porto",
+		};
+		while (true) {
+			system("cls");
+			cout << "\nAdd Student\n\n" << "\nSelect a status [CTRL+Z to cancel] \n\n";
+			for (unsigned int i = 0; i < supportedStatus.size(); i++) {
+				cout << i + 1 << ". " << supportedStatus[i] << endl;
+			}
+			cout << endl;
+			unsigned int option = enterInput<unsigned int>();
+			if (option >= 1 && option <= supportedStatus.size()) {
+				status = supportedStatus[option - 1];
+				break;
+			}
+		}
+
 		while (true)
 		{
 			dateOfBirth = Date(enterString("\nAdd Student\n\n", "Enter the date of birth (DD-MM-YYYY) [CTRL+Z to cancel] : "));
