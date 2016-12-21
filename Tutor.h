@@ -4,7 +4,9 @@
 #define TUTOR_H
 
 #include "CollegeUser.h"
+#include "Meeting.h"
 #include <vector>
+#include <set>
 using namespace std;
 
 class Course;
@@ -22,6 +24,7 @@ private:
 	Course* course;
 	vector<CourseUnit*> ableToTeach, currentlyTeaching;
 	vector<Student*> students;
+	set<Meeting> meetings;
 
 	//MEMBER FUNCTIONS
 	/*!
@@ -115,6 +118,34 @@ public:
 	*	Operator << for saving purposes
 	*/
 	ofstream& operator<<(ofstream& file);
+
+	//MEETINGS
+	/*!
+	*	Tries to add a meeting. Returns the success/failure.
+	*/
+	bool addMeeting(Meeting &m);
+
+	/*!
+	*	Tries to remove a meeting. Returns the success/failure.
+	*/
+	bool removeMeeting(Meeting &m);
+
+	/*!
+	*	Prints all the occured meetings
+	*/
+	void showMeetingsOccured() const;
+
+	/*!
+	*	Prints all the upcoming meetings
+	*/
+	void showMeetingsUpcoming() const;
+
+	/*!
+	*	Prints all the upcoming meetings in a period of time
+	*/
+	void showMeetingsUpcoming(const Date &begin, const Date &end) const;
+
+
 };
 
 #endif

@@ -36,13 +36,13 @@ bool Tutor::teachClass(CourseUnitClass& c)
 {
 	if (find(ableToTeach.begin(), ableToTeach.end(), &(c.getCourseUnit())) == ableToTeach.end()) //NOT ABLE TO TEACH
 		return false;
-		
+
 	if (find(currentlyTeaching.begin(), currentlyTeaching.end(), &(c.getCourseUnit())) == currentlyTeaching.end()) //NOT TEACHING
 	{
 		c.getCourseUnit().addProfessor(*this);
 		currentlyTeaching.push_back(&(c.getCourseUnit()));
 	}
-		
+
 	return true;
 }
 
@@ -51,7 +51,7 @@ void Tutor::assignEmail()
 	string inicials;
 	for (int i = 0; i < name.size(); i++)
 	{
-		if(iswalpha(name[i]))
+		if (iswalpha(name[i]))
 			if (iswupper(name[i]))
 				inicials += name[i];
 	}
@@ -72,7 +72,7 @@ void Tutor::assignID()
 	course->getCollege().getUniversity().incrementLastProfessorID();
 }
 
-bool compareProfessorByName(Tutor* p1, Tutor* p2) 
+bool compareProfessorByName(Tutor* p1, Tutor* p2)
 {
 	return p1->name < p2->name;
 }
@@ -127,7 +127,7 @@ ofstream& Tutor::operator<<(ofstream& file)
 	}
 
 	file << '}'
-		 << endl;
+		<< endl;
 
 	return file;
 }
@@ -150,4 +150,81 @@ void Tutor::show() const {
 		<< '\t'
 		<< dateOfRegistration.getDateString()
 		<< endl;
+}
+
+bool Tutor::addMeeting(Meeting &m) {
+	pair<set<Meeting>::iterator, bool> result = meetings.insert(m);
+	return result.second;
+}
+
+bool Tutor::removeMeeting(Meeting &m) {
+	set<Meeting>::iterator it;
+
+	for (it = meetings.begin();
+		it != meetings.end();
+		it++) {
+		if (*it == m) {
+			meetings.erase(it);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void Tutor::showMeetingsOccured() const {
+	if (meetings.size() != 0) {
+
+		cout << "\nOccured Meetings:\n\n";
+
+		set<Meeting>::iterator it;
+
+		for (it = meetings.begin();
+			it != meetings.end();
+			it++) {
+			if (it->hasOccured()) {
+				it->show();
+				cout << endl;
+			}
+		}
+	}
+	else cout << "\nThere are no past meetings\n\n";
+}
+
+void Tutor::showMeetingsUpcoming() const {
+	if (meetings.size() != 0) {
+
+		cout << "\nUpcoming Meetings:\n\n";
+
+		set<Meeting>::iterator it;
+
+		for (it = meetings.begin();
+			it != meetings.end();
+			it++) {
+			if (!(it->hasOccured())) {
+				it->show();
+				cout << endl;
+			}
+		}
+	}
+	else cout << "\nThere are no upcoming meetings\n\n";
+}
+
+void Tutor::showMeetingsUpcoming(const Date &begin, const Date &end) const {
+	if (meetings.size() != 0) {
+
+		cout << "\nUpcoming Meetings from " << begin.getDateString() << " to " << end.getDateString() << ':' << endl << endl;
+
+		set<Meeting>::iterator it;
+
+		for (it = meetings.begin();
+			it != meetings.end();
+			it++) {
+			if (!(it->hasOccured()) && (it->getDate() >= begin) && (it->getDate() <= end)) {
+				it->show();
+				cout << endl;
+			}
+		}
+	}
+	else cout << "\nThere are no upcoming meetings from " << begin.getDateString() << " to " << end.getDateString() << endl << endl;
 }
