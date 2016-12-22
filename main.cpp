@@ -7,7 +7,10 @@ int run()
 {
 	EnrollmentSystem sys(MAX_CREDITS);
 
-	mainMenu(sys);	
+	sys.addMeetingHandler();
+	sys.removeMeetingHandler();
+
+	//mainMenu(sys);	
 
 	return 0;
 }

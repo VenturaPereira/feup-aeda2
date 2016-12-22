@@ -1,9 +1,10 @@
+#include "Student.h"
 #include "Meeting.h"
 #include <ctime>
 #include <iostream>
-#include "Student.h"
 
-Meeting::Meeting(Date d, Student* st, string top, unsigned int h, unsigned int m) :
+
+Meeting::Meeting(Date d, Student* st, vector<string> &top, unsigned int h, unsigned int m) :
 	student(st), topics(top), date(d), minute(m), hour(h) {
 }
 
@@ -46,6 +47,11 @@ bool operator==(const Meeting &m1, const Meeting &m2) {
 void Meeting::show() const {
 	cout << "Date: " << date.getDateString() << " - " << hour << ':' << minute << endl;
 	cout << "Student: " << student->getID() << endl;
-	cout << "Topics:\n" << topics;
+	cout << "Topics:\n";
+	if (topics.size()) {
+		for (size_t i = 0; i < topics.size(); i++)
+			cout << "\t" << topics[i] << endl;
+	}
+	else cout << "\tThere are no topics for this meeting!\n";
 	cout << "Description: " << description << endl;
 }

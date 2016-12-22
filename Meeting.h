@@ -5,6 +5,7 @@
 
 
 #include "Date.h"
+#include <vector>
 
 class Student;
 
@@ -14,11 +15,13 @@ private:
 	Date date;
 	unsigned int hour, minute;
 	Student* student;
-	string topics, description;
+	vector<string> topics;
+	string description;
+
 
 public:
 	//CONSTRUCTORS
-	Meeting(Date d, Student* su, string top, unsigned int hour, unsigned int minute);
+	Meeting(Date d, Student* st, vector<string> &top, unsigned int hour, unsigned int minute);
 
 	//GETS
 	Date getDate() const { return date; }

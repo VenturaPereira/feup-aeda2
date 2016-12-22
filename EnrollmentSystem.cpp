@@ -1305,7 +1305,7 @@ void EnrollmentSystem::addMeetingHandler() {
 	
 	Tutor* tutor;
 	Student* student;
-	string topics;
+	vector<string> topics;
 	Date date;
 	unsigned int hour, minute;
 	unsigned long long int tutorID;
@@ -1401,12 +1401,14 @@ void EnrollmentSystem::addMeetingHandler() {
 		system("cls");
 		cout << "\nAdd Meeting\n\n";
 		if (topics.size()) {
-			cout << "\nTopics:\n\n" << topics << endl;
+			cout << "\nTopics:\n";
+			for (size_t i = 0; i < topics.size(); i++)
+				cout << '\t' << topics[i] << '\n';
 		}
-		cout << "Enter a topic [CTRL+Z to endl] : \n";
+		cout << "Enter a topic [CTRL+Z to end] : \n";
 		string temp;
 		if (getline(cin, temp)) {
-			topics += temp + '\n';
+			topics.push_back(temp);
 		}
 		else {
 			cin.clear();
