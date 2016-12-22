@@ -63,6 +63,8 @@ public:
 	*/
 	void tutorStudent(Student& s);
 
+	bool isTutorOf(Student& s);
+
 	//COMPARES
 
 	/*!

@@ -317,7 +317,14 @@ public:
 	*/
 	vector<Tutor*> getAllProfessors();
 
+	Tutor& getProfessor(unsigned long long int &ID);
 	
+	//MEETINGS
+	void addMeetingHandler();
+
+	void removeMeetingHandler();
+
+	void changeMeetingDescriptionHandler();
 };
 
 #endif

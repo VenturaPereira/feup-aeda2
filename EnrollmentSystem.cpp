@@ -618,6 +618,42 @@ Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
 	throw NotFound<Student*, unsigned long long int>(ID);
 }
 
+Tutor& EnrollmentSystem::getProfessor(unsigned long long int &ID) {
+	
+	vector<University*>::iterator unIt;
+	for (unIt = universitiesVector.begin();
+		unIt != universitiesVector.end();
+		unIt++
+		)
+	{
+		vector<College*>::iterator colIt;
+		for (colIt = (*unIt)->getColleges().begin();
+			colIt != (*unIt)->getColleges().end();
+			colIt++
+			)
+		{
+			vector<Course*>::iterator courseIt;
+			for (courseIt = (*colIt)->getCourses().begin();
+				courseIt != (*colIt)->getCourses().end();
+				courseIt++
+				)
+			{
+				vector<Tutor*>::iterator sIt;
+				for (sIt = (*courseIt)->getProfessors().begin();
+					sIt != (*courseIt)->getProfessors().end();
+					sIt++
+					)
+				{
+					if ((*sIt)->getID() == ID)
+						return *(*sIt);
+
+				}
+			}
+		}
+	}
+	throw NotFound<Tutor*, unsigned long long int>(ID);
+}
+
 void EnrollmentSystem::removeUniversity(University& u)
 {
 	vector<University*>::iterator it;
@@ -1263,4 +1299,85 @@ void EnrollmentSystem::showCourseUnitInDetail()
 	catch (...) {
 
 	}
+}
+
+void EnrollmentSystem::addMeetingHandler() {
+	
+	Tutor* tutor;
+	Student* student;
+	string topics;
+	Date date;
+	unsigned int hour, minute;
+	unsigned long long int studentID, tutorID;
+
+	try
+	{
+		tutorID = enterInput<unsigned long long int>("\nAdd Meeting\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
+		tutor = &(getProfessor(tutorID));
+		studentID = enterInput<unsigned long long int>("\nAdd Meeting\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
+		student = &(getStudent(studentID));
+
+		if (!(tutor->isTutorOf(*student))) {
+			system("CLS");
+			cout << "\nAdd Meeting\n\n" << "The student's tutor is not the professor you've introduced\n\n";
+			system("PAUSE");
+			return;
+		}
+
+
+		while (true)
+		{
+			date = Date(enterString("\nAdd Meeting\n\n", "Enter the date for the meeting (DD-MM-YYYY) [CTRL+Z to cancel] : "));
+			if (date.getValid())
+				break;
+			cout << "\nInvalid Date!\n";
+			system("PAUSE");
+		}
+
+		while (true) {
+			string time = enterString("\nAdd Meeting\n\n", "Enter the time for the meeting (HH:MM) [CTRL+Z to cancel] : ");
+			istringstream iss(time);
+			char tempChar;
+			iss >> hour >> tempChar >> minute;
+			if (!iss.fail())
+				break;
+		}
+
+	}
+	catch (EndOfFile &eof)
+	{
+		cout << "\nAddition canceled!\n";
+		return;
+	}
+	catch (NotFound<Student*, unsigned long long int> &nfs)
+	{
+		cout << "Student " << nfs.getMember() << " not found!\n";
+		return;
+	}
+	catch (NotFound<Tutor*, unsigned long long int> &nfs)
+	{
+		cout << "Tutor " << nfs.getMember() << " not found!\n";
+		return;
+	}
+
+	//ENTER THE TOPICS
+	while (true) {
+		system("cls");
+		cout << "\nAdd Meeting\n\n";
+		if (topics.size()) {
+			cout << "\nTopics:\n\n" << topics << endl;
+		}
+		cout << "Enter a topic [CTRL+Z to endl] : \n";
+		string temp;
+		if (getline(cin, temp)) {
+			topics += temp + '\n';
+		}
+		else {
+			cin.clear();
+			break;
+		}
+	}	
+
+	tutor->addMeeting(Meeting(date, student,topics, hour, minute));
+
 }

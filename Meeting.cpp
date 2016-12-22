@@ -3,8 +3,8 @@
 #include <iostream>
 #include "Student.h"
 
-Meeting::Meeting(Date d, Student* st, string des, unsigned int h, unsigned int m) :
-	student(st), description(des), date(d), minute(m), hour(h) {
+Meeting::Meeting(Date d, Student* st, string top, unsigned int h, unsigned int m) :
+	student(st), topics(top), date(d), minute(m), hour(h) {
 }
 
 bool Meeting::hasOccured() const {
@@ -31,12 +31,12 @@ bool operator==(const Meeting &m1, const Meeting &m2) {
 	return 
 		(m1.date == m2.date &&
 			m1.hour == m2.hour && 
-				m1.minute == m2.minute &&
-					m1.student == m2.student);
+				m1.minute == m2.minute);
 }
 
 void Meeting::show() const {
 	cout << "Date: " << date.getDateString() << " - " << hour << ':' << minute << endl;
 	cout << "Student: " << student->getID() << endl;
+	cout << "Topics: " << topics << endl;
 	cout << "Description: " << description << endl;
 }

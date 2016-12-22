@@ -6,7 +6,7 @@
 int run()
 {
 	EnrollmentSystem sys(MAX_CREDITS);
-	
+
 	mainMenu(sys);	
 
 	return 0;

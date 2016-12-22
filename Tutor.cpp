@@ -228,3 +228,11 @@ void Tutor::showMeetingsUpcoming(const Date &begin, const Date &end) const {
 	}
 	else cout << "\nThere are no upcoming meetings from " << begin.getDateString() << " to " << end.getDateString() << endl << endl;
 }
+
+bool Tutor::isTutorOf(Student& s) {
+	for (size_t i = 0; i < students.size(); i++) {
+		if (&s == students[i])
+			return true;
+	}
+	return false;
+}
