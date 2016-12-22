@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef MEETING_H
+#define MEETING_H
+
+
 #include "Date.h"
 
 class Student;
@@ -28,3 +32,5 @@ public:
 	friend bool operator<(const Meeting &m1, const Meeting &m2);
 	friend bool operator==(const Meeting &m1, const Meeting &m2);
 };
+
+#endif

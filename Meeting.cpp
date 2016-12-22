@@ -21,10 +21,19 @@ bool Meeting::hasOccured() const {
 }
 
 bool operator<(const Meeting &m1, const Meeting &m2) {
-	return (m1.date < m2.date ||
-		(m1.date == m2.date &&
-		(m1.hour < m2.hour ||
-			(m1.hour == m2.hour && m1.minute < m2.minute))));
+	if (m1.date < m2.date)
+		return true;
+	else if (m1.date == m2.date) {
+		if (m1.hour < m2.hour)
+			return true;
+		else if (m1.hour == m2.hour) {
+			if (m1.minute < m2.minute)
+				return true;
+			else return false;
+		}
+		else return false;
+	}
+	else return false;
 }
 
 bool operator==(const Meeting &m1, const Meeting &m2) {
@@ -37,6 +46,6 @@ bool operator==(const Meeting &m1, const Meeting &m2) {
 void Meeting::show() const {
 	cout << "Date: " << date.getDateString() << " - " << hour << ':' << minute << endl;
 	cout << "Student: " << student->getID() << endl;
-	cout << "Topics: " << topics << endl;
+	cout << "Topics:\n" << topics;
 	cout << "Description: " << description << endl;
 }

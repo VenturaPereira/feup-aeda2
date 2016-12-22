@@ -109,6 +109,8 @@ public:
 	*/
 	vector<Student*>& getStudents() { return students; }
 
+	set<Meeting>& getMeetings() { return meetings; }
+
 	//PRINT TO SCREEN
 	/*!
 	*	Prints Professor in the Screen

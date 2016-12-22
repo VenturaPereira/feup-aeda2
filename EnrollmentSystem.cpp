@@ -1381,3 +1381,64 @@ void EnrollmentSystem::addMeetingHandler() {
 	tutor->addMeeting(Meeting(date, student,topics, hour, minute));
 
 }
+
+void EnrollmentSystem::removeMeetingHandler() {
+	Tutor* tutor; 
+	unsigned long long int tutorID;
+
+	try	{
+		tutorID = enterInput<unsigned long long int>("\nCancel Meeting\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
+		tutor = &(getProfessor(tutorID));
+	}
+	catch (EndOfFile &eof){
+		cout << "\nAddition canceled!\n";
+		return;
+	}
+	catch (NotFound<Tutor*, unsigned long long int> &nfs){
+		cout << "Tutor " << nfs.getMember() << " not found!\n";
+		return;
+	}
+
+	while (true) {
+		system("cls");
+		cout << "\nCancel Meeting\n\n";
+		set<Meeting> meetings = tutor->getMeetings();
+		if (meetings.size()) {
+			set<Meeting>::iterator it;
+			size_t i = 1;
+			for (it = meetings.begin();
+				it != meetings.end();
+				it++, i++) {
+				cout << i << ". " << endl;
+				it->show();
+			}
+			cout << i << ". " << "Exit" << endl;
+			cout << "\nSelect the meeting you wish to cancel:\n";
+			size_t option = enterInput<size_t>();
+			option--;
+			if (option == meetings.size()) { //EXIT OPTION
+				cout << "Action cancelled\n\n";
+				system("Pause");
+				return;
+			}
+			else if (option >= 0 && option <= (meetings.size() - 1)) { //WITHIN RANGE
+				it = tutor->getMeetings().begin();
+				for (; option > 0; option--) {
+					it++;
+				}
+				tutor->getMeetings().erase(it);
+
+				return;
+			}
+			else { //OUTSIDE RANGE
+				cout << "Invalid option\n\n";
+				system("Pause");
+			}
+		}
+		else {
+			cout << "There are no meetings to cancel\n\n";
+			system("Pause");
+			return;
+		}
+	}
+}
