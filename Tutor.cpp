@@ -172,61 +172,77 @@ bool Tutor::removeMeeting(Meeting &m) {
 	return false;
 }
 
-void Tutor::showMeetingsOccured() const {
+void Tutor::showAllMeetings() const {
 	if (meetings.size() != 0) {
 
-		cout << "\nOccured Meetings:\n\n";
+		cout << "\nMeetings:\n\n";
 
 		set<Meeting>::iterator it;
 
 		for (it = meetings.begin();
 			it != meetings.end();
 			it++) {
-			if (it->hasOccured()) {
-				it->show();
-				cout << endl;
-			}
+			it->show();
+			cout << endl;
 		}
 	}
-	else cout << "\nThere are no past meetings\n\n";
+	else cout << "\nThere are no meetings\n\n";
+}
+
+void Tutor::showMeetingsOccured() const {
+
+	cout << "\nOccured Meetings:\n\n";
+	bool empty = true;
+	set<Meeting>::iterator it;
+
+	for (it = meetings.begin();
+		it != meetings.end();
+		it++) {
+		if (it->hasOccured()) {
+			empty = false;
+			it->show();
+			cout << endl;
+		}
+	}
+
+	if (empty)
+		cout << "There were no past meetings\n\n";
 }
 
 void Tutor::showMeetingsUpcoming() const {
-	if (meetings.size() != 0) {
+	cout << "\nUpcoming Meetings:\n\n";
+	bool empty = true;
+	set<Meeting>::iterator it;
 
-		cout << "\nUpcoming Meetings:\n\n";
-
-		set<Meeting>::iterator it;
-
-		for (it = meetings.begin();
-			it != meetings.end();
-			it++) {
-			if (!(it->hasOccured())) {
-				it->show();
-				cout << endl;
-			}
+	for (it = meetings.begin();
+		it != meetings.end();
+		it++) {
+		if (!(it->hasOccured())) {
+			empty = false;
+			it->show();
+			cout << endl;
 		}
 	}
-	else cout << "\nThere are no upcoming meetings\n\n";
+	if (empty)
+		cout << "There are no upcoming meetings\n\n";
 }
 
 void Tutor::showMeetingsUpcoming(const Date &begin, const Date &end) const {
-	if (meetings.size() != 0) {
+	cout << "\nUpcoming Meetings from " << begin.getDateString() << " to " << end.getDateString() << ':' << endl << endl;
+	bool empty = true;
+	set<Meeting>::iterator it;
 
-		cout << "\nUpcoming Meetings from " << begin.getDateString() << " to " << end.getDateString() << ':' << endl << endl;
-
-		set<Meeting>::iterator it;
-
-		for (it = meetings.begin();
-			it != meetings.end();
-			it++) {
-			if (!(it->hasOccured()) && (it->getDate() >= begin) && (it->getDate() <= end)) {
-				it->show();
-				cout << endl;
-			}
+	for (it = meetings.begin();
+		it != meetings.end();
+		it++) {
+		if (!(it->hasOccured()) && (it->getDate() >= begin) && (it->getDate() <= end)) {
+			empty = false;
+			it->show();
+			cout << endl;
 		}
 	}
-	else cout << "\nThere are no upcoming meetings from " << begin.getDateString() << " to " << end.getDateString() << endl << endl;
+	if (empty)
+		cout << "\nThere are no upcoming meetings from " << begin.getDateString() << " to " << end.getDateString() << endl << endl;
 }
 
 bool Tutor::isTutorOf(Student& s) {

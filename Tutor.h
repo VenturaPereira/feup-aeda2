@@ -149,6 +149,8 @@ public:
 	*/
 	void showMeetingsUpcoming(const Date &begin, const Date &end) const;
 
+	void showAllMeetings() const;
+
 
 };
 
