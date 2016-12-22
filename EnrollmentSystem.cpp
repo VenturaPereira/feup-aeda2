@@ -1429,7 +1429,7 @@ void EnrollmentSystem::removeMeetingHandler() {
 		tutor = &(getProfessor(tutorID));
 	}
 	catch (EndOfFile &eof){
-		cout << "\nAddition canceled!\n";
+		cout << "\nAction canceled!\n";
 		return;
 	}
 	catch (NotFound<Tutor*, unsigned long long int> &nfs){
@@ -1475,6 +1475,74 @@ void EnrollmentSystem::removeMeetingHandler() {
 		}
 		else {
 			cout << "There are no meetings to cancel\n\n";
+			system("Pause");
+			return;
+		}
+	}
+}
+
+void EnrollmentSystem::changeMeetingDescriptionHandler() {
+	Tutor* tutor;
+	unsigned long long int tutorID;
+
+	try {
+		tutorID = enterInput<unsigned long long int>("\nModify Meeting\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
+		tutor = &(getProfessor(tutorID));
+	}
+	catch (EndOfFile &eof) {
+		cout << "\nAction canceled!\n";
+		return;
+	}
+	catch (NotFound<Tutor*, unsigned long long int> &nfs) {
+		cout << "Tutor " << nfs.getMember() << " not found!\n";
+		return;
+	}
+
+	while (true) {
+		system("cls");
+		cout << "\nModify Meeting\n\n";
+		set<Meeting> meetings = tutor->getMeetings();
+		if (meetings.size()) {
+			set<Meeting>::iterator it;
+			size_t i = 1;
+			for (it = meetings.begin();
+				it != meetings.end();
+				it++, i++) {
+				cout << i << ". " << endl;
+				it->show();
+			}
+			cout << i << ". " << "Exit" << endl;
+			cout << "\nSelect the meeting you wish to modify:\n";
+			size_t option = enterInput<size_t>();
+			option--;
+			if (option == meetings.size()) { //EXIT OPTION
+				cout << "Action cancelled\n\n";
+				system("Pause");
+				return;
+			}
+			else if (option >= 0 && option <= (meetings.size() - 1)) { //WITHIN RANGE
+				it = tutor->getMeetings().begin();
+				for (; option > 0; option--) {
+					it++;
+				}
+
+				string newDescription = enterString("\nModify Meeting\n\n", "Enter the new description for this meeting: ");
+
+				//CANNOT MODIFY DIRECTLY IN SET
+				//SOLUTION: SAVE IT TO A TEMP VARIABLE, REMOVE FROM SET, MODIFY IT AND STORE IT AGAIN IN SET
+				Meeting tempMeeting = *it;
+				tutor->getMeetings().erase(it);
+				tempMeeting.setDescription(newDescription);
+				tutor->addMeeting(tempMeeting);
+				return;
+			}
+			else { //OUTSIDE RANGE
+				cout << "Invalid option\n\n";
+				system("Pause");
+			}
+		}
+		else {
+			cout << "There are no meetings to modify\n\n";
 			system("Pause");
 			return;
 		}
