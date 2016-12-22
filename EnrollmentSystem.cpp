@@ -1308,12 +1308,13 @@ void EnrollmentSystem::addMeetingHandler() {
 	string topics;
 	Date date;
 	unsigned int hour, minute;
-	unsigned long long int studentID, tutorID;
+	unsigned long long int tutorID;
 
 	try
 	{
 		tutorID = enterInput<unsigned long long int>("\nAdd Meeting\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
 		tutor = &(getProfessor(tutorID));
+		/*
 		studentID = enterInput<unsigned long long int>("\nAdd Meeting\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
 		student = &(getStudent(studentID));
 
@@ -1322,6 +1323,41 @@ void EnrollmentSystem::addMeetingHandler() {
 			cout << "\nAdd Meeting\n\n" << "The student's tutor is not the professor you've introduced\n\n";
 			system("PAUSE");
 			return;
+		}*/
+
+		while (true) {
+			system("cls");
+			cout << "\nAdd Meeting\n\n";
+			if (tutor->getStudents().size()) {
+				for (size_t i = 0; i < tutor->getStudents().size(); i++) {
+					cout << i + 1 << ". ";
+					tutor->getStudents()[i]->show();
+				}
+				cout << tutor->getStudents().size() + 1 << ". Exit\n";
+				cout << "\nWhat student do you want to meet with?\n";
+				size_t option = enterInput<size_t>();
+				option--;
+				if (option == tutor->getStudents().size()) { //EXIT
+					cout << "\nAction Cancelled\n\n";
+					system("Pause");
+					return;
+				}
+				else if (option >= 0 && option <= (tutor->getStudents().size() - 1)) { //WITHIN RANGE
+					student = tutor->getStudents()[option];
+					break;
+				}
+				else {
+					cout << "\nInvalid Option\n\n";
+					system("Pause");
+					continue;
+				}
+			}
+			else {
+				cout << "The tutor is not tutoring any student\n\n";
+				system("Pause");
+				return;
+			}
+
 		}
 
 
