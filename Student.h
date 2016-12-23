@@ -26,7 +26,7 @@ protected:
 	map<CourseUnit*, CourseUnitClass*> classesCurrentlyAtending;
 	Tutor* tutor;
 	unsigned short int year;
-	string status; //REGULAR STUDENT, WORKING STUDENT, SPECIAL NEEDS
+	string personalStatus, collegeStatus;
 	double credits; //CREDITS THIS YEAR
 
 	/*!
@@ -107,9 +107,14 @@ public:
 		
 	//SETS
 	/*!
-	*	Sets the Student Status
+	*	Sets the Personal Status of a Student
 	*/
-	void setStatus(string s) { status = s; }
+	void setPersonalStatus(string s) { personalStatus = s; }
+
+	/*!
+	*	Sets the College Status of a Student
+	*/
+	void setCollegeStatus(string s) { collegeStatus = s; }
 
 	/*!
 	*	Sets the Student Credits
@@ -148,9 +153,14 @@ public:
 	unsigned short int getYear() const { return year; }
 
 	/*!
-	*	Returns the Student' Status
+	*	Returns the Student' Personal Status
 	*/
-	string getStatus() const { return status; }
+	string getPersonalStatus() const { return personalStatus; }
+	
+	/*!
+	*	Returns the Student' College Status
+	*/
+	string getCollegeStatus() const { return collegeStatus; }
 
 	/*!
 	*	Returns the Student's Available Credits

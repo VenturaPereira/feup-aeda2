@@ -13,7 +13,8 @@
 Student::Student(string n, Date dob, Course& c, string s) 
 	: CollegeUser(n, dob, c)
 {
-	status = s;
+	personalStatus = s;
+	collegeStatus = "Frequenting";
 	course = &c;
 	year = 1;
 	credits = double(0);
@@ -25,7 +26,7 @@ Student::Student(string n, Date dob, Course& c, string s)
 
 Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
 	: CollegeUser(n, dob, c),
-	tutor(&t), year(y), credits(cr), status(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
+	tutor(&t), year(y), credits(cr), personalStatus(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {
 	course = &c;
 	dateOfRegistration = dor;
@@ -284,7 +285,7 @@ ofstream& Student::operator<<(ofstream& file)
 		<< ';'
 		<< this->getDateOfRegistration().getDateString()
 		<< ';'
-		<< this->status
+		<< this->personalStatus
 		<< ';'
 		<< this->credits
 		<< ';'
@@ -352,7 +353,7 @@ void Student::show() const{
 		<< '\t'
 		<< dateOfRegistration.getDateString()
 		<< '\t'
-		<< status
+		<< personalStatus
 		<< endl;
 }
 
@@ -363,7 +364,7 @@ void Student::showInDetail() const {
 		<< "Date of Birth: " << dateOfBirth.getDateString() << endl << endl
 		<< "Date of Registration: " << dateOfRegistration.getDateString() << endl << endl
 		<< "Year: " << year << endl << endl
-		<< "Status: " << status << endl << endl
+		<< "Status: " << personalStatus << endl << endl
 		<< "Course: " << course->getAcronym()
 		<< " in " << course->getCollege().getAcronym() << " (" << course->getCollege().getUniversity().getAcronym() << ")" << endl << endl
 		<< "Tutor: " << tutor->getName() << endl;

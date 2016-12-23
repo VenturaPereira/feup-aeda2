@@ -153,3 +153,7 @@ void Course::show() const{
 		<< right
 		<< endl;
 }
+
+bool  Course::StudentHash::operator()(const Student *s1, const Student *s2) const {
+	return s1->getID() == s2->getID();
+}

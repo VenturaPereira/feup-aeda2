@@ -18,9 +18,8 @@ class CollegeUser
 protected:
 	//MEMBER VARIABLES
 	College* college;
-	string name;
-	string email;
-	unsigned long long int ID;
+	string name, email, address;
+	unsigned long long int ID, contact;
 	Date dateOfRegistration, dateOfBirth;
 	
 public:

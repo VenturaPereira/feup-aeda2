@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <unordered_set>
 using namespace std;
 
 class College;
@@ -11,11 +12,17 @@ class Tutor;
 class CourseUnit;
 class Student;
 
+
 /*!
 *	Class for Course
 */
 class Course
 {
+public:
+	struct StudentHash {
+		int operator()(const Student *s) const  { return 0; }
+		bool operator()(const Student *s1,const Student *s2) const;
+	};
 private:
 	//MEMBER VARIABLES
 	const string name, acronym;
@@ -23,6 +30,7 @@ private:
 	vector<Student*> students;
 	vector<Tutor*> professors;
 	College* college;
+	unordered_set<Student*, StudentHash, StudentHash> studentsOutOfCollege;
 
 public:
 	//MEMBER FUNCTIONS
@@ -126,6 +134,12 @@ public:
 	*	Operator << for saving purposes
 	*/
 	ofstream& operator<<(ofstream &file);
+
+	/*!
+	*	Add Student to Hash Table
+	*/
+	void addStudentToHashTable(Student &s) { studentsOutOfCollege.insert(&s); }
 };
+
 
 #endif

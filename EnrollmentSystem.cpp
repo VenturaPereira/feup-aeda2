@@ -275,7 +275,7 @@ void EnrollmentSystem::loadStudents() {
 	*/
 		
 	ifstream file;
-	string line, uni, col, course, name, dateStr, status, ccuStr, ccaStr;
+	string line, uni, col, course, name, dateStr, personalStatus, ccuStr, ccaStr;
 	unsigned long long int ID, tutor_ID;
 	unsigned short int year;
 	double credits;
@@ -299,7 +299,7 @@ void EnrollmentSystem::loadStudents() {
 			Date birthDate(dateStr); 
 			getline(iss, dateStr, ch);
 			Date dateOfRegistration(dateStr);
-			getline(iss, status, ch);
+			getline(iss, personalStatus, ch);
 			iss >> ws >> credits
 				>> ws >> ch
 				>> ws >> year
@@ -371,7 +371,7 @@ void EnrollmentSystem::loadStudents() {
 			catch (...) {
 				continue;
 			}
-			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, credits, status, ccu, cca, ID);
+			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, credits, personalStatus, ccu, cca, ID);
 		}
 	
 	file.close();
@@ -671,7 +671,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 {
 	Date dateOfBirth;
 	Course* course;
-	string studentName, status;
+	string studentName, personalStatus;
 
 	try
 	{
@@ -697,7 +697,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 			cout << endl;
 			unsigned int option = enterInput<unsigned int>();
 			if (option >= 1 && option <= supportedStatus.size()) {
-				status = supportedStatus[option - 1];
+				personalStatus = supportedStatus[option - 1];
 				break;
 			}
 		}
@@ -742,7 +742,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 		return false;
 	}
 		
-	new Student(studentName, dateOfBirth, *course, status);
+	new Student(studentName, dateOfBirth, *course, personalStatus);
 
 	return true;
 }
@@ -769,6 +769,8 @@ bool removeStudentHandler(EnrollmentSystem& s)
 	}
 
 	student->getCourse().removeStudent(*student);
+	student->setCollegeStatus("Suspended");
+	student->getCourse().addStudentToHashTable(*student);
 	
 	return true;
 }
@@ -939,12 +941,23 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 		//CHECK IF STUDENT HAS COMPLETED ALL THE COURSE UNITS OF THE CURRENT YEAR
 		if (student->completedAllCourseUnits(student->getYear()))
 		{
-			//GET READY FOR NEXT YEAR
-			student->setCredits(double(0));
-			student->setYear(student->getYear() + 1);
-			cout << "Student finished this Course Year. Now he/she is currently in year " << student->getYear() << "." << endl;
-			system("pause");
-			break;
+			if (student->getYear() == 5) { 
+				//STUDENT COMPLETED THE COURSE
+				student->setCollegeStatus("Completed");
+				student->getCourse().addStudentToHashTable(*student); //ADD TO HASH TABLE
+				student->getCourse().removeStudent(*student); //REMOVE FROM FREQUENTING VECTOR
+				cout << "Student finished the Course!\n";
+				system("Pause");
+				break;
+			}
+			else {
+				//GET READY FOR NEXT YEAR
+				student->setCredits(double(0));
+				student->setYear(student->getYear() + 1);
+				cout << "Student finished this Course Year. Now he/she is currently in year " << student->getYear() << "." << endl;
+				system("pause");
+				break;
+			}
 		}
 		else {
 			cout << "\nStudent still has course units to complete in order to enroll the next year\n";
