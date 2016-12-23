@@ -1375,8 +1375,12 @@ void EnrollmentSystem::addMeetingHandler() {
 			istringstream iss(time);
 			char tempChar;
 			iss >> hour >> tempChar >> minute;
-			if (!iss.fail())
+			if (!iss.fail() && hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59)
 				break;
+			else {
+				cout << "\nInvalid Time!\n";
+				system("PAUSE");
+			}
 		}
 
 	}
