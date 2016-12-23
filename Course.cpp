@@ -157,3 +157,15 @@ void Course::show() const{
 bool  Course::StudentHash::operator()(const Student *s1, const Student *s2) const {
 	return s1->getID() == s2->getID();
 }
+
+bool Course::removeStudentFromHash(Student &s) {
+	for (auto it = studentsOutOfCollege.begin();
+		it != studentsOutOfCollege.end();
+		it++) {
+		if (s.getID() == (*it)->getID()) {
+			studentsOutOfCollege.erase(it);
+			return true;
+		}
+	}
+	return false;
+}

@@ -113,6 +113,11 @@ public:
 	College& getCollege() { return *college; }
 
 	/*!
+	*	Returns the Hash Table of Students out of College
+	*/
+	unordered_set<Student*, StudentHash, StudentHash>& getStudentsHash() { return studentsOutOfCollege; }
+
+	/*!
 	*	Returns the Course Units of the Course from a given year
 	*/
 	vector<CourseUnit*> getCourseUnits(unsigned short int y);
@@ -139,6 +144,8 @@ public:
 	*	Add Student to Hash Table
 	*/
 	void addStudentToHashTable(Student &s) { studentsOutOfCollege.insert(&s); }
+
+	bool removeStudentFromHash(Student &s);
 };
 
 

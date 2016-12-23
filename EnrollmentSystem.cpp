@@ -602,6 +602,7 @@ Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
 				courseIt++
 				)
 			{
+				//From vector
 				vector<Student*>::iterator sIt; 
 				for (sIt = (*courseIt)->getStudents().begin();
 					sIt != (*courseIt)->getStudents().end();
@@ -612,6 +613,15 @@ Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
 						return *(*sIt);
 
 				}
+				
+				//From hash table
+				for (auto hashIt = (*courseIt)->getStudentsHash().begin();
+					hashIt != (*courseIt)->getStudentsHash().end();
+					hashIt++) {
+					if ((*hashIt)->getID() == ID)
+						return *(*hashIt);
+				}
+
 			}
 		}
 	}
@@ -823,10 +833,12 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		return false;
 	}
 	
+	if (student->getCollegeStatus() == "Completed") {
+
 		vector<CourseUnit*> courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear());
-	
+
 		unsigned int answer = 0;
-		try 
+		try
 		{
 			while (answer != (courseUnitsToShow.size() + 1) && courseUnitsToShow.size() != 0) //EXIT
 			{
@@ -837,18 +849,22 @@ bool enrollmentHandler(EnrollmentSystem& s)
 					cout << (i + 1) << ". ";
 					courseUnitsToShow[i]->show();
 				}
-				cout << endl << endl << (i+1) << ". Exit\n\n";
+				cout << endl << endl << (i + 1) << ". Exit\n\n";
 				answer = enterInput<unsigned int>(); //READ SELECTION
-				if (answer >= 1 && answer <= courseUnitsToShow.size()) 
+				if (answer >= 1 && answer <= courseUnitsToShow.size())
 				{
 					if (student->getCredits() + courseUnitsToShow[answer - 1]->getCredits() <= s.getMaxCredits())
 					{
 						student->enrollCourseUnit(s.getCourseUnit(
 							(courseUnitsToShow[answer - 1])->getAcronym(),
 							student->getCourse()));
-
 						student->setCredits(student->getCredits() + (*courseUnitsToShow[answer - 1]).getCredits());
 						courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear()); //REFRESH MENU
+						if (student->getCollegeStatus() == "Suspended") {
+							student->getCourse().removeStudentFromHash(*student);
+							student->setCollegeStatus("Frequenting");
+							student->getCourse().addStudent(*student);
+						}
 					}
 					else cout << "Student cannot enroll this course unit. Maximum credits have been exceeded";
 				}
@@ -857,10 +873,17 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		catch (EndOfFile &eof)
 		{
 			cout << "Enrollment Canceled!\n";
+			system("Pause");
 			return false;
 		}
-	
-	return courseUnitsToShow.size() == 0;
+
+		return courseUnitsToShow.size() == 0;
+	}
+	else {
+		cout << "Student already completed the course!\n";
+		system("Pause");
+		return false;
+	}
 }
 
 bool studentFinishedCourseUnitHandler(EnrollmentSystem& s) 

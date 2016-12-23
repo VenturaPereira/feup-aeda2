@@ -354,6 +354,8 @@ void Student::show() const{
 		<< dateOfRegistration.getDateString()
 		<< '\t'
 		<< personalStatus
+		<< '\t'
+		<< collegeStatus
 		<< endl;
 }
 
@@ -364,7 +366,8 @@ void Student::showInDetail() const {
 		<< "Date of Birth: " << dateOfBirth.getDateString() << endl << endl
 		<< "Date of Registration: " << dateOfRegistration.getDateString() << endl << endl
 		<< "Year: " << year << endl << endl
-		<< "Status: " << personalStatus << endl << endl
+		<< "Personal status: " << personalStatus << endl << endl
+		<< "College status: " << collegeStatus << endl << endl
 		<< "Course: " << course->getAcronym()
 		<< " in " << course->getCollege().getAcronym() << " (" << course->getCollege().getUniversity().getAcronym() << ")" << endl << endl
 		<< "Tutor: " << tutor->getName() << endl;
