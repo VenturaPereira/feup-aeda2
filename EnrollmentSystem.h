@@ -325,6 +325,8 @@ public:
 	void removeMeetingHandler();
 
 	void changeMeetingDescriptionHandler();
+
+	void showMeetingsHandler(unsigned int &option);
 };
 
 #endif

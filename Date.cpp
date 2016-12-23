@@ -87,17 +87,29 @@ ostream& operator<< (ostream &os, Date &date)
 
 bool operator==(const Date &LHS, const Date &RHS)
 {
-	return (LHS.getDateString() == RHS.getDateString());
+	return (LHS.year == RHS.year
+		&& LHS.month == RHS.month
+		&& LHS.day == RHS.day);
 }
 
 bool operator<(const Date &LHS, const Date &RHS)
 {
-	return (LHS.getDateString() < RHS.getDateString());
+	if (LHS.year < RHS.year)
+		return true;
+	else if (LHS.year == RHS.year) {
+		if (LHS.month < RHS.month)
+			return true;
+		else if (LHS.month == RHS.month) {
+			return LHS.day < RHS.day;
+		}
+		else return false;
+	}
+	else return false;
 }
 
 bool operator>(const Date &LHS, const Date &RHS)
 {
-	return (LHS.getDateString() > RHS.getDateString());
+	return (!((LHS < RHS) || (LHS == RHS)));
 }
 
 bool operator<=(const Date &LHS, const Date &RHS)

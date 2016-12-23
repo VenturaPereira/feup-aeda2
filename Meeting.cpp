@@ -9,16 +9,27 @@ Meeting::Meeting(Date d, Student* st, vector<string> &top, unsigned int h, unsig
 }
 
 bool Meeting::hasOccured() const {
-	//Get current time
-	time_t t = time(NULL);
-	tm now;
-	localtime_s(&now, &t);
-
 	//Return if this->date is less than the current date (includes hour:minute)
-	return (this->date < Date()) ||
-		(this->date == Date() &&
-		(hour < now.tm_hour ||
-			(hour == now.tm_hour && minute < now.tm_min)));
+	Date currentDate;
+	if (this->date < currentDate) {
+		return true;
+	}
+	else {
+		if (this->date == currentDate) {
+			//Get current time
+			time_t t = time(NULL);
+			tm now;
+			localtime_s(&now, &t);
+			if (hour < now.tm_hour)
+				return true;
+			else if (hour == now.tm_hour) {
+				return minute < now.tm_min;
+			}
+			else return false;
+
+		}
+		else return false;
+	}
 }
 
 bool operator<(const Meeting &m1, const Meeting &m2) {
@@ -28,9 +39,7 @@ bool operator<(const Meeting &m1, const Meeting &m2) {
 		if (m1.hour < m2.hour)
 			return true;
 		else if (m1.hour == m2.hour) {
-			if (m1.minute < m2.minute)
-				return true;
-			else return false;
+			return m1.minute < m2.minute;
 		}
 		else return false;
 	}

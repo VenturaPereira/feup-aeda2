@@ -1548,3 +1548,69 @@ void EnrollmentSystem::changeMeetingDescriptionHandler() {
 		}
 	}
 }
+
+void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
+	if (option >= 1 && option <= 4) {
+		
+		Tutor* tutor;
+		unsigned long long int tutorID;
+		Date begin, end;
+
+		try {
+			tutorID = enterInput<unsigned long long int>("\nShow Meetings\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
+			tutor = &(getProfessor(tutorID));
+			
+			if (option == 4) { //READ BEGIN AND END DATES
+				while (true)
+				{
+					begin = Date(enterString("\nShow Meetings\n\n", "Enter the first date (DD-MM-YYYY) [CTRL+Z to cancel] : "));
+					if (begin.getValid())
+						break;
+					cout << "\nInvalid Date!\n";
+					system("PAUSE");
+				}
+				
+				while (true)
+				{
+					end = Date(enterString("\nShow Meetings\n\n", "Enter the second date (DD-MM-YYYY) [CTRL+Z to cancel] : "));
+					if (end.getValid())
+						break;
+					cout << "\nInvalid Date!\n";
+					system("PAUSE");
+				}
+			}
+		}
+		catch (EndOfFile &eof) {
+			cout << "\nAction canceled!\n";
+			return;
+		}
+		catch (NotFound<Tutor*, unsigned long long int> &nfs) {
+			cout << "Tutor " << nfs.getMember() << " not found!\n";
+			return;
+		}
+		
+		
+		switch (option) {
+		case 1: {
+			tutor->showAllMeetings();
+			system("Pause");
+			return;
+		}
+		case 2: {
+			tutor->showMeetingsOccured();
+			system("Pause");
+			return;
+		}
+		case 3: {
+			tutor->showMeetingsUpcoming();
+			system("Pause");
+			return;
+		}
+		case 4: {
+			tutor->showMeetingsUpcoming(begin, end);
+			system("Pause");
+			return;
+		}
+		}
+	}
+}
