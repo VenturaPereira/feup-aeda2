@@ -140,6 +140,11 @@ public:
 	void showMeetingsOccured() const;
 
 	/*!
+	*	Prints all the occured meetings in a period of time
+	*/
+	void showMeetingsOccured(const Date &begin, const Date &end) const;
+
+	/*!
 	*	Prints all the upcoming meetings
 	*/
 	void showMeetingsUpcoming() const;

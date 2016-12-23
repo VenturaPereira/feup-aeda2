@@ -209,6 +209,24 @@ void Tutor::showMeetingsOccured() const {
 		cout << "There were no past meetings\n\n";
 }
 
+void Tutor::showMeetingsOccured(const Date &begin, const Date &end) const {
+	cout << "\nOccured Meetings from " << begin.getDateString() << " to " << end.getDateString() << ':' << endl << endl;
+	bool empty = true;
+	set<Meeting>::iterator it;
+
+	for (it = meetings.begin();
+		it != meetings.end();
+		it++) {
+		if (it->hasOccured() && (it->getDate() >= begin) && (it->getDate() <= end)) {
+			empty = false;
+			it->show();
+			cout << endl;
+		}
+	}
+	if (empty)
+		cout << "\nThere are no occured meetings from " << begin.getDateString() << " to " << end.getDateString() << endl << endl;
+}
+
 void Tutor::showMeetingsUpcoming() const {
 	cout << "\nUpcoming Meetings:\n\n";
 	bool empty = true;

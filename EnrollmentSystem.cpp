@@ -1554,7 +1554,7 @@ void EnrollmentSystem::changeMeetingDescriptionHandler() {
 }
 
 void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
-	if (option >= 1 && option <= 4) {
+	if (option >= 1 && option <= 5) {
 		
 		Tutor* tutor;
 		unsigned long long int tutorID;
@@ -1564,7 +1564,7 @@ void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
 			tutorID = enterInput<unsigned long long int>("\nShow Meetings\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
 			tutor = &(getProfessor(tutorID));
 			
-			if (option == 4) { //READ BEGIN AND END DATES
+			if (option == 5 || option == 3) { //READ BEGIN AND END DATES
 				while (true)
 				{
 					begin = Date(enterString("\nShow Meetings\n\n", "Enter the first date (DD-MM-YYYY) [CTRL+Z to cancel] : "));
@@ -1606,11 +1606,16 @@ void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
 			return;
 		}
 		case 3: {
-			tutor->showMeetingsUpcoming();
+			tutor->showMeetingsOccured(begin, end);
 			system("Pause");
 			return;
 		}
 		case 4: {
+			tutor->showMeetingsUpcoming();
+			system("Pause");
+			return;
+		}
+		case 5: {
 			tutor->showMeetingsUpcoming(begin, end);
 			system("Pause");
 			return;
