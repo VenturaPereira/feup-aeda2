@@ -78,6 +78,5 @@ up;feup;mieic;Vitor Sabino;05/06/1972;05/01/1987;77;{sade};{}
 up;feup;mieic;Goncalo Faria;05/06/1972;05/01/1987;78;{tvvs};{}
 up;feup;mieic;Catarina Borges;05/06/1972;05/01/1987;79;{vcom};{}
 up;feup;mieic;Maria Ribeiro;05/06/1972;05/01/1987;80;{pdis};{}
-up;feup;mieic;Luis Teixeira;05/06/1972;05/01/1987;81;{diss};{}
-up;feup;mieic;Jose Borges;05/06/1965;05/01/1985;82;{mest};{}
-up;feup;mieic;Antonio Sousa;05/06/1965;05/01/1985;83;{cgra};{}
+up;feup;mieic;Jose Borges;05/06/1965;05/01/1985;81;{mest};{}
+up;feup;mieic;Antonio Sousa;05/06/1965;05/01/1985;82;{cgra};{}

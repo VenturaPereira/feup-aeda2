@@ -59,4 +59,14 @@ bool sortingCourseUnitMenu(EnrollmentSystem &sys);
 */
 bool sortingCourseUnitClassMenu(EnrollmentSystem &sys); 
 
+/*!
+*	Menu for Meetings
+*/
+bool meetingsMenu(EnrollmentSystem &sys);
+
+/*!
+*	Menu to Show Meetings
+*/
+bool showMeetingsMenu(EnrollmentSystem &sys);
+
 #endif

@@ -1,3 +1,3 @@
-up;feup;mieic;Daniel Marques;31/10/1997;20/11/2016;Estudante Regular;0;1;201600001;1;{};{}
-up;feup;mieic;Joao Seixas;03/09/1997;20/11/2016;Necessidades Educativas Especiais;0;1;201600002;2;{};{}
-up;feup;mieic;Ventura Pereira;05/11/1996;20/11/2016;Praticante de Confissões Religiosas;0;1;201600003;3;{};{}
+up;feup;mieic;Daniel Marques;31/10/1997;20/11/2016;Estudante Regular;Frequenting;0;1;201600001;1;{};{}
+up;feup;mieic;Joao Seixas;03/09/1997;20/11/2016;Necessidades Educativas Especiais;Frequenting;0;1;201600002;2;{};{}
+up;feup;mieic;Ventura Pereira;05/11/1996;20/11/2016;Praticante de Confissões Religiosas;Frequenting;0;1;201600003;3;{};{}

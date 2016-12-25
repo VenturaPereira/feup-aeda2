@@ -60,7 +60,7 @@ bool studentsMenu(EnrollmentSystem &sys){
 			"Enrollment System", "",
 			"1 - Add Student           ",
 			"2 - Remove Student        ", 
-			"3 - Enroll                " , 
+			"3 - Enroll                " , "",
 			"4 - Back                  ", 
 			"==============================" }, 1, 4);
 		switch (option)
@@ -81,30 +81,85 @@ bool studentsMenu(EnrollmentSystem &sys){
 	}
 }
 
+bool showMeetingsMenu(EnrollmentSystem &sys) {
+	while (true)
+	{
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		{ "--------------------------------------------",
+			"Show Meetings", "",
+			"1 - Show All Meetings                   ",
+			"2 - Show All Occured Meetings           ",
+			"3 - Show Occured Meetings between Dates ",
+			"4 - Show All Upcoming Meetings          ",
+			"5 - Show Upcoming Meetings between Dates", "",
+			"6 - Back                                ",
+			"--------------------------------------------" }, 1, 6);
+		switch (option)
+		{
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			sys.showMeetingsHandler(option);
+			return true;
+		case 6:
+			return false;
+		}
+	}
+}
+
+bool meetingsMenu(EnrollmentSystem &sys) {
+	while (true)
+	{
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		{ "-----------------------------------",
+			"Meetings", "",
+			"1 - Add Meeting                ",
+			"2 - Cancel Meeting             ",
+			"3 - Modify Meeting Description ",
+			"4 - Show Meetings              ", "",
+			"5 - Back                       ",
+			"-----------------------------------" }, 1, 5);
+		switch (option)
+		{
+		case 1:
+			sys.addMeetingHandler();
+			return true;
+		case 2:
+			sys.removeMeetingHandler();
+			return true;
+		case 3:
+			sys.changeMeetingDescriptionHandler();
+			return true;
+		case 4:
+			showMeetingsMenu(sys);
+			return true;
+		case 5:
+			return false;
+		}
+	}
+}
+
 bool professorsMenu(EnrollmentSystem &sys){
 	while (true)
 	{
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 		{ "-------------------------------------",
 			"Professors", "",
-			"1 - Grade Students               ", "",
-			"2 - Back                         ",
-			"-------------------------------------" }, 1, 2);
+			"1 - Grade Students               ",
+			"2 - Meetings                     ", "",
+			"3 - Back                         ",
+			"-------------------------------------" }, 1, 3);
 		switch (option)
 		{
-			/*
-		case 1:
-			addProfessorHandler(sys);
-			//system("pause");
-			return true;
-		case 2:
-			removeProfessorHandler(sys);
-			//system("pause");
-			return true; */
 		case 1:
 			studentFinishedCourseUnitHandler(sys);
 			return true;
 		case 2:
+			meetingsMenu(sys);
+			return true;
+		case 3:
 			return false;
 		}
 	}

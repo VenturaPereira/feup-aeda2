@@ -275,7 +275,7 @@ void EnrollmentSystem::loadStudents() {
 	*/
 		
 	ifstream file;
-	string line, uni, col, course, name, dateStr, personalStatus, ccuStr, ccaStr;
+	string line, uni, col, course, name, dateStr, personalStatus, collegeStatus, ccuStr, ccaStr;
 	unsigned long long int ID, tutor_ID;
 	unsigned short int year;
 	double credits;
@@ -300,6 +300,7 @@ void EnrollmentSystem::loadStudents() {
 			getline(iss, dateStr, ch);
 			Date dateOfRegistration(dateStr);
 			getline(iss, personalStatus, ch);
+			getline(iss, collegeStatus, ch);
 			iss >> ws >> credits
 				>> ws >> ch
 				>> ws >> year
@@ -371,7 +372,7 @@ void EnrollmentSystem::loadStudents() {
 			catch (...) {
 				continue;
 			}
-			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, credits, personalStatus, ccu, cca, ID);
+			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, credits, personalStatus, collegeStatus, ccu, cca, ID);
 		}
 	
 	file.close();
@@ -833,14 +834,14 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		return false;
 	}
 	
-	if (student->getCollegeStatus() == "Completed") {
+	if (student->getCollegeStatus() != "Completed") {
 
 		vector<CourseUnit*> courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear());
 
 		unsigned int answer = 0;
 		try
 		{
-			while (answer != (courseUnitsToShow.size() + 1) && courseUnitsToShow.size() != 0) //EXIT
+			while (courseUnitsToShow.size() != 0) //EXIT
 			{
 				system("CLS");
 				size_t i;
@@ -866,8 +867,10 @@ bool enrollmentHandler(EnrollmentSystem& s)
 							student->getCourse().addStudent(*student);
 						}
 					}
-					else cout << "Student cannot enroll this course unit. Maximum credits have been exceeded";
+					else cout << "Student cannot enroll in this course unit. Maximum credits have been exceeded";
 				}
+				else if (answer == courseUnitsToShow.size() + 1)
+					break;
 			}
 		}
 		catch (EndOfFile &eof)
@@ -1162,6 +1165,7 @@ vector<Student*> EnrollmentSystem::getAllStudents()
 	vector<Course*> courses = getAllCourses();
 	for (unsigned int i = 0; i < courses.size(); i++) {
 		students.insert(students.begin(), courses[i]->getStudents().begin(), courses[i]->getStudents().end());
+		students.insert(students.begin(), courses[i]->getStudentsHash().begin(), courses[i]->getStudentsHash().end());
 	}
 	return students;
 }

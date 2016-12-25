@@ -24,9 +24,9 @@ Student::Student(string n, Date dob, Course& c, string s)
 	c.addStudent(*this);
 }
 
-Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
+Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
 	: CollegeUser(n, dob, c),
-	tutor(&t), year(y), credits(cr), personalStatus(s), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
+	tutor(&t), year(y), credits(cr), personalStatus(ps), collegeStatus(cs), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {
 	course = &c;
 	dateOfRegistration = dor;
@@ -35,13 +35,15 @@ Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned sho
 	map<CourseUnit*, CourseUnitClass*>::iterator mapIt;
 	for (mapIt = cca.begin();
 		mapIt != cca.end();
-		mapIt++) 
-	{
+		mapIt++) {
 		mapIt->first->addStudentWithoutCheck(*this);
 		mapIt->second->addStudent(*this);
 	}
 	t.tutorStudent(*this);
-	c.addStudent(*this);
+	if (this->collegeStatus == "Completed" || this->collegeStatus == "Suspended")
+		c.addStudentToHashTable(*this);
+	else
+		c.addStudent(*this);
 }
 
 bool Student::assignTutor()
@@ -286,6 +288,8 @@ ofstream& Student::operator<<(ofstream& file)
 		<< this->getDateOfRegistration().getDateString()
 		<< ';'
 		<< this->personalStatus
+		<< ';'
+		<< this->collegeStatus
 		<< ';'
 		<< this->credits
 		<< ';'

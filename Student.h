@@ -48,7 +48,7 @@ public:
 	/*!
 	*	Students Constructor with Name, Date of Birth, Date of Registration, Course, Professor(Tutor), Current Course Year, Credits still Available, Status, Completed Course Units and Course Units Currently Attending
 	*/
-	Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string s, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
+	Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
 	
 	/*!
 	*	Students Destructor
