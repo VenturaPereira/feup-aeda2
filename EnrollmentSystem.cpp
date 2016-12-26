@@ -300,8 +300,7 @@ void EnrollmentSystem::loadStudents() {
 			Date dateOfRegistration(dateStr);
 			getline(iss, personalStatus, ch);
 			getline(iss, collegeStatus, ch);
-			iss >> ws >> ch
-				>> ws >> year
+			iss >> ws >> year
 				>> ws >> ch
 				>> ws >> ID
 				>> ws >> ch
