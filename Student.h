@@ -27,7 +27,6 @@ protected:
 	Tutor* tutor;
 	unsigned short int year;
 	string personalStatus, collegeStatus;
-	double credits; //CREDITS THIS YEAR
 
 	/*!
 	*	Assign Email to Student
@@ -48,7 +47,7 @@ public:
 	/*!
 	*	Students Constructor with Name, Date of Birth, Date of Registration, Course, Professor(Tutor), Current Course Year, Credits still Available, Status, Completed Course Units and Course Units Currently Attending
 	*/
-	Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
+	Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id);
 	
 	/*!
 	*	Students Destructor
@@ -59,16 +58,6 @@ public:
 	*	Assigns a Tutor to a Student
 	*/
 	bool assignTutor();
-
-	/*!
-	*	Enroll a Student into a Course Unit
-	*/
-	bool enrollCourseUnit(CourseUnit& courseUnit);
-
-	/*!
-	*	Enroll a Student into a Course Unit Class
-	*/
-	bool enrollClass(CourseUnitClass& courseUnitClass);
 
 	/*!
 	*	Check if Student Completed a Course Unit with a given grade
@@ -117,11 +106,6 @@ public:
 	void setCollegeStatus(string s) { collegeStatus = s; }
 
 	/*!
-	*	Sets the Student Credits
-	*/
-	void setCredits(double c) { credits = c; }
-
-	/*!
 	*	Sets the Student Year
 	*/
 	void setYear(unsigned short int y) { year = y; }
@@ -161,11 +145,6 @@ public:
 	*	Returns the Student' College Status
 	*/
 	string getCollegeStatus() const { return collegeStatus; }
-
-	/*!
-	*	Returns the Student's Available Credits
-	*/
-	double getCredits() const { return credits; }
 
 	//PRINT TO SCREEN
 	/*!

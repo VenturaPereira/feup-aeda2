@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <queue>
 
 class Course;
 class Student;
@@ -26,7 +27,7 @@ protected:
 	Course* course;
 	vector<Student*> studentsCurrentlyInCourseUnit;
 	vector<Tutor*> courseUnitProfessors;
-	vector<CourseUnitClass*> classes;
+	priority_queue<CourseUnitClass*> classes;
 
 public:
 	//MEMBER FUNCTIONS
@@ -41,9 +42,9 @@ public:
 	virtual ~CourseUnit() {}
 
 	/*!
-	*	Adds Student to Course Unit -> Variant in Child Class
+	*	Adds Student to Course Unit
 	*/
-	virtual bool addStudent(Student& s) = 0;
+	void addStudent(Student& s);
 
 	/*!
 	*	Removes Student from Course Unit
@@ -70,11 +71,7 @@ public:
 	*/
 	bool removeCourseUnitClass(CourseUnitClass& cuc);
 
-	/*!
-	*	Add Student to Course Unit
-	*/
-	void addStudentWithoutCheck(Student& s);
-			
+		
 	//COMPARES
 	/*!
 	*	Compares Course Units by Number of Students
@@ -130,7 +127,7 @@ public:
 	/*!
 	*	Returns Classes in the Course Unit
 	*/
-	vector<CourseUnitClass*>& getClasses() { return classes; }
+	priority_queue<CourseUnitClass*>& getClasses() { return classes; }
 
 	/*!
 	*	Returns Students in the Course Unit
@@ -163,6 +160,16 @@ public:
 	*	Operator << for Saving Purposes -> Variants in Child Classes
 	*/
 	virtual ofstream& operator<<(ofstream& file) = 0;
+
+	/*!
+	*	Checks if it's Possible for a Student to Enroll this Course Unit
+	*/
+	virtual bool possibleToEnroll() = 0;
+
+	/*!
+	*	Enrolls a Student in this Course Unit (and in a class with free room)
+	*/
+	virtual void enrollStudent(Student &s) = 0;
 };
 
 /*!
@@ -186,11 +193,6 @@ public:
 	*	Optional Course Units Destructor
 	*/
 	virtual ~OptionalCourseUnit() {}
-
-	/*!
-	*	Adds Student to Course Unit
-	*/
-	virtual bool addStudent(Student& s);
 
 	//GETS
 	/*!
@@ -219,6 +221,16 @@ public:
 	*	Prints Optional Course Unit to Screen In Detail
 	*/
 	virtual void showInDetail() const;
+
+	/*!
+	*	Checks if it's Possible for a Student to Enroll this Course Unit
+	*/
+	virtual bool possibleToEnroll();
+
+	/*!
+	*	Enrolls a Student in this Course Unit (and in a class with free room)
+	*/
+	virtual void enrollStudent(Student &s);
 };
 
 /*!
@@ -242,11 +254,6 @@ public:
 	*/
 	virtual ~MandatoryCourseUnit() {}
 
-	/*!
-	*	Adds Student to Course Unit
-	*/
-	virtual bool addStudent(Student& s);
-
 	//GETS
 	/*!
 	*	Returns Maximum Students per Class of the Course Unit
@@ -269,6 +276,16 @@ public:
 	*	Prints Mandatory Course Unit to Screen In Detail
 	*/
 	virtual void showInDetail() const;
+
+	/*!
+	*	Checks if it's Possible for a Student to Enroll this Course Unit
+	*/
+	virtual bool possibleToEnroll();
+
+	/*!
+	*	Enrolls a Student in this Course Unit (and in a class with free room)
+	*/
+	virtual void enrollStudent(Student &s);
 };
 
 #endif

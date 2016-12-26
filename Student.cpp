@@ -17,16 +17,15 @@ Student::Student(string n, Date dob, Course& c, string s)
 	collegeStatus = "Frequenting";
 	course = &c;
 	year = 1;
-	credits = double(0);
 	assignID();
 	assignEmail();
 	assignTutor();
 	c.addStudent(*this);
 }
 
-Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, double cr, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
+Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
 	: CollegeUser(n, dob, c),
-	tutor(&t), year(y), credits(cr), personalStatus(ps), collegeStatus(cs), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
+	tutor(&t), year(y),  personalStatus(ps), collegeStatus(cs), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {
 	course = &c;
 	dateOfRegistration = dor;
@@ -36,7 +35,7 @@ Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned sho
 	for (mapIt = cca.begin();
 		mapIt != cca.end();
 		mapIt++) {
-		mapIt->first->addStudentWithoutCheck(*this);
+		mapIt->first->addStudent(*this);
 		mapIt->second->addStudent(*this);
 	}
 	t.tutorStudent(*this);
@@ -80,102 +79,30 @@ void Student::assignID()
 	course->getCollege().getUniversity().incrementLastStudentID();
 }
 
-bool Student::enrollClass(CourseUnitClass& courseUnitClass)
-{
-	MandatoryCourseUnit* castIt = dynamic_cast<MandatoryCourseUnit*>(&(courseUnitClass.getCourseUnit()));
-	if (castIt != NULL) //IT'S MANDATORY
-	{
-		//CHECK IF CLASS IS FULL
-		if (courseUnitClass.getNumberOfStudents() < castIt->getMaxStudentsPerClass())
-		{
-			courseUnitClass.addStudent(*this);
-			classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(&(courseUnitClass.getCourseUnit()), &courseUnitClass));
-			return true;
-		}
-		else return false;
-	}
-	//IT'S OPTIONAL ADD THE STUDENT
-	courseUnitClass.addStudent(*this); //ADD STUDENT TO CLASS
-	classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(&(courseUnitClass.getCourseUnit()), &courseUnitClass));
-	return true;
-
-}
-
-bool Student::enrollCourseUnit(CourseUnit& courseUnit)
-{
-	//FIND THE ARGUMENT IN THE VECTOR OF COURSE UNITS
-	vector<CourseUnit*>::iterator itOfCourseUnit;
-	for (itOfCourseUnit = course->getCourseUnits().begin();
-		itOfCourseUnit != course->getCourseUnits().end();
-		itOfCourseUnit++)
-	{
-		if (*itOfCourseUnit == &courseUnit)
-			break;
-	}
-
-	if (itOfCourseUnit == course->getCourseUnits().end()) //THERE IS NO COURSE UNIT IN THE VECTOR THAT MATCHES THE ARGUMENT 
-		throw NotFound<CourseUnit*, string>(courseUnit.getName());
-
-	if (courseUnit.addStudent(*this)) //TRY TO ADD STUDENT TO COURSE UNIT
-	{
-		vector<CourseUnitClass*>::iterator itCourseUnitClass;
-		for (itCourseUnitClass = (*itOfCourseUnit)->getClasses().begin();
-			itCourseUnitClass != (*itOfCourseUnit)->getClasses().end();
-			itCourseUnitClass++)
-		{
-			if (enrollClass(*(*itCourseUnitClass))) //TRY TO ADD STUDENT TO CLASS
-				return true;
-		}
-	}
-	else return false; //NOT POSSIBLE TO ADD STUDENT TO COURSE UNIT (COURSE UNIT IS OPTIONAL)
-
-
-	//ALL CLASSES WERE FULL - CREATE A NEW CLASS AND ADD THE STUDENT
-	MandatoryCourseUnit* castIt = dynamic_cast<MandatoryCourseUnit*>(&courseUnit);
-	if (castIt != NULL) //IT'S MANDATORY
-	{
-		CourseUnitClass* newClass = new CourseUnitClass(courseUnit.getNumberClasses() + 1, courseUnit);
-		enrollClass(*newClass);
-		return true;
-	}
-	else //IT'S OPTIONAL
-	{
-		OptionalCourseUnit* castIt = dynamic_cast<OptionalCourseUnit*>(&courseUnit);
-		if (castIt->getClasses().size() == 0) //THERE ARE NO CLASSES, CREATE ONE
-		{
-			CourseUnitClass* newClass = new CourseUnitClass(courseUnit.getNumberClasses() + 1, courseUnit);
-			enrollClass(*newClass);
-			return true;
-		}
-		else return false; //THERE IS A CLASS AND IT'S FULL
-	}
-}
-
 bool Student::completedClass(CourseUnit& courseUnit, unsigned short int grade)
 {
-	//CHECK IF GRADE IS ACCEPTABLE
-	if (grade < 10 || grade > 20)
-		return false;
-	
-	//CHECK IF STUDENT IS TAKING THAT CLASS
-	for (map<CourseUnit*, CourseUnitClass*>::iterator it = classesCurrentlyAtending.begin();
-		it != classesCurrentlyAtending.end();
-		it++)
-	{
-		if (it->first->getAcronym() == courseUnit.getAcronym())  //STUDENTS IS TAKING THE CLASS
+	if (grade >= 0 && grade <= 20) {
+		//CHECK IF STUDENT IS TAKING THAT CLASS
+		for (map<CourseUnit*, CourseUnitClass*>::iterator it = classesCurrentlyAtending.begin();
+			it != classesCurrentlyAtending.end();
+			it++)
 		{
-			completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(&courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
+			if (it->first->getAcronym() == courseUnit.getAcronym())  //STUDENTS IS TAKING THE CLASS
+			{
+				if (grade >= 10) {
+					completedCourseUnits.insert(pair<CourseUnit*, unsigned int>(&courseUnit, grade)); //STUDENT COMPLETED THE COURSE UNIT FOR THE FIRST TIME
+				}
 
-			this->classesCurrentlyAtending.at(&courseUnit)->removeStudent(*this);
+				this->classesCurrentlyAtending.at(&courseUnit)->removeStudent(*this);
 
-			courseUnit.removeStudent(*this);
+				courseUnit.removeStudent(*this);
 
-			classesCurrentlyAtending.erase(it);
+				classesCurrentlyAtending.erase(it);
 
-			return true;
-		}
+				return true;
+			}
+		}	
 	}
-
 
 	return false;
 
@@ -290,8 +217,6 @@ ofstream& Student::operator<<(ofstream& file)
 		<< this->personalStatus
 		<< ';'
 		<< this->collegeStatus
-		<< ';'
-		<< this->credits
 		<< ';'
 		<< this->year
 		<< ';'

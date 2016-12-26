@@ -96,34 +96,25 @@ vector<CourseUnit*> Course::getCourseUnits(unsigned short int y)
 
 vector<CourseUnit*> Course::getCourseUnitsNotCompleted(Student& s, unsigned short int y)
 {
-	vector<CourseUnit*> courseUnitsFromYear, notCompleted;
-	
-	if (y >= 1 && y <= 5)
-	{
-		//GATHER ALL THE COURSE UNITS FROM THE YEAR 
-		courseUnitsFromYear = getCourseUnits(y);
+	vector<CourseUnit*> notCompleted;
 
-		//CHECK WHAT COURSE UNITS HAVE NOT BEEN COMPLETED
-		vector<CourseUnit*>::const_iterator cuIt;
-		for (cuIt = courseUnitsFromYear.begin();
-			cuIt != courseUnitsFromYear.end();
-			cuIt++)
-		{
-			if (//CHECK IF ALREADY ATENDING THE COURSE UNIT OR IF THE STUDENT HAS ALREADY COMPLETED THE COURSE UNIT
-				s.getClassesCurrentlyAtending().find((*cuIt)) == s.getClassesCurrentlyAtending().end()					
-				&& s.getCompletedCourseUnits().find((*cuIt)) == s.getCompletedCourseUnits().end()
-				)
-			{
-				notCompleted.push_back(*cuIt); //IF NOT TO BOTH, ADD TO NOTCOMPLETED
-			}
+	//CHECK WHAT COURSE UNITS HAVE NOT BEEN COMPLETED
+	vector<CourseUnit*>::const_iterator cuIt;
+	for (cuIt = this->courseUnits.begin();
+		cuIt != this->courseUnits.end();
+		cuIt++) {
+		if((*cuIt)->getYear() <= y)
+			//CHECK IF ALREADY ATENDING THE COURSE UNIT OR IF THE STUDENT HAS ALREADY COMPLETED THE COURSE UNIT
+			if (s.getClassesCurrentlyAtending().find((*cuIt)) == s.getClassesCurrentlyAtending().end() && 
+				s.getCompletedCourseUnits().find((*cuIt)) == s.getCompletedCourseUnits().end()) {
+					notCompleted.push_back(*cuIt); //IF NOT TO BOTH, ADD TO NOTCOMPLETED
 		}
-
 	}
 
 	return notCompleted;
 }
 
-bool compareCourseByName(Course* c1, Course* c2) 
+bool compareCourseByName(Course* c1, Course* c2)
 {
 	return (c1->getName() < c2->getName());
 }
@@ -141,8 +132,8 @@ ofstream& Course::operator<<(ofstream &file)
 	return file;
 }
 
-void Course::show() const{
-	cout 
+void Course::show() const {
+	cout
 		<< left
 		<< setw(CONSOLE_WIDTH * 1.5)
 		<< name

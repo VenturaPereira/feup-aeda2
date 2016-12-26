@@ -36,7 +36,7 @@ void EnrollmentSystem::loadHandler() {
 }
 
 void EnrollmentSystem::loadUniversities() {
-	
+
 	/*
 	FORMAT
 	NAME;ACRONYM;COUNTRY_ACRONYM;LAST_STUDENT_ID;LAST_PROFESSOR_ID
@@ -65,8 +65,8 @@ void EnrollmentSystem::loadUniversities() {
 	}
 }
 
-void EnrollmentSystem::loadColleges(){
-	
+void EnrollmentSystem::loadColleges() {
+
 	/*
 	FORMAT
 	UNIVERSITY_ACRONYM;NAME;ACRONYM
@@ -89,7 +89,7 @@ void EnrollmentSystem::loadColleges(){
 			try {
 				uniPtr = &getUniversity(uni);
 			}
-			catch (...){
+			catch (...) {
 				continue;
 			}
 			new College(name, acr, *uniPtr);
@@ -126,7 +126,7 @@ void EnrollmentSystem::loadCourses() {
 				uniPtr = &getUniversity(uni);
 				collegePtr = &getCollege(col, *uniPtr);
 			}
-			catch (...)	{
+			catch (...) {
 				continue;
 			}
 
@@ -176,7 +176,7 @@ void EnrollmentSystem::loadCourseUnits()
 			catch (...) {
 				continue;
 			}
-			
+
 			getline(iss, type, ch);
 
 			if (type == "Mandatory") {
@@ -193,7 +193,7 @@ void EnrollmentSystem::loadCourseUnits()
 				iss >> ws >> max_num_students
 					>> ws >> ch;
 				getline(iss, scientificArea, ch);
-				iss	>> ws >> year
+				iss >> ws >> year
 					>> ws >> ch
 					>> ws >> semester
 					>> ws >> ch
@@ -209,7 +209,7 @@ void EnrollmentSystem::loadCourseUnits()
 
 }
 
-void EnrollmentSystem::loadCourseUnitClasses() 
+void EnrollmentSystem::loadCourseUnitClasses()
 {
 	/*
 	FORMAT
@@ -235,7 +235,7 @@ void EnrollmentSystem::loadCourseUnitClasses()
 			getline(iss, col, ch);
 			getline(iss, course, ch);
 			getline(iss, courseUnit, ch);
-			
+
 			try {
 				University* uniPtr = &getUniversity(uni);
 				College* collegePtr = &getCollege(col, *uniPtr);
@@ -266,19 +266,18 @@ void EnrollmentSystem::loadCourseUnitClasses()
 }
 
 void EnrollmentSystem::loadStudents() {
-	
+
 	/*
 	FORMAT
 	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;STATUS;CREDITS;YEAR;ID;TUTOR_ID;
 	{(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),...};
 	{(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),...}
 	*/
-		
+
 	ifstream file;
 	string line, uni, col, course, name, dateStr, personalStatus, collegeStatus, ccuStr, ccaStr;
 	unsigned long long int ID, tutor_ID;
 	unsigned short int year;
-	double credits;
 	Tutor* tutorPtr;
 	Course* coursePtr;
 	map<CourseUnit*, unsigned short int> ccu;
@@ -296,13 +295,12 @@ void EnrollmentSystem::loadStudents() {
 			getline(iss, course, ch);
 			getline(iss, name, ch);
 			getline(iss, dateStr, ch);
-			Date birthDate(dateStr); 
+			Date birthDate(dateStr);
 			getline(iss, dateStr, ch);
 			Date dateOfRegistration(dateStr);
 			getline(iss, personalStatus, ch);
 			getline(iss, collegeStatus, ch);
-			iss >> ws >> credits
-				>> ws >> ch
+			iss >> ws >> ch
 				>> ws >> year
 				>> ws >> ch
 				>> ws >> ID
@@ -332,7 +330,7 @@ void EnrollmentSystem::loadStudents() {
 					else firstIt = false;
 					string courseUnitStr;
 					unsigned short int grade;
-					pair.erase(0,1); //REMOVES '('
+					pair.erase(0, 1); //REMOVES '('
 					istringstream iss_3(pair);
 					getline(iss_3, courseUnitStr, ','); //GETS THE COURSE UNIT STR
 					iss_3 >> grade; //GETS THE GRADE
@@ -351,7 +349,7 @@ void EnrollmentSystem::loadStudents() {
 				while (getline(iss_4, pair, ')'))
 				{
 					if (!firstIt)
-						pair.erase(0,1); //REMOVE ',' IF NOT THE FIRST ITERATION
+						pair.erase(0, 1); //REMOVE ',' IF NOT THE FIRST ITERATION
 					else firstIt = false;
 					string courseUnitStr;
 					unsigned int classNumber;
@@ -372,10 +370,10 @@ void EnrollmentSystem::loadStudents() {
 			catch (...) {
 				continue;
 			}
-			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, credits, personalStatus, collegeStatus, ccu, cca, ID);
+			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, personalStatus, collegeStatus, ccu, cca, ID);
 		}
-	
-	file.close();
+
+		file.close();
 	}
 }
 
@@ -422,12 +420,12 @@ void EnrollmentSystem::loadProfessors()
 
 				getline(iss, ableToTeachStr, ch);
 				ableToTeachStr.erase(0, 1); //REMOVE '{'
-				ableToTeachStr.erase(ableToTeachStr.size()-1, 1); //REMOVE '}'
+				ableToTeachStr.erase(ableToTeachStr.size() - 1, 1); //REMOVE '}'
 				istringstream iss_2(ableToTeachStr);
 				string courseUnitStr;
 				char endCh;
 
-				while (getline(iss_2, courseUnitStr, ',')){
+				while (getline(iss_2, courseUnitStr, ',')) {
 					CourseUnit* courseUnitPtr = &getCourseUnit(courseUnitStr, *coursePtr);
 					ableToTeach.push_back(courseUnitPtr);
 				}
@@ -437,11 +435,11 @@ void EnrollmentSystem::loadProfessors()
 				teachingStr.erase(teachingStr.size() - 1, 1); //REMOVE '}'
 				istringstream iss_4(teachingStr);
 
-				while (getline(iss_4, courseUnitStr, ',')){
+				while (getline(iss_4, courseUnitStr, ',')) {
 					CourseUnit* courseUnitPtr = &getCourseUnit(courseUnitStr, *coursePtr);
 					currentlyTeaching.push_back(courseUnitPtr);
 				}
-				
+
 			}
 			catch (...) {
 				continue;
@@ -456,7 +454,7 @@ void EnrollmentSystem::loadProfessors()
 University& EnrollmentSystem::getUniversity(string &acronym)
 {
 	vector<University*>::iterator it;
-	for (it = universitiesVector.begin(); it != universitiesVector.end(); it++){
+	for (it = universitiesVector.begin(); it != universitiesVector.end(); it++) {
 		if ((*it)->getAcronym() == acronym)
 			return *(*it);
 	}
@@ -604,7 +602,7 @@ Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
 				)
 			{
 				//From vector
-				vector<Student*>::iterator sIt; 
+				vector<Student*>::iterator sIt;
 				for (sIt = (*courseIt)->getStudents().begin();
 					sIt != (*courseIt)->getStudents().end();
 					sIt++
@@ -614,7 +612,7 @@ Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
 						return *(*sIt);
 
 				}
-				
+
 				//From hash table
 				for (auto hashIt = (*courseIt)->getStudentsHash().begin();
 					hashIt != (*courseIt)->getStudentsHash().end();
@@ -630,7 +628,7 @@ Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
 }
 
 Tutor& EnrollmentSystem::getProfessor(unsigned long long int &ID) {
-	
+
 	vector<University*>::iterator unIt;
 	for (unIt = universitiesVector.begin();
 		unIt != universitiesVector.end();
@@ -688,16 +686,16 @@ bool addStudentHandler(EnrollmentSystem& s)
 	{
 		studentName = enterString("\nAdd Student\n\n", "Enter the name of the student [CTRL+Z to cancel] : ");
 		vector<string> supportedStatus = {
-			"Estudante Regular",
-			"Trabalhador Estudante",
-			"Dirigente Associativo",
-			"Praticante de Desporto de Alto Rendimento",
-			"Pai e Mãe Estudante",
-			"Necessidades Educativas Especiais",
-			"Militar",
-			"Bombeiro",
-			"Praticante de Confissões Religiosas",
-			"Estudante-atleta da U.Porto",
+			"Regular Student",
+			"Working Student",
+			"Association Leader",
+			"High-level Competitive Athlete",
+			"Parent",
+			"Special Educational Needs",
+			"Military Personnel",
+			"Firefighter",
+			"Religious Practitioner",
+			"U.Porto Student-Athlete"
 		};
 		while (true) {
 			system("cls");
@@ -728,7 +726,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 		system("pause");
 		return false;
 	}
-	
+
 	try {
 		course = &getCourse(s); //GET THE COURSE FROM THE USER
 	}
@@ -752,7 +750,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 		cout << "There are no courses in: " << nfco.getMember()->getName() << endl;
 		return false;
 	}
-		
+
 	new Student(studentName, dateOfBirth, *course, personalStatus);
 
 	return true;
@@ -782,7 +780,7 @@ bool removeStudentHandler(EnrollmentSystem& s)
 	student->getCourse().removeStudent(*student);
 	student->setCollegeStatus("Suspended");
 	student->getCourse().addStudentToHashTable(*student);
-	
+
 	return true;
 }
 
@@ -833,54 +831,92 @@ bool enrollmentHandler(EnrollmentSystem& s)
 		system("PAUSE");
 		return false;
 	}
-	
+
 	if (student->getCollegeStatus() != "Completed") {
 
-		vector<CourseUnit*> courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear());
+		if (student->getClassesCurrentlyAtending().size() != 0) {
 
-		unsigned int answer = 0;
-		try
-		{
-			while (courseUnitsToShow.size() != 0) //EXIT
+			vector<CourseUnit*> courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear());
+			vector<CourseUnit*> courseUnitsToEnroll;
+
+			try
 			{
-				system("CLS");
-				size_t i;
-				for (i = 0; i < courseUnitsToShow.size(); i++) //SHOW AS MENU
-				{
-					cout << (i + 1) << ". ";
-					courseUnitsToShow[i]->show();
-				}
-				cout << endl << endl << (i + 1) << ". Exit\n\n";
-				answer = enterInput<unsigned int>(); //READ SELECTION
-				if (answer >= 1 && answer <= courseUnitsToShow.size())
-				{
-					if (student->getCredits() + courseUnitsToShow[answer - 1]->getCredits() <= s.getMaxCredits())
+				while (true) {
+					while (courseUnitsToShow.size() != 0) //EXIT
 					{
-						student->enrollCourseUnit(s.getCourseUnit(
-							(courseUnitsToShow[answer - 1])->getAcronym(),
-							student->getCourse()));
-						student->setCredits(student->getCredits() + (*courseUnitsToShow[answer - 1]).getCredits());
-						courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear()); //REFRESH MENU
-						if (student->getCollegeStatus() == "Suspended") {
-							student->getCourse().removeStudentFromHash(*student);
-							student->setCollegeStatus("Frequenting");
-							student->getCourse().addStudent(*student);
+						unsigned int answer;
+						double credits = 0.0;
+						system("CLS");
+						for (size_t i = 0; i < courseUnitsToShow.size(); i++) //SHOW AS MENU
+						{
+							cout << (i + 1) << ". ";
+							courseUnitsToShow[i]->show();
+						}
+						cout << endl << endl << 0 << ". Complete enrollment\n\n";
+						answer = enterInput<unsigned int>(); //READ SELECTION
+						if (answer >= 1 && answer <= courseUnitsToShow.size())
+						{
+							if (credits + courseUnitsToShow[answer - 1]->getCredits() <= s.getMaxCredits())
+							{
+								//ADD COURSE UNIT
+								courseUnitsToEnroll.push_back(&s.getCourseUnit(
+									(courseUnitsToShow[answer - 1])->getAcronym(),
+									student->getCourse()));
+
+								if (student->getCollegeStatus() == "Suspended") {
+									student->getCourse().removeStudentFromHash(*student);
+									student->setCollegeStatus("Frequenting");
+									student->getCourse().addStudent(*student);
+								}
+
+								credits += courseUnitsToShow[answer - 1]->getCredits();
+
+								courseUnitsToShow.erase(courseUnitsToShow.begin() + answer - 1); //REFRESH COURSE UNITS TO SHOW
+							}
+							else cout << "Student cannot enroll in this course unit. Maximum credits have been exceeded";
+						}
+						else if (answer == 0)
+							break;
+					}
+
+					//PROCESS ENROLLMENT
+					cout << "\nProcessing...\n";
+					bool possible = true;
+					vector<CourseUnit*> notPossible;
+					for (size_t i = 0; i < courseUnitsToEnroll.size(); i++) {
+						if (!courseUnitsToEnroll[i]->possibleToEnroll()) {
+							notPossible.push_back(courseUnitsToEnroll[i]);
+							possible = false;
 						}
 					}
-					else cout << "Student cannot enroll in this course unit. Maximum credits have been exceeded";
+					if (possible) {
+						for (size_t i = 0; i < courseUnitsToEnroll.size(); i++) {
+							courseUnitsToEnroll[i]->enrollStudent(*student);
+						}
+						return true;
+					}
+					else {
+						system("Cls");
+						cout << "\nThe student cannot enroll the following course units:\n\n";
+						for (size_t i = 0; i < notPossible.size(); i++) {
+							notPossible[i]->show();
+						}
+						system("Pause");
+					}
 				}
-				else if (answer == courseUnitsToShow.size() + 1)
-					break;
+			}
+			catch (EndOfFile &eof)
+			{
+				cout << "Enrollment Canceled!\n";
+				system("Pause");
+				return false;
 			}
 		}
-		catch (EndOfFile &eof)
-		{
-			cout << "Enrollment Canceled!\n";
+		else {
+			cout << "Student needs be graded in all the course units he/she is attending before enrollment\n";
 			system("Pause");
 			return false;
 		}
-
-		return courseUnitsToShow.size() == 0;
 	}
 	else {
 		cout << "Student already completed the course!\n";
@@ -889,7 +925,7 @@ bool enrollmentHandler(EnrollmentSystem& s)
 	}
 }
 
-bool studentFinishedCourseUnitHandler(EnrollmentSystem& s) 
+bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 {
 	Student* student;
 	unsigned long long int ID;
@@ -914,46 +950,46 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 		system("pause");
 		return false;
 	}
-	
+
 	while (true) {
 		vector<CourseUnit*> courseUnitsToShow;
 		unsigned int answer;
 
 		try {
 
-		unsigned int i;
+			unsigned int i;
 
-		courseUnitsToShow = student->getCourseUnitsAttending();
+			courseUnitsToShow = student->getCourseUnitsAttending();
 
-		system("cls");
-		if (courseUnitsToShow.size() == 0) {
-			cout << "\nThis student is not taking any classes\n";
-			system("pause");
-			return false;
-		}
+			system("cls");
+			if (courseUnitsToShow.size() == 0) {
+				cout << "\nThis student is not taking any classes\n";
+				system("pause");
+				return false;
+			}
 
-		for (i = 0; i < courseUnitsToShow.size(); i++) {
-			cout << (i + 1) << ". ";
-			courseUnitsToShow[i]->show();
-		}
-		cout << endl << endl << (i + 1) << ". Exit\n\n";
-		answer = enterInput<unsigned int>(); //READ SELECTION
-		answer--;
+			for (i = 0; i < courseUnitsToShow.size(); i++) {
+				cout << (i + 1) << ". ";
+				courseUnitsToShow[i]->show();
+			}
+			cout << endl << endl << (i + 1) << ". Exit\n\n";
+			answer = enterInput<unsigned int>(); //READ SELECTION
+			answer--;
 
-		if (answer == courseUnitsToShow.size())
-			return true;
-				
-		grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
-		
+			if (answer == courseUnitsToShow.size())
+				return true;
 
-		if (!student->completedClass(*courseUnitsToShow[answer], grade)) {
-			cout << "\nThe Student wasn't taking this course unit or the grade is invalid!\n." << endl;
-			system("pause");
-		}
-		else {
-			cout << "\nThe student has been graded!\n";
-			system("pause");
-		}
+			grade = enterInput<unsigned short int>("\nFinish Course Unit\n\n", "Enter the grade of the student to this course unit [CTRL+Z to cancel] : ");
+
+
+			if (!student->completedClass(*courseUnitsToShow[answer], grade)) {
+				cout << "\nThe student has been graded but will need to enroll this class again!\n." << endl;
+				system("pause");
+			}
+			else {
+				cout << "\nThe student has been graded!\n";
+				system("pause");
+			}
 
 		}
 		catch (EndOfFile &eof)
@@ -962,12 +998,15 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 			system("pause");
 			return false;
 		}
-		
 
-		//CHECK IF STUDENT HAS COMPLETED ALL THE COURSE UNITS OF THE CURRENT YEAR
-		if (student->completedAllCourseUnits(student->getYear()))
+		//CHECK IF STUDENT HAS BEEN GRADED IN ALL COURSE UNITS
+		if (student->getClassesCurrentlyAtending().size() == 0)
 		{
-			if (student->getYear() == 5) { 
+			if (student->completedAllCourseUnits(1)
+				&& student->completedAllCourseUnits(2)
+				&& student->completedAllCourseUnits(3)
+				&& student->completedAllCourseUnits(4)
+				&& student->completedAllCourseUnits(5)) {
 				//STUDENT COMPLETED THE COURSE
 				student->setCollegeStatus("Completed");
 				student->getCourse().addStudentToHashTable(*student); //ADD TO HASH TABLE
@@ -978,15 +1017,13 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 			}
 			else {
 				//GET READY FOR NEXT YEAR
-				student->setCredits(double(0));
 				student->setYear(student->getYear() + 1);
-				cout << "Student finished this Course Year. Now he/she is currently in year " << student->getYear() << "." << endl;
 				system("pause");
 				break;
 			}
 		}
 		else {
-			cout << "\nStudent still has course units to complete in order to enroll the next year\n";
+			cout << "\nStudent still has other course units that need grading in order to enroll the next year\n";
 			system("pause");
 		}
 	}
@@ -1109,13 +1146,11 @@ CourseUnit& EnrollmentSystem::getCourseUnit(string &acronym, Course& course)
 
 CourseUnitClass& EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber, CourseUnit& courseUnit)
 {
-	vector<CourseUnitClass*>::iterator it;
-	for (it = courseUnit.getClasses().begin();
-		it != courseUnit.getClasses().end();
-		it++)
-	{
-		if ((*it)->getClassNumber() == classNumber)
-			return *(*it);
+	priority_queue<CourseUnitClass*> classes = courseUnit.getClasses();
+	while(!classes.empty())	{
+		if (classNumber == classes.top()->getClassNumber())
+			return *classes.top();
+		classes.pop();
 	}
 	throw NotFound<CourseUnitClass*, CourseUnit*>(&courseUnit);
 }
@@ -1123,7 +1158,7 @@ CourseUnitClass& EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber,
 vector<College*> EnrollmentSystem::getAllColleges()
 {
 	vector<College*> colleges;
-	for (unsigned int i = 0; i < universitiesVector.size(); i++){
+	for (unsigned int i = 0; i < universitiesVector.size(); i++) {
 		colleges.insert(colleges.begin(), universitiesVector[i]->getColleges().begin(), universitiesVector[i]->getColleges().end());
 	}
 	return colleges;
@@ -1152,9 +1187,16 @@ vector<CourseUnit*> EnrollmentSystem::getAllCourseUnits()
 vector<CourseUnitClass*> EnrollmentSystem::getAllCourseUnitClasses()
 {
 	vector<CourseUnit*> courseUnits = getAllCourseUnits();
+	
 	vector<CourseUnitClass*> courseUnitClasses;
+	
 	for (unsigned int i = 0; i < courseUnits.size(); i++) {
-		courseUnitClasses.insert(courseUnitClasses.begin(), courseUnits[i]->getClasses().begin(), courseUnits[i]->getClasses().end());
+		
+		priority_queue<CourseUnitClass*> classes = courseUnits[i]->getClasses();
+		while (!classes.empty()) {
+			courseUnitClasses.push_back(classes.top());
+			classes.pop();
+		}
 	}
 	return courseUnitClasses;
 }
@@ -1342,7 +1384,7 @@ void EnrollmentSystem::showCourseUnitInDetail()
 }
 
 void EnrollmentSystem::addMeetingHandler() {
-	
+
 	Tutor* tutor;
 	Student* student;
 	vector<string> topics;
@@ -1354,17 +1396,7 @@ void EnrollmentSystem::addMeetingHandler() {
 	{
 		tutorID = enterInput<unsigned long long int>("\nAdd Meeting\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
 		tutor = &(getProfessor(tutorID));
-		/*
-		studentID = enterInput<unsigned long long int>("\nAdd Meeting\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
-		student = &(getStudent(studentID));
-
-		if (!(tutor->isTutorOf(*student))) {
-			system("CLS");
-			cout << "\nAdd Meeting\n\n" << "The student's tutor is not the professor you've introduced\n\n";
-			system("PAUSE");
-			return;
-		}*/
-
+		
 		while (true) {
 			system("cls");
 			cout << "\nAdd Meeting\n\n";
@@ -1458,25 +1490,25 @@ void EnrollmentSystem::addMeetingHandler() {
 			cin.clear();
 			break;
 		}
-	}	
+	}
 
-	tutor->addMeeting(Meeting(date, student,topics, hour, minute));
+	tutor->addMeeting(Meeting(date, student, topics, hour, minute));
 
 }
 
 void EnrollmentSystem::removeMeetingHandler() {
-	Tutor* tutor; 
+	Tutor* tutor;
 	unsigned long long int tutorID;
 
-	try	{
+	try {
 		tutorID = enterInput<unsigned long long int>("\nCancel Meeting\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
 		tutor = &(getProfessor(tutorID));
 	}
-	catch (EndOfFile &eof){
+	catch (EndOfFile &eof) {
 		cout << "\nAction canceled!\n";
 		return;
 	}
-	catch (NotFound<Tutor*, unsigned long long int> &nfs){
+	catch (NotFound<Tutor*, unsigned long long int> &nfs) {
 		cout << "Tutor " << nfs.getMember() << " not found!\n";
 		return;
 	}
@@ -1595,7 +1627,7 @@ void EnrollmentSystem::changeMeetingDescriptionHandler() {
 
 void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
 	if (option >= 1 && option <= 5) {
-		
+
 		Tutor* tutor;
 		unsigned long long int tutorID;
 		Date begin, end;
@@ -1603,7 +1635,7 @@ void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
 		try {
 			tutorID = enterInput<unsigned long long int>("\nShow Meetings\n\n", "Enter the ID of the tutor [CTRL+Z to cancel] : ");
 			tutor = &(getProfessor(tutorID));
-			
+
 			if (option == 5 || option == 3) { //READ BEGIN AND END DATES
 				while (true)
 				{
@@ -1613,7 +1645,7 @@ void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
 					cout << "\nInvalid Date!\n";
 					system("PAUSE");
 				}
-				
+
 				while (true)
 				{
 					end = Date(enterString("\nShow Meetings\n\n", "Enter the second date (DD-MM-YYYY) [CTRL+Z to cancel] : "));
@@ -1632,8 +1664,8 @@ void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
 			cout << "Tutor " << nfs.getMember() << " not found!\n";
 			return;
 		}
-		
-		
+
+
 		switch (option) {
 		case 1: {
 			tutor->showAllMeetings();

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+
+#include "CourseUnitClass.h"
 #include "CourseUnit.h"
 #include "Course.h"
 #include "College.h"
@@ -27,24 +29,9 @@ MandatoryCourseUnit::MandatoryCourseUnit(unsigned int mnospc, string n, string a
 	c.addCourseUnit(*this);
 }
 
-void CourseUnit::addStudentWithoutCheck(Student& s)
+void CourseUnit::addStudent(Student& s)
 {
 	studentsCurrentlyInCourseUnit.push_back(&s);
-}
-
-bool OptionalCourseUnit::addStudent(Student& s)
-{
-	if (getNumberOfStudents() >= MAXIMUM_NUMBER_OF_STUDENTS) {
-		return false;
-	}
-	studentsCurrentlyInCourseUnit.push_back(&s);
-	return true;
-}
-
-bool MandatoryCourseUnit::addStudent(Student& s)
-{
-	studentsCurrentlyInCourseUnit.push_back(&s);
-	return true;
 }
 
 bool CourseUnit::removeStudent(Student& s)
@@ -84,22 +71,22 @@ bool CourseUnit::removeProfessor(Tutor& t)
 
 void CourseUnit::addCourseUnitClass(CourseUnitClass& cuc)
 {
-	classes.push_back(&cuc);
+	classes.push(&cuc);
 }
 
 bool CourseUnit::removeCourseUnitClass(CourseUnitClass& cuc)
 {
-	for (vector<CourseUnitClass *> ::const_iterator it = classes.begin();
-		it != classes.end();
-		it++)
-	{
-		if ((*it) == &cuc)
-		{
-			classes.erase(it);
-			return true;
-		}
+	bool found = false;
+	priority_queue<CourseUnitClass*> pqTemp;
+	while (!classes.empty()) {
+		CourseUnitClass * cucTemp = classes.top();
+		if (cucTemp->getClassNumber() == cuc.getClassNumber())
+			found = true;
+		else pqTemp.push(cucTemp);
+		classes.pop();
 	}
-	return false;
+	classes = pqTemp;
+	return found;
 }
 
 void OptionalCourseUnit::show() const
@@ -278,4 +265,58 @@ void OptionalCourseUnit::showInDetail() const
 			<< endl;
 	}
 	else cout << "\nThere are no professors teaching this course unit\n\n";
+}
+
+bool MandatoryCourseUnit::possibleToEnroll() {
+	return true;
+}
+
+bool OptionalCourseUnit::possibleToEnroll() {
+	return this->getNumberOfStudents() < this->getMaxStudents();
+}
+
+void MandatoryCourseUnit::enrollStudent(Student &s) {
+	this->addStudent(s);
+	
+	priority_queue<CourseUnitClass*> pqTemp;
+	bool enrolled = false;
+	unsigned short int classNumber = 0;
+	while (!classes.empty()) {
+		CourseUnitClass* cucTemp = classes.top();
+		if (cucTemp->getClassNumber() > classNumber)
+			classNumber = cucTemp->getClassNumber();
+		if (!enrolled) {
+			if (cucTemp->hasSpace()) {
+				cucTemp->addStudent(s);
+				enrolled = true;
+			}
+		}
+		pqTemp.push(cucTemp);
+		classes.pop();
+	}
+	classes = pqTemp;
+	classNumber++;
+
+	if (!enrolled) {
+		CourseUnitClass* newCUC = new CourseUnitClass(classNumber, *this);
+		newCUC->addStudent(s);
+		classes.push(newCUC);
+	}
+}
+
+void OptionalCourseUnit::enrollStudent(Student &s) {
+	this->addStudent(s);
+
+	if (classes.empty()) {
+		CourseUnitClass* newCUC = new CourseUnitClass(1, *this);
+		newCUC->addStudent(s);
+		classes.push(newCUC);
+	}
+	else {
+		priority_queue<CourseUnitClass*> pqTemp;
+		CourseUnitClass* cucTemp = classes.top();
+		cucTemp->addStudent(s);
+		pqTemp.push(cucTemp);
+		classes = pqTemp;
+	}
 }

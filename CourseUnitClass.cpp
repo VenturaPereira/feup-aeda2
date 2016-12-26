@@ -29,7 +29,7 @@ void CourseUnitClass::assignTeacher()
 
 }
 
-CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit& cu, Tutor& t) 
+CourseUnitClass::CourseUnitClass(unsigned short int cn, CourseUnit& cu, Tutor& t)
 	: courseUnit(&cu), classNumber(cn)
 {
 	professor = &t;
@@ -99,4 +99,46 @@ void CourseUnitClass::show() const
 		<< getNumberOfStudents()
 		<< right
 		<< endl;
+}
+
+bool operator<(CourseUnitClass &l, CourseUnitClass &r) {
+	MandatoryCourseUnit* castMl = dynamic_cast<MandatoryCourseUnit*>(&l.getCourseUnit());
+	MandatoryCourseUnit* castMr = dynamic_cast<MandatoryCourseUnit*>(&r.getCourseUnit());
+	if (castMl == castMr) {
+		if (castMr != NULL && castMl != NULL) { //IT'S MANDATORY
+			return
+				(castMl->getMaxStudentsPerClass() - l.getNumberOfStudents())
+				< (castMr->getMaxStudentsPerClass() - r.getNumberOfStudents());
+		}
+		else {
+			OptionalCourseUnit* castOl = dynamic_cast<OptionalCourseUnit*>(&l.getCourseUnit());
+			OptionalCourseUnit* castOr = dynamic_cast<OptionalCourseUnit*>(&r.getCourseUnit());
+			if (castMl == castMr) {
+				if (castMr != NULL && castMl != NULL) { //IT'S OPTIONAL
+					return
+						(castOl->getMaxStudents() - l.getNumberOfStudents())
+						< (castOr->getMaxStudents() - r.getNumberOfStudents());
+				}
+				else return false;
+			}
+			else return false;
+		}
+	}
+	else return false;
+}
+
+bool CourseUnitClass::hasSpace() {
+	MandatoryCourseUnit* castM = dynamic_cast<MandatoryCourseUnit*>(&this->getCourseUnit());
+	if (castM != NULL) { //IT'S MANDATORY
+		return
+			(castM->getMaxStudentsPerClass() - this->getNumberOfStudents()) > 0;
+	}
+	else {
+		OptionalCourseUnit* castO = dynamic_cast<OptionalCourseUnit*>(&this->getCourseUnit());
+		if (castO != NULL) { //IT'S OPTIONAL
+			return
+				(castO->getMaxStudents() - this->getNumberOfStudents()) > 0;
+		}
+		else return false;
+	}
 }
