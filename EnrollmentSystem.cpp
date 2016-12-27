@@ -1782,3 +1782,64 @@ void EnrollmentSystem::showMeetingsHandler(unsigned int &option) {
 		}
 	}
 }
+
+void EnrollmentSystem::changeStudentAddress() {
+	Student* student;
+	unsigned long long int ID;
+	string newAddress;
+
+	try
+	{
+		ID = enterInput<unsigned long long int>("\nChange Student's Address\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
+		student = &(getStudent(ID));
+		newAddress = enterString("\nChange Student's Address\n\n", "Enter the new address of the student [CTRL+Z to cancel] : ");
+	}
+	catch (EndOfFile &eof)
+	{
+		cout << "\nAction canceled!\n";
+		return;
+	}
+	catch (NotFound<Student*, unsigned long long int> &nfs)
+	{
+		cout << "Student " << nfs.getMember() << " not found!\n";
+		return;
+	}
+
+	if (student->getPersonalStatus() == "Suspended"
+		|| student->getPersonalStatus() == "Completed") {
+		student->getCourse().removeStudentFromHash(*student);
+		student->setAddress(newAddress);
+		student->getCourse().addStudentToHashTable(*student);
+	}
+	else student->setAddress(newAddress);
+}
+
+void EnrollmentSystem::changeStudentContact() {
+	Student* student;
+	unsigned long long int ID, newPhoneNumber;
+
+	try
+	{
+		ID = enterInput<unsigned long long int>("\nChange Student's Phone Number\n\n", "Enter the ID of the student [CTRL+Z to cancel] : ");
+		student = &(getStudent(ID));
+		newPhoneNumber = enterInput<unsigned long long int>("\nChange Student's Phone Number\n\n", "Enter the new phone number of the student [CTRL+Z to cancel] : ");
+	}
+	catch (EndOfFile &eof)
+	{
+		cout << "\nAction canceled!\n";
+		return;
+	}
+	catch (NotFound<Student*, unsigned long long int> &nfs)
+	{
+		cout << "Student " << nfs.getMember() << " not found!\n";
+		return;
+	}
+
+	if (student->getPersonalStatus() == "Suspended"
+		|| student->getPersonalStatus() == "Completed") {
+		student->getCourse().removeStudentFromHash(*student);
+		student->setPhoneNumber(newPhoneNumber);
+		student->getCourse().addStudentToHashTable(*student);
+	}
+	else student->setPhoneNumber(newPhoneNumber);
+}

@@ -349,6 +349,10 @@ public:
 	void changeMeetingDescriptionHandler();
 
 	void showMeetingsHandler(unsigned int &option);
+
+	void changeStudentAddress();
+
+	void changeStudentContact();
 };
 
 #endif

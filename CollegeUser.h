@@ -56,11 +56,31 @@ public:
 	*/
 	Date getDateOfBirth() const { return dateOfBirth; }
 
+	/*!
+	*	Returns College User Address
+	*/
+	string getAddress() const { return address; }
+
+	/*!
+	*	Returns College User Phone Number
+	*/
+	unsigned long long int getPhoneNumber() const { return phoneNumber; }
+
 	//SETS
 	/*!
 	*	Sets the College User ID to a given ID
 	*/
 	void setID(unsigned long long int id) { ID = id; }
+
+	/*!
+	*	Sets the College User Address
+	*/
+	void setAddress(string a) { address = a; }
+
+	/*!
+	*	Sets the College User Phone Number
+	*/
+	void setPhoneNumber(unsigned long long int pn)  { phoneNumber = pn; }
 	
 };
 
