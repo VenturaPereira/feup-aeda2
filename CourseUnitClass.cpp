@@ -101,23 +101,23 @@ void CourseUnitClass::show() const
 		<< endl;
 }
 
-bool operator<(CourseUnitClass &l, CourseUnitClass &r) {
-	MandatoryCourseUnit* castMl = dynamic_cast<MandatoryCourseUnit*>(&l.getCourseUnit());
-	MandatoryCourseUnit* castMr = dynamic_cast<MandatoryCourseUnit*>(&r.getCourseUnit());
+bool CourseUnitClass::courseUnitCompare::operator()(CourseUnitClass *l, CourseUnitClass *r) {
+	MandatoryCourseUnit* castMl = dynamic_cast<MandatoryCourseUnit*>(&l->getCourseUnit());
+	MandatoryCourseUnit* castMr = dynamic_cast<MandatoryCourseUnit*>(&r->getCourseUnit());
 	if (castMl == castMr) {
 		if (castMr != NULL && castMl != NULL) { //IT'S MANDATORY
 			return
-				(castMl->getMaxStudentsPerClass() - l.getNumberOfStudents())
-				< (castMr->getMaxStudentsPerClass() - r.getNumberOfStudents());
+				(castMl->getMaxStudentsPerClass() - l->getNumberOfStudents())
+				< (castMr->getMaxStudentsPerClass() - r->getNumberOfStudents());
 		}
 		else {
-			OptionalCourseUnit* castOl = dynamic_cast<OptionalCourseUnit*>(&l.getCourseUnit());
-			OptionalCourseUnit* castOr = dynamic_cast<OptionalCourseUnit*>(&r.getCourseUnit());
+			OptionalCourseUnit* castOl = dynamic_cast<OptionalCourseUnit*>(&l->getCourseUnit());
+			OptionalCourseUnit* castOr = dynamic_cast<OptionalCourseUnit*>(&r->getCourseUnit());
 			if (castMl == castMr) {
 				if (castMr != NULL && castMl != NULL) { //IT'S OPTIONAL
 					return
-						(castOl->getMaxStudents() - l.getNumberOfStudents())
-						< (castOr->getMaxStudents() - r.getNumberOfStudents());
+						(castOl->getMaxStudents() - l->getNumberOfStudents())
+						< (castOr->getMaxStudents() - r->getNumberOfStudents());
 				}
 				else return false;
 			}

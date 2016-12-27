@@ -96,11 +96,6 @@ public:
 	*/
 	ofstream& operator<<(ofstream& file);
 
-	/*!
-	*	Operator < for the Priority Queue to Work Properly
-	*/
-	friend bool operator<(CourseUnitClass &l, CourseUnitClass &r);
-
 	//PRINT TO SCREEN
 	/*!
 	*	Prints Class to the Screen
@@ -111,6 +106,15 @@ public:
 	*	Checks if the Class has Space for one more Student
 	*/
 	bool hasSpace();
+
+	/*!
+	*	Less function for the Priority Queue to Work Properly
+	*/
+	struct courseUnitCompare {
+	public:
+		bool operator()(CourseUnitClass *l, CourseUnitClass *r);
+	};
+	
 };
 
 #endif

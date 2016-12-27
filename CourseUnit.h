@@ -6,11 +6,11 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include "CourseUnitClass.h"
 
 class Course;
 class Student;
 class Tutor;
-class CourseUnitClass;
 
 using namespace std;
 
@@ -27,7 +27,7 @@ protected:
 	Course* course;
 	vector<Student*> studentsCurrentlyInCourseUnit;
 	vector<Tutor*> courseUnitProfessors;
-	priority_queue<CourseUnitClass*> classes;
+	priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> classes;
 
 public:
 	//MEMBER FUNCTIONS
@@ -127,7 +127,7 @@ public:
 	/*!
 	*	Returns Classes in the Course Unit
 	*/
-	priority_queue<CourseUnitClass*>& getClasses() { return classes; }
+	priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare>& getClasses() { return classes; }
 
 	/*!
 	*	Returns Students in the Course Unit

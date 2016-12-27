@@ -77,7 +77,7 @@ void CourseUnit::addCourseUnitClass(CourseUnitClass& cuc)
 bool CourseUnit::removeCourseUnitClass(CourseUnitClass& cuc)
 {
 	bool found = false;
-	priority_queue<CourseUnitClass*> pqTemp;
+	priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> pqTemp;
 	while (!classes.empty()) {
 		CourseUnitClass * cucTemp = classes.top();
 		if (cucTemp->getClassNumber() == cuc.getClassNumber())
@@ -278,7 +278,7 @@ bool OptionalCourseUnit::possibleToEnroll() {
 void MandatoryCourseUnit::enrollStudent(Student &s) {
 	this->addStudent(s);
 	
-	priority_queue<CourseUnitClass*> pqTemp;
+	priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> pqTemp;
 	bool enrolled = false;
 	unsigned short int classNumber = 0;
 	while (!classes.empty()) {
@@ -313,7 +313,7 @@ void OptionalCourseUnit::enrollStudent(Student &s) {
 		classes.push(newCUC);
 	}
 	else {
-		priority_queue<CourseUnitClass*> pqTemp;
+		priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> pqTemp;
 		CourseUnitClass* cucTemp = classes.top();
 		cucTemp->addStudent(s);
 		pqTemp.push(cucTemp);

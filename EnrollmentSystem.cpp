@@ -1145,7 +1145,7 @@ CourseUnit& EnrollmentSystem::getCourseUnit(string &acronym, Course& course)
 
 CourseUnitClass& EnrollmentSystem::getCourseUnitClass(unsigned int &classNumber, CourseUnit& courseUnit)
 {
-	priority_queue<CourseUnitClass*> classes = courseUnit.getClasses();
+	priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> classes = courseUnit.getClasses();
 	while(!classes.empty())	{
 		if (classNumber == classes.top()->getClassNumber())
 			return *classes.top();
@@ -1191,7 +1191,7 @@ vector<CourseUnitClass*> EnrollmentSystem::getAllCourseUnitClasses()
 	
 	for (unsigned int i = 0; i < courseUnits.size(); i++) {
 		
-		priority_queue<CourseUnitClass*> classes = courseUnits[i]->getClasses();
+		priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> classes = courseUnits[i]->getClasses();
 		while (!classes.empty()) {
 			courseUnitClasses.push_back(classes.top());
 			classes.pop();
