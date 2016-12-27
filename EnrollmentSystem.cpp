@@ -10,6 +10,7 @@
 #include "Student.h"
 #include "CourseUnitClass.h"
 #include "Tutor.h"
+#include "Meeting.h"
 
 
 EnrollmentSystem::EnrollmentSystem(unsigned int mc) : MAXIMUM_CREDITS(mc)
@@ -33,6 +34,7 @@ void EnrollmentSystem::loadHandler() {
 	loadProfessors();
 	loadCourseUnitClasses();
 	loadStudents();
+	loadMeetings();
 }
 
 void EnrollmentSystem::loadUniversities() {
@@ -269,7 +271,7 @@ void EnrollmentSystem::loadStudents() {
 
 	/*
 	FORMAT
-	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;STATUS;CREDITS;YEAR;ID;TUTOR_ID;
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;PERSONAL_STATUS;COLLEGE_STATUS;YEAR;ID;TUTOR_ID;
 	{(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),...};
 	{(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),...}
 	*/
@@ -382,7 +384,7 @@ void EnrollmentSystem::loadProfessors()
 	FORMAT
 	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;ID;
 	{ABLE_TO_TEACH,ABLE_TO_TEACH,ABLE_TO_TEACH,...};
-	{TEACHING,TEACHING,TEACHING,...};
+	{TEACHING,TEACHING,TEACHING,...}
 	*/
 
 	ifstream file;
@@ -444,6 +446,64 @@ void EnrollmentSystem::loadProfessors()
 				continue;
 			}
 			new Tutor(name, birthDate, dateOfRegistration, *coursePtr, ID, currentlyTeaching, ableToTeach);
+		}
+
+		file.close();
+	}
+}
+
+void EnrollmentSystem::loadMeetings() {
+	
+	/*FORMAT
+	TUTOR_ID;STUDENT_ID;DATE;HOUR:MINUTE;DESCRIPTION;{TOPIC,TOPIC, ...}
+	*/
+	
+	ifstream file;
+	unsigned long long int tutorID, studentID;
+	unsigned short int hour, minute;
+	string line, description, dateString, topicsString;
+	vector<string> topics;
+	Tutor* tutor;
+	Student* student;
+	Date date;
+	
+	file.open(meetingsFile);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			topics.clear();
+			char ch = ';';
+			istringstream iss(line);
+			
+			try {
+				
+				iss >> ws >> tutorID >> ch
+					>> ws >> studentID >> ch;
+
+				tutor = &(getProfessor(tutorID));
+				student = &(getStudent(studentID));
+
+				getline(iss, dateString, ch);
+				date = Date(dateString);
+				iss >> ws >> hour >> ch
+					>> ws >> minute >> ch;
+				getline(iss, description, ch);
+
+				getline(iss, topicsString, '\n');
+				topicsString.erase(0, 1); //REMOVE '{'
+				topicsString.erase(topicsString.size() - 1, 1); //REMOVE '}'
+				istringstream iss_2(topicsString);
+				string tempTopic;
+				while (getline(iss_2, tempTopic, ',')) {
+					topics.push_back(tempTopic);
+				}
+			}
+			catch (...) {
+				continue;
+			}
+	
+			tutor->addMeeting(Meeting(date, student, tutor, topics, hour, minute));
 		}
 
 		file.close();
@@ -1108,6 +1168,7 @@ bool EnrollmentSystem::changeProfessorsSortOption(unsigned int &option)
 }
 
 void EnrollmentSystem::saveHandler() {
+	saveToFiles(getAllMeetings(), meetingsFile);
 	saveToFiles(getAllStudents(), studentsFile);
 	saveToFiles(getAllCourseUnitClasses(), courseUnitClassesFile);
 	saveToFiles(getAllProfessors(), professorsFile);
@@ -1219,6 +1280,22 @@ vector<Tutor*> EnrollmentSystem::getAllProfessors()
 		professors.insert(professors.begin(), courses[i]->getProfessors().begin(), courses[i]->getProfessors().end());
 	}
 	return professors;
+}
+
+vector<Meeting> EnrollmentSystem::getAllMeetings() {
+	vector<Meeting> meetings;
+	vector<Tutor*> tutors = getAllProfessors();
+
+	for (size_t i = 0; i < tutors.size(); i++) {
+		set<Meeting>::iterator it;
+		for (it = tutors[i]->getMeetings().begin();
+			it != tutors[i]->getMeetings().end();
+			it++) {
+			meetings.push_back((*it));
+		}
+	}
+
+	return meetings;
 }
 
 void EnrollmentSystem::showUniversities()
@@ -1491,7 +1568,7 @@ void EnrollmentSystem::addMeetingHandler() {
 		}
 	}
 
-	tutor->addMeeting(Meeting(date, student, topics, hour, minute));
+	tutor->addMeeting(Meeting(date, student, tutor, topics, hour, minute));
 
 }
 

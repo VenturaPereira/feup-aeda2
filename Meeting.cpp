@@ -1,11 +1,13 @@
 #include "Student.h"
 #include "Meeting.h"
+#include "Tutor.h"
 #include <ctime>
 #include <iostream>
+#include <fstream>
 
 
-Meeting::Meeting(Date d, Student* st, vector<string> &top, unsigned int h, unsigned int m) :
-	student(st), topics(top), date(d), minute(m), hour(h) {
+Meeting::Meeting(Date d, Student* st, Tutor* t, vector<string> &top, unsigned int h, unsigned int m) :
+	student(st), professor(t), topics(top), date(d), minute(m), hour(h) {
 }
 
 bool Meeting::hasOccured() const {
@@ -63,4 +65,31 @@ void Meeting::show() const {
 	}
 	else cout << "\tThere are no topics for this meeting!\n";
 	cout << "Description: " << description << endl;
+}
+
+ofstream& Meeting::operator<<(ofstream& file) {
+	file << professor->getID()
+		<< ';'
+		<< student->getID()
+		<< ';'
+		<< date.getDateString()
+		<< ';'
+		<< hour
+		<< ':'
+		<< minute
+		<< ';'
+		<< description
+		<< ';'
+		<< '{';
+
+	for (size_t i = 0; i < topics.size(); i++) {
+		file << topics[i];
+		if (i != topics.size() - 1)
+			file << ',';
+	}
+
+	file << '}'
+		<< endl;
+
+	return file;
 }

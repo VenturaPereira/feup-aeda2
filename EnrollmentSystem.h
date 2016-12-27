@@ -11,6 +11,7 @@ class CourseUnitClass;
 class Student;
 class Tutor;
 class Date;
+class Meeting;
 
 #include <vector>
 #include <string>
@@ -30,7 +31,8 @@ private:
 		courseUnitsFile = "courseunits.txt",
 		courseUnitClassesFile = "courseunitclasses.txt",
 		studentsFile = "students.txt",
-		professorsFile = "tutors.txt";
+		professorsFile = "tutors.txt",
+		meetingsFile = "meetings.txt";
 	vector<University*> universitiesVector;
 
 	//SORTING OPTIONS (POINTERS TO THE SORTING FUNCTIONS)
@@ -115,12 +117,25 @@ public:
 	*	Template Function To Save All Data Into Files
 	*/
 	template<class T>
-	friend void saveToFiles(vector<T*> const &vector, string &fileName)
+	friend void saveToFiles(vector<T*> &vector, string &fileName)
 	{
 		ofstream file;
 		file.open(fileName);
 		for (unsigned int i = 0; i < vector.size(); i++)
 			(*vector[i]).operator<<(file);
+		file.close();
+	}
+
+	/*!
+	*	Template Function To Save All Data Into Files
+	*/
+	template<class T>
+	friend void saveToFiles(vector<T> &vector, string &fileName)
+	{
+		ofstream file;
+		file.open(fileName);
+		for (unsigned int i = 0; i < vector.size(); i++)
+			vector[i].operator<<(file);
 		file.close();
 	}
 
@@ -197,6 +212,11 @@ public:
 	*	Loads All Course Units (courseunits.txt)
 	*/
 	void loadCourseUnits();
+
+	/*!
+	*	Loads All Meetings (meetings.txt)
+	*/
+	void loadMeetings();
 	
 	
 	//SORT FUNCTIONS
@@ -316,6 +336,8 @@ public:
 	*	Returns All Professors
 	*/
 	vector<Tutor*> getAllProfessors();
+
+	vector<Meeting> getAllMeetings();
 
 	Tutor& getProfessor(unsigned long long int &ID);
 	
