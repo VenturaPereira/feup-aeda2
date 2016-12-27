@@ -10,8 +10,8 @@
 #include "Utilities.h"
 
 
-Student::Student(string n, Date dob, Course& c, string s) 
-	: CollegeUser(n, dob, c)
+Student::Student(string n, Date dob, Course& c, string s, string ad, unsigned long long int pn) 
+	: CollegeUser(n, dob, c, ad, pn)
 {
 	personalStatus = s;
 	collegeStatus = "Frequenting";
@@ -23,8 +23,8 @@ Student::Student(string n, Date dob, Course& c, string s)
 	c.addStudent(*this);
 }
 
-Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id)
-	: CollegeUser(n, dob, c),
+Student::Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id, string ad, unsigned long long int pn)
+	: CollegeUser(n, dob, c, ad, pn),
 	tutor(&t), year(y),  personalStatus(ps), collegeStatus(cs), completedCourseUnits(ccu), classesCurrentlyAtending(cca)
 {
 	course = &c;
@@ -223,6 +223,10 @@ ofstream& Student::operator<<(ofstream& file)
 		<< this->ID
 		<< ';'
 		<< this->tutor->getID()
+		<< ';'
+		<< this->address
+		<< ';'
+		<< this->phoneNumber
 		<< ';'
 		<< '{';
 

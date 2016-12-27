@@ -271,14 +271,14 @@ void EnrollmentSystem::loadStudents() {
 
 	/*
 	FORMAT
-	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;PERSONAL_STATUS;COLLEGE_STATUS;YEAR;ID;TUTOR_ID;
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;PERSONAL_STATUS;COLLEGE_STATUS;YEAR;ID;TUTOR_ID;ADDRESS;CONTACT
 	{(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),(COMPLETED_COURSE_UNIT, GRADE),...};
 	{(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),(ATTENDING_COURSE_UNIT, CLASS_NUMBER),...}
 	*/
 
 	ifstream file;
-	string line, uni, col, course, name, dateStr, personalStatus, collegeStatus, ccuStr, ccaStr;
-	unsigned long long int ID, tutor_ID;
+	string line, uni, col, course, name, dateStr, personalStatus, collegeStatus, ccuStr, ccaStr, address;
+	unsigned long long int ID, tutor_ID, phoneNumber;
 	unsigned short int year;
 	Tutor* tutorPtr;
 	Course* coursePtr;
@@ -307,6 +307,9 @@ void EnrollmentSystem::loadStudents() {
 				>> ws >> ID
 				>> ws >> ch
 				>> ws >> tutor_ID
+				>> ws >> ch;
+			getline(iss, address, ch);
+			iss >> ws >> phoneNumber 
 				>> ws >> ch;
 
 
@@ -371,7 +374,7 @@ void EnrollmentSystem::loadStudents() {
 			catch (...) {
 				continue;
 			}
-			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, personalStatus, collegeStatus, ccu, cca, ID);
+			new Student(name, birthDate, dateOfRegistration, *coursePtr, *tutorPtr, year, personalStatus, collegeStatus, ccu, cca, ID, address, phoneNumber);
 		}
 
 		file.close();
@@ -382,14 +385,14 @@ void EnrollmentSystem::loadProfessors()
 {
 	/*
 	FORMAT
-	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;ID;
+	UNIVERSITY_ACRONYM;COLLEGE_ACRONYM;COURSE_ACRONYM;NAME;BIRTH_DATE;DATE_OF_REGISTRATION;ID;ADDRESS;CONTACT
 	{ABLE_TO_TEACH,ABLE_TO_TEACH,ABLE_TO_TEACH,...};
 	{TEACHING,TEACHING,TEACHING,...}
 	*/
 
 	ifstream file;
-	string line, uni, col, course, name, dateStr, ableToTeachStr, teachingStr;
-	unsigned long long int ID;
+	string line, uni, col, course, name, dateStr, ableToTeachStr, teachingStr, address;
+	unsigned long long int ID, phoneNumber;
 	Course* coursePtr;
 	vector<CourseUnit*> ableToTeach, currentlyTeaching;
 
@@ -412,6 +415,9 @@ void EnrollmentSystem::loadProfessors()
 			getline(iss, dateStr, ch);
 			Date dateOfRegistration(dateStr);
 			iss >> ws >> ID >> ws >> ch;
+			getline(iss, address, ch);
+			iss >> ws >> phoneNumber
+				>> ws >> ch;
 
 
 			try {
@@ -445,7 +451,7 @@ void EnrollmentSystem::loadProfessors()
 			catch (...) {
 				continue;
 			}
-			new Tutor(name, birthDate, dateOfRegistration, *coursePtr, ID, currentlyTeaching, ableToTeach);
+			new Tutor(name, birthDate, dateOfRegistration, *coursePtr, ID, currentlyTeaching, ableToTeach, address, phoneNumber);
 		}
 
 		file.close();
@@ -739,7 +745,8 @@ bool addStudentHandler(EnrollmentSystem& s)
 {
 	Date dateOfBirth;
 	Course* course;
-	string studentName, personalStatus;
+	string studentName, personalStatus, address;
+	unsigned long long int phoneNumber;
 
 	try
 	{
@@ -770,14 +777,18 @@ bool addStudentHandler(EnrollmentSystem& s)
 			}
 		}
 
-		while (true)
-		{
+		while (true){
 			dateOfBirth = Date(enterString("\nAdd Student\n\n", "Enter the date of birth (DD-MM-YYYY) [CTRL+Z to cancel] : "));
 			if (dateOfBirth.getValid())
 				break;
 			cout << "\nInvalid Date!\n";
 			system("PAUSE");
 		}
+
+		address = enterString("\nAdd Student\n\n", "Enter your address [CTRL+Z to cancel] : ");
+
+		phoneNumber = enterInput<unsigned long long int>("\nAdd Student\n\n", "Enter your phone number [CTRL+Z to cancel] : ");
+
 	}
 	catch (EndOfFile &eof)
 	{
@@ -810,7 +821,7 @@ bool addStudentHandler(EnrollmentSystem& s)
 		return false;
 	}
 
-	new Student(studentName, dateOfBirth, *course, personalStatus);
+	new Student(studentName, dateOfBirth, *course, personalStatus, address, phoneNumber);
 
 	return true;
 }

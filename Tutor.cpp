@@ -8,8 +8,8 @@
 #include "Student.h"
 #include "Utilities.h"
 
-Tutor::Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att)
-	: CollegeUser(n, dob, c), course(&c),
+Tutor::Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att, string ad, unsigned long long int pn)
+	: CollegeUser(n, dob, c, ad, pn), course(&c),
 	ableToTeach(att)
 {
 	assignID();
@@ -17,8 +17,8 @@ Tutor::Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att)
 	c.addProfessor(*this);
 }
 
-Tutor::Tutor(string n, Date dob, Date dor, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att)
-	: CollegeUser(n, dob, c), course(&c),
+Tutor::Tutor(string n, Date dob, Date dor, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att, string ad, unsigned long long int pn)
+	: CollegeUser(n, dob, c, ad, pn), course(&c),
 	ableToTeach(att), currentlyTeaching(ct)
 {
 	setID(ID);
@@ -107,6 +107,10 @@ ofstream& Tutor::operator<<(ofstream& file)
 		<< this->getDateOfRegistration().getDateString()
 		<< ';'
 		<< this->ID
+		<< ';'
+		<< this->address
+		<< ';'
+		<< this->phoneNumber
 		<< ';'
 		<< '{';
 

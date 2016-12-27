@@ -19,7 +19,7 @@ protected:
 	//MEMBER VARIABLES
 	College* college;
 	string name, email, address;
-	unsigned long long int ID, contact;
+	unsigned long long int ID, phoneNumber;
 	Date dateOfRegistration, dateOfBirth;
 	
 public:
@@ -27,7 +27,7 @@ public:
 	/*!
 	*	College User Constructor with Name, Date of Birth and Course
 	*/
-	CollegeUser(string n, Date dob, Course& c);
+	CollegeUser(string n, Date dob, Course& c, string ad, unsigned long long int pn);
 	/*!
 	*	College User Destructor
 	*/
