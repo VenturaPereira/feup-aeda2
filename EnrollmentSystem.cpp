@@ -308,9 +308,10 @@ void EnrollmentSystem::loadStudents() {
 				>> ws >> ch
 				>> ws >> tutor_ID
 				>> ws >> ch;
-			getline(iss, address, ch);
-			iss >> ws >> phoneNumber 
-				>> ws >> ch;
+			phoneNumber = 0;
+			//getline(iss, address, ch);
+			//iss >> ws >> phoneNumber 
+			//	>> ws >> ch;
 
 
 			try {
@@ -415,10 +416,13 @@ void EnrollmentSystem::loadProfessors()
 			getline(iss, dateStr, ch);
 			Date dateOfRegistration(dateStr);
 			iss >> ws >> ID >> ws >> ch;
-			getline(iss, address, ch);
-			iss >> ws >> phoneNumber
-				>> ws >> ch;
-
+			
+			phoneNumber = 0;
+			
+			//getline(iss, address, ch);
+			//iss >> ws >> phoneNumber
+			//	>> ws >> ch;
+			
 
 			try {
 				University* uniPtr = &getUniversity(uni);
@@ -904,7 +908,7 @@ bool enrollmentHandler(EnrollmentSystem& s)
 
 	if (student->getCollegeStatus() != "Completed") {
 
-		if (student->getClassesCurrentlyAtending().size() != 0) {
+		if (student->getClassesCurrentlyAtending().size() == 0) {
 
 			vector<CourseUnit*> courseUnitsToShow = student->getCourse().getCourseUnitsNotCompleted(*student, student->getYear());
 			vector<CourseUnit*> courseUnitsToEnroll;
