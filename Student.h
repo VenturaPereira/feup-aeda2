@@ -162,6 +162,8 @@ public:
 	*	Operator << for saving Student into Files
 	*/
 	ofstream& operator<<(ofstream& file);
+
+	bool addToCurrentlyAttending(CourseUnit &cu, CourseUnitClass &cuc);
 };
 
 #endif

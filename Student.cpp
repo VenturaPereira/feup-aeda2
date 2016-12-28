@@ -336,4 +336,6 @@ void Student::showInDetail() const {
 	cout << endl << endl;
 }
 
-
+bool Student::addToCurrentlyAttending(CourseUnit &cu, CourseUnitClass &cuc) {
+	return classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(&cu, &cuc)).second;
+}

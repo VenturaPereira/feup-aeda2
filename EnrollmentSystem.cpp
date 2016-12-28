@@ -955,6 +955,7 @@ bool enrollmentHandler(EnrollmentSystem& s)
 
 					//PROCESS ENROLLMENT
 					cout << "\nProcessing...\n";
+					system("Pause");
 					bool possible = true;
 					vector<CourseUnit*> notPossible;
 					for (size_t i = 0; i < courseUnitsToEnroll.size(); i++) {
@@ -967,6 +968,8 @@ bool enrollmentHandler(EnrollmentSystem& s)
 						for (size_t i = 0; i < courseUnitsToEnroll.size(); i++) {
 							courseUnitsToEnroll[i]->enrollStudent(*student);
 						}
+						cout << "\nIt was possible to enroll all of the course units\n\n";
+						system("Pause");
 						return true;
 					}
 					else {

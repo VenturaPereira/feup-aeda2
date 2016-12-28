@@ -288,6 +288,7 @@ void MandatoryCourseUnit::enrollStudent(Student &s) {
 		if (!enrolled) {
 			if (cucTemp->hasSpace()) {
 				cucTemp->addStudent(s);
+				s.addToCurrentlyAttending(*this, *cucTemp);
 				enrolled = true;
 			}
 		}
@@ -300,7 +301,7 @@ void MandatoryCourseUnit::enrollStudent(Student &s) {
 	if (!enrolled) {
 		CourseUnitClass* newCUC = new CourseUnitClass(classNumber, *this);
 		newCUC->addStudent(s);
-		classes.push(newCUC);
+		s.addToCurrentlyAttending(*this, *newCUC);
 	}
 }
 
@@ -310,7 +311,7 @@ void OptionalCourseUnit::enrollStudent(Student &s) {
 	if (classes.empty()) {
 		CourseUnitClass* newCUC = new CourseUnitClass(1, *this);
 		newCUC->addStudent(s);
-		classes.push(newCUC);
+		s.addToCurrentlyAttending(*this, *newCUC);
 	}
 	else {
 		priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> pqTemp;
@@ -318,5 +319,6 @@ void OptionalCourseUnit::enrollStudent(Student &s) {
 		cucTemp->addStudent(s);
 		pqTemp.push(cucTemp);
 		classes = pqTemp;
+		s.addToCurrentlyAttending(*this, *cucTemp);
 	}
 }
