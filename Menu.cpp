@@ -14,6 +14,54 @@ unsigned int menuOption(string badInput, string normalInput, vector<string> tryA
 	} 
 }
 
+bool adminMenu(EnrollmentSystem &sys) {
+	while (true)
+	{
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		{ "-------------------------------------",
+			"Administration", "",
+			"1 - Add Class                    ",
+			"2 - Remove Class                 ", "",
+			"3 - Back                         ",
+			"-------------------------------------" }, 1, 3);
+		switch (option)
+		{
+		case 1:
+			sys.addClass();
+			return true;
+		case 2:
+			sys.removeClass();
+			return true;
+		case 3:
+			return false;
+		}
+	}
+}
+
+bool modifyStudentMenu(EnrollmentSystem &sys) {
+	while (true)
+	{
+		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
+		{ "-------------------------------------",
+			"Modify Student Data", "",
+			"1 - Change Address               ",
+			"2 - Change Phone Number          ", "",
+			"3 - Back                         ",
+			"-------------------------------------" }, 1, 3);
+		switch (option)
+		{
+		case 1:
+			sys.changeStudentAddress();
+			return true;
+		case 2:
+			sys.changeStudentContact();
+			return true;
+		case 3:
+			return false;
+		}
+	}
+}
+
 bool mainMenu(EnrollmentSystem &sys){
 	while (true)
 	{
@@ -22,10 +70,11 @@ bool mainMenu(EnrollmentSystem &sys){
 			"WELCOME", "",
 			"1 - Students              ",
 			"2 - Professors            ", 
-			"3 - Information           " ,
-			"4 - Options               ", "",
-			"5 - Exit                  ",
-			"==============================" }, 1, 5);
+			"3 - Information           ",
+			"4 - Administration        ",
+			"5 - Options               ", "",
+			"6 - Exit                  ",
+			"==============================" }, 1, 6);
 		switch (option)
 		{
 		case 1:
@@ -38,9 +87,12 @@ bool mainMenu(EnrollmentSystem &sys){
 			infoMenu(sys);
 			break;
 		case 4:
-			optionsMenu(sys);
+			adminMenu(sys);
 			break;
 		case 5:
+			optionsMenu(sys);
+			break;
+		case 6:
 			cout << "\nAre you sure you want to exit? (Y/N)\n";
 			if (yesNoAnswer()){
 				sys.saveHandler();
@@ -59,9 +111,10 @@ bool studentsMenu(EnrollmentSystem &sys){
 		{ "==============================",
 			"Enrollment System", "",
 			"1 - Add Student           ",
-			"2 - Remove Student        ", 
-			"3 - Enroll                " , "",
-			"4 - Back                  ", 
+			"2 - Suspend Course        ", 
+			"3 - Enroll                " ,
+			"4 - Update Data           ","",
+			"5 - Back                  ", 
 			"==============================" }, 1, 4);
 		switch (option)
 		{
@@ -73,8 +126,11 @@ bool studentsMenu(EnrollmentSystem &sys){
 			return true;
 		case 3:
 			enrollmentHandler(sys);
-				return true;
+			return true;
 		case 4:
+			modifyStudentMenu(sys);
+			return true;
+		case 5:
 			return false;
 
 		}

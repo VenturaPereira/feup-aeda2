@@ -308,7 +308,6 @@ void EnrollmentSystem::loadStudents() {
 				>> ws >> ch
 				>> ws >> tutor_ID
 				>> ws >> ch;
-			phoneNumber = 0;
 			getline(iss, address, ch);
 			iss >> ws >> phoneNumber 
 				>> ws >> ch;
@@ -415,10 +414,7 @@ void EnrollmentSystem::loadProfessors()
 			Date birthDate(dateStr);
 			getline(iss, dateStr, ch);
 			Date dateOfRegistration(dateStr);
-			iss >> ws >> ID >> ws >> ch;
-			
-			phoneNumber = 0;
-			
+			iss >> ws >> ID >> ws >> ch;			
 			getline(iss, address, ch);
 			iss >> ws >> phoneNumber
 				>> ws >> ch;
@@ -649,6 +645,40 @@ CourseUnit& getCourseUnitUser(EnrollmentSystem &s)
 	answer_4--;
 
 	return *(course->getCourseUnits()[answer_4]);
+}
+
+CourseUnitClass& getCourseUnitClassUser(EnrollmentSystem &s) {
+	CourseUnit* cu = &getCourseUnitUser(s);
+
+	int answer_5 = -1;
+
+	if (cu->getClasses().empty())
+		throw NotFound<CourseUnitClass*, CourseUnit*>(cu);
+
+	while (answer_5 <= 0 || answer_5 > cu->getClasses().size()) {
+		system("CLS");
+		priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> classes = cu->getClasses();
+		
+		int i = 1;
+		while (!classes.empty()) {
+			cout << i << ". Class ";
+			cout << cu->getClasses().top()->getClassNumber() << endl;
+			classes.pop();
+			i++;
+		}
+		cout << endl;
+		answer_5 = enterInput<int>(); //READ SELECTION
+	}
+	answer_5--;
+	priority_queue<CourseUnitClass*, vector<CourseUnitClass*>, CourseUnitClass::courseUnitCompare> classes = cu->getClasses();
+	while (true) {
+		if (answer_5 == 0)
+			return *classes.top();
+		else {
+			answer_5--;
+			classes.pop();
+		}
+	}
 }
 
 Student& EnrollmentSystem::getStudent(unsigned long long int &ID)
@@ -1863,4 +1893,44 @@ void EnrollmentSystem::changeStudentContact() {
 		student->getCourse().addStudentToHashTable(*student);
 	}
 	else student->setPhoneNumber(newPhoneNumber);
+}
+
+void EnrollmentSystem::addClass() {
+	CourseUnit* cu = &getCourseUnitUser(*this);
+	auto classes = cu->getClasses();
+	vector<unsigned short int> classNumbers;
+	while (!classes.empty()) {
+		classNumbers.push_back(classes.top()->getClassNumber());
+		classes.pop();
+	}
+	sort(classNumbers.begin(), classNumbers.end());
+	unsigned short int min = 1;
+	for (size_t i = 0; i < classNumbers.size(); i++) {
+		if (min == classNumbers[i])
+			min++;
+		else break;
+	}
+	CourseUnitClass* cuc = new CourseUnitClass(min, *cu);
+}
+
+void EnrollmentSystem::removeClass() {
+	try {
+		CourseUnitClass* cuc = &getCourseUnitClassUser(*this);
+		if (cuc->getStudentsInClass().empty()) {
+			cuc->getCourseUnit().removeCourseUnitClass(*cuc);
+			cout << "\nThe class was removed!\n";
+			system("Pause");
+			return;
+		}
+		else {
+			cout << "\nThe class was not removed because there are students in this class!\n";
+			system("Pause");
+			return;
+		}
+	}
+	catch (...) {
+		cout << "\nThere are no classes in this course unit!\n";
+		system("Pause");
+		return;
+	}
 }

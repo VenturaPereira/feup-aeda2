@@ -353,6 +353,10 @@ public:
 	void changeStudentAddress();
 
 	void changeStudentContact();
+
+	void addClass();
+
+	void removeClass();
 };
 
 #endif

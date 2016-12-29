@@ -1,82 +1,82 @@
-up;feup;mieic;Antonio Ferreira;05/06/1965;05/01/1985;1;{alge};{}
-up;feup;mieic;Joao Jacob;05/09/1980;05/08/2010;2;{fpro};{}
-up;feup;mieic;Rui Ribeiro;13/07/1975;16/12/2000;3;{amat};{}
-up;feup;mieic;Raul Vidal;19/03/1955;05/01/1985;4;{aoco};{}
-up;feup;mieic;Gabriel David;19/10/1970;25/03/2002;5;{mdis};{}
-up;feup;mieic;Manuel Torres;05/11/1974;05/01/2001;6;{pf};{}
-up;feup;mieic;Jorge Silva;13/12/1959;05/07/1999;7;{prog};{}
-up;feup;mieic;Jaime Villate;05/06/1972;05/01/1987;8;{fisi1};{}
-up;feup;mieic;Jose Barbosa;05/06/1963;05/01/1994;9;{cmat};{}
-up;feup;mieic;Joao Canas;05/06/1965;05/01/1985;10;{mpcp};{}
-up;feup;mieic;Daniel Silva;05/06/1965;05/01/1985;11;{tcom};{}
-up;feup;mieic;Jose Carvalho;05/06/1965;05/01/1985;12;{mnum};{}
-up;feup;mieic;Joana Oliveira;05/06/1965;05/01/1985;13;{fisi2};{}
-up;feup;mieic;Henrique Cardoso;05/06/1965;05/01/1985;14;{aeda};{}
-up;feup;mieic;Pedro Souto;05/06/1965;05/01/1985;15;{lcom};{}
-up;feup;mieic;Joao Moreira;05/06/1965;05/01/1985;16;{bdad};{}
-up;feup;mieic;Rosaldo Rossetti;05/06/1965;05/01/1985;17;{cal};{}
-up;feup;mieic;Hugo Ferreira;05/09/1980;05/08/2010;18;{sope};{}
-up;feup;mieic;Joao Faria;05/09/1980;05/08/2010;19;{lpoo};{}
-up;feup;mieic;Rui Silva;05/09/1980;05/08/2010;20;{plog};{}
-up;feup;mieic;Alexandre Carvalho;05/09/1980;05/08/2010;21;{laig};{}
-up;feup;mieic;Rui Abreu;05/09/1980;05/08/2010;22;{esof};{}
-up;feup;mieic;Manuel Ricardo;05/09/1980;05/08/2010;23;{rcom};{}
-up;feup;mieic;Andre Restivo;05/09/1980;05/08/2010;24;{ltw};{}
-up;feup;mieic;Sergio Nunes;05/09/1980;05/08/2010;25;{lbaw};{}
-up;feup;mieic;Eugenio Oliveira;05/09/1980;05/08/2010;26;{iart};{}
-up;feup;mieic;Joao Cardoso;05/09/1980;05/08/2010;27;{comp};{}
-up;feup;mieic;Nuno Flores;13/07/1975;16/12/2000;28;{sdis};{}
-up;feup;mieic;Fernanda Torres;13/07/1975;16/12/2000;29;{ppin};{}
-up;feup;mieic;Joao Ferreira;13/07/1975;16/12/2000;30;{sinf};{}
-up;feup;mieic;Ademar Aguiar;13/07/1975;16/12/2000;31;{ldso};{}
-up;feup;mieic;Lia Patricio;13/07/1975;16/12/2000;32;{gemp};{}
-up;feup;mieic;Ana Rocha;13/07/1975;16/12/2000;33;{aiad};{}
-up;feup;mieic;Ana Paiva;13/07/1975;16/12/2000;34;{mfes};{}
-up;feup;mieic;Maria Dias;13/07/1975;16/12/2000;35;{iope};{}
-up;feup;mieic;Gil Goncalves;13/07/1975;16/12/2000;36;{lgpr};{}
-up;feup;mieic;Luis Teixeira;13/07/1975;16/12/2000;37;{diss};{}
-up;feup;mieic;Fernando Fernandes;19/03/1955;05/01/1985;38;{apsi};{}
-up;feup;mieic;Miguel Marcelo;19/03/1955;05/01/1985;39;{asso};{}
-up;feup;mieic;Andreia Brandao;19/03/1955;05/01/1985;40;{agrs};{}
-up;feup;mieic;Xavier Fonseca;19/03/1955;05/01/1985;41;{cpar};{}
-up;feup;mieic;Flavio Dias;19/03/1955;05/01/1985;42;{cmo};{}
-up;feup;mieic;Edgar Carvalho;19/03/1955;05/01/1985;43;{djco};{}
-up;feup;mieic;Luis Torres;19/03/1955;05/01/1985;44;{erss};{}
-up;feup;mieic;Ines Abreu;19/03/1955;05/01/1985;45;{golo};{}
-up;feup;mieic;Francisco Ponte;19/03/1955;05/01/1985;46;{lapd};{}
-up;feup;mieic;Raul Carreira;19/10/1970;25/03/2002;47;{mark};{}
-up;feup;mieic;Ricardo Reis;19/10/1970;25/03/2002;48;{mssi};{}
-up;feup;mieic;Dinis Silva;19/10/1970;25/03/2002;49;{mnse};{}
-up;feup;mieic;Cristina Marques;19/10/1970;25/03/2002;50;{ssin};{}
-up;feup;mieic;Patricia Miranda;19/10/1970;25/03/2002;51;{ssen};{}
-up;feup;mieic;Tiago Souto;19/10/1970;25/03/2002;52;{scri};{}
-up;feup;mieic;Fabio Matias;19/10/1970;25/03/2002;53;{setr};{}
-up;feup;mieic;Andre Pereira;19/10/1970;25/03/2002;54;{sgeo};{}
-up;feup;mieic;Sofia Santos;19/10/1970;25/03/2002;55;{sins};{}
-up;feup;mieic;Gabriel Azevedo;19/10/1970;25/03/2002;56;{tbda};{}
-up;feup;mieic;Afonso Reis;05/11/1974;05/01/2001;57;{tdin};{}
-up;feup;mieic;Pedro Pereira;05/11/1974;05/01/2001;58;{apin};{}
-up;feup;mieic;Ricardo Araujo;05/11/1974;05/01/2001;59;{adad};{}
-up;feup;mieic;Otavio Carvalho;05/11/1974;05/01/2001;60;{aaco};{}
-up;feup;mieic;Miguel Carneiro;05/11/1974;05/01/2001;61;{cmov};{}
-up;feup;mieic;Luis Carlos;05/11/1974;05/01/2001;62;{dapi};{}
-up;feup;mieic;Jorge Liberato;05/11/1974;05/01/2001;63;{ecac};{}
-up;feup;mieic;Nuno Azevedo;05/11/1974;05/01/2001;64;{gqua};{}
-up;feup;mieic;Eduardo Monteiro;05/11/1974;05/01/2001;65;{giem};{}
-up;feup;mieic;Carolina Dias;05/11/1974;05/01/2001;66;{ipco};{}
-up;feup;mieic;Bruno Marques;13/12/1959;05/07/1999;67;{mads};{}
-up;feup;mieic;Jorge Moreno;13/12/1959;05/07/1999;68;{pesi};{}
-up;feup;mieic;Daniel Goncalves;13/12/1959;05/07/1999;69;{pfal};{}
-up;feup;mieic;Goncalo Carvalho;13/12/1959;05/07/1999;70;{rvau};{}
-up;feup;mieic;Francisco Cunha;13/12/1959;05/07/1999;71;{robo};{}
-up;feup;mieic;Cristiana Fernandes;13/12/1959;05/07/1999;72;{ssin};{}
-up;feup;mieic;Miguel Fonseca;13/12/1959;05/07/1999;73;{sesi};{}
-up;feup;mieic;Sergio Pereira;13/12/1959;05/07/1999;74;{srti};{}
-up;feup;mieic;Luisa Relvas;13/12/1959;05/07/1999;75;{ssim};{}
-up;feup;mieic;Pedro Ferreira;13/12/1959;05/07/1999;76;{srsi};{}
-up;feup;mieic;Vitor Sabino;05/06/1972;05/01/1987;77;{sade};{}
-up;feup;mieic;Goncalo Faria;05/06/1972;05/01/1987;78;{tvvs};{}
-up;feup;mieic;Catarina Borges;05/06/1972;05/01/1987;79;{vcom};{}
-up;feup;mieic;Maria Ribeiro;05/06/1972;05/01/1987;80;{pdis};{}
-up;feup;mieic;Jose Borges;05/06/1965;05/01/1985;81;{mest};{}
-up;feup;mieic;Antonio Sousa;05/06/1965;05/01/1985;82;{cgra};{}
+up;feup;mieic;Antonio Ferreira;05/06/1965;05/01/1985;1;Rua de Candido dos Reis n238, Porto;908476525;{alge};{}
+up;feup;mieic;Joao Jacob;05/09/1980;05/08/2010;2;Rua de Cedofeita n482 2B, Porto;947342639;{fpro};{}
+up;feup;mieic;Rui Ribeiro;13/07/1975;16/12/2000;3;Rua dos Clerigos n23 4Esq, Porto;965971265;{amat};{}
+up;feup;mieic;Raul Vidal;19/03/1955;05/01/1985;4;Rua de Costa Cabral n124, Porto;972962159;{aoco};{}
+up;feup;mieic;Gabriel David;19/10/1970;25/03/2002;5;Rua da Constituicao n96, Porto;917908235;{mdis};{}
+up;feup;mieic;Manuel Torres;05/11/1974;05/01/2001;6;Avenida da Boavista n66 5A;902140466;{pf};{}
+up;feup;mieic;Jorge Silva;13/12/1959;05/07/1999;7;Rua de Nove de Julho n27, Porto;941767450;{prog};{}
+up;feup;mieic;Jaime Villate;05/06/1972;05/01/1987;8;Rua de Passos Manuel n724, Porto;904903179;{fisi1};{}
+up;feup;mieic;Jose Barbosa;05/06/1963;05/01/1994;9;Rua do Rosario n232 4B, Porto;929091988;{cmat};{}
+up;feup;mieic;Joao Canas;05/06/1965;05/01/1985;10;Rua do Loureiro n234, Porto;919224249;{mpcp};{}
+up;feup;mieic;Daniel Silva;05/06/1965;05/01/1985;11;Rua de Sa da Bandeira n62, Porto;946309114;{tcom};{}
+up;feup;mieic;Jose Carvalho;05/06/1965;05/01/1985;12;Rua de Sao Miguel n212, Porto;907999247;{mnum};{}
+up;feup;mieic;Joana Oliveira;05/06/1965;05/01/1985;13;Rua das Taipas n23, Porto;938214446;{fisi2};{}
+up;feup;mieic;Henrique Cardoso;05/06/1965;05/01/1985;14;Rua de Trinta e Um de Janeiro n21, Porto;995233844;{aeda};{}
+up;feup;mieic;Pedro Souto;05/06/1965;05/01/1985;15;Rua de Sao Bento da Vitoria n73, Porto;926358783;{lcom};{}
+up;feup;mieic;Joao Moreira;05/06/1965;05/01/1985;16;Rua de Sao Roque da Lameira n182, Porto;965279458;{bdad};{}
+up;feup;mieic;Rosaldo Rossetti;05/06/1965;05/01/1985;17;Escadas das Verdades n238 3C, Porto;905312528;{cal};{}
+up;feup;mieic;Hugo Ferreira;05/09/1980;05/08/2010;18;Alameda das Fontainhas n69, Porto;978803224;{sope};{}
+up;feup;mieic;Joao Faria;05/09/1980;05/08/2010;19;Rua de Jose Falcao n412, Porto;906633212;{lpoo};{}
+up;feup;mieic;Rui Silva;05/09/1980;05/08/2010;20;Rua de Mouzinho da Silveira n28, Porto;948692971;{plog};{}
+up;feup;mieic;Alexandre Carvalho;05/09/1980;05/08/2010;21;Rua de Mota Pinto n431, Porto;932768829;{laig};{}
+up;feup;mieic;Rui Abreu;05/09/1980;05/08/2010;22;Rua dos Mercadores n129, Porto;970977099;{esof};{}
+up;feup;mieic;Manuel Ricardo;05/09/1980;05/08/2010;23;Rua de Belomonte n1 , Porto;910061217;{rcom};{}
+up;feup;mieic;Andre Restivo;05/09/1980;05/08/2010;24;Viela da Senhora da Lapa n2, Porto;964807127;{ltw};{}
+up;feup;mieic;Sergio Nunes;05/09/1980;05/08/2010;25;Viela do Calvario n3, Porto;998111532;{lbaw};{}
+up;feup;mieic;Eugenio Oliveira;05/09/1980;05/08/2010;26;Viela do Sobreirinho n129, Porto;923939466;{iart};{}
+up;feup;mieic;Joao Cardoso;05/09/1980;05/08/2010;27;Viela do Picoto n7654, Porto;913338380;{comp};{}
+up;feup;mieic;Nuno Flores;13/07/1975;16/12/2000;28;Viela do Monte da Pena n39, Porto;971333455;{sdis};{}
+up;feup;mieic;Fernanda Torres;13/07/1975;16/12/2000;29;Rua do Sol a Santana n723 4A, Porto;937062148;{ppin};{}
+up;feup;mieic;Joao Ferreira;13/07/1975;16/12/2000;30;Travessa de Sao Joao da Praca n823, Porto;983769998;{sinf};{}
+up;feup;mieic;Ademar Aguiar;13/07/1975;16/12/2000;31;Rua do Salitre n72, Porto;941072307;{ldso};{}
+up;feup;mieic;Lia Patricio;13/07/1975;16/12/2000;32;Rua Nova do Almada, Porto;955511606;{gemp};{}
+up;feup;mieic;Ana Rocha;13/07/1975;16/12/2000;33;Rua dos Fanqueiros, Porto;994666212;{aiad};{}
+up;feup;mieic;Ana Paiva;13/07/1975;16/12/2000;34;Rua da Betesga, Porto;931848462;{mfes};{}
+up;feup;mieic;Maria Dias;13/07/1975;16/12/2000;35;Rua Roberto Duarte Silva, Porto;954250953;{iope};{}
+up;feup;mieic;Gil Goncalves;13/07/1975;16/12/2000;36;Rua de Trinta e Um de Janeiro, Braga;929062606;{lgpr};{}
+up;feup;mieic;Luis Teixeira;13/07/1975;16/12/2000;37;Rua de Sao Bento da Vitoria, Braga;910219755;{diss};{}
+up;feup;mieic;Fernando Fernandes;19/03/1955;05/01/1985;38;Rua de Sao Roque da Lameira, Braga;987864903;{apsi};{}
+up;feup;mieic;Miguel Marcelo;19/03/1955;05/01/1985;39;Escadas das Verdades, Braga;908702595;{asso};{}
+up;feup;mieic;Andreia Brandao;19/03/1955;05/01/1985;40;Alameda das Fontainhas, Braga;939143040;{agrs};{}
+up;feup;mieic;Xavier Fonseca;19/03/1955;05/01/1985;41;Rua de Jose Falcao, Braga;976509287;{cpar};{}
+up;feup;mieic;Flavio Dias;19/03/1955;05/01/1985;42;Rua de Mouzinho da Silveira, Braga;918777339;{cmo};{}
+up;feup;mieic;Edgar Carvalho;19/03/1955;05/01/1985;43;Rua de Mota Pinto, Braga;949824818;{djco};{}
+up;feup;mieic;Luis Torres;19/03/1955;05/01/1985;44;Rua dos Mercadores, Braga;907401407;{erss};{}
+up;feup;mieic;Ines Abreu;19/03/1955;05/01/1985;45;Rua de Belomonte, Braga;917558633;{golo};{}
+up;feup;mieic;Francisco Ponte;19/03/1955;05/01/1985;46;Viela da Senhora da Lapa, Braga;926690017;{lapd};{}
+up;feup;mieic;Raul Carreira;19/10/1970;25/03/2002;47;Viela do Calvario, Braga;938637743;{mark};{}
+up;feup;mieic;Ricardo Reis;19/10/1970;25/03/2002;48;Viela do Sobreirinho, Braga;927922678;{mssi};{}
+up;feup;mieic;Dinis Silva;19/10/1970;25/03/2002;49;Viela do Picoto, Braga;983335799;{mnse};{}
+up;feup;mieic;Cristina Marques;19/10/1970;25/03/2002;50;Viela do Monte da Pena, Braga;922309087;{ssin};{}
+up;feup;mieic;Patricia Miranda;19/10/1970;25/03/2002;51;Rua do Sol a Santana, Braga;938787578;{ssen};{}
+up;feup;mieic;Tiago Souto;19/10/1970;25/03/2002;52;Travessa de Sao Joao da Praca, Braga;917272840;{scri};{}
+up;feup;mieic;Fabio Matias;19/10/1970;25/03/2002;53;Rua do Salitre, Braga;977435965;{setr};{}
+up;feup;mieic;Andre Pereira;19/10/1970;25/03/2002;54;Rua Nova do Almada, Braga;970458314;{sgeo};{}
+up;feup;mieic;Sofia Santos;19/10/1970;25/03/2002;55;Rua dos Fanqueiros, Braga;919197939;{sins};{}
+up;feup;mieic;Gabriel Azevedo;19/10/1970;25/03/2002;56;Rua da Betesga, Braga;957806656;{tbda};{}
+up;feup;mieic;Afonso Reis;05/11/1974;05/01/2001;57;Rua Roberto Duarte Silva, Braga;921618912;{tdin};{}
+up;feup;mieic;Pedro Pereira;05/11/1974;05/01/2001;58;Avenida Ressano Garcia, Braga;933168282;{apin};{}
+up;feup;mieic;Ricardo Araujo;05/11/1974;05/01/2001;59;Travessa de Sao Joao da Praca, Lisboa;936713763;{adad};{}
+up;feup;mieic;Otavio Carvalho;05/11/1974;05/01/2001;60;Rua do Salitre, Lisboa;933706695;{aaco};{}
+up;feup;mieic;Miguel Carneiro;05/11/1974;05/01/2001;61;Rua Nova do Almada, Lisboa;933728723;{cmov};{}
+up;feup;mieic;Luis Carlos;05/11/1974;05/01/2001;62;Rua dos Fanqueiros, Lisboa;959561782;{dapi};{}
+up;feup;mieic;Jorge Liberato;05/11/1974;05/01/2001;63;Rua da Betesga, Lisboa;969597046;{ecac};{}
+up;feup;mieic;Nuno Azevedo;05/11/1974;05/01/2001;64;Rua Roberto Duarte Silva, Lisboa;917484319;{gqua};{}
+up;feup;mieic;Eduardo Monteiro;05/11/1974;05/01/2001;65;Avenida Ressano Garcia, Lisboa;931685466;{giem};{}
+up;feup;mieic;Carolina Dias;05/11/1974;05/01/2001;66;Rua Garrett, Lisboa;933894705;{ipco};{}
+up;feup;mieic;Bruno Marques;13/12/1959;05/07/1999;67;Rua de Trinta e Um de Janeiro, Lisboa;908500997;{mads};{}
+up;feup;mieic;Jorge Moreno;13/12/1959;05/07/1999;68;Rua de Sao Bento da Vitoria, Lisboa;977241971;{pesi};{}
+up;feup;mieic;Daniel Goncalves;13/12/1959;05/07/1999;69;Rua de Sao Roque da Lameira, Lisboa;945404407;{pfal};{}
+up;feup;mieic;Goncalo Carvalho;13/12/1959;05/07/1999;70;Escadas das Verdades, Lisboa;969359498;{rvau};{}
+up;feup;mieic;Francisco Cunha;13/12/1959;05/07/1999;71;Alameda das Fontainhas, Lisboa;997390805;{robo};{}
+up;feup;mieic;Cristiana Fernandes;13/12/1959;05/07/1999;72;Rua de Jose Falcao, Lisboa;922457626;{ssin};{}
+up;feup;mieic;Miguel Fonseca;13/12/1959;05/07/1999;73;Rua de Mouzinho da Silveira, Lisboa;921246819;{sesi};{}
+up;feup;mieic;Sergio Pereira;13/12/1959;05/07/1999;74;Rua de Mota Pinto, Lisboa;986956192;{srti};{}
+up;feup;mieic;Luisa Relvas;13/12/1959;05/07/1999;75;Rua dos Mercadores, Lisboa;948641069;{ssim};{}
+up;feup;mieic;Pedro Ferreira;13/12/1959;05/07/1999;76;Rua de Belomonte, Lisboa;996275815;{srsi};{}
+up;feup;mieic;Vitor Sabino;05/06/1972;05/01/1987;77;Viela da Senhora da Lapa, Lisboa;967257236;{sade};{}
+up;feup;mieic;Goncalo Faria;05/06/1972;05/01/1987;78;Viela do Calvario, Lisboa;936468425;{tvvs};{}
+up;feup;mieic;Catarina Borges;05/06/1972;05/01/1987;79;Viela do Sobreirinho, Lisboa;939662540;{vcom};{}
+up;feup;mieic;Maria Ribeiro;05/06/1972;05/01/1987;80;Viela do Picoto, Lisboa;937809983;{pdis};{}
+up;feup;mieic;Jose Borges;05/06/1965;05/01/1985;81;Viela do Monte da Pena, Lisboa;943949603;{mest};{}
+up;feup;mieic;Antonio Sousa;05/06/1965;05/01/1985;82;Rua do Sol a Santana, Lisboa;983105902;{cgra};{}
