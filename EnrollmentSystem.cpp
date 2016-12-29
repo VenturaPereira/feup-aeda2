@@ -910,7 +910,7 @@ bool enrollmentHandler(EnrollmentSystem& s)
 	}
 	catch (EndOfFile &eof)
 	{
-		cout << "\nAddition canceled!\n";
+		cout << "\nEnrollment canceled!\n";
 		return false;
 	}
 	catch (NotFound<Student*, unsigned long long int> &nfs)
@@ -1031,7 +1031,7 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 	}
 	catch (EndOfFile &eof)
 	{
-		cout << "\nAddition canceled!\n";
+		cout << "\nGrading Canceled!\n";
 		system("pause");
 		return false;
 	}
@@ -1085,7 +1085,7 @@ bool studentFinishedCourseUnitHandler(EnrollmentSystem& s)
 		}
 		catch (EndOfFile &eof)
 		{
-			cout << "\nAddition canceled!\n";
+			cout << "\nGrading Canceled!\n";
 			system("pause");
 			return false;
 		}

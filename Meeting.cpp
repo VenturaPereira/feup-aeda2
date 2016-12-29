@@ -68,23 +68,23 @@ void Meeting::show() const {
 }
 
 ofstream& Meeting::operator<<(ofstream& file) {
-	file << professor->getID()
+	file << this->professor->getID()
 		<< ';'
-		<< student->getID()
+		<< this->student->getID()
 		<< ';'
-		<< date.getDateString()
+		<< this->date.getDateString()
 		<< ';'
-		<< hour
+		<< this->hour
 		<< ':'
-		<< minute
+		<< this->minute
 		<< ';'
-		<< description
+		<< this->description
 		<< ';'
 		<< '{';
 
-	for (size_t i = 0; i < topics.size(); i++) {
-		file << topics[i];
-		if (i != topics.size() - 1)
+	for (size_t i = 0; i < this->topics.size(); i++) {
+		file << this->topics[i];
+		if (i != this->topics.size() - 1)
 			file << ',';
 	}
 
