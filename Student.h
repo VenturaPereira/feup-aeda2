@@ -164,6 +164,8 @@ public:
 	ofstream& operator<<(ofstream& file);
 
 	bool addToCurrentlyAttending(CourseUnit &cu, CourseUnitClass &cuc);
+
+	void suspendCourse();
 };
 
 #endif

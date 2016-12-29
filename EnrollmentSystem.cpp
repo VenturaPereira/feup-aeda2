@@ -851,9 +851,22 @@ bool removeStudentHandler(EnrollmentSystem& s)
 		return false;
 	}
 
-	student->getCourse().removeStudent(*student);
-	student->setCollegeStatus("Suspended");
-	student->getCourse().addStudentToHashTable(*student);
+	if (student->getCollegeStatus() == "Frequenting") {
+		student->suspendCourse();
+		student->getCourse().removeStudent(*student);
+		student->setCollegeStatus("Suspended");
+		student->getCourse().addStudentToHashTable(*student);
+		cout << "\nThe student has suspended the course!\n";
+		system("Pause");
+	}
+	else if(student->getCollegeStatus() == "Suspended")	{
+		cout << "\nThe student has already suspended the course\n";
+		system("Pause");
+	}
+	else if (student->getCollegeStatus() == "Completed") {
+		cout << "\nThe student has already completed the course\n";
+		system("Pause");
+	}
 
 	return true;
 }

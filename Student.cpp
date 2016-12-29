@@ -339,3 +339,12 @@ void Student::showInDetail() const {
 bool Student::addToCurrentlyAttending(CourseUnit &cu, CourseUnitClass &cuc) {
 	return classesCurrentlyAtending.insert(pair<CourseUnit*, CourseUnitClass*>(&cu, &cuc)).second;
 }
+
+void Student::suspendCourse() {
+	map<CourseUnit*, CourseUnitClass*>::iterator it;
+	for (it = this->classesCurrentlyAtending.begin();
+		it != this->classesCurrentlyAtending.end();
+		it++) {
+		this->completedClass(*(it->first), 0);
+	}
+}
