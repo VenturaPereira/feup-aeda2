@@ -309,9 +309,9 @@ void EnrollmentSystem::loadStudents() {
 				>> ws >> tutor_ID
 				>> ws >> ch;
 			phoneNumber = 0;
-			//getline(iss, address, ch);
-			//iss >> ws >> phoneNumber 
-			//	>> ws >> ch;
+			getline(iss, address, ch);
+			iss >> ws >> phoneNumber 
+				>> ws >> ch;
 
 
 			try {
@@ -419,9 +419,9 @@ void EnrollmentSystem::loadProfessors()
 			
 			phoneNumber = 0;
 			
-			//getline(iss, address, ch);
-			//iss >> ws >> phoneNumber
-			//	>> ws >> ch;
+			getline(iss, address, ch);
+			iss >> ws >> phoneNumber
+				>> ws >> ch;
 			
 
 			try {
@@ -455,6 +455,7 @@ void EnrollmentSystem::loadProfessors()
 			catch (...) {
 				continue;
 			}
+			
 			new Tutor(name, birthDate, dateOfRegistration, *coursePtr, ID, currentlyTeaching, ableToTeach, address, phoneNumber);
 		}
 

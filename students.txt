@@ -1,3 +1,14 @@
-up;feup;mieic;Daniel Marques;31/10/1997;20/11/2016;Regular Student;Frequenting;1;201600001;1;{};{}
-up;feup;mieic;Joao Seixas;03/09/1997;20/11/2016;Special Educational Needs;Frequenting;1;201600002;2;{};{}
-up;feup;mieic;Ventura Pereira;05/11/1996;20/11/2016;Religious Practitioner;Frequenting;1;201600003;3;{};{}
+up;feup;mieic;Daniel Marques;31/10/1997;20/11/2016;Regular Student;Frequenting;1;201600001;1;Avenida da Liberdade n1242 3A, Porto;914627294;{};{}
+up;feup;mieic;Joao Seixas;03/09/1997;20/11/2016;Special Educational Needs;Frequenting;1;201600002;2;Rua Aldeia Nova n119, Ruivaes;966570964;{};{}
+up;feup;mieic;Ventura Pereira;05/11/1996;20/11/2016;Religious Practitioner;Frequenting;1;201600003;3;Rua das Fontinhas n532B, Guimaraes;937163134;{};{}
+up;feup;mieic;Luis Martins;02/03/1997;29/12/2016;Regular Student;Frequenting;1;201600004;4;Rua das Flores n14, Gaia;937375923;{};{}
+up;feup;mieic;Afonso Ramos;07/04/1997;29/12/2016;Working Student;Frequenting;1;201600005;5;Avenida dos Lioes n888 3B, Salgueiros;915735849;{};{}
+up;feup;mieic;Miguel Fernandes;24/11/1997;29/12/2016;U.Porto Student-Athlete;Frequenting;1;201600006;6;Rua D.Afonso Henriques n632 4D, Braga;963726823;{};{}
+up;feup;mieic;Andre Fernandes;04/09/1997;29/12/2016;Special Educational Needs;Frequenting;1;201600007;7;Praca do Comercio n41 11C, Lisboa;937758392;{};{}
+up;feup;mieic;Carolina Silva;27/07/1995;29/12/2016;Regular Student;Frequenting;1;201600008;8;Rua dos Ribeiros n32, Viana do Castelo;964732834;{};{}
+up;feup;mieic;Francisca Carvalho;12/12/1998;29/12/2016;Regular Student;Frequenting;1;201600009;9;Rua Julio Dinis n2, Ovar;917846385;{};{}
+up;feup;mieic;Joao Carvalho;16/03/1994;29/12/2016;Parent;Frequenting;1;201600010;10;Rua 25 de Abril n731, Aveiro;915237283;{};{}
+up;feup;mieic;Joao Damas;30/08/1996;29/12/2016;Regular Student;Frequenting;1;201600011;11;Rua Einstein;916782050;{};{}
+up;feup;mieic;Sofia Silva;22/11/1999;29/12/2016;Regular Student;Frequenting;1;201600012;12;Rua da Prata n23, Lisboa;916434552;{};{}
+up;feup;mieic;Beatriz Henriques;12/01/1997;29/12/2016;Association Leader;Frequenting;1;201600013;13;Rua Ferreira Lapa n532 5A, Porto;913462111;{};{}
+up;feup;mieic;Francisca Lopes;13/03/1997;29/12/2016;Working Student;Frequenting;1;201600014;14;Rua General Morais Sarmento n182 5Dir, Braga;935558355;{};{}
