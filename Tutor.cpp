@@ -156,6 +156,37 @@ void Tutor::show() const {
 		<< endl;
 }
 
+void Tutor::showInDetail() const {
+	cout
+		<< "Name: " << name << endl << endl
+		<< "ID: " << ID << endl << endl
+		<< "Date of Birth: " << dateOfBirth.getDateString() << endl << endl
+		<< "Date of Registration: " << dateOfRegistration.getDateString() << endl << endl
+		<< "Address: " << address << endl << endl
+		<< "Phone Number: " << phoneNumber << endl << endl
+		<< "Email: " << email << endl << endl
+		<< "Course: " << course->getAcronym()
+		<< " in " << course->getCollege().getAcronym() << " (" << course->getCollege().getUniversity().getAcronym() << ")" << endl << endl;
+	if (ableToTeach.size() > 0) {
+		cout << "Course Units able to teach: " << endl;
+		for (size_t i = 0; i < ableToTeach.size(); i++)
+			cout << '\t' << ableToTeach[i]->getName() << endl;
+	}
+	cout << endl;
+	if (currentlyTeaching.size() > 0) {
+		cout << "Course Units currently teaching: " << endl;
+		for (size_t i = 0; i < currentlyTeaching.size(); i++)
+			cout << '\t' << currentlyTeaching[i]->getName() << endl;
+	}
+	cout << endl;
+	if (students.size() > 0) {
+		cout << "Students tutoring: " << endl;
+		for (size_t i = 0; i < students.size(); i++)
+			cout << '\t' << students[i]->getName() << endl;
+	}
+	cout << endl;
+}
+
 bool Tutor::addMeeting(Meeting &m) {
 	pair<set<Meeting>::iterator, bool> result = meetings.insert(m);
 	return result.second;

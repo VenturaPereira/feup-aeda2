@@ -156,7 +156,7 @@ public:
 
 	void showAllMeetings() const;
 
-
+	void showInDetail() const;
 };
 
 #endif

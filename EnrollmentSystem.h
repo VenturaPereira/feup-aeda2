@@ -97,6 +97,11 @@ public:
 	*	Prints to the screen All Professors
 	*/
 	void showProfessors();
+	
+	/*!
+	*	Prints to the screen Detailed Information about a Professors
+	*/
+	void showProfessorInDetail();
 
 	/*!
 	*	Prints to the screen All Students
@@ -112,6 +117,11 @@ public:
 	*	Prints to the screen Detailed Information about a Course Unit
 	*/
 	void showCourseUnitInDetail();
+
+	/*!
+	*	Prints to the screen Detailed Information about a Course Unit Class
+	*/
+	void showCourseUnitClassInDetail();
 
 	/*!
 	*	Template Function To Save All Data Into Files
@@ -357,6 +367,7 @@ public:
 	void addClass();
 
 	void removeClass();
+
 };
 
 #endif

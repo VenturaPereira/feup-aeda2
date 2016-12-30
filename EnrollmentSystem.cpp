@@ -1174,7 +1174,8 @@ bool EnrollmentSystem::changeCourseUnitClassSortOption(unsigned int &option)
 {
 	vector<bool(*)(CourseUnitClass*, CourseUnitClass*)> options = {
 		compareCourseUnitClassByNumber,
-		compareCourseUnitClassByNumberStudents
+		compareCourseUnitClassByNumberStudents,
+		compareCourseUnitClassBySpace
 	};
 
 	size_t minimum = 1, maximum = options.size() + 1;
@@ -1454,6 +1455,21 @@ void EnrollmentSystem::showProfessors()
 	else cout << "There are no professors\n";
 }
 
+void EnrollmentSystem::showProfessorInDetail() {
+	try {
+		system("cls");
+		cout << "\nEnter the ID of the professor\n\n";
+		unsigned long long int id = enterInput<unsigned long long int>();
+		Tutor t = getProfessor(id);
+		system("cls");
+		cout << "\nProfessor Details\n\n\n";
+		t.showInDetail();
+	}
+	catch (...) {
+
+	}
+}
+
 void EnrollmentSystem::showStudents()
 {
 	system("cls");
@@ -1515,6 +1531,18 @@ void EnrollmentSystem::showCourseUnitInDetail()
 		CourseUnit* cuPtr = &getCourseUnitUser(*this);
 		cout << "\nCourse Unit Details\n\n\n";
 		cuPtr->showInDetail();
+	}
+	catch (...) {
+
+	}
+}
+
+void EnrollmentSystem::showCourseUnitClassInDetail() {
+	try {
+		system("cls");
+		CourseUnitClass* cucPtr = &getCourseUnitClassUser(*this);
+		cout << "\nCourse Unit Details\n\n\n";
+		cucPtr->showInDetail();
 	}
 	catch (...) {
 

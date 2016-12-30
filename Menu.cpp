@@ -227,17 +227,19 @@ bool infoMenu(EnrollmentSystem &sys){
 		unsigned int option = menuOption("Invalid Option!\n\n", "Menu Option: ",
 		{ "---------------------------------------",
 			"Information", "",
-			"1  - Read all Universities         ",
-			"2  - Read all Colleges             ",
-			"3  - Read all Courses              ",
-			"4  - Read all Course Units         ",
-			"5  - Read a Course Unit in Detail  ",
-			"6  - Read all Course Unit Classes  ",
-			"7  - Read all Students             ",
-			"8  - Read a Student in Detail      ",
-			"9  - Read all Professors           ", "",
-			"10 - Back                          ",
-			"---------------------------------------" }, 1, 10);
+			"1  - Read all Universities             ",
+			"2  - Read all Colleges                 ",
+			"3  - Read all Courses                  ",
+			"4  - Read all Course Units             ",
+			"5  - Read a Course Unit in Detail      ",
+			"6  - Read all Course Unit Classes      ",
+			"7  - Read a Course Unit Class in Detail"
+			"8  - Read all Students                 ",
+			"9  - Read a Student in Detail          ",
+			"10 - Read all Professors               ", 
+			"11 - Read a Professor in Detail        ",	"",
+			"12 - Back                              ",
+			"---------------------------------------" }, 1, 12);
 
 		switch (option)
 		{
@@ -266,18 +268,26 @@ bool infoMenu(EnrollmentSystem &sys){
 			system("pause");
 			return true;
 		case 7:
-			sys.showStudents();
+			sys.showCourseUnitClassInDetail();
 			system("pause");
 			return true;
 		case 8:
-			sys.showStudentInDetail();
+			sys.showStudents();
 			system("pause");
 			return true;
 		case 9:
-			sys.showProfessors();
+			sys.showStudentInDetail();
 			system("pause");
 			return true;
 		case 10:
+			sys.showProfessors();
+			system("pause");
+			return true;
+		case 11:
+			sys.showProfessorInDetail();
+			system("pause");
+			return true;
+		case 12:
 			return false;
 		}
 	}
@@ -338,17 +348,9 @@ bool sortingStudentsMenu(EnrollmentSystem &sys) {
 		switch (option)
 		{
 		case 1:
-			sys.changeStudentsSortOption(option);
-			return true;
 		case 2:
-			sys.changeStudentsSortOption(option);
-			return true;
 		case 3:
-			sys.changeStudentsSortOption(option);
-			return true;
 		case 4:
-			sys.changeStudentsSortOption(option);
-			return true;
 		case 5:
 			sys.changeStudentsSortOption(option);
 			return true;
@@ -376,14 +378,8 @@ bool sortingProfessorsMenu(EnrollmentSystem &sys) {
 		switch (option)
 		{
 		case 1:
-			sys.changeProfessorsSortOption(option);
-			return true;
 		case 2:
-			sys.changeProfessorsSortOption(option);
-			return true;
 		case 3:
-			sys.changeProfessorsSortOption(option);
-			return true;
 		case 4:
 			sys.changeProfessorsSortOption(option);
 			return true;
@@ -410,11 +406,7 @@ bool sortingCourseUnitMenu(EnrollmentSystem &sys) {
 		switch (option)
 		{
 		case 1:
-			sys.changeCourseUnitSortOption(option);
-			return true;
 		case 2:
-			sys.changeCourseUnitSortOption(option);
-			return true;
 		case 3:
 			sys.changeCourseUnitSortOption(option);
 			return true;
@@ -432,20 +424,20 @@ bool sortingCourseUnitClassMenu(EnrollmentSystem &sys) {
 		{ "--------------------------------------------",
 			"Course Unit Sorting Options", "",
 			"1 - Sort by Number                     ",
-			"2 - Sort by Number of Students         ", "", 
-			"3 - Back                               ",
-			"--------------------------------------------", }, 1, 3);
+			"2 - Sort by Number of Students         ",
+			"3 - Sort by Space Available            ","", 
+			"4 - Back                               ",
+			"--------------------------------------------", }, 1, 4);
 
 
 		switch (option)
 		{
 		case 1:
-			sys.changeCourseUnitSortOption(option);
-			return true;
 		case 2:
+		case 3:
 			sys.changeCourseUnitSortOption(option);
 			return true;
-		case 3:
+		case 4:
 			return false;
 		}
 	}

@@ -298,6 +298,9 @@ void Student::showInDetail() const {
 		<< "ID: " << ID << endl << endl
 		<< "Date of Birth: " << dateOfBirth.getDateString() << endl << endl
 		<< "Date of Registration: " << dateOfRegistration.getDateString() << endl << endl
+		<< "Address: " << address << endl << endl
+		<< "Phone Number: " << phoneNumber << endl << endl
+		<< "Email: " << email << endl << endl
 		<< "Year: " << year << endl << endl
 		<< "Personal status: " << personalStatus << endl << endl
 		<< "College status: " << collegeStatus << endl << endl

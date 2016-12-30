@@ -69,6 +69,11 @@ public:
 	*/
 	friend bool compareCourseUnitClassByNumberStudents(CourseUnitClass* cuc1, CourseUnitClass* cuc2);
 
+	/*!
+	*	Compares Classes by Space Avaiable
+	*/
+	friend bool compareCourseUnitClassBySpace(CourseUnitClass* cuc1, CourseUnitClass* cuc2);
+
 	//GETS
 	/*!
 	*	Returns Number of Students in Class
@@ -103,6 +108,11 @@ public:
 	void show() const;
 
 	/*!
+	*	Prints Class in Detail to the Screen
+	*/
+	void showInDetail();
+
+	/*!
 	*	Checks if the Class has Space for one more Student
 	*/
 	bool hasSpace();
@@ -115,6 +125,7 @@ public:
 		bool operator()(CourseUnitClass *l, CourseUnitClass *r);
 	};
 	
+	unsigned int getSpaceAvailable();
 };
 
 #endif
