@@ -125,6 +125,9 @@ public:
 		bool operator()(CourseUnitClass *l, CourseUnitClass *r);
 	};
 	
+	/*!
+	*	Returns the Number of Students needed to fill the Class
+	*/
 	unsigned int getSpaceAvailable();
 };
 

@@ -39,12 +39,12 @@ private:
 public:
 	//MEMBER FUNCTIONS
 	/*!
-	 *	Tutor Constructor with Name, Date of Birth, Course and Course Units Able to Teach
+	 *	Tutor Constructor with Name, Date of Birth, Course, Course Units Able to Teach, Address and Phone Number
 	 */
 	Tutor(string n, Date dob, Course& c, vector<CourseUnit*>& att, string ad, unsigned long long int pn);
 
 	/*!
-	*	Tutor Constructor with Name, Date of Birth, Date of Registration, Course, ID, Course Units Currently Teaching and Course Units Able to Teach
+	*	Tutor Constructor with Name, Date of Birth, Date of Registration, Course, ID, Course Units Currently Teaching, Course Units Able to Teach, Address and Phone Number
 	*/
 	Tutor(string n, Date dob, Date dor, Course& c, unsigned long long int &ID, vector<CourseUnit*> &ct, vector<CourseUnit*> &att, string ad, unsigned long long int pn);
 	
@@ -63,6 +63,9 @@ public:
 	*/
 	void tutorStudent(Student& s);
 
+	/*!
+	*	Checks if the Professor is tutor of a given Student
+	*/
 	bool isTutorOf(Student& s);
 
 	//COMPARES
@@ -109,6 +112,9 @@ public:
 	*/
 	vector<Student*>& getStudents() { return students; }
 
+	/*!
+	*	Returns the Professor's meetings
+	*/
 	set<Meeting>& getMeetings() { return meetings; }
 
 	//PRINT TO SCREEN
@@ -154,8 +160,14 @@ public:
 	*/
 	void showMeetingsUpcoming(const Date &begin, const Date &end) const;
 
+	/*!
+	*	Prints all meetings
+	*/
 	void showAllMeetings() const;
 
+	/*!
+	*	Shows a Professor in detail
+	*/
 	void showInDetail() const;
 };
 

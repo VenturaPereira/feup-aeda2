@@ -347,25 +347,55 @@ public:
 	*/
 	vector<Tutor*> getAllProfessors();
 
+	/*!
+	*	Returns All Meetings
+	*/
 	vector<Meeting> getAllMeetings();
 
+	/*!
+	*	Returns a Professor with a given ID
+	*/
 	Tutor& getProfessor(unsigned long long int &ID);
 	
 	//MEETINGS
+	/*!
+	*	Adds a Meeting
+	*/
 	void addMeetingHandler();
 
+	/*!
+	*	Removes a Meeting
+	*/
 	void removeMeetingHandler();
 
+	/*!
+	*	Changes a Description to a Meeting
+	*/
 	void changeMeetingDescriptionHandler();
 
+	/*!
+	*	Prints a Meeting in the Screen
+	*/
 	void showMeetingsHandler(unsigned int &option);
 
+	/*!
+	*	Changes a Student's Address
+	*/
 	void changeStudentAddress();
 
+	/*!
+	*	Changes a Student's Contact
+	*/
 	void changeStudentContact();
 
+	/*!
+	*	Adds a Class to a Course Unit
+	*/
 	void addClass();
 
+	/*!
+	*	Removes a Class from a Course Unit
+	*/
 	void removeClass();
 
 };

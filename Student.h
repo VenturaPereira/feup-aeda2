@@ -40,12 +40,12 @@ protected:
 public:
 	//MEMBER FUNCTIONS
 	/*!
-	*	Students Constructor with Name, Date of Birth, Course and Status
+	*	Students Constructor with Name, Date of Birth, Course, Status, Address and Phone Number
 	*/
 	Student(string n, Date dob, Course& c, string s, string ad, unsigned long long int pn);
 
 	/*!
-	*	Students Constructor with Name, Date of Birth, Date of Registration, Course, Professor(Tutor), Current Course Year, Credits still Available, Status, Completed Course Units and Course Units Currently Attending
+	*	Students Constructor with Name, Date of Birth, Date of Registration, Course, Professor(Tutor), Current Course Year, Credits still Available, Status, Completed Course Units, Course Units Currently Attending, Address and Phone Number
 	*/
 	Student(string n, Date dob, Date dor, Course& c, Tutor& t, unsigned short int y, string ps, string cs, map<CourseUnit*, unsigned short int> &ccu, map<CourseUnit*, CourseUnitClass*> &cca, unsigned long long int &id, string ad, unsigned long long int pn);
 	
@@ -163,8 +163,14 @@ public:
 	*/
 	ofstream& operator<<(ofstream& file);
 
+	/*!
+	*	Adds a Course Unit to the Classes Currently Attending by the student
+	*/
 	bool addToCurrentlyAttending(CourseUnit &cu, CourseUnitClass &cuc);
 
+	/*!
+	*	Suspends the Enrollment of the Course
+	*/
 	void suspendCourse();
 };
 

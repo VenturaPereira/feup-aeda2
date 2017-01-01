@@ -145,6 +145,9 @@ public:
 	*/
 	void addStudentToHashTable(Student &s) { studentsOutOfCollege.insert(&s); }
 
+	/*!
+	*	Removes Student and returns True. If it wasn't there returns false
+	*/
 	bool removeStudentFromHash(Student &s);
 };
 

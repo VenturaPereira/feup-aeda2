@@ -25,7 +25,7 @@ bool mainMenu(EnrollmentSystem &sys);
 bool studentsMenu(EnrollmentSystem &sys);
 
 /*!
-*	Menu to Grade Students
+*	Menu to Grade Students and Manage Meetings
 */
 bool professorsMenu(EnrollmentSystem &sys);
 
