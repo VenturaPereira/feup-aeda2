@@ -233,7 +233,7 @@ bool infoMenu(EnrollmentSystem &sys){
 			"4  - Read all Course Units             ",
 			"5  - Read a Course Unit in Detail      ",
 			"6  - Read all Course Unit Classes      ",
-			"7  - Read a Course Unit Class in Detail"
+			"7  - Read a Course Unit Class in Detail",
 			"8  - Read all Students                 ",
 			"9  - Read a Student in Detail          ",
 			"10 - Read all Professors               ", 
